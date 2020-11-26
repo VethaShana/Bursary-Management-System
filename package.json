@@ -1,0 +1,27 @@
+{
+  "name": "bursary-management-system",
+  "version": "1.0.0",
+  "description": "Bursary Management System for University of Jaffna",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zmardil/bursary-management-system.git"
+  },
+  "author": "zmardil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zmardil/bursary-management-system/issues"
+  },
+  "homepage": "https://github.com/zmardil/bursary-management-system#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.16",
+    "nodemon": "^2.0.6"
+  }
+}
