@@ -1,3 +1,5 @@
+.eslintcache
+
 # dependencies
 **/node_modules
 client/.pnp
