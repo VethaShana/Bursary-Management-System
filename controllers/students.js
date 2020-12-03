@@ -37,8 +37,10 @@ export const updateStudent = async (req, res) => {
 			fullName: req.body.fullName,
 			nic: req.body.nic,
 			address: req.body.address,
-			mobileNo: req.body.mobileNo,
+			mobile: req.body.mobile,
 			zScore: req.body.zScore
+		
+
 		}
 	})
 	
