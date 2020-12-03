@@ -15,7 +15,7 @@ import {
 import TimerIcon from '@material-ui/icons/Timer'
 import React from 'react'
 
-import { districts, GSDivisions, courses } from '../utils/datum'
+import { districts, GSDivisions, courses } from '../utils/data'
 
 const useStyles = makeStyles(theme => ({
 	root: {

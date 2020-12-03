@@ -1,151 +1,259 @@
 // react
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+
 // material components
 import {
 	Container,
 	Grid,
 	makeStyles,
-	Paper,
 	Typography,
 	List,
 	ListItem,
 	ListItemIcon,
 	ListItemText,
-	ListItemSecondaryAction,
 	Button,
+	Divider,
+	Box,
+	ListSubheader,
+	Collapse,
+	TextField,
+	Link as MuiLink,
 } from '@material-ui/core'
+
 // material-icons
 import InsertDriveFileOutlinedIcon from '@material-ui/icons/InsertDriveFileOutlined'
-import ArrowForwardOutlinedIcon from '@material-ui/icons/ArrowForwardOutlined'
 import ArrowRightAltOutlinedIcon from '@material-ui/icons/ArrowRightAltOutlined'
+
 // assets
-import bgImg from '../assets/hero-img.svg'
-
-function ListItemLink(props) {
-	const { primary, secondary, to } = props
-
-	const CustomLink = React.useMemo(
-		() =>
-			React.forwardRef((linkProps, ref) => (
-				<Link ref={ref} to={to} {...linkProps} />
-			)),
-		[to]
-	)
-
-	return (
-		<ListItem button component={CustomLink}>
-			<ListItemIcon>
-				<InsertDriveFileOutlinedIcon />
-			</ListItemIcon>
-			<ListItemText primary={primary} secondary={secondary} />
-			<ListItemSecondaryAction>
-				<ArrowForwardOutlinedIcon />
-			</ListItemSecondaryAction>
-		</ListItem>
-	)
-}
+import bgImg from '../assets/bg1.svg'
 
 const useStyles = makeStyles(theme => ({
-	root: {
-		minHeight: '100vh',
-		backgroundColor: '#f5f5ff',
-		border: 'none',
-	},
-	container: {
-		height: '100%',
-	},
-	grid: {
-		height: '100%',
-		paddingTop: theme.spacing(6),
-		paddingBottom: theme.spacing(2),
-		flexWrap: 'nowrap',
-	},
-	hero_img: {
-		padding: `${theme.spacing(10)}px 0`,
-		backgroundImage: 'url(' + bgImg + ')',
-		backgroundSize: '40%',
-		backgroundRepeat: 'no-repeat',
-		backgroundPosition: 'center center',
-		width: '100%',
-		minHeight: '500px',
+	gridHalf: {
+		padding: `${theme.spacing(8)}px ${theme.spacing(3)}px`,
 		[theme.breakpoints.down('sm')]: {
-			backgroundSize: '60%',
+			paddingBottom: theme.spacing(0),
+		},
+	},
+	banner: {
+		backgroundColor: theme.palette.secondary.main,
+		backgroundImage: `url(${bgImg})`,
+		backgroundRepeat: 'no-repeat',
+		backgroundSize: '400px',
+		backgroundPosition: 'center bottom',
+		overflow: 'hidden',
+		flex: 1,
+		marginTop: theme.spacing(2),
+		borderRadius: theme.shape.borderRadius,
+		padding: theme.spacing(6),
+		width: '100%',
+		maxWidth: '600px',
+		[theme.breakpoints.down('sm')]: {
+			backgroundSize: '350px',
 		},
 		[theme.breakpoints.down('xs')]: {
-			backgroundSize: '80%',
+			height: '500px',
+			flex: 'none',
+			backgroundSize: '250px',
+			padding: theme.spacing(3),
+			marginTop: theme.spacing(3),
+			marginBottom: theme.spacing(5),
 		},
 	},
-	title: {
-		fontWeight: 'bold',
+	faq: {
+		float: 'right',
+		[theme.breakpoints.down('xs')]: {
+			width: '100%',
+			float: 'none',
+		},
 	},
-	cta: {
-		marginBottom: theme.spacing(4),
-		width: '100%',
-		maxWidth: '400px',
+	applications: {
+		maxWidth: '500px',
+		[theme.breakpoints.down('xs')]: {
+			marginTop: theme.spacing(8),
+		},
 	},
-	cta__faq: {
-		marginBottom: theme.spacing(6),
+	nestedForm: {
+		padding: theme.spacing(2),
+	},
+	textField: {
+		marginBottom: theme.spacing(2),
 	},
 }))
 
+const helpMail = 'help@welfare.jfn.ac.lk'
+
 function LandingPage() {
 	const classes = useStyles()
+	const [open, setOpen] = useState(true)
 
 	return (
-		<Paper className={classes.root} elevation={0} square>
-			<Container className={classes.container}>
-				<Grid
-					container
-					direction='column'
-					justify='space-between'
-					alignItems='center'
-					className={classes.grid}
-				>
-					<Grid item>
-						<Typography variant='h2' color='primary' className={classes.title}>
-							{' '}
-							University of Jaffna
-						</Typography>
-						<Typography variant='h5' color='initial'>
-							Bursary Department
-						</Typography>
-					</Grid>
-					<Grid item className={classes.hero_img}>
-						{/* <img src={bgImg} alt="" /> */}
-					</Grid>
-					<Grid item className={classes.cta}>
-						<div>
-							<List components='nav' aria-label='application navigation'>
-								<ListItemLink
-									to='/application'
-									primary='Rudimentary Bursary Application'
-								/>
-								<ListItemLink
-									to='/application'
+		<Container maxWidth='xl'>
+			<Grid
+				container
+				style={{ minHeight: '100vh' }}
+				spacing={3}
+				direction='column'
+			>
+				<Grid container style={{ flex: 1 }}>
+					<Grid
+						container
+						item
+						xs={12}
+						sm={6}
+						direction='column'
+						justify='space-between'
+						className={classes.gridHalf}
+					>
+						<Box>
+							<header>
+								<Typography
+									color='primary'
+									variant='h3'
+									style={{ fontWeight: 'bold' }}
+									gutterBottom
+								>
+									University of Jaffna
+								</Typography>
+								<Typography color='primary' variant='h5'>
+									Bursary Department
+								</Typography>
+							</header>
+						</Box>
+						<List
+							className={classes.applications}
+							component='nav'
+							aria-labelledby='application-subheader'
+							subheader={
+								<ListSubheader component='div' id='application-subheader'>
+									Applications
+								</ListSubheader>
+							}
+							dense
+						>
+							<ListItem button onClick={() => setOpen(!open)}>
+								<ListItemIcon>
+									<InsertDriveFileOutlinedIcon />
+								</ListItemIcon>
+								<ListItemText primary='Preliminary Bursary Application' />
+							</ListItem>
+							<Collapse in={open} timeout='auto' unmountOnExit>
+								<Box className={classes.nestedForm}>
+									<TextField
+										required
+										id='regno'
+										label='Registration Number'
+										type='text'
+										variant='outlined'
+										className={classes.textField}
+										size='small'
+									/>
+									<TextField
+										required
+										id='email'
+										label='Email'
+										type='email'
+										variant='outlined'
+										className={classes.textField}
+										size='small'
+									/>
+									<Button size='small' variant='contained' color='secondary'>
+										Request Application
+									</Button>
+								</Box>
+							</Collapse>
+							<Divider />
+							<ListItem button onClick={() => setOpen(!open)}>
+								<ListItemIcon>
+									<InsertDriveFileOutlinedIcon />
+								</ListItemIcon>
+								<ListItemText
 									primary='Bursary Extension'
 									secondary='Eligible only for honours degree students'
 								/>
-							</List>
+							</ListItem>
+							<Collapse in={!open} timeout='auto' unmountOnExit>
+								<Box className={classes.nestedForm}>
+									<TextField
+										required
+										id='regno'
+										label='Registration Number'
+										type='text'
+										variant='outlined'
+										className={classes.textField}
+										size='small'
+									/>
+									<TextField
+										required
+										id='email'
+										label='Email'
+										type='email'
+										variant='outlined'
+										className={classes.textField}
+										size='small'
+									/>
+									<Button size='small' variant='contained' color='secondary'>
+										Request Application
+									</Button>
+								</Box>
+							</Collapse>
+						</List>
+					</Grid>
+					<Grid
+						container
+						item
+						xs={12}
+						sm={6}
+						direction='column'
+						className={classes.gridHalf}
+					>
+						<Box>
 							<Button
+								className={classes.faq}
 								color='primary'
 								endIcon={<ArrowRightAltOutlinedIcon />}
 								variant='text'
-								fullWidth
-								className={classes.cta__faq}
 							>
 								FAQ
 							</Button>
-							<footer className={classes.footer}>
-								<Typography variant='body2' color='initial' align='center'>
-									&copy; copyrights University of Jaffna, 2020.
-								</Typography>
-							</footer>
-						</div>
+						</Box>
+						<Box className={classes.banner} alignSelf='flex-end'>
+							<Typography
+								variant='h4'
+								color='primary'
+								style={{ fontWeight: 'bold' }}
+								gutterBottom
+							>
+								Need help?
+							</Typography>
+							<Typography variant='subtitle1' color='primary'>
+								Contact Bursary Department at{' '}
+								<MuiLink
+									style={{ fontWeight: '700' }}
+									color='primary'
+									href={'mailto:' + helpMail}
+								>
+									{helpMail}
+								</MuiLink>
+							</Typography>
+						</Box>
 					</Grid>
 				</Grid>
-			</Container>
-		</Paper>
+				<Grid
+					container
+					item
+					xs={12}
+					direction='column'
+					justify='space-between'
+					style={{ height: 'min-content' }}
+				>
+					<footer>
+						<Typography variant='body2' color='initial' align='center'>
+							&copy; copyrights University of Jaffna, 2021.
+						</Typography>
+					</footer>
+				</Grid>
+			</Grid>
+		</Container>
 	)
 }
 
