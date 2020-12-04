@@ -1,7 +1,4 @@
-// react
 import React, { useState } from 'react'
-
-// material components
 import {
 	Container,
 	Grid,
@@ -19,12 +16,8 @@ import {
 	TextField,
 	Link as MuiLink,
 } from '@material-ui/core'
-
-// material-icons
 import InsertDriveFileOutlinedIcon from '@material-ui/icons/InsertDriveFileOutlined'
 import ArrowRightAltOutlinedIcon from '@material-ui/icons/ArrowRightAltOutlined'
-
-// assets
 import bgImg from '../assets/bg1.svg'
 
 const useStyles = makeStyles(theme => ({
@@ -87,7 +80,7 @@ function LandingPage() {
 	const [open, setOpen] = useState(true)
 
 	return (
-		<Container maxWidth='xl'>
+		<Container maxWidth='lg'>
 			<Grid
 				container
 				style={{ minHeight: '100vh' }}
