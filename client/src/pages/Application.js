@@ -15,6 +15,8 @@ import {
 import TimerIcon from '@material-ui/icons/Timer'
 import React from 'react'
 
+import Copyright from '../components/Copyright'
+
 import { districts, GSDivisions, courses } from '../utils/data'
 
 const useStyles = makeStyles(theme => ({
@@ -282,9 +284,7 @@ function Form() {
 				</Grid>
 			</Paper>
 			<footer className={classes.footer}>
-				<Typography variant='body2' color='initial' align='center'>
-					&copy; copyrights University of Jaffna, 2020.
-				</Typography>
+				<Copyright />
 			</footer>
 		</Container>
 	)

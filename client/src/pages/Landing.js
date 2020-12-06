@@ -20,6 +20,8 @@ import InsertDriveFileOutlinedIcon from '@material-ui/icons/InsertDriveFileOutli
 import ArrowRightAltOutlinedIcon from '@material-ui/icons/ArrowRightAltOutlined'
 import bgImg from '../assets/bg1.svg'
 
+import Copyright from '../components/Copyright'
+
 const useStyles = makeStyles(theme => ({
 	gridHalf: {
 		padding: `${theme.spacing(8)}px ${theme.spacing(3)}px`,
@@ -75,7 +77,7 @@ const useStyles = makeStyles(theme => ({
 
 const helpMail = 'help@welfare.jfn.ac.lk'
 
-function LandingPage() {
+function Landing() {
 	const classes = useStyles()
 	const [open, setOpen] = useState(true)
 
@@ -240,9 +242,7 @@ function LandingPage() {
 					style={{ height: 'min-content' }}
 				>
 					<footer>
-						<Typography variant='body2' color='initial' align='center'>
-							&copy; copyrights University of Jaffna, 2021.
-						</Typography>
+						<Copyright />
 					</footer>
 				</Grid>
 			</Grid>
@@ -250,4 +250,4 @@ function LandingPage() {
 	)
 }
 
-export default LandingPage
+export default Landing
