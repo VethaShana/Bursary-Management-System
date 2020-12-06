@@ -8,6 +8,8 @@ import theme from './utils/theme'
 
 import LandingPage from './pages/LandingPage'
 import ApplicationPage from './pages/ApplicationPage'
+import SignIn from './pages/SignIn'
+import SignUp from './pages/SignUp'
 
 function App() {
 	return (
@@ -16,6 +18,8 @@ function App() {
 			<Switch>
 				<Route exact path='/' component={LandingPage} />
 				<Route exact path='/application' component={ApplicationPage} />
+				<Route exact path='/signin' component={SignIn} />
+				<Route exact path='/signup' component={SignUp} />
 			</Switch>
 		</MuiThemeProvider>
 	)
