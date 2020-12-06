@@ -10,6 +10,7 @@ import LandingPage from './pages/LandingPage'
 import ApplicationPage from './pages/ApplicationPage'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
+import DashboardPage from './pages/DashboardPage';
 
 function App() {
 	return (
@@ -20,6 +21,7 @@ function App() {
 				<Route exact path='/application' component={ApplicationPage} />
 				<Route exact path='/signin' component={SignIn} />
 				<Route exact path='/signup' component={SignUp} />
+        <Route exact path="/dashboard" component={DashboardPage} />
 			</Switch>
 		</MuiThemeProvider>
 	)
