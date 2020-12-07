@@ -4,6 +4,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 
 import students from './routes/students.js'
+import user from './routes/user.js'
 
 dotenv.config()
 
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 app.use('/students', students)
+app.use('/user',user)
 
 const MONGODB_URI = process.env.MONGODB_URI
 const PORT = process.env.PORT || 5000
