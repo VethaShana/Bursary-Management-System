@@ -20,34 +20,28 @@ export const createStudent = async (req, res) => {
 	}
 }
 
-
 export const deleteStudent = async (req, res) => {
 	try {
 		const student = await Student.findByIdAndRemove(req.params.id)
-		res.status(200).json({message:"Deleted Successfully"})
-	} 
-	catch (error) {
+		res.status(200).json({ message: 'Deleted Successfully' })
+	} catch (error) {
 		res.status(400).json({ message: error.message })
 	}
 }
 
 export const updateStudent = async (req, res) => {
 	try {
-		const student = await Student.findByIdAndUpdate(req.params.id,{$set:{
-			fullName: req.body.fullName,
-			nic: req.body.nic,
-			address: req.body.address,
-			mobile: req.body.mobile,
-			zScore: req.body.zScore
-		
-
-		}
-	})
-	
-		
-		res.status(200).json({message:"Updated Successfully"})
-	} 
-	catch (error) {
+		const student = await Student.findByIdAndUpdate(
+			req.params.id,
+			{
+				$set: {
+					...req.body,
+				},
+			},
+			{ new: true }
+		)
+		res.status(200).json(student)
+	} catch (error) {
 		res.status(400).json({ message: error.message })
 	}
 }

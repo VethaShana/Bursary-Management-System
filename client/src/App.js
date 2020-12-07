@@ -6,20 +6,22 @@ import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import { CssBaseline } from '@material-ui/core'
 import theme from './utils/theme'
 
-import LandingPage from './pages/LandingPage'
-import ApplicationPage from './pages/ApplicationPage'
+import Landing from './pages/Landing'
+import Application from './pages/Application'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
+import Dashboard from './pages/Dashboard'
 
 function App() {
 	return (
 		<MuiThemeProvider theme={theme}>
 			<CssBaseline />
 			<Switch>
-				<Route exact path='/' component={LandingPage} />
-				<Route exact path='/application' component={ApplicationPage} />
+				<Route exact path='/' component={Landing} />
+				<Route exact path='/application' component={Application} />
 				<Route exact path='/signin' component={SignIn} />
 				<Route exact path='/signup' component={SignUp} />
+				<Route exact path='/dashboard' component={Dashboard} />
 			</Switch>
 		</MuiThemeProvider>
 	)
