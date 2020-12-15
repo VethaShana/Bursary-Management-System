@@ -21,6 +21,7 @@ import ArrowRightAltOutlinedIcon from '@material-ui/icons/ArrowRightAltOutlined'
 import bgImg from '../assets/bg1.svg'
 
 import Copyright from '../components/Copyright'
+import CollapsableForm from '../components/CollapsableForm'
 
 const useStyles = makeStyles(theme => ({
 	gridHalf: {
@@ -66,12 +67,6 @@ const useStyles = makeStyles(theme => ({
 		[theme.breakpoints.down('xs')]: {
 			marginTop: theme.spacing(8),
 		},
-	},
-	nestedForm: {
-		padding: theme.spacing(2),
-	},
-	textField: {
-		marginBottom: theme.spacing(2),
 	},
 }))
 
@@ -132,29 +127,7 @@ function Landing() {
 								<ListItemText primary='Preliminary Bursary Application' />
 							</ListItem>
 							<Collapse in={open} timeout='auto' unmountOnExit>
-								<Box className={classes.nestedForm}>
-									<TextField
-										required
-										id='regno'
-										label='Registration Number'
-										type='text'
-										variant='outlined'
-										className={classes.textField}
-										size='small'
-									/>
-									<TextField
-										required
-										id='email'
-										label='Email'
-										type='email'
-										variant='outlined'
-										className={classes.textField}
-										size='small'
-									/>
-									<Button size='small' variant='contained' color='secondary'>
-										Request Application
-									</Button>
-								</Box>
+								<CollapsableForm />
 							</Collapse>
 							<Divider />
 							<ListItem button onClick={() => setOpen(!open)}>
@@ -167,29 +140,7 @@ function Landing() {
 								/>
 							</ListItem>
 							<Collapse in={!open} timeout='auto' unmountOnExit>
-								<Box className={classes.nestedForm}>
-									<TextField
-										required
-										id='regno'
-										label='Registration Number'
-										type='text'
-										variant='outlined'
-										className={classes.textField}
-										size='small'
-									/>
-									<TextField
-										required
-										id='email'
-										label='Email'
-										type='email'
-										variant='outlined'
-										className={classes.textField}
-										size='small'
-									/>
-									<Button size='small' variant='contained' color='secondary'>
-										Request Application
-									</Button>
-								</Box>
+								<CollapsableForm />
 							</Collapse>
 						</List>
 					</Grid>
