@@ -3,7 +3,12 @@ import Typography from '@material-ui/core/Typography'
 
 function Copyright() {
 	return (
-		<Typography variant='body2' color='textSecondary' align='center'>
+		<Typography
+			variant='body2'
+			color='textSecondary'
+			align='center'
+			gutterBottom
+		>
 			{'Copyright © '}
 			<Link color='inherit' href='#'>
 				University of Jaffna

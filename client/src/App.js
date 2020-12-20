@@ -8,6 +8,7 @@ import theme from './utils/theme'
 
 import Landing from './pages/Landing'
 import Application from './pages/Application'
+import ExtendedApplication from './pages/ExtendedApplication'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import Dashboard from './pages/Dashboard'
@@ -19,6 +20,11 @@ function App() {
 			<Switch>
 				<Route exact path='/' component={Landing} />
 				<Route exact path='/application' component={Application} />
+				<Route
+					exact
+					path='/extended-application'
+					component={ExtendedApplication}
+				/>
 				<Route exact path='/signin' component={SignIn} />
 				<Route exact path='/signup' component={SignUp} />
 				<Route exact path='/dashboard' component={Dashboard} />

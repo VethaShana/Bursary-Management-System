@@ -45,6 +45,9 @@ const theme = responsiveFontSizes(
 
 		//props
 		props: {
+			MuiCheckbox: {
+				disableRipple: true,
+			},
 			MuiButton: {
 				disableRipple: true,
 				disableElevation: true,
