@@ -10,15 +10,18 @@ import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import Container from '@material-ui/core/Container'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
-import { mainListItems, secondaryListItems } from '../components/listItems'
-import Orders from '../components/Orders'
+import { MainListItems, SecondaryListItems } from './components/listItems'
 
-import Copyright from '../components/Copyright'
+import Copyright from '../../components/Copyright'
+import { useRouteMatch, Switch, Route } from 'react-router-dom'
+import Students from './components/Students'
+import Applications from './components/Applications'
+import Installments from './components/Installments'
+import Users from './components/Users'
+import Settings from './components/Settings'
 
 const drawerWidth = 240
 
@@ -111,6 +114,8 @@ export default function Dashboard() {
 		setOpen(false)
 	}
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
+	let match = useRouteMatch()
+	console.log(match)
 
 	return (
 		<div className={classes.root}>
@@ -135,7 +140,7 @@ export default function Dashboard() {
 						component='h1'
 						variant='h6'
 						color='inherit'
-						noWrap
+						// noWrap
 						className={classes.title}
 					>
 						Dashboard
@@ -158,25 +163,32 @@ export default function Dashboard() {
 					</IconButton>
 				</div>
 				<Divider />
-				<List dense>{mainListItems}</List>
+				<List dense>
+					<MainListItems />
+				</List>
 				<Divider />
-				<List dense>{secondaryListItems}</List>
+				<List dense>
+					<SecondaryListItems />
+				</List>
 			</Drawer>
 			<main className={classes.content}>
 				<div className={classes.appBarSpacer} />
 				<Container maxWidth='lg' className={classes.container}>
-					<Grid container spacing={3}>
-						{/* Chart */}
-						<Grid item xs={12} md={8} lg={9}></Grid>
-						{/* Recent Deposits */}
-						<Grid item xs={12} md={4} lg={3}></Grid>
-						{/* Recent Orders */}
-						<Grid item xs={12}>
-							<Paper className={classes.paper}>
-								<Orders />
-							</Paper>
-						</Grid>
-					</Grid>
+					<Switch>
+						<Route exact path={`${match.path}/students`} component={Students} />
+						<Route
+							exact
+							path={`${match.path}/applications`}
+							component={Applications}
+						/>
+						<Route
+							exact
+							path={`${match.path}/installments`}
+							component={Installments}
+						/>
+						<Route exact path={`${match.path}/users`} component={Users} />
+						<Route exact path={`${match.path}/settings`} component={Settings} />
+					</Switch>
 					<Box pt={4}>
 						<Copyright />
 					</Box>

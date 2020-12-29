@@ -11,7 +11,7 @@ import Application from './pages/Application'
 import ExtendedApplication from './pages/ExtendedApplication'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
-import Dashboard from './pages/Dashboard'
+import Dashboard from './pages/Dashboard/Dashboard'
 
 function App() {
 	return (
