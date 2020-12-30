@@ -146,7 +146,7 @@ export default function Dashboard() {
 						Dashboard
 					</Typography>
 					<IconButton color='inherit'>
-						<AccountCircleIcon fontSize='large' />
+						<AccountCircleIcon fontSize='default' />
 					</IconButton>
 				</Toolbar>
 			</AppBar>

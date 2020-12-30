@@ -2,11 +2,11 @@ import React from 'react'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import DashboardIcon from '@material-ui/icons/Dashboard'
-import PersonIcon from '@material-ui/icons/Person'
 import SettingsIcon from '@material-ui/icons/Settings'
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle'
-import UpdateOutlinedIcon from '@material-ui/icons/UpdateOutlined'
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd'
 import PaymentIcon from '@material-ui/icons/Payment'
+import DescriptionIcon from '@material-ui/icons/Description'
 import ListItemText from '@material-ui/core/ListItemText'
 import { Link, useRouteMatch } from 'react-router-dom'
 
@@ -22,15 +22,15 @@ export const MainListItems = () => {
 			</ListItem>
 			<ListItem button component={Link} to={`${match.url}/students`}>
 				<ListItemIcon>
-					<SupervisedUserCircleIcon fontSize='small' />
+					<AssignmentIndIcon fontSize='small' />
 				</ListItemIcon>
 				<ListItemText primary='Students' />
 			</ListItem>
 			<ListItem button component={Link} to={`${match.url}/applications`}>
 				<ListItemIcon>
-					<UpdateOutlinedIcon />
+					<DescriptionIcon fontSize='small' />
 				</ListItemIcon>
-				<ListItemText primary='Pending Applications' />
+				<ListItemText primary='Applications' />
 			</ListItem>
 			<ListItem button component={Link} to={`${match.url}/installments`}>
 				<ListItemIcon>
@@ -48,7 +48,7 @@ export const SecondaryListItems = () => {
 		<div>
 			<ListItem button component={Link} to={`${match.url}/users`}>
 				<ListItemIcon>
-					<PersonIcon fontSize='small' />
+					<SupervisedUserCircleIcon fontSize='small' />
 				</ListItemIcon>
 				<ListItemText primary='Users' />
 			</ListItem>
