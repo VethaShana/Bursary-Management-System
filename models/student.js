@@ -1,6 +1,10 @@
 import mongoose from 'mongoose'
 
 const studentSchema = mongoose.Schema({
+	regNo:{
+		type:String,
+		required:true
+	},
 	fullName: {
 		type: String,
 		required: true,
@@ -17,6 +21,29 @@ const studentSchema = mongoose.Schema({
 	mobile: {
 		type: Number,
 		required: true,
+	},
+	gsArea:{
+		type:String,
+		required:true,
+	},
+	gsNo:{
+		type:Number,
+		required:true,
+	},
+	dsDivision:{
+		type:String,
+		required:true,
+	},
+	indexNum:{
+		type:String,
+	},
+	district:{
+		type:String,
+		required:true,
+	},
+	admin_districtAL:{
+		type:String,
+		required:true,
 	},
 	zScore: {
 		type: Number,
