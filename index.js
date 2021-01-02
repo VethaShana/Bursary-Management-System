@@ -28,6 +28,7 @@ mongoose
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		useFindAndModify: false,
+		useCreateIndex: true
 	})
 	.then(() =>
 		app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
