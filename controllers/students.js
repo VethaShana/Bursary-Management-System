@@ -45,3 +45,71 @@ export const updateStudent = async (req, res) => {
 		res.status(400).json({ message: error.message })
 	}
 }
+//Queries
+var db;
+
+const query_married= db.student.find([ fullName, nic, {married : {annual_income}}, {propeincomefromEstate_Fields_Lands : {annual_income}}, { incomefromHouses :{annual_income}} ])
+
+const query_guardian= db.student.find([ fullName, nic,  {parentsDetails : {guardian : {guardianAnnualIncome}}}, {propeincomefromEstate_Fields_Lands : {annual_income}}, { incomefromHouses :{annual_income}} ])
+
+const query_parents= db.student.find([ fullName, nic,  {parentsDetails : {father : {fatherTotalAnnualIncome}, mother : {motherTotalAnnualIncome}}}, {propeincomefromEstate_Fields_Lands : {annual_income}}, { incomefromHouses :{annual_income}} ])
+
+const noOfSibb= db.student.find(nic, {$count:{siblingsUniversity:[regNo]}})
+
+const noOfSib =db.student.find(nic, {$count:{siblingsUnder19:[namesb]}})
+
+db.student.aggregate([
+	 {salaryA: { $sum: {parentsDetails:{father : {fatherTotalAnnualIncome}, mother : {motherTotalAnnualIncome}}}, propeincomefromEstate_Fields_Lands : {annual_income}, incomefromHouses :{annual_income}}}
+	])
+
+
+db.student.aggregate([
+	{salaryB: { $sum: {parentsDetails : {guardian : {guardianAnnualIncome}}}, propeincomefromEstate_Fields_Lands : {annual_income}, incomefromHouses :{annual_income}}}
+   ])
+
+   
+db.student.aggregate([
+	{salaryC: { $sum: {married : {$multiply:[{spouseMonthlySalary},12]}}}, propeincomefromEstate_Fields_Lands : {annual_income}, incomefromHouses :{annual_income}}
+   ])
+	
+//functions
+	var totSalary = 500000;
+	
+	function salarySort(){
+		if(db.student.find({married:{$exists:true}})){
+			salary = salaryC;
+
+		}else if(db.student.find({guardian :{$exists:true}})){
+			salary = salaryB;
+		}
+		else{
+			salary = salaryA;
+		}
+		eligibility();
+	}
+
+	function eligibility() {
+
+	if (salary <= totSalary) {
+		console.log(Eligible);
+	  } else{
+		console.log(NotEligible);
+	  }
+	
+}
+	function eligibilitySib(){
+	if(noOfSib > 0){
+			
+		for (var i = 0; i < 3; i++) {
+			totSalary = totSalary + 18000;
+		}
+	  }
+
+	  if(noOfSibb > 0){
+			
+		for (var i = 0; i < 3; i++) {
+			totSalary = totSalary + 36000;
+		}
+	  }
+	  eligibility();
+}

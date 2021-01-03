@@ -51,7 +51,7 @@ const studentSchema = mongoose.Schema({
 	},
 	siblingsUnder19: [
 		{
-			name: {
+			namesb: {
 				type: String,
 				required: true,
 			},
