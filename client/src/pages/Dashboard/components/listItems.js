@@ -11,28 +11,28 @@ import ListItemText from '@material-ui/core/ListItemText'
 import { Link, useRouteMatch } from 'react-router-dom'
 
 export const MainListItems = () => {
-	let match = useRouteMatch()
+	const { url } = useRouteMatch()
 	return (
 		<div>
-			<ListItem button component={Link} to={match.url}>
+			<ListItem button component={Link} to={url}>
 				<ListItemIcon>
 					<DashboardIcon fontSize='small' />
 				</ListItemIcon>
 				<ListItemText primary='Dashboard' />
 			</ListItem>
-			<ListItem button component={Link} to={`${match.url}/students`}>
+			<ListItem button component={Link} to={`${url}/students`}>
 				<ListItemIcon>
 					<AssignmentIndIcon fontSize='small' />
 				</ListItemIcon>
 				<ListItemText primary='Students' />
 			</ListItem>
-			<ListItem button component={Link} to={`${match.url}/applications`}>
+			<ListItem button component={Link} to={`${url}/applications`}>
 				<ListItemIcon>
 					<DescriptionIcon fontSize='small' />
 				</ListItemIcon>
 				<ListItemText primary='Applications' />
 			</ListItem>
-			<ListItem button component={Link} to={`${match.url}/installments`}>
+			<ListItem button component={Link} to={`${url}/installments`}>
 				<ListItemIcon>
 					<PaymentIcon fontSize='small' />
 				</ListItemIcon>
@@ -43,16 +43,16 @@ export const MainListItems = () => {
 }
 
 export const SecondaryListItems = () => {
-	let match = useRouteMatch()
+	const { url } = useRouteMatch()
 	return (
 		<div>
-			<ListItem button component={Link} to={`${match.url}/users`}>
+			<ListItem button component={Link} to={`${url}/users`}>
 				<ListItemIcon>
 					<SupervisedUserCircleIcon fontSize='small' />
 				</ListItemIcon>
 				<ListItemText primary='Users' />
 			</ListItem>
-			<ListItem button component={Link} to={`${match.url}/settings`}>
+			<ListItem button component={Link} to={`${url}/settings`}>
 				<ListItemIcon>
 					<SettingsIcon fontSize='small' />
 				</ListItemIcon>

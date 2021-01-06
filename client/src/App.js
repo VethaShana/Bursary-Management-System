@@ -19,15 +19,15 @@ function App() {
 			<CssBaseline />
 			<Switch>
 				<Route exact path='/' component={Landing} />
-				<Route exact path='/application' component={Application} />
+				<Route path='/application' component={Application} />
 				<Route
 					exact
 					path='/extended-application'
 					component={ExtendedApplication}
 				/>
-				<Route exact path='/signin' component={SignIn} />
-				<Route exact path='/signup' component={SignUp} />
-				<Route exact path='/dashboard' component={Dashboard} />
+				<Route path='/signin' component={SignIn} />
+				<Route path='/signup' component={SignUp} />
+				<Route path='/dashboard' component={Dashboard} />
 			</Switch>
 		</MuiThemeProvider>
 	)

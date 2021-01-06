@@ -114,8 +114,7 @@ export default function Dashboard() {
 		setOpen(false)
 	}
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
-	let match = useRouteMatch()
-	console.log(match)
+	const { path } = useRouteMatch()
 
 	return (
 		<div className={classes.root}>
@@ -175,19 +174,14 @@ export default function Dashboard() {
 				<div className={classes.appBarSpacer} />
 				<Container maxWidth='lg' className={classes.container}>
 					<Switch>
-						<Route exact path={`${match.path}/students`} component={Students} />
-						<Route
-							exact
-							path={`${match.path}/applications`}
-							component={Applications}
-						/>
-						<Route
-							exact
-							path={`${match.path}/installments`}
-							component={Installments}
-						/>
-						<Route exact path={`${match.path}/users`} component={Users} />
-						<Route exact path={`${match.path}/settings`} component={Settings} />
+						<Route exact path={path}>
+							Dashboard
+						</Route>
+						<Route path={`${path}/students`} component={Students} />
+						<Route path={`${path}/applications`} component={Applications} />
+						<Route path={`${path}/installments`} component={Installments} />
+						<Route path={`${path}/users`} component={Users} />
+						<Route path={`${path}/settings`} component={Settings} />
 					</Switch>
 					<Box pt={4}>
 						<Copyright />
