@@ -61,7 +61,7 @@ export const Register = async (req, res) => {
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) return res.status(400).json({ msg: "Invalid credentials." });
             
-            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
                 res.json({
                 token,
                 user: {
@@ -69,6 +69,7 @@ export const Register = async (req, res) => {
                 userName: user.userName,
                 },
                 });
+                console.log("Successfully login");
         } 
     
         catch (err) {
