@@ -2,9 +2,13 @@ import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import path, { dirname } from 'path'
+import { fileURLToPath } from 'url'
 
 import students from './routes/students.js'
 import user from './routes/user.js'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 dotenv.config()
 
@@ -14,7 +18,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 app.use('/students', students)
-app.use('/user',user)
+app.use('/user', user)
 
 const MONGODB_URI = process.env.MONGODB_URI
 const PORT = process.env.PORT || 5000
@@ -29,3 +33,9 @@ mongoose
 		app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
 	)
 	.catch(error => console.log(error.message))
+
+app.use(express.static(path.join(__dirname, 'client', 'build')))
+
+app.get('/*', function (req, res) {
+	res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+})

@@ -1,29 +1,33 @@
 {
-  "name": "bursary-management-system",
-  "version": "1.0.0",
-  "description": "Bursary Management System for University of Jaffna",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "start": "nodemon index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zmardil/bursary-management-system.git"
-  },
-  "author": "zmardil",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/zmardil/bursary-management-system/issues"
-  },
-  "homepage": "https://github.com/zmardil/bursary-management-system#readme",
-  "dependencies": {
-    "bcrypt": "^5.0.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.9",
-    "nodemon": "^2.0.6"
-  }
+	"name": "bursary-management-system",
+	"version": "1.0.0",
+	"description": "Bursary Management System for University of Jaffna",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"start": "npm run build --prefix client && node index.js",
+		"server": "nodemon server.js",
+		"client": "npm start --prefix client",
+		"dev": "concurrently -n server,client -c bgRed.bold,bgGreen.bold \"npm run server\" \"npm run client\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/zmardil/bursary-management-system.git"
+	},
+	"author": "zmardil",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/zmardil/bursary-management-system/issues"
+	},
+	"homepage": "https://github.com/zmardil/bursary-management-system#readme",
+	"dependencies": {
+		"bcrypt": "^5.0.0",
+		"concurrently": "^5.3.0",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^5.11.9",
+		"nodemon": "^2.0.6"
+	}
 }
