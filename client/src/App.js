@@ -21,9 +21,9 @@ function App() {
 				<Route exact path='/' component={Landing} />
 				<Route path='/application' component={Application} />
 				<Route path='/extended-application' component={ExtendedApplication} />
-				<Route exact path='/dashboard' component={Dashboard} />
 				<Route path='/dashboard/signin' component={SignIn} />
 				<Route path='/dashboard/signup' component={SignUp} />
+				<Route path='/dashboard' component={Dashboard} />
 			</Switch>
 		</MuiThemeProvider>
 	)
