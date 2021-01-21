@@ -9,8 +9,8 @@ import theme from './utils/theme'
 import Landing from './pages/Landing'
 import Application from './pages/Application'
 import ExtendedApplication from './pages/ExtendedApplication'
-import SignIn from './pages/SignIn'
-import SignUp from './pages/SignUp'
+import SignIn from './pages/Dashboard/pages/SignIn'
+import SignUp from './pages/Dashboard/pages/SignUp'
 import Dashboard from './pages/Dashboard/Dashboard'
 
 function App() {
@@ -20,14 +20,10 @@ function App() {
 			<Switch>
 				<Route exact path='/' component={Landing} />
 				<Route path='/application' component={Application} />
-				<Route
-					exact
-					path='/extended-application'
-					component={ExtendedApplication}
-				/>
-				<Route path='/signin' component={SignIn} />
-				<Route path='/signup' component={SignUp} />
-				<Route path='/dashboard' component={Dashboard} />
+				<Route path='/extended-application' component={ExtendedApplication} />
+				<Route exact path='/dashboard' component={Dashboard} />
+				<Route path='/dashboard/signin' component={SignIn} />
+				<Route path='/dashboard/signup' component={SignUp} />
 			</Switch>
 		</MuiThemeProvider>
 	)

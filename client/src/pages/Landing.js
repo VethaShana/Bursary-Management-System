@@ -21,7 +21,8 @@ import ArrowRightAltOutlinedIcon from '@material-ui/icons/ArrowRightAltOutlined'
 import bgImg from '../assets/bg1.svg'
 
 import Copyright from '../components/Copyright'
-import CollapsableForm from '../components/CollapsableForm'
+import Register from '../components/Register'
+import Login from '../components/Login'
 
 const useStyles = makeStyles(theme => ({
 	gridHalf: {
@@ -62,8 +63,8 @@ const useStyles = makeStyles(theme => ({
 			float: 'none',
 		},
 	},
-	applications: {
-		maxWidth: '500px',
+	authContainer: {
+		maxWidth: '450px',
 		[theme.breakpoints.down('xs')]: {
 			marginTop: theme.spacing(8),
 		},
@@ -74,7 +75,11 @@ const helpMail = 'help@welfare.jfn.ac.lk'
 
 function Landing() {
 	const classes = useStyles()
-	const [open, setOpen] = useState(true)
+	const [authView, setAuthView] = useState('register')
+
+	const handleAuthViewChange = () => {
+		setAuthView(authView === 'register' ? 'login' : 'register')
+	}
 
 	return (
 		<Container maxWidth='lg'>
@@ -96,53 +101,22 @@ function Landing() {
 					>
 						<Box>
 							<header>
-								<Typography
-									color='primary'
-									variant='h3'
-									style={{ fontWeight: 'bold' }}
-									gutterBottom
-								>
+								<Typography variant='h3' style={{ fontWeight: 'bold' }}>
 									University of Jaffna
 								</Typography>
-								<Typography color='primary' variant='h5'>
-									Bursary Department
-								</Typography>
+								<Typography variant='h5'>Welfare Department</Typography>
 							</header>
 						</Box>
-						<List
-							className={classes.applications}
-							component='nav'
-							aria-labelledby='application-subheader'
-							subheader={
-								<ListSubheader component='div' id='application-subheader'>
-									Applications
-								</ListSubheader>
-							}
-							dense
-						>
-							<ListItem button onClick={() => setOpen(!open)}>
-								<ListItemIcon>
-									<InsertDriveFileOutlinedIcon />
-								</ListItemIcon>
-								<ListItemText primary='Preliminary Bursary Application' />
-							</ListItem>
-							<Collapse in={open} timeout='auto' unmountOnExit>
-								<CollapsableForm />
-							</Collapse>
-							<Divider />
-							<ListItem button onClick={() => setOpen(!open)}>
-								<ListItemIcon>
-									<InsertDriveFileOutlinedIcon />
-								</ListItemIcon>
-								<ListItemText
-									primary='Bursary Extension'
-									secondary='Eligible only for honours degree students'
-								/>
-							</ListItem>
-							<Collapse in={!open} timeout='auto' unmountOnExit>
-								<CollapsableForm />
-							</Collapse>
-						</List>
+						<Box className={classes.authContainer}>
+							<Register
+								authView={authView}
+								onAuthViewChange={handleAuthViewChange}
+							/>
+							<Login
+								authView={authView}
+								onAuthViewChange={handleAuthViewChange}
+							/>
+						</Box>
 					</Grid>
 					<Grid
 						container
@@ -164,7 +138,7 @@ function Landing() {
 						</Box>
 						<Box className={classes.banner} alignSelf='flex-end'>
 							<Typography
-								variant='h4'
+								variant='h5'
 								color='primary'
 								style={{ fontWeight: 'bold' }}
 								gutterBottom

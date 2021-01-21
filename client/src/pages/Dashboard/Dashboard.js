@@ -17,11 +17,15 @@ import { MainListItems, SecondaryListItems } from './components/listItems'
 
 import Copyright from '../../components/Copyright'
 import { useRouteMatch, Switch, Route } from 'react-router-dom'
-import Students from './components/Students'
-import Applications from './components/Applications'
-import Installments from './components/Installments'
-import Users from './components/Users'
-import Settings from './components/Settings'
+import Students from './views/Students'
+import Applications from './views/Applications'
+import Installments from './views/Installments'
+import Users from './views/Users'
+import Settings from './views/Settings'
+import { Paper, Grid } from '@material-ui/core'
+import PendingApplications from './components/PendingApplications'
+import Statics from './components/Statics'
+import Chart from './components/Chart'
 
 const drawerWidth = 240
 
@@ -114,7 +118,7 @@ export default function Dashboard() {
 		setOpen(false)
 	}
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
-	const { path } = useRouteMatch()
+	const { path, url } = useRouteMatch()
 
 	return (
 		<div className={classes.root}>
@@ -175,7 +179,26 @@ export default function Dashboard() {
 				<Container maxWidth='lg' className={classes.container}>
 					<Switch>
 						<Route exact path={path}>
-							Dashboard
+							<Grid container spacing={3}>
+								{/* Chart */}
+								<Grid item xs={12} md={8} lg={9}>
+									<Paper className={fixedHeightPaper}>
+										<Chart />
+									</Paper>
+								</Grid>
+								{/* Recent Statics */}
+								<Grid item xs={12} md={4} lg={3}>
+									<Paper className={fixedHeightPaper}>
+										<Statics />
+									</Paper>
+								</Grid>
+								{/* Pending Applications */}
+								<Grid item xs={12}>
+									<Paper className={classes.paper}>
+										<PendingApplications />
+									</Paper>
+								</Grid>
+							</Grid>
 						</Route>
 						<Route path={`${path}/students`} component={Students} />
 						<Route path={`${path}/applications`} component={Applications} />
