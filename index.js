@@ -8,7 +8,11 @@ import { fileURLToPath } from 'url'
 import students from './routes/students.js'
 import user from './routes/user.js'
 
+<<<<<<< HEAD
 const __dirname = dirname(fileURLToPath(import.meta.url))
+=======
+import auth from './middleware/auth.js'
+>>>>>>> 81bb755 (changes in user)
 
 dotenv.config()
 
@@ -18,7 +22,14 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 app.use('/students', students)
+<<<<<<< HEAD
 app.use('/user', user)
+=======
+app.use('/user',user)
+app.post('/test', auth, (req, res) => {
+	res.send(req.user)
+})
+>>>>>>> 81bb755 (changes in user)
 
 const MONGODB_URI = process.env.MONGODB_URI
 const PORT = process.env.PORT || 5000

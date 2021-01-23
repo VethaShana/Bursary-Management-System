@@ -1,12 +1,16 @@
 import express from 'express'
-import { getStudents, createStudent,deleteStudent,updateStudent } from '../controllers/students.js'
+import auth from '../middleware/auth.js'
+import { getStudents, createStudent,deleteStudent,updateStudent,PDF } from '../controllers/students.js'
+//import auth2 from '../middleware/auth.js'
 
 const router = express.Router()
 
-router.get('/', getStudents)
+// protected
+router.get('/', auth, getStudents)
 router.post('/', createStudent)
-router.delete('/:id', deleteStudent)
-router.put('/:id',updateStudent)
+router.delete('/:id',auth, deleteStudent)
+router.put('/:id',auth,updateStudent)
+router.post('/pdf/:id',auth,PDF)
 // update all other routes
 
 export default router

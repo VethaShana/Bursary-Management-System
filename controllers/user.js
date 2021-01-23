@@ -1,6 +1,8 @@
 import User from '../models/user.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+dotenv.config()
 //import auth from '../middleware/auth.js'
 
 
@@ -8,13 +10,13 @@ import jwt from 'jsonwebtoken'
 
 export const Register = async (req, res) => {
     try {
-    let { email, password, passwordCheck, userName } = req.body;
+    let { email, password, passwordCheck, userName , usertype} = req.body;
     // validate
-    if (!email || !password || !passwordCheck)
+    if (!email || !password || !passwordCheck ||!usertype)
     return res.status(400).json({ msg: "Not all fields have been entered." });
 
     if (password.length < 8)
-    return res.status(400).json({ msg: "The password needs to be at least 5 characters long." });
+    return res.status(400).json({ msg: "The password needs to be at least 8 characters long." });
 
     if (password !== passwordCheck)
     return res.status(400).json({ msg: "Enter the same password twice for verification." });
@@ -30,6 +32,7 @@ export const Register = async (req, res) => {
     email,
     password: passwordHash,
     userName,
+    usertype
     });
     const savedUser = await newUser.save();
     res.json(savedUser);
@@ -60,16 +63,26 @@ export const Register = async (req, res) => {
 
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) return res.status(400).json({ msg: "Invalid credentials." });
-            
-          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-                res.json({
-                token,
-                user: {
-                id: user._id,
-                userName: user.userName,
-                },
-                });
-                console.log("Successfully login");
+            const stu = await compare(usertype,user.usertype)
+            if(!stu) {
+                const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET1);
+                    res.json({
+                    token,
+                    user: {
+                    id: user._id,
+                    userName: user.userName,
+                    },
+                    });
+            }
+            token = jwt.sign({ id: user._id }, process.env.JWT_SECRET2);
+            res.json({
+            token,
+            user: {
+            id: user._id,
+            userName: user.userName,
+            },
+            });
+            console.log("Successfully login");
         } 
     
         catch (err) {
@@ -97,8 +110,9 @@ export const Register = async (req, res) => {
     try {
     const token = req.header("x-auth-token");
     if (!token) return res.json(false);
-    const verified = jwt.verify(token, process.env.JWT_SECRET);
-    if (!verified) return res.json(false);
+    const verified = jwt.verify(token, process.env.JWT_SECRET1);
+    const verified2 = jwt.verify(token, process.env.JWT_SECRET2);
+    if (!verified && !verified2) return res.json(false);
     const user = await User.findById(verified.id);
     if (!user) return res.json(false);
     return res.json(true);

@@ -1,6 +1,12 @@
 import Student from '../models/student.js'
+import pdfMake from 'pdfmake/build/pdfmake.js'
+import PDF_Fonts from 'pdfmake/build/vfs_fonts.js'
+
+
+pdfMake.vfs = PDF_Fonts.pdfMake.vfs;
 
 export const getStudents = async (req, res) => {
+	console.log(req.user)
 	try {
 		const student = await Student.find()
 		res.status(200).json(student)
@@ -45,6 +51,7 @@ export const updateStudent = async (req, res) => {
 		res.status(400).json({ message: error.message })
 	}
 }
+<<<<<<< HEAD
 //Queries
 // var db
 
@@ -111,3 +118,33 @@ export const updateStudent = async (req, res) => {
 // 	  }
 // 	  eligibility();
 // }
+=======
+
+//router.post('/pdf', (req, res, next)=>{
+    //res.send('PDF');
+export const PDF = async(req,res)=>{
+	var student= await Student.findById(req.params.id);
+    const Name = student.fullName;
+    //const lname = req.body.lname;
+
+    var docDefinition = {
+        content: [
+            `Hello ${Name} ` ,
+            'Nice to meet you!'
+        ]        
+    };
+	//pdfMake.createPdf(docDefinition).download();
+    const pdfDoc = pdfMake.createPdf(docDefinition);
+    pdfDoc.getBase64((data)=>{
+        res.writeHead(200, 
+        {
+            'Content-Type': 'application/pdf',
+            'Content-Disposition':'attachment;filename="filename.pdf"'
+        });
+
+        const download = Buffer.from(data.toString('utf-8'), 'base64');
+        res.end(download);
+    });
+	console.log("sucessfully Done!");
+}
+>>>>>>> 81bb755 (changes in user)

@@ -3,6 +3,7 @@ import { Delete, LoginUser, Register, tokenIsValid,getUser } from '../controller
 import auth from '../middleware/auth.js'
 
 
+
 const router = express.Router()
 
 router.post('/login', LoginUser)
