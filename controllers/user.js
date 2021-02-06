@@ -50,7 +50,7 @@ export const Register = async (req, res) => {
     export const LoginUser = async (req, res) => {
         try {
             //const user = await User.find()
-            const { email, password } = req.body;
+            const { email, password ,usertype} = req.body;
     
            
             // validate
@@ -63,8 +63,9 @@ export const Register = async (req, res) => {
 
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) return res.status(400).json({ msg: "Invalid credentials." });
-            const stu = await compare(usertype,user.usertype)
-            if(!stu) {
+           //const stu = await compare(usertype,user.usertype,"student");
+           
+            if(usertype!="student" && user.usertype!="student") {
                 const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET1);
                     res.json({
                     token,
@@ -73,8 +74,8 @@ export const Register = async (req, res) => {
                     userName: user.userName,
                     },
                     });
-            }
-            token = jwt.sign({ id: user._id }, process.env.JWT_SECRET2);
+            };
+            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET2);
             res.json({
             token,
             user: {

@@ -117,3 +117,31 @@ export const updateStudent = async (req, res) => {
 // 	  }
 // 	  eligibility();
 // }
+
+//router.post('/pdf', (req, res, next)=>{
+    //res.send('PDF');
+export const PDF = async(req,res)=>{
+	var student= await Student.findById(req.params.id);
+    const Name = student.fullName;
+    //const lname = req.body.lname;
+
+    var docDefinition = {
+        content: [
+            `Hello ${Name} ` ,
+            'Nice to meet you!'
+        ]        
+    };
+	//pdfMake.createPdf(docDefinition).download();
+    const pdfDoc = pdfMake.createPdf(docDefinition);
+    pdfDoc.getBase64((data)=>{
+        res.writeHead(200, 
+        {
+            'Content-Type': 'application/pdf',
+            'Content-Disposition':'attachment;filename="filename.pdf"'
+        });
+
+        const download = Buffer.from(data.toString('utf-8'), 'base64');
+        res.end(download);
+    });
+	console.log("sucessfully Done!");
+}
