@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url'
 
 import students from './routes/students.js'
 import users from './routes/users.js'
+import bodyParser from 'body-parser'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -16,6 +17,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use('/students', students)
 app.use('/users', users)
