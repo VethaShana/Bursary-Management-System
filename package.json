@@ -8,7 +8,7 @@
 		"start": "npm run build --prefix client && node index.js",
 		"server": "nodemon index.js --ignore client",
 		"client": "npm start --prefix client",
-		"dev": "concurrently -n server,client -c bgRed.bold,bgGreen.bold \"npm run server\" \"npm run client\""
+		"dev": "concurrently -n server,client -c red,green \"npm run server\" \"npm run client\""
 	},
 	"repository": {
 		"type": "git",

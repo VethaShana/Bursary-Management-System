@@ -6,7 +6,7 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 import students from './routes/students.js'
-import user from './routes/user.js'
+import users from './routes/users.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 app.use('/students', students)
-app.use('/user', user)
+app.use('/users', users)
 
 const MONGODB_URI = process.env.MONGODB_URI
 const PORT = process.env.PORT || 5000
@@ -28,7 +28,7 @@ mongoose
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		useFindAndModify: false,
-		useCreateIndex: true
+		useCreateIndex: true,
 	})
 	.then(() =>
 		app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))

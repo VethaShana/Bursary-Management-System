@@ -1,67 +1,67 @@
 import mongoose from 'mongoose'
 
 const studentSchema = mongoose.Schema({
-	regNo:{
-		type:String,
-		required:true
+	regNo: {
+		type: String,
+		// required:true
 	},
 	fullName: {
 		type: String,
-		required: true,
+		// required: true,
 	},
 	nic: {
 		type: String,
-		required: true,
+		// required: true,
 		trim: true,
 	},
 	address: {
 		type: String,
-		required: true,
+		// required: true,
 	},
 	mobile: {
 		type: Number,
-		required: true,
+		// required: true,
 	},
-	gsArea:{
-		type:String,
-		required:true,
+	gsArea: {
+		type: String,
+		// required:true,
 	},
-	gsNo:{
-		type:Number,
-		required:true,
+	gsNo: {
+		type: Number,
+		// required:true,
 	},
-	dsDivision:{
-		type:String,
-		required:true,
+	dsDivision: {
+		type: String,
+		// required:true,
 	},
-	indexNum:{
-		type:String,
+	indexNum: {
+		type: String,
 	},
-	district:{
-		type:String,
-		required:true,
+	district: {
+		type: String,
+		// required:true,
 	},
-	admin_districtAL:{
-		type:String,
-		required:true,
+	admin_districtAL: {
+		type: String,
+		// required:true,
 	},
 	zScore: {
 		type: Number,
-		required: true,
+		// required: true,
 	},
 	siblingsUnder19: [
 		{
 			namesb: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			dob: {
 				type: Date,
-				required: true,
+				// required: true,
 			},
 			school: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 		},
 	],
@@ -69,27 +69,27 @@ const studentSchema = mongoose.Schema({
 		{
 			name: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			regNo: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			university: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			siblingCourse: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			academicYear: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			isBursaryRecipient: {
 				type: Boolean,
-				required: true,
+				// required: true,
 			},
 		},
 	],
@@ -97,27 +97,27 @@ const studentSchema = mongoose.Schema({
 		{
 			nameOfOwner: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			relationship: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			location: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			natureOfCultivation: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			extentOfLandAndDetails: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			annualIncome: {
 				type: Number,
-				required: true,
+				// required: true,
 			},
 		},
 	],
@@ -125,27 +125,27 @@ const studentSchema = mongoose.Schema({
 		{
 			nameOfOwner: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			relationship: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			assessmentNo: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			noOfHouseholders: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			address: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			annualIncome: {
 				type: Number,
-				required: true,
+				// required: true,
 			},
 		},
 	],
@@ -153,19 +153,19 @@ const studentSchema = mongoose.Schema({
 		{
 			establishmentName: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			establishmentAddress: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			post: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			salaryScale: {
 				type: Number,
-				required: true,
+				// required: true,
 			},
 			dateOfAppointment: {
 				type: Date,
@@ -177,23 +177,23 @@ const studentSchema = mongoose.Schema({
 		{
 			spouseName: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			dateOfMarriage: {
 				type: Date,
-				required: true,
+				// required: true,
 			},
 			spousePost: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			spouseEstablishmentName: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			spouseMonthlySalary: {
 				type: Number,
-				required: true,
+				// required: true,
 			},
 		},
 	],
@@ -203,39 +203,39 @@ const studentSchema = mongoose.Schema({
 				{
 					fatherFullName: {
 						type: String,
-						required: true,
+						// required: true,
 					},
 					aliveOrNot: {
 						type: String,
-						required: true,
+						// required: true,
 					},
 					ageYearMonth: {
 						type: String,
-						required: true,
+						// required: true,
 					},
 					fatherOccupation: {
 						type: String,
-						required: true,
+						// required: true,
 					},
 					fatherWorkPlace: {
 						type: String,
-						required: true,
+						// required: true,
 					},
 					fatherAnnualIncome: {
 						type: Number,
-						required: true,
+						// required: true,
 					},
 					fatherAnnualPropertyIncome: {
 						type: Number,
-						required: true,
+						// required: true,
 					},
 					fatherAnnualOtherIncome: {
 						type: Number,
-						required: true,
+						// required: true,
 					},
 					fatherTotalAnnualIncome: {
 						type: Number,
-						required: true,
+						// required: true,
 					},
 				},
 			],
@@ -243,39 +243,39 @@ const studentSchema = mongoose.Schema({
 				{
 					motherFullName: {
 						type: String,
-						required: true,
+						// required: true,
 					},
 					aliveOrNot: {
 						type: String,
-						required: true,
+						// required: true,
 					},
 					ageYearMonth: {
 						type: String,
-						required: true,
+						// required: true,
 					},
 					motherOccupation: {
 						type: String,
-						required: true,
+						// required: true,
 					},
 					motherWorkPlace: {
 						type: String,
-						required: true,
+						// required: true,
 					},
 					motherAnnualIncome: {
 						type: Number,
-						required: true,
+						// required: true,
 					},
 					motherAnnualPropertyIncome: {
 						type: Number,
-						required: true,
+						// required: true,
 					},
 					motherAnnualOtherIncome: {
 						type: Number,
-						required: true,
+						// required: true,
 					},
 					motherTotalAnnualIncome: {
 						type: Number,
-						required: true,
+						// required: true,
 					},
 				},
 			],
@@ -283,27 +283,27 @@ const studentSchema = mongoose.Schema({
 				{
 					guardianFullName: {
 						type: String,
-						required: true,
+						// required: true,
 					},
 					permanentAddress: {
 						type: String,
-						required: true,
+						// required: true,
 					},
 					motherOccupation: {
 						type: String,
-						required: true,
+						// required: true,
 					},
 					guardianAnnualIncome: {
 						type: Number,
-						required: true,
+						// required: true,
 					},
 					guardianAnnualPropertyIncome: {
 						type: Number,
-						required: true,
+						// required: true,
 					},
 					guardianAge: {
 						type: Number,
-						required: true,
+						// required: true,
 					},
 				},
 			],

@@ -68,6 +68,11 @@ const theme = responsiveFontSizes(
 			MuiListItem: {
 				disableRipple: true,
 			},
+			MuiIconButton: {
+				disableRipple: true,
+				disableTouchRipple: true,
+				disableFocusRipple: true,
+			},
 		},
 	})
 )

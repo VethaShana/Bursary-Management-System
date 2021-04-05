@@ -6,6 +6,7 @@ import {
 	TextField,
 	Typography,
 	Fade,
+	Link,
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
@@ -16,6 +17,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	title: {
 		fontWeight: 700,
+	},
+	btn: {
+		minWidth: '120px',
 	},
 }))
 
@@ -51,6 +55,10 @@ function Login({ authView, onAuthViewChange, ...props }) {
 		validationSchema,
 		onSubmit,
 	})
+
+	const handleClick = e => {
+		onAuthViewChange()
+	}
 
 	return (
 		<Fade
@@ -117,22 +125,33 @@ function Login({ authView, onAuthViewChange, ...props }) {
 							helperText={formik.touched.password && formik.errors.password}
 						/>
 					</Grid>
-					<Grid item container xs={12} justify='flex-end'>
-						<Button
-							size='small'
-							style={{ marginRight: '10px' }}
-							onClick={e => onAuthViewChange()}
-						>
-							Register
-						</Button>
-						<Button
-							type='submit'
-							size='small'
-							variant='contained'
-							color='secondary'
-						>
-							Login
-						</Button>
+					<Grid
+						item
+						container
+						xs={12}
+						alignItems='flex-end'
+						style={{ marginTop: '10px' }}
+					>
+						<Grid item xs>
+							<Link
+								style={{ marginRight: '10px' }}
+								onClick={handleClick}
+								underline='hover'
+							>
+								Don't have an account? Sign Up
+							</Link>
+						</Grid>
+						<Grid item>
+							<Button
+								type='submit'
+								size='small'
+								variant='contained'
+								color='secondary'
+								className={classes.btn}
+							>
+								Login
+							</Button>
+						</Grid>
 					</Grid>
 				</Grid>
 			</form>

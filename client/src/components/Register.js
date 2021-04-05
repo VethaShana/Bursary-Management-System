@@ -5,6 +5,7 @@ import {
 	makeStyles,
 	TextField,
 	Typography,
+	Link,
 	Fade,
 } from '@material-ui/core'
 import { useFormik } from 'formik'
@@ -16,6 +17,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	title: {
 		fontWeight: 700,
+	},
+	btn: {
+		minWidth: '120px',
 	},
 }))
 
@@ -144,22 +148,33 @@ function Register({ authView, onAuthViewChange, ...props }) {
 							}
 						/>
 					</Grid>
-					<Grid item container xs={12} justify='flex-end'>
-						<Button
-							size='small'
-							style={{ marginRight: '10px' }}
-							onClick={handleClick}
-						>
-							Login
-						</Button>
-						<Button
-							type='submit'
-							size='small'
-							variant='contained'
-							color='secondary'
-						>
-							Register
-						</Button>
+					<Grid
+						item
+						container
+						xs={12}
+						alignItems='flex-end'
+						style={{ marginTop: '10px' }}
+					>
+						<Grid item xs>
+							<Link
+								style={{ marginRight: '10px' }}
+								onClick={handleClick}
+								underline='hover'
+							>
+								Already have an account? Sign In
+							</Link>
+						</Grid>
+						<Grid item>
+							<Button
+								type='submit'
+								size='small'
+								variant='contained'
+								color='secondary'
+								className={classes.btn}
+							>
+								Register
+							</Button>
+						</Grid>
 					</Grid>
 				</Grid>
 			</form>

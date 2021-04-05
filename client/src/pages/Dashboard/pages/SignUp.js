@@ -15,6 +15,8 @@ import Container from '@material-ui/core/Container'
 
 import Copyright from '../../../components/Copyright'
 
+import { connect } from 'react-redux'
+
 const useStyles = makeStyles(theme => ({
 	paper: {
 		marginTop: theme.spacing(8),

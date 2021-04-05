@@ -1,8 +1,11 @@
-import { Grid, makeStyles, Paper } from '@material-ui/core'
+import { Grid, makeStyles, Paper, Button } from '@material-ui/core'
 import React from 'react'
-import PendingApplications from '../components/PendingApplications'
 import clsx from 'clsx'
-import Statics from '../components/Statics'
+import Card from '../components/panels/Card'
+import Student from '../components/tables/Student'
+import Title from '../components/Title'
+import AddIcon from '@material-ui/icons/Add'
+import StudentChart from '../components/panels/StudentChart'
 
 const useStyles = makeStyles(theme => ({
 	paper: {
@@ -24,13 +27,31 @@ function Students() {
 			<Grid container spacing={3}>
 				<Grid item xs={12} md={4} lg={3}>
 					<Paper className={fixedHeightPaper}>
-						<Statics />
+						<Card />
 					</Paper>
 				</Grid>
-				{/* Pending Applications */}
+				{/* Chart */}
+				<Grid item xs={12} md={8} lg={9}>
+					<Paper className={fixedHeightPaper}>
+						<StudentChart />
+					</Paper>
+				</Grid>
+
+				<Grid item container xs={12} display='flex' justify='flex-end'>
+					<Button
+						variant='contained'
+						color='primary'
+						size='small'
+						startIcon={<AddIcon fontSize='small' />}
+					>
+						Add Student
+					</Button>
+				</Grid>
+
+				{/* Enhanced Table */}
 				<Grid item xs={12}>
 					<Paper className={classes.paper}>
-						<PendingApplications />
+						<Student />
 					</Paper>
 				</Grid>
 			</Grid>

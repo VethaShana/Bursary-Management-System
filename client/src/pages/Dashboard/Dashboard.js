@@ -23,9 +23,9 @@ import Installments from './views/Installments'
 import Users from './views/Users'
 import Settings from './views/Settings'
 import { Paper, Grid } from '@material-ui/core'
-import PendingApplications from './components/PendingApplications'
-import Statics from './components/Statics'
-import Chart from './components/Chart'
+import PendingApplications from './components/panels/PendingApplications'
+import Card from './components/panels/Card'
+import Chart from './components/panels/Chart'
 
 const drawerWidth = 240
 
@@ -176,7 +176,7 @@ export default function Dashboard() {
 			</Drawer>
 			<main className={classes.content}>
 				<div className={classes.appBarSpacer} />
-				<Container maxWidth='lg' className={classes.container}>
+				<Container maxWidth={false} className={classes.container}>
 					<Switch>
 						<Route exact path={path}>
 							<Grid container spacing={3}>
@@ -189,7 +189,7 @@ export default function Dashboard() {
 								{/* Recent Statics */}
 								<Grid item xs={12} md={4} lg={3}>
 									<Paper className={fixedHeightPaper}>
-										<Statics />
+										<Card />
 									</Paper>
 								</Grid>
 								{/* Pending Applications */}
