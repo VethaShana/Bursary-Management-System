@@ -597,6 +597,15 @@ const studentSchema = mongoose.Schema({
       },
     },
   ],
+  netAmount: {
+    type: Number,
+    required: true,
+  },
+  isValidCandidate: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 const Student = mongoose.model("student", studentSchema);
