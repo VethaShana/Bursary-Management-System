@@ -19,7 +19,7 @@ export default [
     { text: "\n8. Annual income from other sources:" },
     {
       text:
-        "\nTotal annual income of father:\n(Original salary particulars should be attached/ if retired original pension certificate should be attached) ",
+        "\nTotal annual income of mother:\n(Original salary particulars should be attached/ if retired original pension certificate should be attached) ",
       bold: "true",
     },
   ],
