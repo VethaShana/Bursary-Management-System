@@ -2,14 +2,16 @@ import Student from "../models/student.js";
 import pdfMake from "pdfmake/build/pdfmake.js";
 import PDF_Fonts from "pdfmake/build/vfs_fonts.js";
 import { json } from "express";
+import bodyParser from "body-parser";
+import { getDocumentDefinition } from "../services/pdf.js";
+import { uoj } from "../utils/Uojlogo.js";
+//import { netAmount, capAmount } from "../utils/getAmounts.js";
 
 //import JSON  from 'nodemon/lib/utils'
 
 pdfMake.vfs = PDF_Fonts.pdfMake.vfs;
 
 export const getStudents = async (req, res) => {
-  console.log(req.user);
-
   try {
     const student = await Student.find();
     res.status(200).json(student);
@@ -19,40 +21,31 @@ export const getStudents = async (req, res) => {
 };
 
 export const createStudent = async (req, res, next) => {
-  const { regNo, nic } = req.body;
-  console.log({ regNo, nic });
-  Student.findOne({
-    $or: [{ nic, regNo }],
-  }).then(async (doc) => {
-    // console.log(doc)
-    if (doc)
-      return res.status(400).json({ message: "Student already exists." });
-    const student = new Student(req.body);
-    try {
-      await student.save();
-      res.status(201).json(student);
-    } catch (error) {
-      res.status(409).json({ message: error.message });
-    }
-  });
-};
+  /*const netAmount = 0;
+  try {
+    netAmount = getNetAmount(req.body);
+  } catch (err) {
+    res.status(500).json({ msg: "Internal Server Error" });
+  }*/
 
-export const PDF = async (req, res) => {
-  const Sname = "johndoe";
-  var documentDefinition = {
-    content: [`Hello ${Sname}`, "Nice to meet you!"],
-  };
+  const newStudent = new Student(req.body);
+  try {
+    await newStudent.save();
+    const pdfDoc = pdfMake.createPdf(
+      getDocumentDefinition("application", req.body)
+    );
+    pdfDoc.getBase64((data) => {
+      res.writeHead(200, {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": 'attachment;filename="filename.pdf"',
+      });
 
-  const pdfDoc = pdfMake.createPdf(documentDefinition);
-  pdfDoc.getBase64((data) => {
-    res.writeHead(200, {
-      "Content-Type": "application/pdf",
-      "Content-Disposition": 'attachment;filename="filename.pdf"',
+      const download = Buffer.from(data.toString("utf-8"), "base64");
+      res.end(download);
     });
-
-    const download = Buffer.from(data.toString("utf-8"), "base64");
-    res.end(download);
-  });
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
 };
 
 export const deleteStudent = async (req, res) => {
@@ -80,142 +73,6 @@ export const updateStudent = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
-//Queries
-// var db
-//const student = await Student.find();
-/*app.post('/id', function(req,res) {
-
-    var data = req.body;
-    var id = data.id;
-    console.log(id);
-    var query = "SELECT * FROM Control WHERE id=" +id;
-    connection.query(query, function(error, result) {
-            console.log(result);
-            res.send(result);
-    });
-});*/
-
-export const Bursarycheck = async (req, res) => {
-  var data = Student.req.body;
-  const query_married = data.find([
-    fullName,
-    nic,
-    { married: { annual_income } },
-    { propeincomefromEstate_Fields_Lands: { annual_income } },
-    { incomefromHouses: { annual_income } },
-  ]);
-
-  const query_guardian = data.student.find([
-    fullName,
-    nic,
-    { parentsDetails: { guardian: { guardianAnnualIncome } } },
-    { propeincomefromEstate_Fields_Lands: { annual_income } },
-    { incomefromHouses: { annual_income } },
-  ]);
-
-  const query_parents = data.student.find([
-    fullName,
-    nic,
-    {
-      parentsDetails: {
-        father: { fatherTotalAnnualIncome },
-        mother: { motherTotalAnnualIncome },
-      },
-    },
-    { propeincomefromEstate_Fields_Lands: { annual_income } },
-    { incomefromHouses: { annual_income } },
-  ]);
-
-  const noOfSibb = data.student.find(nic, {
-    $count: { siblingsUniversity: [regNo] },
-  });
-
-  const noOfSib = data.student.find(nic, {
-    $count: { siblingsUnder19: [namesb] },
-  });
-
-  db.student.aggregate([
-    {
-      salaryA: {
-        $sum: {
-          parentsDetails: {
-            father: { fatherTotalAnnualIncome },
-            mother: { motherTotalAnnualIncome },
-          },
-        },
-        propeincomefromEstate_Fields_Lands: { annual_income },
-        incomefromHouses: { annual_income },
-      },
-    },
-  ]);
-
-  db.student.aggregate([
-    {
-      salaryB: {
-        $sum: { parentsDetails: { guardian: { guardianAnnualIncome } } },
-        propeincomefromEstate_Fields_Lands: { annual_income },
-        incomefromHouses: { annual_income },
-      },
-    },
-  ]);
-
-  db.student.aggregate([
-    {
-      salaryC: {
-        $sum: { married: { $multiply: [{ spouseMonthlySalary }, 12] } },
-      },
-      propeincomefromEstate_Fields_Lands: { annual_income },
-      incomefromHouses: { annual_income },
-    },
-  ]);
-
-  connection.query(query_married, function (error, result) {
-    console.log(result);
-    res.send(result);
-  });
-};
-
-// //functions
-// 	var totSalary = 500000;
-
-// 	function salarySort(){
-// 		if(db.student.find({married:{$exists:true}})){
-// 			salary = salaryC;
-
-// 		}else if(db.student.find({guardian :{$exists:true}})){
-// 			salary = salaryB;
-// 		}
-// 		else{
-// 			salary = salaryA;
-// 		}
-// 		eligibility();
-// 	}
-
-// 	function eligibility() {
-
-// 	if (salary <= totSalary) {
-// 		console.log(Eligible);
-// 	  } else{
-// 		console.log(NotEligible);
-// 	  }
-
-// }
-// 	function eligibilitySib(){
-// 	if(noOfSib > 0){
-
-// 		for (var i = 0; i < 3; i++) {
-// 			totSalary = totSalary + 18000;
-// 		}
-// 	  }
-
-// 	  if(noOfSibb > 0){
-
-// 		for (var i = 0; i < 3; i++) {
-// 			totSalary = totSalary + 36000;
-// 		}
-// 	  }
-// 	  eligibility();
-// }
 
 export const PDFStudent = async (req, res) => {
   //var student= await Student.findById(req.params.id);

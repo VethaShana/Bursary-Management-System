@@ -597,7 +597,7 @@ const studentSchema = mongoose.Schema({
       },
     },
   ],
-  netAmount: {
+  /* netAmount: {
     type: Number,
     required: true,
   },
@@ -605,7 +605,7 @@ const studentSchema = mongoose.Schema({
     type: Boolean,
     required: true,
     default: false,
-  },
+  },*/
 });
 
 const Student = mongoose.model("student", studentSchema);
