@@ -7,6 +7,7 @@ import {
 	Typography,
 	Link,
 	Fade,
+	Slide,
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
@@ -69,7 +70,7 @@ function Register({ authView, onAuthViewChange, ...props }) {
 			in={authView === 'register'}
 			mountOnEnter
 			unmountOnExit
-			timeout={{ enter: 500 }}
+			timeout={{ enter: 300 }}
 		>
 			<form onSubmit={formik.handleSubmit}>
 				<Grid container spacing={2}>
