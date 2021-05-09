@@ -1,19 +1,24 @@
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles'
-import { cyan, amber } from '@material-ui/core/colors'
 
 const theme = responsiveFontSizes(
 	createMuiTheme({
 		palette: {
-			secondary: {
-				main: '#adefd1ff',
-				// dark: '#87a899',
-				light: '#4b45b2',
-				dark: '#a7e2c8',
-			},
 			primary: {
 				main: '#496076',
 				dark: '#334352',
 				light: '#6d7f91',
+			},
+			secondary: {
+				main: '#adefd1',
+				light: '#bdf2da',
+				dark: '#a7e2c8',
+				// dark: '#87a899',
+			},
+			accent: {
+				main: 'dodgerblue',
+				light: '#bdf2da',
+				dark: '#a7e2c8',
+				// dark: '#87a899',
 			},
 		},
 		typography: {
@@ -51,7 +56,9 @@ const theme = responsiveFontSizes(
 			MuiButton: {
 				disableRipple: true,
 				disableElevation: true,
-				variant: 'outlined',
+			},
+			MuiIcon: {
+				disableRipple: true,
 			},
 			MuiPaper: {
 				elevation: 0,

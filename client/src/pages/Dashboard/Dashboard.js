@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
@@ -16,16 +16,27 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import { MainListItems, SecondaryListItems } from './components/listItems'
 
 import Copyright from '../../components/Copyright'
-import { useRouteMatch, Switch, Route } from 'react-router-dom'
+import { useRouteMatch, Switch, Route, Redirect } from 'react-router-dom'
 import Students from './views/Students'
 import Applications from './views/Applications'
 import Installments from './views/Installments'
 import Users from './views/Users'
 import Settings from './views/Settings'
 import { Paper, Grid } from '@material-ui/core'
-import PendingApplications from './components/panels/PendingApplications'
-import Card from './components/panels/Card'
-import Chart from './components/panels/Chart'
+import PendingApplications from './components/PendingApplications'
+import Card from './components/Card'
+import Chart from './components/Chart'
+import Title from './components/Title'
+
+// redux
+import { connect } from 'react-redux'
+import { getStudents } from '../../actions/students'
+
+const mapStateToProps = state => ({
+	user: state.user.data,
+})
+
+const mapDispatchToProps = { getStudents }
 
 const drawerWidth = 240
 
@@ -40,7 +51,7 @@ const useStyles = makeStyles(theme => ({
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'flex-end',
-		padding: '0 10px',
+		padding: '0 8px',
 		...theme.mixins.toolbar,
 	},
 	appBar: {
@@ -77,15 +88,12 @@ const useStyles = makeStyles(theme => ({
 		}),
 	},
 	drawerPaperClose: {
-		overflowX: 'true',
+		overflowX: 'hidden',
 		transition: theme.transitions.create('width', {
 			easing: theme.transitions.easing.sharp,
 			duration: theme.transitions.duration.leavingScreen,
 		}),
 		width: theme.spacing(7),
-		[theme.breakpoints.up('sm')]: {
-			width: theme.spacing(9),
-		},
 	},
 	appBarSpacer: theme.mixins.toolbar,
 	content: {
@@ -107,8 +115,7 @@ const useStyles = makeStyles(theme => ({
 		height: 240,
 	},
 }))
-
-export default function Dashboard() {
+function Dashboard({ user, getStudents }) {
 	const classes = useStyles()
 	const [open, setOpen] = React.useState(true)
 	const handleDrawerOpen = () => {
@@ -119,6 +126,11 @@ export default function Dashboard() {
 	}
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
 	const { path, url } = useRouteMatch()
+
+	useEffect(() => {
+		console.log(user)
+		getStudents()
+	}, [])
 
 	return (
 		<div className={classes.root}>
@@ -180,6 +192,12 @@ export default function Dashboard() {
 					<Switch>
 						<Route exact path={path}>
 							<Grid container spacing={3}>
+								<Grid item xs={12}>
+									<Title
+										title={`Hi! ${user.name}`}
+										description='Welcome Back to the Dashboard'
+									/>
+								</Grid>
 								{/* Chart */}
 								<Grid item xs={12} md={8} lg={9}>
 									<Paper className={fixedHeightPaper}>
@@ -205,6 +223,10 @@ export default function Dashboard() {
 						<Route path={`${path}/installments`} component={Installments} />
 						<Route path={`${path}/users`} component={Users} />
 						<Route path={`${path}/settings`} component={Settings} />
+						<Route
+							path={`${path}/*`}
+							render={() => <Redirect to={`${path}`} />}
+						/>
 					</Switch>
 					<Box pt={4}>
 						<Copyright />
@@ -214,3 +236,5 @@ export default function Dashboard() {
 		</div>
 	)
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

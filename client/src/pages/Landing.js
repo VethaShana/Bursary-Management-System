@@ -9,7 +9,6 @@ import {
 	Link as MuiLink,
 	IconButton,
 } from '@material-ui/core'
-import InsertDriveFileOutlinedIcon from '@material-ui/icons/InsertDriveFileOutlined'
 import ArrowRightAltOutlinedIcon from '@material-ui/icons/ArrowRightAltOutlined'
 import bgImg from '../assets/bg1.svg'
 
@@ -101,6 +100,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	authContainer: {
 		maxWidth: '450px',
+		overflow: 'hidden',
 		[theme.breakpoints.down('xs')]: {
 			marginTop: theme.spacing(8),
 		},
@@ -119,7 +119,7 @@ function Landing({ history }) {
 
 	return (
 		<>
-			{process.env.NODE_ENV != 'production' && (
+			{process.env.NODE_ENV !== 'production' && (
 				<Snackbar handleClick={() => history.push('/dashboard')} />
 			)}
 			<Container maxWidth='lg'>

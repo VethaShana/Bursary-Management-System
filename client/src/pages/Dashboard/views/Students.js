@@ -1,11 +1,11 @@
 import { Grid, makeStyles, Paper, Button } from '@material-ui/core'
 import React from 'react'
 import clsx from 'clsx'
-import Card from '../components/panels/Card'
-import Student from '../components/tables/Student'
+import Card from '../components/Card'
+import Table from '../components/Table'
 import Title from '../components/Title'
 import AddIcon from '@material-ui/icons/Add'
-import StudentChart from '../components/panels/StudentChart'
+import StudentChart from '../components/StudentChart'
 
 const useStyles = makeStyles(theme => ({
 	paper: {
@@ -25,6 +25,12 @@ function Students() {
 	return (
 		<>
 			<Grid container spacing={3}>
+				<Grid item xs={12}>
+					<Title
+						title='Applications'
+						description='Review bursary recipients.'
+					/>
+				</Grid>
 				<Grid item xs={12} md={4} lg={3}>
 					<Paper className={fixedHeightPaper}>
 						<Card />
@@ -51,7 +57,7 @@ function Students() {
 				{/* Enhanced Table */}
 				<Grid item xs={12}>
 					<Paper className={classes.paper}>
-						<Student />
+						<Table.Student />
 					</Paper>
 				</Grid>
 			</Grid>

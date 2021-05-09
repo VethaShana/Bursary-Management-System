@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { lighten, makeStyles } from '@material-ui/core/styles'
@@ -20,39 +20,60 @@ import FilterListIcon from '@material-ui/icons/FilterList'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
-
-import { Button, Menu, MenuItem } from '@material-ui/core'
-
-function createData(regNo, nic, name, district, courseOfStudy, grossIncome) {
-	return { regNo, nic, name, district, courseOfStudy, grossIncome }
-}
+import { Box, Button, Collapse, Menu, MenuItem } from '@material-ui/core'
+import Skeleton from '@material-ui/lab/Skeleton'
+import { connect } from 'react-redux'
+import { getStudents } from '../../../actions/students'
 
 const rows = [
-	createData(
-		'2017/CSC/045',
-		'961803420V',
-		'Z. M Ardil',
-		'Kandy',
-		'Computer Science',
-		125000.0
-	),
-	createData(
-		'2017/CSC/021',
-		'963083448V',
-		'Isuru Lakmal',
-		'Anudradhapura',
-		'Computer Science',
-		220000.0
-	),
-	createData(
-		'2017/CSC/017',
-		'964028018V',
-		'Ramesh Perera',
-		'Galle',
-		'Computer Science',
-		130000.0
-	),
+	{
+		regNo: '2017/CSC/045',
+		nic: '961803420V',
+		name: 'Ardil Mohamed',
+		district: 'Kandy',
+		faculty: 'Computer Science',
+		grossIncome: 120000,
+	},
+	{
+		regNo: '2017/MMA/025',
+		nic: '951202420V',
+		name: 'Sarath Piyasena',
+		district: 'Colombo',
+		faculty: 'Physical Science',
+		grossIncome: 180000,
+	},
+	{
+		regNo: '2017/A/012',
+		nic: '941202420V',
+		name: 'John Banda',
+		district: 'Anuradhapura',
+		faculty: 'Biological Science',
+		grossIncome: 210000,
+	},
+	{
+		regNo: '2017/CSC/025',
+		nic: '941202420V',
+		name: 'Sanasta',
+		district: 'Ratnapura',
+		faculty: 'Computer Science',
+		grossIncome: 350000,
+	},
+	{
+		regNo: '2017/MMA/015',
+		nic: '952202420V',
+		name: 'John Keells',
+		district: 'Kandy',
+		faculty: 'Physical Science',
+		grossIncome: 192000,
+	},
 ]
+
+const mapStateToProps = state => ({
+	students: state.students.data,
+	isLoading: state.students.isLoading,
+})
+
+const mapDispatchToProps = { getStudents }
 
 function descendingComparator(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
@@ -84,28 +105,44 @@ const headCells = [
 	{
 		id: 'regNo',
 		numeric: false,
-		disablePadding: true,
+		disablePadding: false,
 		label: 'Registration No.',
+		skeleton: true,
 	},
-	{ id: 'nic', numeric: false, disablePadding: false, label: 'NIC' },
+	{
+		id: 'nic',
+		numeric: false,
+		disablePadding: false,
+		label: 'NIC',
+		skeleton: true,
+	},
 	{
 		id: 'name',
 		numeric: false,
 		disablePadding: false,
 		label: 'Name with Initials',
+		skeleton: true,
 	},
-	{ id: 'district', numeric: false, disablePadding: false, label: 'District' },
 	{
-		id: 'courseOfStudy',
+		id: 'district',
 		numeric: false,
 		disablePadding: false,
-		label: 'Course of Study',
+		label: 'District',
+		skeleton: true,
+	},
+	{
+		id: 'faculty',
+		numeric: false,
+		disablePadding: false,
+		label: 'Faculty',
+		skeleton: true,
 	},
 	{
 		id: 'grossIncome',
 		numeric: true,
 		disablePadding: false,
 		label: 'Gross Income',
+		skeleton: true,
 	},
 ]
 
@@ -301,51 +338,119 @@ ContextMenu.propTypes = {
 	// numSelected: PropTypes.number.isRequired,
 }
 
+const useRowStyles = makeStyles({
+	root: {
+		'& > *': {
+			borderBottom: 'unset',
+		},
+	},
+})
+
 const Row = props => {
+	const classes = useRowStyles()
 	const { row, isItemSelected, labelId, handleClick } = props
 	const [open, setOpen] = React.useState(false)
 
 	return (
-		<TableRow
-			hover
-			// onClick={event => handleClick(event, row.regNo)}
-			role='checkbox'
-			aria-checked={isItemSelected}
-			tabIndex={-1}
-			key={row.regNo}
-			selected={isItemSelected}
-		>
+		<React.Fragment>
+			<TableRow
+				hover
+				// onClick={event => handleClick(event, row.regNo)}
+				role='checkbox'
+				aria-checked={isItemSelected}
+				tabIndex={-1}
+				key={row.regNo}
+				selected={isItemSelected}
+				className={classes.root}
+			>
+				<TableCell padding='checkbox'>
+					<Checkbox
+						checked={isItemSelected}
+						inputProps={{ 'aria-labelledby': labelId }}
+						size='small'
+						onClick={event => handleClick(event, row.regNo)}
+					/>
+				</TableCell>
+				<TableCell>
+					<IconButton
+						aria-label='expand row'
+						size='small'
+						onClick={e => {
+							e.preventDefault()
+							setOpen(!open)
+						}}
+					>
+						{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+					</IconButton>
+				</TableCell>
+				<TableCell component='th' id={labelId} scope='row'>
+					{row.regNo}
+				</TableCell>
+				<TableCell align='left'>{row.nic}</TableCell>
+				<TableCell align='left'>{row.name}</TableCell>
+				<TableCell align='left'>{row.district}</TableCell>
+				<TableCell align='left'>{row.faculty}</TableCell>
+				<TableCell align='right'>{row.grossIncome}</TableCell>
+				<TableCell align='right'>
+					<ContextMenu />
+				</TableCell>
+			</TableRow>
+			<TableRow>
+				<TableCell
+					style={{ paddingBottom: 0, paddingTop: 0 }}
+					colSpan={2}
+				></TableCell>
+				<TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+					<Collapse in={open} timeout='auto' unmountOnExit>
+						<Box margin={1}>
+							<Typography variant='button' gutterBottom component='div'>
+								Details
+							</Typography>
+							<Table size='small' aria-label='purchases'>
+								<TableHead>
+									<TableRow>
+										<TableCell>Date</TableCell>
+										<TableCell>Customer</TableCell>
+										<TableCell align='right'>Amount</TableCell>
+										<TableCell align='right'>Total price ($)</TableCell>
+										<TableCell align='right'>Total price ($)</TableCell>
+										<TableCell align='right'>Total price ($)</TableCell>
+										<TableCell align='right'>Total price ($)</TableCell>
+										<TableCell align='right'>Total price ($)</TableCell>
+									</TableRow>
+								</TableHead>
+								<TableBody>
+									{/* TODO: map() */}
+								</TableBody>
+							</Table>
+						</Box>
+					</Collapse>
+				</TableCell>
+				<TableCell
+					style={{ paddingBottom: 0, paddingTop: 0 }}
+					colSpan={1}
+				></TableCell>
+			</TableRow>
+		</React.Fragment>
+	)
+}
+
+const RowSkeleton = () => {
+	return (
+		<TableRow>
 			<TableCell padding='checkbox'>
-				<Checkbox
-					checked={isItemSelected}
-					inputProps={{ 'aria-labelledby': labelId }}
-					size='small'
-					onClick={event => handleClick(event, row.regNo)}
-				/>
+				<Skeleton />
 			</TableCell>
-			<TableCell>
-				<IconButton
-					aria-label='expand row'
-					size='small'
-					onClick={e => {
-						e.preventDefault()
-						setOpen(!open)
-					}}
-				>
-					{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-				</IconButton>
-			</TableCell>
-			<TableCell component='th' id={labelId} scope='row' padding='none'>
-				{row.regNo}
-			</TableCell>
-			<TableCell align='left'>{row.nic}</TableCell>
-			<TableCell align='left'>{row.name}</TableCell>
-			<TableCell align='left'>{row.district}</TableCell>
-			<TableCell align='left'>{row.courseOfStudy}</TableCell>
-			<TableCell align='right'>{row.grossIncome}</TableCell>
-			<TableCell align='right'>
-				<ContextMenu />
-			</TableCell>
+			<TableCell></TableCell>
+			{headCells.map(({ skeleton }, key) => {
+				return skeleton ? (
+					<TableCell key>
+						<Skeleton />
+					</TableCell>
+				) : (
+					<TableCell key></TableCell>
+				)
+			})}
 		</TableRow>
 	)
 }
@@ -367,13 +472,17 @@ const useStyles = makeStyles(theme => ({
 	},
 }))
 
-export default function EnhancedTable() {
+const EnhancedTable = props => {
+	// const { students: rows, isLoading } = props
+	const { students, isLoading } = props
 	const classes = useStyles()
 	const [order, setOrder] = React.useState('asc')
 	const [orderBy, setOrderBy] = React.useState('grossIncome')
 	const [selected, setSelected] = React.useState([])
 	const [page, setPage] = React.useState(0)
 	const [rowsPerPage, setRowsPerPage] = React.useState(5)
+
+	console.log(rows)
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === 'asc'
@@ -444,21 +553,25 @@ export default function EnhancedTable() {
 						rowCount={rows.length}
 					/>
 					<TableBody>
-						{stableSort(rows, getComparator(order, orderBy))
-							.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-							.map((row, index) => {
-								const isItemSelected = isSelected(row.regNo)
-								const labelId = `enhanced-table-checkbox-${index}`
+						{isLoading &&
+							[...Array(rowsPerPage)].map((x, i) => <RowSkeleton key={i} />)}
+						{!isLoading &&
+							stableSort(rows, getComparator(order, orderBy))
+								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+								.map((row, index) => {
+									const isItemSelected = isSelected(row.regNo)
+									const labelId = `enhanced-table-checkbox-${index}`
 
-								return (
-									<Row
-										row={row}
-										labelId={labelId}
-										isItemSelected={isItemSelected}
-										handleClick={handleClick}
-									/>
-								)
-							})}
+									return (
+										<Row
+											row={row}
+											labelId={labelId}
+											isItemSelected={isItemSelected}
+											handleClick={handleClick}
+											key={index}
+										/>
+									)
+								})}
 						{/* {emptyRows > 0 && (
 							<TableRow style={{ height: (false ? 33 : 53) * emptyRows }}>
 								<TableCell colSpan={6} />
@@ -479,3 +592,5 @@ export default function EnhancedTable() {
 		</>
 	)
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(EnhancedTable)

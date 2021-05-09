@@ -14,19 +14,28 @@ import {
 	FormControlLabel,
 	InputAdornment,
 	FormLabel,
+	useMediaQuery,
 } from '@material-ui/core'
 import Alert from '@material-ui/lab/Alert'
 import { Formik, Form, Field } from 'formik'
 import * as yup from 'yup'
-import Copyright from '../components/Copyright'
-import Header from '../components/Header'
 import { TextField, Checkbox } from 'formik-material-ui'
 import { KeyboardDatePicker } from 'formik-material-ui-pickers'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns'
 // import { DatePicker } from 'formik-material-ui-pickers'
 
-import { districts, GSDivisions, courses } from '../utils/data'
+import {
+	titles,
+	districts,
+	GSDivisions,
+	courses,
+	DSDivisions,
+} from '../utils/data'
+
+import Copyright from '../components/Copyright'
+import Header from '../components/Header'
+import Instruction from '../components/Instruction'
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -66,8 +75,6 @@ const useStyles = makeStyles(theme => ({
 	},
 }))
 
-const titles = ['Mr', 'Mrs', 'Miss', 'Rev']
-
 const initialValues = {
 	regNo: '',
 	indexNo: '',
@@ -82,6 +89,8 @@ const initialValues = {
 	alDistrict: '',
 	phone: '',
 	email: '',
+	course: 'N/A',
+	zScore: '',
 	employed: false,
 	employment: {
 		establishment: '',
@@ -97,6 +106,7 @@ const initialValues = {
 	married: false,
 	spouse: {
 		name: '',
+		//date of marriage
 		employment: {
 			establishment: '',
 			designation: '',
@@ -146,6 +156,10 @@ const initialValues = {
 			houseAndPropertyOrTemple: '',
 		},
 	},
+	// TODO
+	// siblingsAtUniversity: {
+	// 	mahapolaOrBursary: false
+	// }
 }
 
 const validationSchema = yup.object({
@@ -185,14 +199,20 @@ const validationSchema = yup.object({
 		.string()
 		.oneOf(districts, 'Invalid district')
 		.required('This field is required'),
-	gsDivision: yup
-		.string()
-		.oneOf(
-			GSDivisions.map(x => x.division),
-			'Invalid G. S. Division'
-		)
-		.required('This field is required'),
+	gsDivision: yup.string().when('district', (value, schema) => {
+		return yup
+			.string()
+			.oneOf(
+				DSDivisions.find(({ district }) => district === value).division,
+				'Invalid G. S. Division'
+			)
+			.required('This field is required')
+	}),
 	email: yup.string().email('Invalid email').required('Email is required'),
+	course: yup
+		.string()
+		.oneOf(courses, 'Invalid course')
+		.required('Select a course'),
 	phone: yup
 		.string()
 		.matches(/^(?:7|0|(?:\+94))[0-9]{9,10}$/, 'Invalid phone number.')
@@ -368,7 +388,9 @@ const validationSchema = yup.object({
 	}),
 })
 
-const onSubmit = () => {}
+const onSubmit = (values, { setSubmitting }) => {
+	alert(values)
+}
 
 function Application() {
 	const classes = useStyles()
@@ -376,40 +398,47 @@ function Application() {
 		<Container className={classes.root}>
 			<Header title='Bursary Application' subTitle='University of Jaffna' />
 			<Paper className={classes.paper}>
-				<Grid item>
-					<Typography variant='subtitle2' color='initial' gutterBottom>
-						Please read the following instructions before filling the form.
-					</Typography>
-					<Typography variant='body2' color='initial'>
-						Particulars regarding sources of income of should be stated in full.
-						Particulars of income supplied by you will be checked with relevant
-						officers and the Department of Inland revenue. <br />
-						<br />
-						No fields should be left blank. If you have nothing to state it
-						should be stated N/A ,Incomplete applications or applications that
-						do not reach this office before closing date or applications that
-						are not channeled through Grama Sevaka and Divisional Secretary will
-						be rejected. <br /> <br />
-						This application should be duly perfected and handed over to Grama
-						Sevaka, so as to reach this office on or before 30th of September
-						2020 the Grama Sevaka will forward the Application to the Division
-						Secretary as specified in cage 11. As the application has to be
-						returned by registered post and envelop of 9”x 4” in size with
-						stamps to the appropriate value pasted should be handed over to the
-						Grama Sevaka along with the application.The words “Bursary
-						Application” should be indicated on the top left corner of the
-						envelop. This application should not be handed over to this office
-						personally under any circumstances. <br /> <br />
-						If the Jaffna University authorities are convinced that the
-						information supplied by you are incorrect, you should note that you
-						could either be punished or your internal studentship will be
-						cancelled. <br /> <br />
-						If you are a clergy you should indicate the particulars of the
-						guardian (chief priest of the temple) <br /> <br />
-						If you are under the custody of a legal Guardian you should furnish
-						copies of documents issued by a court of law to that effect. <br />{' '}
-						<br />
-					</Typography>
+				<Grid container spacing={2}>
+					<Grid item>
+						<Typography variant='subtitle2' color='error' gutterBottom>
+							Please read the following instructions before filling the form.{' '}
+						</Typography>
+					</Grid>
+					<Grid item>
+						<Instruction>
+							<Typography variant='body2' color='initial'>
+								Particulars regarding sources of income of should be stated in
+								full. Particulars of income supplied by you will be checked with
+								relevant officers and the Department of Inland revenue. <br />
+								<br />
+								No fields should be left blank. If you have nothing to state it
+								should be stated N/A ,Incomplete applications or applications
+								that do not reach this office before closing date or
+								applications that are not channeled through Grama Sevaka and
+								Divisional Secretary will be rejected. <br /> <br />
+								This application should be duly perfected and handed over to
+								Grama Sevaka, so as to reach this office on or before 30th of
+								September 2020 the Grama Sevaka will forward the Application to
+								the Division Secretary as specified in cage 11. As the
+								application has to be returned by registered post and envelop of
+								9”x 4” in size with stamps to the appropriate value pasted
+								should be handed over to the Grama Sevaka along with the
+								application.The words “Bursary Application” should be indicated
+								on the top left corner of the envelop. This application should
+								not be handed over to this office personally under any
+								circumstances. <br /> <br />
+								If the Jaffna University authorities are convinced that the
+								information supplied by you are incorrect, you should note that
+								you could either be punished or your internal studentship will
+								be cancelled. <br /> <br />
+								If you are a clergy you should indicate the particulars of the
+								guardian (chief priest of the temple) <br /> <br />
+								If you are under the custody of a legal Guardian you should
+								furnish copies of documents issued by a court of law to that
+								effect. <br /> <br />
+							</Typography>
+						</Instruction>
+					</Grid>
 				</Grid>
 
 				<Formik
@@ -417,7 +446,7 @@ function Application() {
 					validationSchema={validationSchema}
 					onSubmit={onSubmit}
 				>
-					{({ submitForm, isSubmitting, touched, errors }) => (
+					{({ submitForm, isSubmitting, touched, errors, values }) => (
 						<MuiPickersUtilsProvider utils={DateFnsUtils}>
 							<Form>
 								<Grid container spacing={2} style={{ padding: '32px 8px' }}>
@@ -458,6 +487,50 @@ function Application() {
 												label='NIC'
 												name='nic'
 												placeholder='Eg. XXXXXXXXXV'
+											/>
+										</Grid>
+									</Grid>
+								</Grid>
+
+								<Divider variant='middle' />
+
+								<Grid container spacing={2} style={{ padding: '32px 8px' }}>
+									<Grid item xs={12} md={3}>
+										<Typography variant='h6' color='initial' gutterBottom>
+											Academic Details
+										</Typography>
+										<Typography variant='body2' color='initial'>
+											No Fields should be left blank.
+										</Typography>
+									</Grid>
+									<Grid container item spacing={2} xs={12} md={9}>
+										<Grid item xs={12} sm={9}>
+											<Field
+												component={TextField}
+												type='text'
+												name='course'
+												label='Course of Study'
+												select
+												InputLabelProps={{
+													shrink: true,
+												}}
+											>
+												<MenuItem key={'N/A'} value={'N/A'}>
+													N/A
+												</MenuItem>
+												{courses.map(option => (
+													<MenuItem key={option} value={option}>
+														{option}
+													</MenuItem>
+												))}
+											</Field>
+										</Grid>
+										<Grid item xs={12} sm={3}>
+											<Field
+												component={TextField}
+												type='text'
+												label='Z score'
+												name='zScore'
 											/>
 										</Grid>
 									</Grid>
@@ -572,11 +645,14 @@ function Application() {
 												}}
 											>
 												<MenuItem value='N/A'>N/A</MenuItem>
-												{GSDivisions.map(({ division: option }) => (
-													<MenuItem key={option} value={option}>
-														{option}
-													</MenuItem>
-												))}
+												{values.district !== 'N/A' &&
+													DSDivisions.find(
+														({ district }) => district === values.district
+													).division.map(option => (
+														<MenuItem key={option} value={option}>
+															{option}
+														</MenuItem>
+													))}
 											</Field>
 										</Grid>
 									</Grid>

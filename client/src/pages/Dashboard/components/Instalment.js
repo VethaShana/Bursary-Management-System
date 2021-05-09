@@ -3,7 +3,7 @@ import Link from '@material-ui/core/Link'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { TextField } from 'formik-material-ui'
-import Title from '../Title'
+import Title from './Title'
 import * as yup from 'yup'
 import { Formik, Form, Field } from 'formik'
 import { Grid, Button, MenuItem } from '@material-ui/core'
@@ -11,7 +11,7 @@ import { KeyboardDatePicker } from 'formik-material-ui-pickers'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns'
 
-import { courses } from '../../../../utils/data'
+import { courses } from '../../../utils/data'
 
 function preventDefault(event) {
 	event.preventDefault()

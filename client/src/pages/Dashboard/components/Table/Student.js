@@ -21,6 +21,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 
+import Title from '../Title'
 import { Button, Menu, MenuItem } from '@material-ui/core'
 
 function createData(regNo, nic, name, district, courseOfStudy, grossIncome) {
@@ -367,7 +368,7 @@ const useStyles = makeStyles(theme => ({
 	},
 }))
 
-export default function InstallmentTable() {
+export default function Student() {
 	const classes = useStyles()
 	const [order, setOrder] = React.useState('asc')
 	const [orderBy, setOrderBy] = React.useState('grossIncome')
