@@ -22,6 +22,7 @@ app.use('/users', users)
 
 const MONGODB_URI = process.env.MONGODB_URI
 const PORT = process.env.PORT || 5000
+const NODE_ENV = process.env.NODE_ENV || 'development'
 
 mongoose
 	.connect(MONGODB_URI, {

@@ -12,13 +12,11 @@ import {
 const router = express.Router()
 
 // protected
-// router.get('/', auth, getStudents)
-router.get('/', getStudents)
+
+router.get('/', auth, getStudents)
 router.post('/', createStudent)
 router.delete('/:id', auth, deleteStudent)
 router.put('/:id', auth, updateStudent)
-router.get('/pdf', PDFStudent)
-// router.get('/:id/pdf', PDFStudent)
-// update all other routes
+router.post('/pdf', PDFStudent)
 
 export default router
