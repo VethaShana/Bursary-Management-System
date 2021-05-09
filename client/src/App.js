@@ -13,17 +13,23 @@ import SignIn from './pages/Dashboard/pages/SignIn'
 import SignUp from './pages/Dashboard/pages/SignUp'
 import Dashboard from './pages/Dashboard/Dashboard'
 
+import ProtectedRoute from './components/ProtectedRoute'
+
 function App() {
 	return (
 		<MuiThemeProvider theme={theme}>
 			<CssBaseline />
 			<Switch>
 				<Route exact path='/' component={Landing} />
-				<Route path='/application' component={Application} />
-				<Route path='/extended-application' component={ExtendedApplication} />
-				<Route path='/dashboard/signin' component={SignIn} />
-				<Route path='/dashboard/signup' component={SignUp} />
-				<Route path='/dashboard' component={Dashboard} />
+				<ProtectedRoute path='/application' component={Application} />
+				<ProtectedRoute
+					path='/extended-application'
+					component={ExtendedApplication}
+				/>
+				<Route path='/dashboard/sign-in' component={SignIn} />
+				<Route path='/dashboard/sign-up' component={SignUp} />
+				<ProtectedRoute path='/dashboard' component={Dashboard} />
+				<Route path='*' component={() => '404 NOT FOUND'} />
 			</Switch>
 		</MuiThemeProvider>
 	)
