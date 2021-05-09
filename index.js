@@ -8,6 +8,7 @@ import { fileURLToPath } from "url";
 import students from "./routes/students.js";
 import users from "./routes/users.js";
 import bodyParser from "body-parser";
+import installments from "./routes/installments.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -21,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/students", students);
 app.use("/users", users);
+app.use("/installments", installments);
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const PORT = process.env.PORT || 5000;

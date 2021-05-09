@@ -28,6 +28,6 @@ const installmentSchema = mongoose.Schema({
   },
 });
 
-const User = mongoose.model("installment", installmentSchema);
+const Installment = mongoose.model("installment", installmentSchema);
 
 export default Installment;
