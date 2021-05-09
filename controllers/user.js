@@ -30,10 +30,9 @@ export const registerUser = async (req, res) => {
 
 		if (!userName) userName = email
 		const salt = await bcrypt.genSalt()
-		const passwordHash = await bcrypt.hash(password, salt)
 		const newUser = new User({
 			email,
-			password: passwordHash,
+			password,
 			userName,
 			usertype,
 		})

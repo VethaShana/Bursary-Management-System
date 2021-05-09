@@ -15,4 +15,5 @@ router.post('/register', registerUser)
 router.delete('/delete', auth, deleteUser)
 // router.post('/tokenIsValid', tokenIsValid)
 router.get('/', auth, getUser)
+
 export default router

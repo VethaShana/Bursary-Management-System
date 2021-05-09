@@ -1,97 +1,212 @@
-import mongoose from "mongoose";
-import moment from "moment";
+import mongoose from 'mongoose'
+import moment from 'moment'
+import { titles } from '../utils/data.js'
 
 const studentSchema = mongoose.Schema({
-<<<<<<< HEAD
 	regNo: {
 		type: String,
-		// required:true
-	},
-	fullName: {
-		type: String,
-		// required: true,
+		required: true,
 	},
 	nic: {
 		type: String,
-		// required: true,
+		required: true,
 		trim: true,
 	},
-	address: {
+	title: {
 		type: String,
-		// required: true,
+		required: true,
+		enum: titles,
 	},
-	mobile: {
+	nameWithInitials: {
+		type: String,
+		required: true,
+	},
+	fullName: {
+		type: String,
+		required: true,
+	},
+	street: {
+		type: String,
+		required: true,
+	},
+	city: {
+		type: String,
+		required: true,
+	},
+	district: {
+		type: String,
+		required: true,
+	},
+	gsDivision: {
+		type: String,
+		required: true,
+	},
+	alDistrict: {
+		type: String,
+		required: true,
+	},
+	phone: {
 		type: Number,
-		// required: true,
+		required: true,
+	},
+	email: {
+		type: String,
+		required: true,
+	},
+	zScore: {
+		type: Number,
+		required: true,
+	},
+	course: {
+		type: String,
+		required: true,
+	},
+	employed: {
+		type: Boolean,
+		required: true,
+	},
+	employment: {
+		establishment: {
+			type: String,
+		},
+		address: {
+			street: {
+				type: String,
+			},
+			city: {
+				type: String,
+			},
+			district: {
+				type: String,
+			},
+		},
+		designation: { type: String },
+		salary: { type: Number },
+		dateOfEmployment: { type: Date },
+	},
+	married: {
+		type: Boolean,
+		required: true,
+	},
+	spouse: {
+		name: { type: String },
+		employment: {
+			establishment: { type: String },
+			designation: { type: String },
+			salary: { type: Number },
+		},
+	},
+	father: {
+		name: { type: String },
+		living: { type: Boolean },
+		age: { type: Number },
+		employment: {
+			occupation: { type: String },
+			dateOfEmployment: { type: Date },
+			salary: { type: Number },
+			address: { type: String },
+		},
+		annualIncome: {
+			occupationOrPension: { type: Number },
+			houseAndProperty: { type: Number },
+			otherSources: { type: Number },
+		},
+	},
+	mother: {
+		name: { type: String },
+		living: { type: Boolean },
+		age: { type: Number },
+		employment: {
+			occupation: { type: String },
+			dateOfEmployment: { type: Date },
+			salary: { type: Number },
+			address: { type: String },
+		},
+		annualIncome: {
+			occupationOrPension: { type: Number },
+			houseAndProperty: { type: Number },
+			otherSources: { type: Number },
+		},
+	},
+	guardian: {
+		name: { type: String },
+		age: { type: Number },
+		address: { type: String },
+		post: { type: String },
+		annualIncome: {
+			salary: { type: Number },
+			houseAndPropertyOrTemple: { type: Number },
+		},
 	},
 	gsArea: {
 		type: String,
-		// required:true,
+		required: true,
 	},
 	gsNo: {
 		type: Number,
-		// required:true,
+		required: true,
 	},
 	dsDivision: {
 		type: String,
-		// required:true,
+		required: true,
 	},
 	indexNum: {
 		type: String,
 	},
 	district: {
 		type: String,
-		// required:true,
+		required: true,
 	},
 	admin_districtAL: {
 		type: String,
-		// required:true,
-	},
-	zScore: {
-		type: Number,
-		// required: true,
+		required: true,
 	},
 	siblingsUnder19: [
 		{
 			namesb: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			dob: {
 				type: Date,
-				// required: true,
+				required: true,
 			},
+			//age: moment(dob, "YYYY-MM-DD").fromNow(),
 			school: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 		},
 	],
+	Distance: {
+		type: Number,
+		required: true,
+	},
 	siblingsUniversity: [
 		{
 			name: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			regNo: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			university: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			siblingCourse: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			academicYear: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			isBursaryRecipient: {
 				type: Boolean,
-				// required: true,
+				required: true,
 			},
 		},
 	],
@@ -99,27 +214,27 @@ const studentSchema = mongoose.Schema({
 		{
 			nameOfOwner: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			relationship: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			location: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			natureOfCultivation: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			extentOfLandAndDetails: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			annualIncome: {
 				type: Number,
-				// required: true,
+				required: true,
 			},
 		},
 	],
@@ -127,47 +242,63 @@ const studentSchema = mongoose.Schema({
 		{
 			nameOfOwner: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			relationship: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			assessmentNo: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			noOfHouseholders: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			address: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			annualIncome: {
 				type: Number,
-				// required: true,
+				required: true,
 			},
 		},
 	],
+	GSDNo: {
+		type: String,
+		//required:true
+	},
+	DSDivision: {
+		type: String,
+		//required:true
+	},
+	LocalAthority: {
+		type: String,
+		//required:true
+	},
 	employed: [
 		{
 			establishmentName: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			establishmentAddress: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			post: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			salaryScale: {
 				type: Number,
-				// required: true,
+				required: true,
+			},
+			salary: {
+				type: String,
+				required: true,
 			},
 			dateOfAppointment: {
 				type: Date,
@@ -175,479 +306,141 @@ const studentSchema = mongoose.Schema({
 		},
 	],
 
-	married: [
+	spouse: [
 		{
-			spouseName: {
+			name: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			dateOfMarriage: {
 				type: Date,
-				// required: true,
+				required: true,
 			},
 			spousePost: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			spouseEstablishmentName: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			spouseMonthlySalary: {
 				type: Number,
-				// required: true,
+				required: true,
 			},
 		},
 	],
-	parentsDetails: [
+
+	father: [
 		{
-			father: [
-				{
-					fatherFullName: {
-						type: String,
-						// required: true,
-					},
-					aliveOrNot: {
-						type: String,
-						// required: true,
-					},
-					ageYearMonth: {
-						type: String,
-						// required: true,
-					},
-					fatherOccupation: {
-						type: String,
-						// required: true,
-					},
-					fatherWorkPlace: {
-						type: String,
-						// required: true,
-					},
-					fatherAnnualIncome: {
-						type: Number,
-						// required: true,
-					},
-					fatherAnnualPropertyIncome: {
-						type: Number,
-						// required: true,
-					},
-					fatherAnnualOtherIncome: {
-						type: Number,
-						// required: true,
-					},
-					fatherTotalAnnualIncome: {
-						type: Number,
-						// required: true,
-					},
-				},
-			],
-			mother: [
-				{
-					motherFullName: {
-						type: String,
-						// required: true,
-					},
-					aliveOrNot: {
-						type: String,
-						// required: true,
-					},
-					ageYearMonth: {
-						type: String,
-						// required: true,
-					},
-					motherOccupation: {
-						type: String,
-						// required: true,
-					},
-					motherWorkPlace: {
-						type: String,
-						// required: true,
-					},
-					motherAnnualIncome: {
-						type: Number,
-						// required: true,
-					},
-					motherAnnualPropertyIncome: {
-						type: Number,
-						// required: true,
-					},
-					motherAnnualOtherIncome: {
-						type: Number,
-						// required: true,
-					},
-					motherTotalAnnualIncome: {
-						type: Number,
-						// required: true,
-					},
-				},
-			],
-			guardian: [
-				{
-					guardianFullName: {
-						type: String,
-						// required: true,
-					},
-					permanentAddress: {
-						type: String,
-						// required: true,
-					},
-					motherOccupation: {
-						type: String,
-						// required: true,
-					},
-					guardianAnnualIncome: {
-						type: Number,
-						// required: true,
-					},
-					guardianAnnualPropertyIncome: {
-						type: Number,
-						// required: true,
-					},
-					guardianAge: {
-						type: Number,
-						// required: true,
-					},
-				},
-			],
+			fatherFullName: {
+				type: String,
+				required: true,
+			},
+			aliveOrNot: {
+				type: String,
+				required: true,
+			},
+			ageYearMonth: {
+				type: String,
+				required: true,
+			},
+			fatherOccupation: {
+				type: String,
+				required: true,
+			},
+			fatherWorkPlace: {
+				type: String,
+				required: true,
+			},
+			fatherAnnualIncome: {
+				type: Number,
+				required: true,
+			},
+			fatherAnnualPropertyIncome: {
+				type: Number,
+				required: true,
+			},
+			fatherAnnualOtherIncome: {
+				type: Number,
+				required: true,
+			},
+			fatherTotalAnnualIncome: {
+				type: Number,
+				required: true,
+			},
+		},
+	],
+	mother: [
+		{
+			motherFullName: {
+				type: String,
+				required: true,
+			},
+			aliveOrNot: {
+				type: String,
+				required: true,
+			},
+			ageYearMonth: {
+				type: String,
+				required: true,
+			},
+			motherOccupation: {
+				type: String,
+				required: true,
+			},
+			motherWorkPlace: {
+				type: String,
+				required: true,
+			},
+			motherAnnualIncome: {
+				type: Number,
+				required: true,
+			},
+			motherAnnualPropertyIncome: {
+				type: Number,
+				required: true,
+			},
+			motherAnnualOtherIncome: {
+				type: Number,
+				required: true,
+			},
+			motherTotalAnnualIncome: {
+				type: Number,
+				required: true,
+			},
+		},
+	],
+	guardian: [
+		{
+			guardianFullName: {
+				type: String,
+				required: true,
+			},
+			permanentAddress: {
+				type: String,
+				required: true,
+			},
+			guardianOccupation: {
+				type: String,
+				required: true,
+			},
+			guardianAnnualIncome: {
+				type: Number,
+				required: true,
+			},
+			guardianAnnualPropertyIncome: {
+				type: Number,
+				required: true,
+			},
+			guardianAge: {
+				type: Number,
+				required: true,
+			},
 		},
 	],
 })
-=======
-  regNo: {
-    type: String,
-    required: true,
-  },
-  fullName: {
-    type: String,
-    required: true,
-  },
-  nic: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  address: {
-    type: String,
-    required: true,
-  },
-  mobile: {
-    type: Number,
-    required: true,
-  },
-  gsArea: {
-    type: String,
-    required: true,
-  },
-  gsNo: {
-    type: Number,
-    required: true,
-  },
-  dsDivision: {
-    type: String,
-    required: true,
-  },
-  indexNum: {
-    type: String,
-  },
-  district: {
-    type: String,
-    required: true,
-  },
 
-  course: {
-    type: String,
-    required: true,
-  },
->>>>>>> f8794a111574752555b9142aa577a05ecdc18bf6
+const Student = mongoose.model('student', studentSchema)
 
-  admin_districtAL: {
-    type: String,
-    required: true,
-  },
-  zScore: {
-    type: Number,
-    required: true,
-  },
-  siblingsUnder19: [
-    {
-      namesb: {
-        type: String,
-        required: true,
-      },
-      dob: {
-        type: Date,
-        required: true,
-      },
-      //age: moment(dob, "YYYY-MM-DD").fromNow(),
-      school: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-  Distance: {
-    type: Number,
-    required: true,
-  },
-  siblingsUniversity: [
-    {
-      name: {
-        type: String,
-        required: true,
-      },
-      regNo: {
-        type: String,
-        required: true,
-      },
-      university: {
-        type: String,
-        required: true,
-      },
-      siblingCourse: {
-        type: String,
-        required: true,
-      },
-      academicYear: {
-        type: String,
-        required: true,
-      },
-      isBursaryRecipient: {
-        type: Boolean,
-        required: true,
-      },
-    },
-  ],
-  incomeFromEstateFieldsLands: [
-    {
-      nameOfOwner: {
-        type: String,
-        required: true,
-      },
-      relationship: {
-        type: String,
-        required: true,
-      },
-      location: {
-        type: String,
-        required: true,
-      },
-      natureOfCultivation: {
-        type: String,
-        required: true,
-      },
-      extentOfLandAndDetails: {
-        type: String,
-        required: true,
-      },
-      annualIncome: {
-        type: Number,
-        required: true,
-      },
-    },
-  ],
-  incomeFromHouses: [
-    {
-      nameOfOwner: {
-        type: String,
-        required: true,
-      },
-      relationship: {
-        type: String,
-        required: true,
-      },
-      assessmentNo: {
-        type: String,
-        required: true,
-      },
-      noOfHouseholders: {
-        type: String,
-        required: true,
-      },
-      address: {
-        type: String,
-        required: true,
-      },
-      annualIncome: {
-        type: Number,
-        required: true,
-      },
-    },
-  ],
-  GSDNo: {
-    type: String,
-    //required:true
-  },
-  DSDivision: {
-    type: String,
-    //required:true
-  },
-  LocalAthority: {
-    type: String,
-    //required:true
-  },
-  employed: [
-    {
-      establishmentName: {
-        type: String,
-        required: true,
-      },
-      establishmentAddress: {
-        type: String,
-        required: true,
-      },
-      post: {
-        type: String,
-        required: true,
-      },
-      salaryScale: {
-        type: Number,
-        required: true,
-      },
-      salary: {
-        type: String,
-        required: true,
-      },
-      dateOfAppointment: {
-        type: Date,
-      },
-    },
-  ],
-
-  married: [
-    {
-      spouseName: {
-        type: String,
-        required: true,
-      },
-      dateOfMarriage: {
-        type: Date,
-        required: true,
-      },
-      spousePost: {
-        type: String,
-        required: true,
-      },
-      spouseEstablishmentName: {
-        type: String,
-        required: true,
-      },
-      spouseMonthlySalary: {
-        type: Number,
-        required: true,
-      },
-    },
-  ],
-
-  father: [
-    {
-      fatherFullName: {
-        type: String,
-        required: true,
-      },
-      aliveOrNot: {
-        type: String,
-        required: true,
-      },
-      ageYearMonth: {
-        type: String,
-        required: true,
-      },
-      fatherOccupation: {
-        type: String,
-        required: true,
-      },
-      fatherWorkPlace: {
-        type: String,
-        required: true,
-      },
-      fatherAnnualIncome: {
-        type: Number,
-        required: true,
-      },
-      fatherAnnualPropertyIncome: {
-        type: Number,
-        required: true,
-      },
-      fatherAnnualOtherIncome: {
-        type: Number,
-        required: true,
-      },
-      fatherTotalAnnualIncome: {
-        type: Number,
-        required: true,
-      },
-    },
-  ],
-  mother: [
-    {
-      motherFullName: {
-        type: String,
-        required: true,
-      },
-      aliveOrNot: {
-        type: String,
-        required: true,
-      },
-      ageYearMonth: {
-        type: String,
-        required: true,
-      },
-      motherOccupation: {
-        type: String,
-        required: true,
-      },
-      motherWorkPlace: {
-        type: String,
-        required: true,
-      },
-      motherAnnualIncome: {
-        type: Number,
-        required: true,
-      },
-      motherAnnualPropertyIncome: {
-        type: Number,
-        required: true,
-      },
-      motherAnnualOtherIncome: {
-        type: Number,
-        required: true,
-      },
-      motherTotalAnnualIncome: {
-        type: Number,
-        required: true,
-      },
-    },
-  ],
-  guardian: [
-    {
-      guardianFullName: {
-        type: String,
-        required: true,
-      },
-      permanentAddress: {
-        type: String,
-        required: true,
-      },
-      guardianOccupation: {
-        type: String,
-        required: true,
-      },
-      guardianAnnualIncome: {
-        type: Number,
-        required: true,
-      },
-      guardianAnnualPropertyIncome: {
-        type: Number,
-        required: true,
-      },
-      guardianAge: {
-        type: Number,
-        required: true,
-      },
-    },
-  ],
-});
-
-const Student = mongoose.model("student", studentSchema);
-
-export default Student;
+export default Student
