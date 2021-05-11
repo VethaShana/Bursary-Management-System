@@ -448,6 +448,11 @@ const studentSchema = mongoose.Schema({
     required: true,
     default: false,
   },
+
+  // stu_Doc: {
+  //   type: String,
+  //   required: true,
+  // },
 });
 
 const Student = mongoose.model("student", studentSchema);

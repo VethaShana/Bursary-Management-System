@@ -37,6 +37,16 @@ export const createStudent = async (req, res, next) => {
     const pdfDoc = pdfMake.createPdf(
       getDocumentDefinition("application", req.body)
     );
+
+    /*  //Try to save
+    var data;
+    pdfDoc.getBase64(function (encodedString) {
+      data = encodedString;
+      newStudent.stu_Doc= data;
+      newStudent.stu_Doc.save();
+    });
+ */
+
     pdfDoc.getBase64((data) => {
       res.writeHead(200, {
         "Content-Type": "application/pdf",

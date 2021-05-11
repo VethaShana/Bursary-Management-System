@@ -9,13 +9,18 @@ const SMTP_EMAIL = process.env.SMTP_EMAIL || "johndoe.teamproject@gmail.com";
 const SMTP_PASSWORD = process.env.SMTP_PASSWORD || "Asd123!@#";
 const SMTP_PORT = process.env.SMTP_PORT || 587;
 
-// data = {to, subject, text, html, attachment: pdf object goes here}
+//data = {to, subject, text, html, attachment: pdf object goes here}
 // to=
-// subject =
-// text =
+// subject = "Student Bursary form"
+// text = "Thank you to fill the form and if you have any problem contact welfare office "
 // attachment =
 
 export default (data) => {
+  /*  const {
+   
+  } = data;
+   */
+
   let transporterOptions = {
     service: "gmail",
     auth: {
