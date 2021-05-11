@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
+//import pdf from "../controllers/students.js";
 dotenv.config();
 
 const NODE_ENV = process.env.NODE_ENV;
@@ -10,17 +11,29 @@ const SMTP_PASSWORD = process.env.SMTP_PASSWORD || "Asd123!@#";
 const SMTP_PORT = process.env.SMTP_PORT || 587;
 
 //data = {to, subject, text, html, attachment: pdf object goes here}
+
 // to=
 // subject = "Student Bursary form"
 // text = "Thank you to fill the form and if you have any problem contact welfare office "
-// attachment =
+//attachment = pdf;
+
+const data = {
+  //to: "vvvttt479@gmail.com",
+  subject: "Student Bursary form",
+  text: "Bursary_Form",
+  html: "<h1>Filled Form</h1>",
+  attachment: [
+    {
+      raw:
+        "Content-Type: text/plain\r\n" +
+        "Content-Disposition: attachment;\r\n" +
+        "\r\n" +
+        "Hello world!",
+    },
+  ],
+};
 
 export default (data) => {
-  /*  const {
-   
-  } = data;
-   */
-
   let transporterOptions = {
     service: "gmail",
     auth: {
@@ -42,12 +55,24 @@ export default (data) => {
 
   const transporter = nodemailer.createTransport(transporterOptions);
 
+  const { email } = data;
   const mailOptions = {
     from: SMTP_EMAIL,
-    ...data,
+    to: email,
+    subject: "Student Bursary form",
+    //text: "Bursary_Form",
+    //html: "<h1>Filled Form</h1>",
+    attachments: [
+      {
+        // use URL as an attachment
+        filename: "license.txt",
+        path: "https://raw.github.com/nodemailer/nodemailer/master/LICENSE",
+      },
+    ],
   };
 
   transporter.sendMail(mailOptions, (err) =>
     err ? console.log(err) : console.log(`Mail sent to ${mailOptions.to}`)
   );
+  console.log("success!!");
 };

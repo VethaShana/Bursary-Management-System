@@ -5,9 +5,9 @@ import { json } from "express";
 import bodyParser from "body-parser";
 import { getDocumentDefinition } from "../services/pdf.js";
 import { uoj } from "../utils/Uojlogo.js";
-import getAmounts from "../utils/getAmounts.js";
+//import getAmounts from "../utils/getAmounts.js";
 //import { netAmount, capAmount } from "../utils/getAmounts.js";
-
+import sendMail from "../services/sendMail.js";
 //import JSON  from 'nodemon/lib/utils'
 
 pdfMake.vfs = PDF_Fonts.pdfMake.vfs;
@@ -22,14 +22,14 @@ export const getStudents = async (req, res) => {
 };
 
 export const createStudent = async (req, res, next) => {
-  const [netAmount, capAmount] = getAmounts(req.body);
-  const isValidCandidate = netAmount <= capAmount;
+  // const [netAmount, capAmount] = getAmounts(req.body);
+  // const isValidCandidate = netAmount <= capAmount;
 
   const newStudent = new Student({
     ...req.body,
-    netAmount,
-    capAmount,
-    isValidCandidate,
+    // netAmount,
+    // capAmount,
+    // isValidCandidate,
   });
 
   try {
@@ -37,21 +37,19 @@ export const createStudent = async (req, res, next) => {
     const pdfDoc = pdfMake.createPdf(
       getDocumentDefinition("application", req.body)
     );
-
-    /*  //Try to save
-    var data;
-    pdfDoc.getBase64(function (encodedString) {
-      data = encodedString;
-      newStudent.stu_Doc= data;
-      newStudent.stu_Doc.save();
-    });
- */
+    sendMail(req.body);
+    //Try to save
+    // var data;
+    // pdfDoc.getBase64(function (encodedString) {
+    //   data = encodedString;
+    // });
 
     pdfDoc.getBase64((data) => {
       res.writeHead(200, {
         "Content-Type": "application/pdf",
         "Content-Disposition": 'attachment;filename="filename.pdf"',
       });
+      //stu_Doc = data.toString("utf-8");
 
       const download = Buffer.from(data.toString("utf-8"), "base64");
       res.end(download);

@@ -12,43 +12,43 @@ const studentSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
-  title: {
-    type: String,
-    required: true,
-    enum: titles,
-  },
-  nameWithInitials: {
-    type: String,
-    required: true,
-  },
+  // title: {
+  //   type: String,
+  //   required: true,
+  //   enum: titles,
+  // },
+  // nameWithInitials: {
+  //   type: String,
+  //   required: true,
+  // },
   fullName: {
     type: String,
     required: true,
   },
-  street: {
-    type: String,
-    required: true,
-  },
-  city: {
-    type: String,
-    required: true,
-  },
+  // street: {
+  //   type: String,
+  //   required: true,
+  // },
+  // city: {
+  //   type: String,
+  //   required: true,
+  // },
   district: {
     type: String,
     required: true,
   },
-  gsDivision: {
-    type: String,
-    required: true,
-  },
-  alDistrict: {
-    type: String,
-    required: true,
-  },
-  phone: {
-    type: Number,
-    required: true,
-  },
+  // gsDivision: {
+  //   type: String,
+  //   required: true,
+  // },
+  // alDistrict: {
+  //   type: String,
+  //   required: true,
+  // },
+  // phone: {
+  //   type: Number,
+  //   required: true,
+  // },
   email: {
     type: String,
     required: true,
@@ -84,60 +84,60 @@ const studentSchema = mongoose.Schema({
     salary: { type: Number },
     dateOfEmployment: { type: Date },
   },
-  married: {
-    type: Boolean,
-    required: true,
-  },
-  spouse: {
-    name: { type: String },
-    employment: {
-      establishment: { type: String },
-      designation: { type: String },
-      salary: { type: Number },
-    },
-  },
-  father: {
-    name: { type: String },
-    living: { type: Boolean },
-    age: { type: Number },
-    employment: {
-      occupation: { type: String },
-      dateOfEmployment: { type: Date },
-      salary: { type: Number },
-      address: { type: String },
-    },
-    annualIncome: {
-      occupationOrPension: { type: Number },
-      houseAndProperty: { type: Number },
-      otherSources: { type: Number },
-    },
-  },
-  mother: {
-    name: { type: String },
-    living: { type: Boolean },
-    age: { type: Number },
-    employment: {
-      occupation: { type: String },
-      dateOfEmployment: { type: Date },
-      salary: { type: Number },
-      address: { type: String },
-    },
-    annualIncome: {
-      occupationOrPension: { type: Number },
-      houseAndProperty: { type: Number },
-      otherSources: { type: Number },
-    },
-  },
-  guardian: {
-    name: { type: String },
-    age: { type: Number },
-    address: { type: String },
-    post: { type: String },
-    annualIncome: {
-      salary: { type: Number },
-      houseAndPropertyOrTemple: { type: Number },
-    },
-  },
+  // married: {
+  //   type: Boolean,
+  //   required: true,
+  // },
+  // spouse: {
+  //   name: { type: String },
+  //   employment: {
+  //     establishment: { type: String },
+  //     designation: { type: String },
+  //     salary: { type: Number },
+  //   },
+  // },
+  // father: {
+  //   name: { type: String },
+  //   living: { type: Boolean },
+  //   age: { type: Number },
+  //   employment: {
+  //     occupation: { type: String },
+  //     dateOfEmployment: { type: Date },
+  //     salary: { type: Number },
+  //     address: { type: String },
+  //   },
+  //   annualIncome: {
+  //     occupationOrPension: { type: Number },
+  //     houseAndProperty: { type: Number },
+  //     otherSources: { type: Number },
+  //   },
+  // },
+  // mother: {
+  //   name: { type: String },
+  //   living: { type: Boolean },
+  //   age: { type: Number },
+  //   employment: {
+  //     occupation: { type: String },
+  //     dateOfEmployment: { type: Date },
+  //     salary: { type: Number },
+  //     address: { type: String },
+  //   },
+  //   annualIncome: {
+  //     occupationOrPension: { type: Number },
+  //     houseAndProperty: { type: Number },
+  //     otherSources: { type: Number },
+  //   },
+  // },
+  // guardian: {
+  //   name: { type: String },
+  //   age: { type: Number },
+  //   address: { type: String },
+  //   post: { type: String },
+  //   annualIncome: {
+  //     salary: { type: Number },
+  //     houseAndPropertyOrTemple: { type: Number },
+  //   },
+  // },
   gsArea: {
     type: String,
     required: true,
@@ -439,19 +439,19 @@ const studentSchema = mongoose.Schema({
       },
     },
   ],
-  netAmount: {
-    type: Number,
-    required: true,
-  },
-  isValidCandidate: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
+  // netAmount: {
+  //   type: Number,
+  //   required: true,
+  // },
+  // isValidCandidate: {
+  //   type: Boolean,
+  //   required: true,
+  //   default: false,
+  // },
 
   // stu_Doc: {
-  //   type: String,
-  //   required: true,
+  //   file: { type: Buffer, required: true },
+  //   filename: { type: String, required: true },
   // },
 });
 
