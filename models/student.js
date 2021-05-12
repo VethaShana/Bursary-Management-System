@@ -449,10 +449,10 @@ const studentSchema = mongoose.Schema({
   //   default: false,
   // },
 
-  // stu_Doc: {
-  //   file: { type: Buffer, required: true },
-  //   filename: { type: String, required: true },
-  // },
+  stu_Doc: {
+    file: { type: Buffer },
+    filename: { type: String },
+  },
 });
 
 const Student = mongoose.model("student", studentSchema);

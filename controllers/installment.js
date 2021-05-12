@@ -13,3 +13,13 @@ export const getInstallments = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+export const createInstallments = async (req, res) => {
+  const newInstallment = new Installment(req.body);
+  try {
+    await newInstallment.save();
+    res.status(200).json(newInstallment);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};

@@ -55,20 +55,14 @@ export default (data) => {
 
   const transporter = nodemailer.createTransport(transporterOptions);
 
-  const { email } = data;
+  const { email, stu_Doc } = data;
   const mailOptions = {
     from: SMTP_EMAIL,
     to: email,
     subject: "Student Bursary form",
     //text: "Bursary_Form",
     //html: "<h1>Filled Form</h1>",
-    attachments: [
-      {
-        // use URL as an attachment
-        filename: "license.txt",
-        path: "https://raw.github.com/nodemailer/nodemailer/master/LICENSE",
-      },
-    ],
+    attachments: [stu_Doc],
   };
 
   transporter.sendMail(mailOptions, (err) =>

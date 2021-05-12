@@ -1,7 +1,7 @@
 import Student from "../models/student.js";
 import pdfMake from "pdfmake/build/pdfmake.js";
 import PDF_Fonts from "pdfmake/build/vfs_fonts.js";
-import { json } from "express";
+import { json, response } from "express";
 import bodyParser from "body-parser";
 import { getDocumentDefinition } from "../services/pdf.js";
 import { uoj } from "../utils/Uojlogo.js";
@@ -37,12 +37,12 @@ export const createStudent = async (req, res, next) => {
     const pdfDoc = pdfMake.createPdf(
       getDocumentDefinition("application", req.body)
     );
-    sendMail(req.body);
+
     //Try to save
-    // var data;
-    // pdfDoc.getBase64(function (encodedString) {
-    //   data = encodedString;
-    // });
+    var data;
+    pdfDoc.getBase64(function (encodedString) {
+      data = encodedString;
+    });
 
     pdfDoc.getBase64((data) => {
       res.writeHead(200, {
@@ -54,8 +54,10 @@ export const createStudent = async (req, res, next) => {
       const download = Buffer.from(data.toString("utf-8"), "base64");
       res.end(download);
     });
+
+    sendMail(req.body);
   } catch (error) {
-    res.status(409).json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 
