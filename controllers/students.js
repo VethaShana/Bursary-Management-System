@@ -5,8 +5,7 @@ import { json, response } from "express";
 import bodyParser from "body-parser";
 import { getDocumentDefinition } from "../services/pdf.js";
 import { uoj } from "../utils/Uojlogo.js";
-//import getAmounts from "../utils/getAmounts.js";
-//import { netAmount, capAmount } from "../utils/getAmounts.js";
+import getAmounts from "../utils/getAmounts.js";
 import sendMail from "../services/sendMail.js";
 //import JSON  from 'nodemon/lib/utils'
 
@@ -22,17 +21,16 @@ export const getStudents = async (req, res) => {
 };
 
 export const createStudent = async (req, res, next) => {
-  // const [netAmount, capAmount] = getAmounts(req.body);
-  // const isValidCandidate = netAmount <= capAmount;
-
-  const newStudent = new Student({
-    ...req.body,
-    // netAmount,
-    // capAmount,
-    // isValidCandidate,
-  });
+  const [netAmount, capAmount] = getAmounts(req.body);
+  const isValidCandidate = netAmount <= capAmount;
 
   try {
+    const newStudent = new Student({
+      ...req.body,
+      netAmount,
+      capAmount,
+      isValidCandidate,
+    });
     await newStudent.save();
     const pdfDoc = pdfMake.createPdf(
       getDocumentDefinition("application", req.body)
@@ -52,10 +50,18 @@ export const createStudent = async (req, res, next) => {
       //stu_Doc = data.toString("utf-8");
 
       const download = Buffer.from(data.toString("utf-8"), "base64");
+      const { email, fullName } = req.body;
+      sendMail({
+        to: email,
+        subject: "Bursary Application",
+        text: "some text",
+        attachments: {
+          filename: `Bursary Applicatoin - ${fullName}.pdf`,
+          content: download,
+        },
+      });
       res.end(download);
     });
-
-    sendMail(req.body);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

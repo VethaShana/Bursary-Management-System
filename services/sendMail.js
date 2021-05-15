@@ -17,23 +17,23 @@ const SMTP_PORT = process.env.SMTP_PORT || 587;
 // text = "Thank you to fill the form and if you have any problem contact welfare office "
 //attachment = pdf;
 
-const data = {
-  //to: "vvvttt479@gmail.com",
-  subject: "Student Bursary form",
-  text: "Bursary_Form",
-  html: "<h1>Filled Form</h1>",
-  attachment: [
-    {
-      raw:
-        "Content-Type: text/plain\r\n" +
-        "Content-Disposition: attachment;\r\n" +
-        "\r\n" +
-        "Hello world!",
-    },
-  ],
-};
+// const data = {
+//   //to: "vvvttt479@gmail.com",
+//   subject: "Student Bursary form",
+//   text: "Bursary_Form",
+//   html: "<h1>Filled Form</h1>",
+//   attachment: [
+//     {
+//       raw:
+//         "Content-Type: text/plain\r\n" +
+//         "Content-Disposition: attachment;\r\n" +
+//         "\r\n" +
+//         "Hello world!",
+//     },
+//   ],
+// };
 
-export default (data) => {
+export default ({ to, from, subject, text, attachments }) => {
   let transporterOptions = {
     service: "gmail",
     auth: {
@@ -55,14 +55,13 @@ export default (data) => {
 
   const transporter = nodemailer.createTransport(transporterOptions);
 
-  const { email, stu_Doc } = data;
   const mailOptions = {
-    from: SMTP_EMAIL,
-    to: email,
-    subject: "Student Bursary form",
-    //text: "Bursary_Form",
+    from: from || SMTP_EMAIL,
+    to,
+    subject,
+    text,
     //html: "<h1>Filled Form</h1>",
-    attachments: [stu_Doc],
+    attachments,
   };
 
   transporter.sendMail(mailOptions, (err) =>

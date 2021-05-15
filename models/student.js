@@ -439,20 +439,17 @@ const studentSchema = mongoose.Schema({
       },
     },
   ],
-  // netAmount: {
-  //   type: Number,
-  //   required: true,
-  // },
-  // isValidCandidate: {
-  //   type: Boolean,
-  //   required: true,
-  //   default: false,
-  // },
-
-  stu_Doc: {
-    file: { type: Buffer },
-    filename: { type: String },
+  netAmount: {
+    type: Number,
+    required: true,
   },
+  isValidCandidate: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+
+  installments: [{ type: mongoose.Schema.Types.ObjectId, ref: "installment" }],
 });
 
 const Student = mongoose.model("student", studentSchema);
