@@ -19,17 +19,38 @@ export const createInstallments = async (req, res) => {
   const { stream: course } = req.body;
   const newInstallment = new Installment(req.body);
   try {
-    await newInstallment.save().then((doc) => {
-      // const students = Student.find({ course });
-      // console.log(doc);
-      const students = Student.updateMany(
-        { course },
-        { $set: { installments: doc._id } },
-        { multi: true }
-      );
-      // console.log(students);
-    });
-    // res.status(200).json(newInstallment);
+    await newInstallment.save()
+    // await newInstallment.save().then((doc) => {
+    //   // const students = Student.find({ course });
+    //   // console.log(doc);
+    //   const students = Student.updateMany(
+    //     { course },
+        
+    //     // { $set: { installments: doc._id } },
+    //     { multi: true }
+    //   );
+    //   // console.log(students);
+    // });
+     res.status(200).json(newInstallment);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+
+export const updateInstallment = async (req, res) => {
+  
+  try {
+    const installment = await Installment.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {
+          ...req.body,
+        },
+      },
+      { new: true }
+    );
+    res.status(200).json(installment);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
