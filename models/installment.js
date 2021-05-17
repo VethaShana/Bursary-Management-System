@@ -11,7 +11,10 @@ const installmentSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-
+  noOfInstallments: {
+    type: Number,
+    required: true,
+  },
   acadamicYear: {
     type: String,
     required: true,

@@ -449,7 +449,19 @@ const studentSchema = mongoose.Schema({
     default: false,
   },
 
-  installments: [{ type: mongoose.Schema.Types.ObjectId, ref: "installment" }],
+  installments: [
+    {
+      installmentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "installment",
+        required: true,
+      },
+      noOfInstallments: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
 });
 
 const Student = mongoose.model("student", studentSchema);
