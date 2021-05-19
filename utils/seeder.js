@@ -40,7 +40,7 @@ const data = [
 		},
 
 		father: {
-			name: 'MOHOMAD ARDHIL',
+			name: 'John Doe',
 			living: true,
 			age: '52',
 			employment: {
@@ -57,7 +57,7 @@ const data = [
 		},
 
 		mother: {
-			name: 'MOHOMAD NASVIN',
+			name: 'Jane Doe',
 			living: true,
 			age: '47',
 			employment: {
