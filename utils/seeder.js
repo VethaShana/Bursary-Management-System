@@ -20,11 +20,11 @@ const data = [
 			address: {
 				street: '',
 				city: '',
-				district: '',
+				district: ''
 			},
 			designation: '',
 			salary: '',
-			dateOfEmployment: '',
+			dateOfEmployment: ''
 		},
 
 		married: false,
@@ -35,8 +35,8 @@ const data = [
 				establishment: '',
 				designation: '',
 				salary: '',
-				dateOfEmployment: new Date(),
-			},
+				dateOfEmployment: new Date()
+			}
 		},
 
 		father: {
@@ -47,13 +47,13 @@ const data = [
 				occupation: 'driving',
 				salary: '30000',
 				dateOfEmployment: new Date(),
-				address: 'KANDY',
+				address: 'KANDY'
 			},
 			annualIncome: {
 				occupationOrPension: '120000',
 				houseAndProperty: 'N/A',
-				otherSources: 'N/A',
-			},
+				otherSources: 'N/A'
+			}
 		},
 
 		mother: {
@@ -64,13 +64,13 @@ const data = [
 				occupation: '',
 				salary: '',
 				dateOfEmployment: new Date(),
-				address: '',
+				address: ''
 			},
 			annualIncome: {
 				occupationOrPension: '',
 				houseAndProperty: '',
-				otherSources: '',
-			},
+				otherSources: ''
+			}
 		},
 
 		guardian: {
@@ -80,67 +80,62 @@ const data = [
 			post: '',
 			annualIncome: {
 				salary: '',
-				houseAndPropertyOrTemple: '',
-			},
+				houseAndPropertyOrTemple: ''
+			}
 		},
-		siblingsUnder:true,
+		siblingsUnder: true,
 		siblingsUnder19: [
 			{
 				name: 'foo',
 				dob: '1998-12-1',
 				age: 19,
 				instituteOrSchool: 'Josephs College',
-				distanceforJafna: '',
+				distanceforJafna: ''
 			},
 			{
 				name: 'foo',
 				dob: '',
 				age: 19,
 				instituteOrSchool: 'Josephs College',
-				distanceforJafna: '',
-			},
+				distanceforJafna: ''
+			}
 		],
 		siblingsAt_University: true,
 		siblingsAtUniversity: [
-            {
-			
-				nameofuniversity : 'UNIVERSITY OF KALANI',
+			{
+				nameofuniversity: 'UNIVERSITY OF KALANI',
 				regNo: '2020/SP/50 ',
 				course: 'PHYSICAL SCIENCE',
 				academicyear: '2020',
-				anyscholarship: 'NO',
-
-
-            },
-            {
-				nameofuniversity : '',
+				anyscholarship: 'NO'
+			},
+			{
+				nameofuniversity: '',
 				regNo: ' ',
 				course: '',
 				academicyear: '',
-				anyscholarship: '',
-            }
-        ],
-		otherstate:true,
+				anyscholarship: ''
+			}
+		],
+		otherstate: true,
 		incomefromestate: {
 			nameOfowner: '',
 			relationship: '',
 			location: '',
 			nameOfcultication: '',
-			external:true,
-			annualincome: '',
+			external: true,
+			annualincome: ''
 		},
-		otherhous:true,
+		otherhous: true,
 		incomefromHous: {
-			nameOfowner:'',
+			nameOfowner: '',
 			relationship: '',
 			assessmentNo: '',
 			no_Of_hhl: '',
 			address: '',
 			annualincome: '',
-			rent: '',
-		},
-
-
+			rent: ''
+		}
 	},
 
 	{
@@ -164,11 +159,11 @@ const data = [
 			address: {
 				street: '',
 				city: '',
-				district: 'N/A',
+				district: 'N/A'
 			},
 			designation: '',
 			salary: '',
-			dateOfEmployment: '10-03-2020',
+			dateOfEmployment: '10-03-2020'
 		},
 
 		married: false,
@@ -179,8 +174,8 @@ const data = [
 				establishment: '',
 				designation: '',
 				salary: '',
-				dateOfEmployment: new Date(),
-			},
+				dateOfEmployment: new Date()
+			}
 		},
 
 		father: {
@@ -191,13 +186,13 @@ const data = [
 				occupation: 'driving',
 				salary: '30000',
 				dateOfEmployment: new Date(),
-				address: '',
+				address: ''
 			},
 			annualIncome: {
 				occupationOrPension: '',
 				houseAndProperty: '',
-				otherSources: '',
-			},
+				otherSources: ''
+			}
 		},
 
 		mother: {
@@ -208,13 +203,13 @@ const data = [
 				occupation: '',
 				salary: '',
 				dateOfEmployment: new Date(),
-				address: '',
+				address: ''
 			},
 			annualIncome: {
 				occupationOrPension: '',
 				houseAndProperty: '',
-				otherSources: '',
-			},
+				otherSources: ''
+			}
 		},
 
 		guardian: {
@@ -224,67 +219,62 @@ const data = [
 			post: '',
 			annualIncome: {
 				salary: '',
-				houseAndPropertyOrTemple: '',
-			},
+				houseAndPropertyOrTemple: ''
+			}
 		},
-		siblingsUnder:true,
+		siblingsUnder: true,
 		siblingsUnder19: [
 			{
 				name: 'foo',
 				dob: '',
 				age: 19,
 				instituteOrSchool: 'Josephs College',
-				distanceforJafna: '',
+				distanceforJafna: ''
 			},
 			{
 				name: 'foo',
 				dob: '',
 				age: 19,
 				instituteOrSchool: 'Josephs College',
-				distanceforJafna: '',
-			},
+				distanceforJafna: ''
+			}
 		],
 		siblingsAt_University: true,
 		siblingsAtUniversity: [
-            {
-			
-				nameofuniversity : '',
+			{
+				nameofuniversity: '',
 				regNo: ' ',
 				course: '',
 				academicyear: '',
-				anyscholarship: '',
-
-
-            },
-            {
-				nameofuniversity : '',
+				anyscholarship: ''
+			},
+			{
+				nameofuniversity: '',
 				regNo: ' ',
 				course: '',
 				academicyear: '',
-				anyscholarship: '',
-            }
-        ],
-		otherstate:true,
+				anyscholarship: ''
+			}
+		],
+		otherstate: true,
 		incomefromestate: {
 			nameOfowner: '',
 			relationship: '',
 			location: '',
 			nameOfcultication: '',
-			external:true,
-			annualincome: '',
+			external: true,
+			annualincome: ''
 		},
-		otherhous:true,
+		otherhous: true,
 		incomefromHous: {
-			nameOfowner:'',
+			nameOfowner: '',
 			relationship: '',
 			assessmentNo: '',
 			no_Of_hhl: '',
 			address: '',
 			annualincome: '',
-			rent: '',
-		},
-
-
+			rent: ''
+		}
 	},
 
 	{
@@ -308,11 +298,11 @@ const data = [
 			address: {
 				street: '',
 				city: '',
-				district: 'N/A',
+				district: 'N/A'
 			},
 			designation: '',
 			salary: '',
-			dateOfEmployment: '10-03-2020',
+			dateOfEmployment: '10-03-2020'
 		},
 
 		married: false,
@@ -323,8 +313,8 @@ const data = [
 				establishment: '',
 				designation: '',
 				salary: '',
-				dateOfEmployment: new Date(),
-			},
+				dateOfEmployment: new Date()
+			}
 		},
 
 		father: {
@@ -335,13 +325,13 @@ const data = [
 				occupation: 'driving',
 				salary: '30000',
 				dateOfEmployment: new Date(),
-				address: '',
+				address: ''
 			},
 			annualIncome: {
 				occupationOrPension: '',
 				houseAndProperty: '',
-				otherSources: '',
-			},
+				otherSources: ''
+			}
 		},
 
 		mother: {
@@ -352,13 +342,13 @@ const data = [
 				occupation: '',
 				salary: '',
 				dateOfEmployment: new Date(),
-				address: '',
+				address: ''
 			},
 			annualIncome: {
 				occupationOrPension: '',
 				houseAndProperty: '',
-				otherSources: '',
-			},
+				otherSources: ''
+			}
 		},
 
 		guardian: {
@@ -368,67 +358,62 @@ const data = [
 			post: '',
 			annualIncome: {
 				salary: '',
-				houseAndPropertyOrTemple: '',
-			},
+				houseAndPropertyOrTemple: ''
+			}
 		},
-		siblingsUnder:true,
+		siblingsUnder: true,
 		siblingsUnder19: [
 			{
 				name: 'foo',
 				dob: '',
 				age: 19,
 				instituteOrSchool: 'Josephs College',
-				distanceforJafna: '',
+				distanceforJafna: ''
 			},
 			{
 				name: 'foo',
 				dob: '',
 				age: 19,
 				instituteOrSchool: 'Josephs College',
-				distanceforJafna: '',
-			},
+				distanceforJafna: ''
+			}
 		],
 		siblingsAt_University: true,
 		siblingsAtUniversity: [
-            {
-			
-				nameofuniversity : '',
+			{
+				nameofuniversity: '',
 				regNo: ' ',
 				course: '',
 				academicyear: '',
-				anyscholarship: '',
-
-
-            },
-            {
-				nameofuniversity : '',
+				anyscholarship: ''
+			},
+			{
+				nameofuniversity: '',
 				regNo: ' ',
 				course: '',
 				academicyear: '',
-				anyscholarship: '',
-            }
-        ],
-		otherstate:true,
+				anyscholarship: ''
+			}
+		],
+		otherstate: true,
 		incomefromestate: {
 			nameOfowner: '',
 			relationship: '',
 			location: '',
 			nameOfcultication: '',
-			external:true,
-			annualincome: '',
+			external: true,
+			annualincome: ''
 		},
-		otherhous:true,
+		otherhous: true,
 		incomefromHous: {
-			nameOfowner:'',
+			nameOfowner: '',
 			relationship: '',
 			assessmentNo: '',
 			no_Of_hhl: '',
 			address: '',
 			annualincome: '',
-			rent: '',
-		},
-
-
+			rent: ''
+		}
 	},
 
 	{
@@ -452,11 +437,11 @@ const data = [
 			address: {
 				street: '',
 				city: '',
-				district: 'N/A',
+				district: 'N/A'
 			},
 			designation: '',
 			salary: '',
-			dateOfEmployment: '10-03-2020',
+			dateOfEmployment: '10-03-2020'
 		},
 
 		married: false,
@@ -467,8 +452,8 @@ const data = [
 				establishment: '',
 				designation: '',
 				salary: '',
-				dateOfEmployment: new Date(),
-			},
+				dateOfEmployment: new Date()
+			}
 		},
 
 		father: {
@@ -479,13 +464,13 @@ const data = [
 				occupation: 'driving',
 				salary: '30000',
 				dateOfEmployment: new Date(),
-				address: '',
+				address: ''
 			},
 			annualIncome: {
 				occupationOrPension: '',
 				houseAndProperty: '',
-				otherSources: '',
-			},
+				otherSources: ''
+			}
 		},
 
 		mother: {
@@ -496,13 +481,13 @@ const data = [
 				occupation: 'no',
 				salary: '',
 				dateOfEmployment: new Date(),
-				address: '',
+				address: ''
 			},
 			annualIncome: {
 				occupationOrPension: '',
 				houseAndProperty: '',
-				otherSources: '',
-			},
+				otherSources: ''
+			}
 		},
 
 		guardian: {
@@ -512,67 +497,62 @@ const data = [
 			post: '',
 			annualIncome: {
 				salary: '',
-				houseAndPropertyOrTemple: '',
-			},
+				houseAndPropertyOrTemple: ''
+			}
 		},
-		siblingsUnder:true,
+		siblingsUnder: true,
 		siblingsUnder19: [
 			{
 				name: 'ruwan ',
 				dob: '2004-1-1',
 				age: 16,
 				instituteOrSchool: 'mahasen college',
-				distanceforJafna: '200',
+				distanceforJafna: '200'
 			},
 			{
 				name: 'kamal',
 				dob: '2008-12-2',
 				age: 12,
 				instituteOrSchool: 'mahasen college',
-				distanceforJafna: '200',
-			},
+				distanceforJafna: '200'
+			}
 		],
 		siblingsAt_University: true,
 		siblingsAtUniversity: [
-            {
-			
-				nameofuniversity : 'university of colombo',
+			{
+				nameofuniversity: 'university of colombo',
 				regNo: '2018/A/012',
 				course: 'VISUAL AND ART',
 				academicyear: '2018',
-				anyscholarship: 'YES',
-
-
-            },
-            {
-				nameofuniversity : 'UNIVERSITY OF RUHUNA',
+				anyscholarship: 'YES'
+			},
+			{
+				nameofuniversity: 'UNIVERSITY OF RUHUNA',
 				regNo: '2016/M/045',
 				course: 'B-COM',
 				academicyear: '2017',
-				anyscholarship: 'NO',
-            }
-        ],
-		otherstate:true,
+				anyscholarship: 'NO'
+			}
+		],
+		otherstate: true,
 		incomefromestate: {
 			nameOfowner: '',
 			relationship: '',
 			location: '',
 			nameOfcultication: '',
-			external:true,
-			annualincome: '',
+			external: true,
+			annualincome: ''
 		},
-		otherhous:true,
+		otherhous: true,
 		incomefromHous: {
-			nameOfowner:'',
+			nameOfowner: '',
 			relationship: '',
 			assessmentNo: '',
 			no_Of_hhl: '',
 			address: '',
 			annualincome: '',
-			rent: '',
-		},
-
-
+			rent: ''
+		}
 	},
 
 	{
@@ -596,11 +576,11 @@ const data = [
 			address: {
 				street: 'COLOMBO RAILWAY',
 				city: 'COLOMBO',
-				district: 'COLOMBO',
+				district: 'COLOMBO'
 			},
 			designation: 'RAIL MASTER',
 			salary: '30000',
-			dateOfEmployment: '10-03-2017',
+			dateOfEmployment: '10-03-2017'
 		},
 
 		married: TRUE,
@@ -611,8 +591,8 @@ const data = [
 				establishment: '',
 				designation: '',
 				salary: '',
-				dateOfEmployment: new Date(),
-			},
+				dateOfEmployment: new Date()
+			}
 		},
 
 		father: {
@@ -623,13 +603,13 @@ const data = [
 				occupation: ' ',
 				salary: ' ',
 				dateOfEmployment: new Date(),
-				address: '',
+				address: ''
 			},
 			annualIncome: {
 				occupationOrPension: '',
 				houseAndProperty: '',
-				otherSources: '',
-			},
+				otherSources: ''
+			}
 		},
 
 		mother: {
@@ -640,13 +620,13 @@ const data = [
 				occupation: 'TRACHER',
 				salary: '45000',
 				dateOfEmployment: new Date(),
-				address: 'KURUNAGALA UYANDANA',
+				address: 'KURUNAGALA UYANDANA'
 			},
 			annualIncome: {
 				occupationOrPension: '',
 				houseAndProperty: '',
-				otherSources: '',
-			},
+				otherSources: ''
+			}
 		},
 
 		guardian: {
@@ -656,61 +636,55 @@ const data = [
 			post: '',
 			annualIncome: {
 				salary: '',
-				houseAndPropertyOrTemple: '',
-			},
+				houseAndPropertyOrTemple: ''
+			}
 		},
-		siblingsUnder:true,
+		siblingsUnder: true,
 		siblingsUnder19: [
 			{
 				name: 'DEVID',
 				dob: '20-5-2005',
 				age: 16,
 				instituteOrSchool: 'MALIYADEWA COLLAGE',
-				distanceforJafna: '450',
-			},
-
+				distanceforJafna: '450'
+			}
 		],
 		siblingsAt_University: false,
 		siblingsAtUniversity: [
-            {
-			
-				nameofuniversity : '',
+			{
+				nameofuniversity: '',
 				regNo: ' ',
 				course: '',
 				academicyear: '',
-				anyscholarship: '',
-
-
-            },
-            {
-				nameofuniversity : '',
+				anyscholarship: ''
+			},
+			{
+				nameofuniversity: '',
 				regNo: ' ',
 				course: '',
 				academicyear: '',
-				anyscholarship: '',
-            }
-        ],
-		otherstate:true,
+				anyscholarship: ''
+			}
+		],
+		otherstate: true,
 		incomefromestate: {
 			nameOfowner: 'KEVIN',
 			relationship: 'BROTHER',
 			location: 'KANDY',
 			nameOfcultication: 'TEA',
-			external:true,
-			annualincome: '20000',
+			external: true,
+			annualincome: '20000'
 		},
-		otherhous:true,
+		otherhous: true,
 		incomefromHous: {
-			nameOfowner:'KEVIN',
+			nameOfowner: 'KEVIN',
 			relationship: 'BROTHER',
 			assessmentNo: '255',
 			no_Of_hhl: '56',
 			address: 'KULIYAPITIYA',
 			annualincome: '150000',
-			rent: '15000',
-		},
-
-
+			rent: '15000'
+		}
 	},
 
 	{
@@ -734,11 +708,11 @@ const data = [
 			address: {
 				street: '',
 				city: '',
-				district: 'N/A',
+				district: 'N/A'
 			},
 			designation: '',
 			salary: '',
-			dateOfEmployment: '10-03-2020',
+			dateOfEmployment: '10-03-2020'
 		},
 
 		married: false,
@@ -749,8 +723,8 @@ const data = [
 				establishment: '',
 				designation: '',
 				salary: '',
-				dateOfEmployment: new Date(),
-			},
+				dateOfEmployment: new Date()
+			}
 		},
 
 		father: {
@@ -761,13 +735,13 @@ const data = [
 				occupation: '',
 				salary: '',
 				dateOfEmployment: new Date(),
-				address: '',
+				address: ''
 			},
 			annualIncome: {
 				occupationOrPension: '',
 				houseAndProperty: '',
-				otherSources: '',
-			},
+				otherSources: ''
+			}
 		},
 
 		mother: {
@@ -778,13 +752,13 @@ const data = [
 				occupation: '',
 				salary: '',
 				dateOfEmployment: new Date(),
-				address: '',
+				address: ''
 			},
 			annualIncome: {
 				occupationOrPension: '',
 				houseAndProperty: '',
-				otherSources: '',
-			},
+				otherSources: ''
+			}
 		},
 
 		guardian: {
@@ -794,67 +768,61 @@ const data = [
 			post: 'MARAVILA',
 			annualIncome: {
 				salary: '40000',
-				houseAndPropertyOrTemple: '1000',
-			},
+				houseAndPropertyOrTemple: '1000'
+			}
 		},
-		siblingsUnder:false,
+		siblingsUnder: false,
 		siblingsUnder19: [
 			{
 				name: '',
 				dob: '',
-				age:,
+				age: '',
 				instituteOrSchool: ' ',
-				distanceforJafna: '',
+				distanceforJafna: ''
 			},
 			{
 				name: '',
 				dob: '',
-				age: ,
+				age: '',
 				instituteOrSchool: ' ',
-				distanceforJafna: '',
-			},
+				distanceforJafna: ''
+			}
 		],
 		siblingsAt_University: true,
 		siblingsAtUniversity: [
-            {
-			
-				nameofuniversity : '',
+			{
+				nameofuniversity: '',
 				regNo: ' ',
 				course: '',
 				academicyear: '',
-				anyscholarship: '',
-
-
-            },
-            {
-				nameofuniversity : '',
+				anyscholarship: ''
+			},
+			{
+				nameofuniversity: '',
 				regNo: ' ',
 				course: '',
 				academicyear: '',
-				anyscholarship: '',
-            }
-        ],
-		otherstate:true,
+				anyscholarship: ''
+			}
+		],
+		otherstate: true,
 		incomefromestate: {
 			nameOfowner: '',
 			relationship: '',
 			location: '',
 			nameOfcultication: '',
-			external:true,
-			annualincome: '',
+			external: true,
+			annualincome: ''
 		},
-		otherhous:true,
+		otherhous: true,
 		incomefromHous: {
-			nameOfowner:'',
+			nameOfowner: '',
 			relationship: '',
 			assessmentNo: '',
 			no_Of_hhl: '',
 			address: '',
 			annualincome: '',
-			rent: '',
-		},
-
-
-	},
-	
+			rent: ''
+		}
+	}
 ]
