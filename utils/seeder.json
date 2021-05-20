@@ -1,1 +1,125 @@
-[{}]
+[
+  {
+    "regNo": "",
+    "nic": "",
+    "title": "",
+    "nameWithInitials": "",
+    "fullName": "",
+    "street": "",
+    "city": "",
+    "district": "",
+    "email": "",
+    "course": "",
+    "*employed": "",
+    "employment": {
+      "establishment": "",
+      "address": { "street": "", "city": "", "district": "" },
+      "designation": "",
+      "salary": "",
+      "dateOfEmployment": ""
+    },
+    "gsArea": "",
+    "gsNo": "",
+    "dsDivision": "",
+    "indexNum": "",
+    "zScore": "",
+    "admin_districtAL": "",
+    "siblingsUnder19": [
+      {
+        "namesb": "",
+        "dob": "",
+        "school": ""
+      }
+    ],
+    "Distance": "",
+    "siblingsUniversity": [
+      {
+        "name": "",
+        "regNo": "",
+        "university": "",
+        "siblingCourse": "",
+        "academicYear": "",
+        "isBursaryRecipient": ""
+      }
+    ],
+    "incomeFromEstateFieldsLands": [
+      {
+        "nameOfOwner": "",
+        "relationship": "",
+        "location": "",
+        "natureOfCultivation": "",
+        "extentOfLandAndDetails": "",
+        "annualIncome": ""
+      }
+    ],
+    "incomeFromHouses": [
+      {
+        "nameOfOwner": "",
+        "relationship": "",
+        "assessmentNo": "",
+        "noOfHouseholders": "",
+        "address": "",
+        "annualIncome": ""
+      }
+    ],
+    "GSDNo": "",
+    "DSDivision": "",
+    "LocalAthority": "",
+    "employed": [
+      {
+        "establishmentName": "",
+        "establishmentAddress": "",
+        "post": "",
+        "salaryScale": "",
+        "salary": "",
+        "dateOfAppointment": ""
+      }
+    ],
+    "spouse": [
+      {
+        "name": "",
+        "dateOfMarriage": "",
+        "spousePost": "",
+        "spouseEstablishmentName": "",
+        "spouseMonthlySalary": ""
+      }
+    ],
+    "father": [
+      {
+        "fatherFullName": "",
+        "aliveOrNot": "",
+        "ageYearMonth": "",
+        "fatherOccupation": "",
+        "fatherWorkPlace": "",
+        "fatherAnnualIncome": "",
+        "fatherAnnualPropertyIncome": "",
+        "fatherAnnualOtherIncome": "",
+        "fatherTotalAnnualIncome": ""
+      }
+    ],
+    "mother": [
+      {
+        "motherFullName": "",
+        "aliveOrNot": "",
+        "ageYearMonth": "",
+        "motherOccupation": "",
+        "motherWorkPlace": "",
+        "motherAnnualIncome": "",
+        "motherAnnualPropertyIncome": "",
+        "motherAnnualOtherIncome": "",
+        "motherTotalAnnualIncome": ""
+      }
+    ],
+
+    "guardian": [
+      {
+        "guardianFullName": "",
+        "permanentAddress": "",
+        "guardianOccupation": "",
+        "guardianAnnualIncome": "",
+        "guardianAnnualPropertyIncome": "",
+        "guardianAge": ""
+      }
+    ]
+  }
+]
