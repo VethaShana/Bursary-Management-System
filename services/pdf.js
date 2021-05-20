@@ -13,6 +13,7 @@ import guard from './layout/guard.js'
 const applicationDocDefinition = data => {
 	const {
 		fullName,
+		title,
 		siblingsUnder19,
 		married,
 		spouse,
@@ -85,7 +86,7 @@ const applicationDocDefinition = data => {
 					...stuD,
 					[
 						{ text: '\n\n\n' },
-						{ text: `\n${fullName}` },
+						{ text: `\n${title}.${fullName}` },
 						{
 							text: `\n${data.street}, ${data.city}, ${data.district} `
 						},
@@ -241,16 +242,16 @@ const applicationDocDefinition = data => {
 					employee,
 					[
 						{ text: '\n\n\n' },
-						...employment.map(work => [
-							{ text: `\n${work.establishment}` },
-							{
-								text: `\n\n${work.address.street},${work.address.city},${work.address.district}`
-							},
-							{ text: `\n${work.designation}` },
-							{ text: `\n${work.salaryScale}` },
-							{ text: `\n${work.salary}` },
-							{ text: `\n${work.dateOfEmployment}` }
-						])
+						//...employment.map(work => [
+						{ text: `\n${employed}` },
+						{
+							text: `\n\n${employment.establishment} from ${employment.address.street},${employment.address.city},${employment.address.district}`
+						},
+						{ text: `\n${employment.designation}` },
+						{ text: `\n${employment.salaryScale}` },
+						{ text: `\n${employment.salary}` },
+						{ text: `\n${employment.dateOfEmployment}` }
+						//])
 					]
 				]
 			},
@@ -259,13 +260,13 @@ const applicationDocDefinition = data => {
 					marriage,
 					[
 						{ text: `\n\n\n\n\n` },
-						...spouse.map(spouse => [
-							{ text: `\n${spouse.dateOfMarriage}` },
-							{ text: `\n${spouse.name}` },
-							{ text: `\n\n${spouse.employment.establishment}` },
-							{ text: `\n${spouse.employment.designation}` },
-							{ text: `\n\n${spouse.employment.salary}` }
-						])
+						//...spouse.map(marry => [
+						{ text: `\n${spouse.dateOfMarriage}` },
+						{ text: `\n${spouse.name}` },
+						{ text: `\n\n${spouse.employment.establishment}` },
+						{ text: `\n${spouse.employment.designation}` },
+						{ text: `\n\n${spouse.employment.salary}` }
+						//])
 					]
 				]
 			},
@@ -278,21 +279,21 @@ const applicationDocDefinition = data => {
 				columns: [
 					Father,
 					[
-						...father.map(attr => [
-							{ text: `\n${attr.name}` },
-							{ text: `\n\n\n${attr.living}` },
-							{ text: `\n${attr.age}` },
-							{ text: `\n\n\n${attr.employment.occupation}` },
-							{ text: `\n\n${attr.employment.address}` },
-							{
-								text: `\n\n\n${attr.annualIncome.occupationOrPension}`
-							},
-							{
-								text: `\n\n${attr.annualIncome.houseAndProperty}`
-							},
-							{ text: `\n${attr.annualIncome.otherSources}` },
-							{ text: `\n${attr.fatherTotalAnnualIncome}` }
-						])
+						//...father.map(attr => [
+						{ text: `\n${father.name}` },
+						{ text: `\n\n\n${father.living}` },
+						{ text: `\n${father.age}` },
+						{ text: `\n\n\n${father.employment.occupation}` },
+						{ text: `\n\n${father.employment.address}` },
+						{
+							text: `\n\n\n${father.annualIncome.occupationOrPension}`
+						},
+						{
+							text: `\n\n${father.annualIncome.houseAndProperty}`
+						},
+						{ text: `\n${father.annualIncome.otherSources}` },
+						{ text: `\n${father.fatherTotalAnnualIncome}` }
+						//])
 					]
 				]
 			},
@@ -302,21 +303,21 @@ const applicationDocDefinition = data => {
 				columns: [
 					Mother,
 					[
-						...mother.map(attr => [
-							{ text: `\n${attr.name}` },
-							{ text: `\n\n\n${attr.living}` },
-							{ text: `\n${attr.age}` },
-							{ text: `\n\n\n${attr.employment.occupation}` },
-							{ text: `\n\n${attr.employment.address}` },
-							{
-								text: `\n\n\n${attr.annualIncome.occupationOrPension}`
-							},
-							{
-								text: `\n\n${attr.annualIncome.houseAndProperty}`
-							},
-							{ text: `\n${attr.annualIncome.otherSources}` },
-							{ text: `\n${attr.motherTotalAnnualIncome}` }
-						])
+						//	...mother.map(attr => [
+						{ text: `\n${mother.name}` },
+						{ text: `\n\n\n${mother.living}` },
+						{ text: `\n${mother.age}` },
+						{ text: `\n\n\n${mother.employment.occupation}` },
+						{ text: `\n\n${mother.employment.address}` },
+						{
+							text: `\n\n\n${mother.annualIncome.occupationOrPension}`
+						},
+						{
+							text: `\n\n${mother.annualIncome.houseAndProperty}`
+						},
+						{ text: `\n${mother.annualIncome.otherSources}` },
+						{ text: `\n${mother.motherTotalAnnualIncome}` }
+						//])
 					]
 				]
 			},
@@ -333,16 +334,16 @@ const applicationDocDefinition = data => {
 				columns: [
 					guard,
 					[
-						...guardian.map(attr => [
-							{ text: `\n${attr.name}` },
-							{ text: `\n${attr.address}` },
-							{ text: `\n${attr.post}` },
-							{ text: `\n\n\n\n${attr.annualIncome.salary}` },
-							{
-								text: `\n\n${attr.annualIncome.houseAndPropertyOrTemple}`
-							},
-							{ text: `\n${attr.age}` }
-						])
+						//...guardian.map(attr => [
+						{ text: `\n${guardian.name}` },
+						{ text: `\n${guardian.address}` },
+						{ text: `\n${guardian.post}` },
+						{ text: `\n\n\n\n${guardian.annualIncome.salary}` },
+						{
+							text: `\n\n${guardian.annualIncome.houseAndPropertyOrTemple}`
+						},
+						{ text: `\n${guardian.age}` }
+						//	])
 					]
 				]
 			},
