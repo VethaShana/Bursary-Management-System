@@ -1,24 +1,19 @@
-import express from "express";
-import auth from "../middleware/auth.js";
-import {
-  getStudents,
-  createStudent,
-  deleteStudent,
-  updateStudent,
-  PDFStudent,
-  getInstallments,
-} from "../controllers/students.js";
-//import auth2 from '../middleware/auth.js'
+import express from 'express'
+import auth from '../middleware/auth.js'
+import * as StudentsController from '../controllers/students.js'
+import ROLES from '../utils/roles.js'
 
-const router = express.Router();
+const router = express.Router()
 
-// protected
+router.get('/', auth(ROLES.ADMIN), StudentsController.getStudents)
+router.get(
+	'/:id/installments',
+	auth(ROLES.ADMIN),
+	StudentsController.getInstallments
+)
+router.post('/', auth(ROLES.STUDENT), StudentsController.createStudent)
+router.delete('/:id', auth(ROLES.ADMIN), StudentsController.deleteStudent)
+router.put('/:id', auth(ROLES.ADMIN), StudentsController.updateStudent)
+router.post('/pdf', auth(ROLES.ADMIN), StudentsController.PDFStudent)
 
-router.get("/", auth, getStudents);
-router.get("/:id/installments", getInstallments);
-router.post("/", createStudent);
-router.delete("/:id", auth, deleteStudent);
-router.put("/:id", auth, updateStudent);
-router.post("/pdf", PDFStudent);
-
-export default router;
+export default router
