@@ -27,6 +27,7 @@ export const createStudent = async (req, res, next) => {
 		const isValidCandidate = netAmount <= capAmount
 		const newStudent = new Student({
 			...req.body,
+			userId: req.user._id,
 			netAmount,
 			capAmount,
 			isValidCandidate
