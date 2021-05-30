@@ -4,7 +4,6 @@ import User from '../models/user.js'
 export default (...roles) => {
 	return (req, res, next) => {
 		const token = req.get('x-auth-token')
-		console.log(token)
 		if (!token) {
 			return res
 				.status(401)

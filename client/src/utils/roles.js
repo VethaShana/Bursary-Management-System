@@ -1,7 +1,7 @@
 const ROLES = {
 	ADMIN: 'admin',
 	DEAN: 'dean',
-	FINANCE: 'finance',
+	STUDENT: 'student'
 }
 
-export { ROLES }
+export default ROLES
