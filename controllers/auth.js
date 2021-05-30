@@ -2,6 +2,7 @@ import User from '../models/user.js'
 import Token from '../models/Token.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import ROLES from '../utils/roles.js'
 
 export const login = async (req, res) => {
 	const { email } = req.body
@@ -27,15 +28,21 @@ export const login = async (req, res) => {
 
 export const register = async (req, res) => {
 	const { email, password } = req.body
+	const { query } = req
 	try {
 		let user = await User.findOne({ email })
 		if (user) {
-			return res.status(400).json({ error: 'email already in use.' })
+			return res.status(400).json({ error: 'Email already in use.' })
 		} else {
-			user = await new User({ email, password }).save()
+			const role =
+				query && query.role === ROLES.DEAN ? ROLES.DEAN : ROLES.STUDENT
+			user = await new User({ email, password, role }).save()
 			const accessToken = await user.createAccessToken()
 			const refreshToken = await user.createRefreshToken()
-			return res.status(201).json({ accessToken, refreshToken })
+			const { _id } = user
+			return res
+				.status(201)
+				.json({ _id, email, role, accessToken, refreshToken })
 		}
 	} catch (err) {
 		console.error(err)

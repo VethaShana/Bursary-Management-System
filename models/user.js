@@ -43,7 +43,6 @@ userSchema.pre('save', async function (next) {
 userSchema.methods.createAccessToken = async function () {
 	try {
 		const { _id, email, role } = this
-		console.log(process.env.ACCESS_TOKEN_SECRET)
 		const accessToken = jwt.sign(
 			{ user: { _id, email, role } },
 			process.env.ACCESS_TOKEN_SECRET,

@@ -5,7 +5,11 @@ import ROLES from '../utils/roles.js'
 
 const router = express.Router()
 
-router.get('/', auth(ROLES.ADMIN), StudentsController.getStudents)
+router.get(
+	'/',
+	auth(ROLES.ADMIN, ROLES.STUDENT),
+	StudentsController.getStudents
+)
 router.get(
 	'/:id/installments',
 	auth(ROLES.ADMIN),
