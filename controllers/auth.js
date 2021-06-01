@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import ROLES from '../utils/roles.js'
 
 export const login = async (req, res) => {
-	const { email } = req.body
+	const { email, _id, role } = req.body
 	try {
 		let user = await User.findOne({ email })
 		if (!user) {

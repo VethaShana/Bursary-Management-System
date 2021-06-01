@@ -12,11 +12,11 @@ export default data => {
 		guardian
 	} = data
 
-	const siblingUnder19Fund = 10 // to be changed
-	const siblingAtUniversityFund = 10 // to be changed
+	const siblingUnder19Fund = 24000 // to be changed
+	const siblingAtUniversityFund = 36000 // to be changed
 
 	let netAmount = 0
-	let capAmount = 10000 // to be changed
+	let capAmount = 500000 // to be changed
 
 	// check marriage status
 	if (married) netAmount += parseInt(spouseSalary)
