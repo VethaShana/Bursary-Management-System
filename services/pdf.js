@@ -28,7 +28,7 @@ const applicationDocDefinition = data => {
 	} = data
 
 	const rows = siblingsUnder19.map(sibling => [
-		`${sibling.namesb}`,
+		`${sibling.name}`,
 		`${moment(sibling.dob).format('L')}`,
 		`${moment().diff(sibling.dob, 'years')}`,
 		`${sibling.school}`
@@ -43,8 +43,9 @@ const applicationDocDefinition = data => {
 		`${sib.isBursaryRecipient}`
 	])
 
+	console.log(incomeFromEstateFieldsLands)
 	const rows2 = incomeFromEstateFieldsLands.map(income => [
-		`${income.nameOfOwner}`,
+		`${income.name}`,
 		`${income.relationship}`,
 		`${income.location}`,
 		`${income.natureOfCultivation}`,
@@ -53,7 +54,7 @@ const applicationDocDefinition = data => {
 	])
 
 	const rows3 = incomeFromHouses.map(income => [
-		`${income.nameOfOwner}`,
+		`${income.name}`,
 		`${income.relationship}`,
 		`${income.assessmentNo}`,
 		`${income.noOfHouseholders}`,
@@ -121,9 +122,9 @@ const applicationDocDefinition = data => {
 							{
 								text: 'Name of school/Institute attenden ',
 								style: 'tableHeader'
-							}
-						],
-						...rows
+							},
+							...rows
+						]
 					]
 				}
 			},
@@ -152,9 +153,9 @@ const applicationDocDefinition = data => {
 							},
 							{ text: 'Course ', style: 'tableHeader' },
 							{ text: 'Acadamic Year', style: 'tableHeader' },
-							{ text: 'getBursary', style: 'tableHeader' }
-						],
-						...rows1
+							{ text: 'getBursary', style: 'tableHeader' },
+							...rows1
+						]
 					]
 				}
 			},
@@ -184,9 +185,9 @@ const applicationDocDefinition = data => {
 							{
 								text: 'Annual income in Rupees ',
 								style: 'tableHeader'
-							}
-						],
-						...rows2
+							},
+							...rows2
+						]
 					]
 				}
 			},
@@ -211,9 +212,9 @@ const applicationDocDefinition = data => {
 							{
 								text: 'If given on rent/lease names and addresses of tenant/lease',
 								style: 'tableHeader'
-							}
-						],
-						...rows3
+							},
+							...rows3
+						]
 					]
 				}
 			},
