@@ -66,8 +66,7 @@ const studentSchema = mongoose.Schema({
 		type: String
 	},
 	indexNo: {
-		type: String,
-		required: true
+		type: String
 	},
 	siblingsUnder19: [
 		{
@@ -75,10 +74,7 @@ const studentSchema = mongoose.Schema({
 				type: String,
 				required: true
 			},
-			age: {
-				type: String,
-				required: true
-			},
+
 			dob: {
 				type: Date,
 				required: true
