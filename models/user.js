@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 import bycrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import Token from './Token.js'
 import ROLES from '../utils/roles.js'
 
 const userSchema = mongoose.Schema({
@@ -40,31 +39,15 @@ userSchema.pre('save', async function (next) {
 	}
 })
 
-userSchema.methods.createAccessToken = async function () {
+userSchema.methods.createToken = async function () {
 	try {
 		const { _id, email, role } = this
 		const accessToken = jwt.sign(
 			{ user: { _id, email, role } },
-			process.env.ACCESS_TOKEN_SECRET,
-			{ expiresIn: '10m' }
+			process.env.JWT_SECRET,
+			{ expiresIn: '1w' }
 		)
 		return accessToken
-	} catch (err) {
-		console.log(err)
-		return
-	}
-}
-
-userSchema.methods.createRefreshToken = async function () {
-	try {
-		const { _id, email, role } = this
-		const refreshToken = jwt.sign(
-			{ user: { _id, email, role } },
-			process.env.REFRESH_TOKEN_SECRET,
-			{ expiresIn: '1d' }
-		)
-		await new Token({ token: refreshToken }).save()
-		return refreshToken
 	} catch (err) {
 		console.log(err)
 		return
