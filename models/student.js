@@ -71,7 +71,11 @@ const studentSchema = mongoose.Schema({
 	},
 	siblingsUnder19: [
 		{
-			namesb: {
+			name: {
+				type: String,
+				required: true
+			},
+			age: {
 				type: String,
 				required: true
 			},
@@ -95,11 +99,11 @@ const studentSchema = mongoose.Schema({
 				type: String,
 				required: true
 			},
-			university: {
+			institute: {
 				type: String,
 				required: true
 			},
-			siblingCourse: {
+			course: {
 				type: String,
 				required: true
 			},
@@ -107,7 +111,7 @@ const studentSchema = mongoose.Schema({
 				type: String,
 				required: true
 			},
-			isBursaryRecipient: {
+			isBursaryOrMahapolaRecipient: {
 				type: Boolean,
 				required: true
 			}
@@ -115,7 +119,7 @@ const studentSchema = mongoose.Schema({
 	],
 	incomeFromEstateFieldsLands: [
 		{
-			nameOfOwner: {
+			name: {
 				type: String,
 				required: true
 			},
@@ -143,7 +147,7 @@ const studentSchema = mongoose.Schema({
 	],
 	incomeFromHouses: [
 		{
-			nameOfOwner: {
+			name: {
 				type: String,
 				required: true
 			},

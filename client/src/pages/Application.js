@@ -157,11 +157,45 @@ const initialValues = {
 			salary: '',
 			houseAndPropertyOrTemple: ''
 		}
-	}
-	// TODO
-	// siblingsAtUniversity: {
-	// 	mahapolaOrBursary: false
-	// }
+	},
+	siblingsUnder19: [
+		{
+			name: '',
+			dob: new Date(),
+			age: 19,
+			schoolOrInstitute: ''
+		}
+	],
+	siblingsAtUniversity: [
+		{
+			name: '',
+			regNo: '',
+			institute: '',
+			academicYear: 2018,
+			course: '',
+			isBursaryOrMahapolaRecipient: false
+		}
+	],
+	incomeFromHouses: [
+		{
+			name: '',
+			relationship: '',
+			assessmentNo: '',
+			noOfHouseholders: '',
+			address: '',
+			annualIncome: ''
+		}
+	],
+	incomeFromEstateFieldsLands: [
+		{
+			name: '',
+			relationship: '',
+			location: '',
+			natureOfCultivation: '',
+			extentOfLandAndDetails: '',
+			annualIncome: ''
+		}
+	]
 }
 
 const validationSchema = yup.object({
