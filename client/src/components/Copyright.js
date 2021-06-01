@@ -14,7 +14,7 @@ function Copyright() {
 			<Link color="inherit" href="#">
 				University of Jaffna
 			</Link>
-			{`${new Date().getFullYear()}.`}
+			{` ${new Date().getFullYear()}.`}
 		</Typography>
 	)
 }
