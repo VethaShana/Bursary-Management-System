@@ -7,9 +7,16 @@ import {
 	Button,
 	Box,
 	Link as MuiLink,
-	IconButton
+	IconButton,
+	List,
+	ListItem,
+	ListItemIcon,
+	ListItemText,
+	Divider
 } from '@material-ui/core'
 import ArrowRightAltOutlinedIcon from '@material-ui/icons/ArrowRightAltOutlined'
+import DescriptionIcon from '@material-ui/icons/Description'
+import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile'
 import bgImg from '../assets/bg1.svg'
 
 import Copyright from '../components/Copyright'
@@ -20,6 +27,9 @@ import Login from '../components/Login'
 import { default as MuiSnackbar } from '@material-ui/core/Snackbar'
 import { Close as CloseIcon } from '@material-ui/icons'
 import OpenInNewIcon from '@material-ui/icons/OpenInNew'
+
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Snackbar = ({ handleClick }) => {
 	const [open, setOpen] = useState(true)
@@ -95,13 +105,6 @@ const useStyles = makeStyles(theme => ({
 			marginBottom: theme.spacing(5)
 		}
 	},
-	faq: {
-		float: 'right',
-		[theme.breakpoints.down('xs')]: {
-			width: '100%',
-			float: 'none'
-		}
-	},
 	authContainer: {
 		maxWidth: '450px',
 		overflow: 'hidden',
@@ -114,6 +117,7 @@ const useStyles = makeStyles(theme => ({
 const helpMail = 'help@welfare.jfn.ac.lk'
 
 function Landing({ history }) {
+	const isAuthenticated = useSelector(state => state.user.isAuthenticated)
 	const classes = useStyles()
 	const [authView, setAuthView] = useState('register')
 
@@ -157,14 +161,70 @@ function Landing({ history }) {
 								</header>
 							</Box>
 							<Box className={classes.authContainer}>
-								<Register
-									authView={authView}
-									onAuthViewChange={handleAuthViewChange}
-								/>
-								<Login
-									authView={authView}
-									onAuthViewChange={handleAuthViewChange}
-								/>
+								{isAuthenticated ? (
+									<React.Fragment>
+										<Box mb={2}>
+											<Typography variant="h6">
+												Bursary Applications
+											</Typography>
+											<Typography
+												variant="body2"
+												color="textSecondary"
+											>
+												Select Application to continue
+											</Typography>
+										</Box>
+										<List
+											component="nav"
+											aria-label="main mailbox folders"
+											dense
+											// style={{ maxWidth: '350px' }}
+										>
+											<ListItem
+												button
+												component={Link}
+												to="/application"
+											>
+												<ListItemIcon>
+													<DescriptionIcon fontSize="small" />
+												</ListItemIcon>
+												<ListItemText
+													primary="Preliminary Application"
+													secondary=""
+												/>
+											</ListItem>
+											<Divider />
+											<ListItem
+												button
+												component={Link}
+												to="/extended-application"
+											>
+												<ListItemIcon>
+													<InsertDriveFileIcon fontSize="small" />
+												</ListItemIcon>
+												<ListItemText
+													primary="Extended Application"
+													secondary="For Honours students"
+												/>
+											</ListItem>
+										</List>
+									</React.Fragment>
+								) : (
+									<React.Fragment>
+										<Register
+											authView={authView}
+											onAuthViewChange={
+												handleAuthViewChange
+											}
+										/>
+										<Login
+											authView={authView}
+											onAuthViewChange={
+												handleAuthViewChange
+											}
+										/>
+									</React.Fragment>
+								)}
 							</Box>
 						</Grid>
 						<Grid
@@ -175,16 +235,27 @@ function Landing({ history }) {
 							direction="column"
 							className={classes.gridHalf}
 						>
-							<Box>
+							<Grid container justify="flex-end" item>
+								{isAuthenticated && (
+									<Button
+										color="primary"
+										// endIcon={<ArrowRightAltOutlinedIcon />}
+										variant="contained"
+										size={'small'}
+									>
+										Log Out
+									</Button>
+								)}
 								<Button
-									className={classes.faq}
 									color="primary"
 									endIcon={<ArrowRightAltOutlinedIcon />}
 									variant="text"
+									style={{ marginLeft: '10px' }}
+									size={'small'}
 								>
 									FAQ
 								</Button>
-							</Box>
+							</Grid>
 							<Box
 								className={classes.banner}
 								alignSelf="flex-end"

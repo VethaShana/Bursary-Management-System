@@ -19,6 +19,7 @@ import store from './store'
 import { setUser, logoutUser } from './actions/user'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
+import ROLES from './utils/roles'
 
 import ProtectedRoute from './components/ProtectedRoute'
 
@@ -55,14 +56,23 @@ function App({ error }) {
 			<CssBaseline />
 			<Switch>
 				<Route exact path="/" component={Landing} />
-				<ProtectedRoute path="/application" component={Application} />
+				<ProtectedRoute
+					path="/application"
+					role={[ROLES.STUDENT]}
+					component={Application}
+				/>
 				<ProtectedRoute
 					path="/extended-application"
 					component={ExtendedApplication}
+					role={[ROLES.STUDENT]}
 				/>
 				<Route path="/dashboard/sign-in" component={SignIn} />
 				<Route path="/dashboard/sign-up" component={SignUp} />
-				<ProtectedRoute path="/dashboard" component={Dashboard} />
+				<ProtectedRoute
+					path="/dashboard"
+					role={[ROLES.ADMIN, ROLES.DEAN]}
+					component={Dashboard}
+				/>
 				<Route path="*" component={() => '404 NOT FOUND'} />
 			</Switch>
 			<Snackbar

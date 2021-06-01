@@ -52,7 +52,6 @@ export const registerUser =
 
 export const loginUser =
 	(data, history, formikHelpers) => async (dispatch, getState) => {
-		console.log(formikHelpers)
 		dispatch({
 			type: LOGIN_USER
 		})
