@@ -14,12 +14,12 @@ const applicationDocDefinition = data => {
 	const {
 		fullName,
 		title,
-		siblingsUnder19,
 		married,
 		spouse,
-		siblingsUniversity,
-		incomeFromEstateFieldsLands,
-		incomeFromHouses,
+		siblingsAtUniversity = [],
+		siblingsUnder19 = [],
+		incomeFromEstateFieldsLands = [],
+		incomeFromHouses = [],
 		employed,
 		employment,
 		father,
@@ -34,7 +34,7 @@ const applicationDocDefinition = data => {
 		`${sibling.school}`
 	])
 
-	const rows1 = siblingsUniversity.map(sib => [
+	const rows1 = siblingsAtUniversity.map(sib => [
 		`${sib.name}`,
 		`${sib.regNo}`,
 		`${sib.university}`,
@@ -60,8 +60,6 @@ const applicationDocDefinition = data => {
 		`${income.address}`,
 		`${income.annualIncome}`
 	])
-
-	console.log(rows)
 
 	return {
 		pageMargins: [60, 60, 60, 60],

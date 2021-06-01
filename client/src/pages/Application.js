@@ -6,20 +6,18 @@ import {
 	Button,
 	Typography,
 	makeStyles,
-	FormControl,
-	InputLabel,
-	Select,
 	MenuItem,
 	Divider,
 	FormControlLabel,
 	InputAdornment,
-	FormLabel,
-	useMediaQuery
+	IconButton
 } from '@material-ui/core'
+import AddIcon from '@material-ui/icons/Add'
+import DeleteIcon from '@material-ui/icons/Delete'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import * as yup from 'yup'
-import { Formik, Form, Field } from 'formik'
+import { Formik, Form, Field, FieldArray } from 'formik'
 import Alert from '@material-ui/lab/Alert'
 import { TextField, Checkbox } from 'formik-material-ui'
 import { KeyboardDatePicker } from 'formik-material-ui-pickers'
@@ -171,7 +169,7 @@ const initialValues = {
 			name: '',
 			regNo: '',
 			institute: '',
-			academicYear: 2018,
+			academicYear: new Date().getFullYear(),
 			course: '',
 			isBursaryOrMahapolaRecipient: false
 		}
@@ -198,7 +196,7 @@ const initialValues = {
 	]
 }
 
-const validationSchema = yup.object({
+const validationSchema = yup.object().shape({
 	regNo: yup
 		.string()
 		.trim()
@@ -432,13 +430,14 @@ const validationSchema = yup.object({
 		})
 	}),
 	guardian: yup.object().shape({
-		name: yup.string(),
-		living: yup.boolean(),
-		address: yup.string(),
+		name: yup.string().optional(),
+		living: yup.boolean().optional(),
+		address: yup.string().optional(),
 		age: yup
 			.number()
 			.positive('Age cannot be negative')
-			.max(123, 'Invalid age'),
+			.max(123, 'Invalid age')
+			.optional(),
 		post: yup.string(),
 		annualIncome: yup.object().shape({
 			houseAndPropertyOrTemple: yup
@@ -446,16 +445,103 @@ const validationSchema = yup.object({
 				.positive('Income cannot be negative'),
 			salary: yup.number().positive('Income cannot be negative')
 		})
-	})
+	}),
+	siblingsUnder19: yup
+		.array()
+		.of(
+			yup.object().shape({
+				name: yup
+					.string()
+					.min(2, 'Too Short.')
+					.required('Name is required'),
+				dob: yup
+					.date()
+					.max(new Date(), 'Date of Birth cannot be in future')
+					.required('Date of Birth is required'),
+				age: yup
+					.number()
+					.positive('Age cannot be negative')
+					.max(123, 'Invalid age')
+					.required('Age is required'),
+				schoolOrInstitute: yup
+					.string()
+					.max(123, 'Invalid age')
+					.required('Academic year is required')
+			})
+		)
+		.optional(),
+	siblingsAtUniversity: yup
+		.array()
+		.of(
+			yup.object().shape({
+				name: yup
+					.string()
+					.min(2, 'Too Short.')
+					.required('Name is required'),
+				regNo: yup.string().required('Registration No. is required'),
+				institute: yup.string().required('Institute is required'),
+				academicYear: yup
+					.number()
+					.min(new Date().getFullYear() - 7, 'Invalid Academic year')
+					.max(
+						new Date().getFullYear(),
+						'Academic year cannot exceed current year.'
+					)
+					.required('Academic year is required'),
+				course: yup.string().required('Course is required'),
+				isBursaryOrMahapolaRecipient: yup.boolean().required()
+			})
+		)
+		.optional(),
+	incomeFromHouses: yup
+		.array()
+		.of(
+			yup.object().shape({
+				name: yup
+					.string()
+					.min(2, 'Too Short.')
+					.required('Name is required'),
+				relationship: yup.string().required('Relationship is required'),
+				assessmentNo: yup
+					.string()
+					.required('Assessment No. is required'),
+				noOfHouseholders: yup
+					.number()
+					.required('No. of Householders is required'),
+				address: yup.string().required('Address is required'),
+				annualIncome: yup.number().required('Annual Income is requied')
+			})
+		)
+		.optional(),
+	incomeFromEstateFieldsLands: yup
+		.array()
+		.of(
+			yup.object().shape({
+				name: yup.string().required('Name is required'),
+				relationship: yup
+					.string()
+					.required('Relationship No. is required'),
+				location: yup.string().required('Location is required'),
+				natureOfCultivation: yup
+					.string()
+					.required('Nature of Cultivation is required'),
+				extentOfLandAndDetails: yup
+					.string()
+					.required('Extent of Land & Details are required'),
+				annualIncome: yup.number().required('Annual Income is requied')
+			})
+		)
+		.optional()
 })
 
-const onSubmit = async values => {
+const onSubmit = values => {
+	console.log('happening')
 	localStorage.setItem('application', JSON.stringify(values))
 	axios
 		.post('/students', values)
 		.then(res => {
 			console.log(res)
-			localStorage.removeItem('application')
+			// localStorage.removeItem('application')
 		})
 		.catch(err => {
 			console.log(err)
@@ -488,7 +574,7 @@ function Application() {
 								Particulars regarding sources of income of
 								should be stated in full. Particulars of income
 								supplied by you will be checked with relevant
-								officers and the Department of Inland revenue.{' '}
+								officers and the Department of Inland revenue.
 								<br />
 								<br />
 								No fields should be left blank. If you have
@@ -758,13 +844,13 @@ function Application() {
 										>
 											Address
 										</Typography>
-										<MenuItem
+										<Typography
 											variant="body2"
 											color="initial"
 										>
 											No Fields should be left blank.
 											State your permanent Address here.
-										</MenuItem>
+										</Typography>
 									</Grid>
 									<Grid
 										container
@@ -1017,6 +1103,804 @@ function Application() {
 												format="dd/MM/yyyy"
 											/>
 										</Grid>
+									</Grid>
+								</Grid>
+
+								<Divider variant="middle" />
+
+								<Grid
+									container
+									spacing={2}
+									style={{ padding: '32px 8px' }}
+								>
+									<Grid item xs={12} md={3}>
+										<Typography
+											variant="h6"
+											color="initial"
+											gutterBottom
+										>
+											Siblings Details
+										</Typography>
+										<Typography
+											variant="body2"
+											color="initial"
+										>
+											No Fields should be left blank. To
+											add a sibling click{' '}
+											<AddIcon
+												style={{
+													fontSize: 16,
+													verticalAlign: '-3px'
+												}}
+												color="secondary"
+											/>
+											and to remove a sibling click{' '}
+											<DeleteIcon
+												style={{
+													fontSize: 16,
+													verticalAlign: '-3px'
+												}}
+												color="secondary"
+											/>
+										</Typography>
+									</Grid>
+									<Grid
+										container
+										item
+										spacing={2}
+										xs={12}
+										md={9}
+									>
+										<Grid item xs={12}>
+											<Typography
+												variant="subtitle1"
+												color="initial"
+												style={{ fontWeight: '500' }}
+											>
+												Siblings under the age of 19
+											</Typography>
+										</Grid>
+
+										<FieldArray
+											name="siblingsUnder19"
+											render={arrayHelpers => (
+												<React.Fragment>
+													{values.siblingsUnder19.map(
+														(sibling, index) => (
+															<React.Fragment
+																key={index}
+															>
+																<Grid
+																	item
+																	container
+																	justify="space-between"
+																	xs={12}
+																>
+																	<Typography>
+																		{sibling.name
+																			? `${sibling.name}'s details`
+																			: ''}
+																	</Typography>
+																	<IconButton
+																		aria-label="remove-sibling"
+																		color="secondary"
+																		size="small"
+																		disabled={
+																			index ===
+																			0
+																				? true
+																				: false
+																		}
+																		onClick={() =>
+																			arrayHelpers.remove(
+																				index
+																			)
+																		}
+																	>
+																		<DeleteIcon fontSize="inherit" />
+																	</IconButton>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={12}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="text"
+																		label="Name"
+																		name={`siblingsUnder19[${index}].name`}
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={4}
+																>
+																	<Field
+																		component={
+																			KeyboardDatePicker
+																		}
+																		type="text"
+																		label="Date Of Birth"
+																		name={`siblingsUnder19[${index}].dob`}
+																		format="dd/MM/yyyy"
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={2}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="number"
+																		label="Age"
+																		name={`siblingsUnder19[${index}].age`}
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={6}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="text"
+																		label="Name of School/Institute attended"
+																		name={`siblingsUnder19[${index}].schoolOrInstitute`}
+																	/>
+																</Grid>
+															</React.Fragment>
+														)
+													)}
+													<Grid
+														xs={12}
+														container
+														item
+														justify="flex-end"
+													>
+														<Button
+															variant="contained"
+															color="secondary"
+															size="small"
+															slot="right"
+															startIcon={
+																<AddIcon fontSize="small" />
+															}
+															onClick={() =>
+																arrayHelpers.push(
+																	{
+																		name: '',
+																		dob: new Date(),
+																		age: 19,
+																		schoolOrInstitute:
+																			''
+																	}
+																)
+															}
+														>
+															Add sibling
+														</Button>
+													</Grid>
+												</React.Fragment>
+											)}
+										/>
+
+										<Grid item xs={12}>
+											<Divider
+												style={{ margin: '24px 0' }}
+											/>
+										</Grid>
+
+										<Grid item xs={12}>
+											<Typography
+												variant="subtitle1"
+												color="initial"
+												style={{ fontWeight: '500' }}
+											>
+												Siblings At University/Institute
+											</Typography>
+										</Grid>
+
+										<FieldArray
+											name="siblingsAtUniversity"
+											render={arrayHelpers => (
+												<React.Fragment>
+													{values.siblingsAtUniversity.map(
+														(sibling, index) => (
+															<React.Fragment
+																key={index}
+															>
+																<Grid
+																	item
+																	container
+																	justify="space-between"
+																	xs={12}
+																>
+																	<Typography>
+																		{sibling.name
+																			? `${sibling.name}'s details`
+																			: ''}
+																	</Typography>
+																	<IconButton
+																		aria-label="remove-sibling"
+																		color="secondary"
+																		size="small"
+																		disabled={
+																			index ===
+																			0
+																				? true
+																				: false
+																		}
+																		onClick={() =>
+																			arrayHelpers.remove(
+																				index
+																			)
+																		}
+																	>
+																		<DeleteIcon fontSize="inherit" />
+																	</IconButton>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={9}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="text"
+																		label="Name"
+																		name={`siblingsAtUniversity[${index}].name`}
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={3}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="number"
+																		label="Academic Year"
+																		name={`siblingsAtUniversity[${index}].academicYear`}
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={3}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="text"
+																		label="Resiteration No."
+																		name={`siblingsAtUniversity[${index}].regNo`}
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={5}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="text"
+																		label="University/Institute"
+																		name={`siblingsAtUniversity[${index}].institute`}
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={4}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="text"
+																		label="Course of Study"
+																		name={`siblingsAtUniversity[${index}].course`}
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																>
+																	<FormControlLabel
+																		control={
+																			<Field
+																				component={
+																					Checkbox
+																				}
+																				type="checkbox"
+																				name={`siblingsAtUniversity[${index}].isBursaryOrMahapolaRecipient`}
+																				color="primary"
+																				size="small"
+																			/>
+																		}
+																		label={
+																			sibling.name
+																				? `Yes, ${sibling.name} is a Bursary/Mahapola recipient`
+																				: `Yes, sibling is a Bursary/Mahapola recipient`
+																		}
+																	/>
+																</Grid>
+															</React.Fragment>
+														)
+													)}
+													<Grid
+														xs={12}
+														container
+														item
+														justify="flex-end"
+													>
+														<Button
+															variant="contained"
+															color="secondary"
+															size="small"
+															slot="right"
+															startIcon={
+																<AddIcon fontSize="small" />
+															}
+															onClick={() =>
+																arrayHelpers.push(
+																	{
+																		name: '',
+																		regNo: '',
+																		institute:
+																			'',
+																		academicYear:
+																			new Date().getFullYear(),
+																		course: '',
+																		isBursaryOrMahapolaRecipient: false
+																	}
+																)
+															}
+														>
+															Add sibling
+														</Button>
+													</Grid>
+												</React.Fragment>
+											)}
+										/>
+									</Grid>
+								</Grid>
+
+								{/* Income Details */}
+								<Divider variant="middle" />
+
+								<Grid
+									container
+									spacing={2}
+									style={{ padding: '32px 8px' }}
+								>
+									<Grid item xs={12} md={3}>
+										<Typography
+											variant="h6"
+											color="initial"
+											gutterBottom
+										>
+											Income Details
+										</Typography>
+										<Typography
+											variant="body2"
+											color="initial"
+										>
+											No Fields should be left blank. To
+											add a field click{' '}
+											<AddIcon
+												style={{
+													fontSize: 16,
+													verticalAlign: '-3px'
+												}}
+												color="secondary"
+											/>
+											and to remove a field click{' '}
+											<DeleteIcon
+												style={{
+													fontSize: 16,
+													verticalAlign: '-3px'
+												}}
+												color="secondary"
+											/>
+										</Typography>
+									</Grid>
+									<Grid
+										container
+										item
+										spacing={2}
+										xs={12}
+										md={9}
+									>
+										<Grid item xs={12}>
+											<Typography
+												variant="subtitle1"
+												color="initial"
+												style={{ fontWeight: '500' }}
+											>
+												Income from Houses
+											</Typography>
+										</Grid>
+
+										<FieldArray
+											name="incomeFromHouses"
+											render={arrayHelpers => (
+												<React.Fragment>
+													{values.incomeFromHouses.map(
+														(house, index) => (
+															<React.Fragment
+																key={index}
+															>
+																<Grid
+																	item
+																	container
+																	justify="space-between"
+																	xs={12}
+																>
+																	<Typography>
+																		{house.name
+																			? `${house.name}'s House details`
+																			: ''}
+																	</Typography>
+																	<IconButton
+																		aria-label="remove-sibling"
+																		color="secondary"
+																		size="small"
+																		disabled={
+																			index ===
+																			0
+																				? true
+																				: false
+																		}
+																		onClick={() =>
+																			arrayHelpers.remove(
+																				index
+																			)
+																		}
+																	>
+																		<DeleteIcon fontSize="inherit" />
+																	</IconButton>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={12}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="text"
+																		label="Owners' Name"
+																		name={`incomeFromHouses[${index}].name`}
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={6}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="text"
+																		label="Address"
+																		name={`incomeFromHouses[${index}].address`}
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={6}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="text"
+																		label="Relationship"
+																		name={`incomeFromHouses[${index}].relationship`}
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={4}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="text"
+																		label="Assessment No."
+																		name={`incomeFromHouses[${index}].assessmentNo`}
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={4}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="number"
+																		label="No. of House-holders"
+																		name={`incomeFromHouses[${index}].noOfHouseholders`}
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={4}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="number"
+																		label="Annual Income"
+																		InputProps={{
+																			startAdornment:
+																				(
+																					<InputAdornment position="start">
+																						Rs.{' '}
+																					</InputAdornment>
+																				)
+																		}}
+																		name={`incomeFromHouses[${index}].annualIncome`}
+																	/>
+																</Grid>
+															</React.Fragment>
+														)
+													)}
+													<Grid
+														xs={12}
+														container
+														item
+														justify="flex-end"
+													>
+														<Button
+															variant="contained"
+															color="secondary"
+															size="small"
+															slot="right"
+															startIcon={
+																<AddIcon fontSize="small" />
+															}
+															onClick={() =>
+																arrayHelpers.push(
+																	{
+																		name: '',
+																		relationship:
+																			'',
+																		assessmentNo:
+																			'',
+																		noOfHouseholders:
+																			'',
+																		address:
+																			'',
+																		annualIncome:
+																			''
+																	}
+																)
+															}
+														>
+															Add House
+														</Button>
+													</Grid>
+												</React.Fragment>
+											)}
+										/>
+
+										<Grid item xs={12}>
+											<Divider
+												style={{ margin: '24px 0' }}
+											/>
+										</Grid>
+
+										<Grid item xs={12}>
+											<Typography
+												variant="subtitle1"
+												color="initial"
+												style={{ fontWeight: '500' }}
+											>
+												Income from property( Estate /
+												Fields / Lands )
+											</Typography>
+										</Grid>
+
+										<FieldArray
+											name="incomeFromEstateFieldsLands"
+											render={arrayHelpers => (
+												<React.Fragment>
+													{values.incomeFromEstateFieldsLands.map(
+														(property, index) => (
+															<React.Fragment
+																key={index}
+															>
+																<Grid
+																	item
+																	container
+																	justify="space-between"
+																	xs={12}
+																>
+																	<Typography>
+																		{property.name
+																			? `${property.name}'s property details`
+																			: ''}
+																	</Typography>
+																	<IconButton
+																		aria-label="remove-sibling"
+																		color="secondary"
+																		size="small"
+																		disabled={
+																			index ===
+																			0
+																				? true
+																				: false
+																		}
+																		onClick={() =>
+																			arrayHelpers.remove(
+																				index
+																			)
+																		}
+																	>
+																		<DeleteIcon fontSize="inherit" />
+																	</IconButton>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={12}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="text"
+																		label="Owners' Name"
+																		name={`incomeFromEstateFieldsLands[${index}].name`}
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={6}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="text"
+																		label="Location"
+																		name={`incomeFromEstateFieldsLands[${index}].location`}
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={6}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="text"
+																		label="Relationship"
+																		name={`incomeFromEstateFieldsLands[${index}].relationship`}
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={8}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="text"
+																		label="Nature of Cultivation"
+																		name={`incomeFromEstateFieldsLands[${index}].natureOfCultivation`}
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																	sm={4}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="number"
+																		label="Annual Income"
+																		InputProps={{
+																			startAdornment:
+																				(
+																					<InputAdornment position="start">
+																						Rs.{' '}
+																					</InputAdornment>
+																				)
+																		}}
+																		name={`incomeFromEstateFieldsLands[${index}].annualIncome`}
+																	/>
+																</Grid>
+																<Grid
+																	item
+																	xs={12}
+																>
+																	<Field
+																		component={
+																			TextField
+																		}
+																		type="text"
+																		multiline
+																		rows={2}
+																		label="Extent Of Cultivation"
+																		name={`incomeFromEstateFieldsLands[${index}].extentOfLandAndDetails`}
+																	/>
+																</Grid>
+															</React.Fragment>
+														)
+													)}
+													<Grid
+														xs={12}
+														container
+														item
+														justify="flex-end"
+													>
+														<Button
+															variant="contained"
+															color="secondary"
+															size="small"
+															slot="right"
+															startIcon={
+																<AddIcon fontSize="small" />
+															}
+															onClick={() =>
+																arrayHelpers.push(
+																	{
+																		name: '',
+																		relationship:
+																			'',
+																		location:
+																			'',
+																		natureOfCultivation:
+																			'',
+																		extentOfLandAndDetails:
+																			'',
+																		annualIncome:
+																			''
+																	}
+																)
+															}
+														>
+															Add property
+														</Button>
+													</Grid>
+												</React.Fragment>
+											)}
+										/>
 									</Grid>
 								</Grid>
 
