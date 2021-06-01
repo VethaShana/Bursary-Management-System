@@ -13,11 +13,11 @@ const useStyles = makeStyles(theme => ({
 		padding: theme.spacing(2),
 		display: 'flex',
 		overflow: 'auto',
-		flexDirection: 'column',
+		flexDirection: 'column'
 	},
 	fixedHeight: {
 		// height: 240,
-	},
+	}
 }))
 
 function Installments() {
@@ -25,12 +25,12 @@ function Installments() {
 
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
 	return (
-		<>
+		<React.Fragment>
 			<Grid container spacing={3}>
 				<Grid item xs={12}>
 					<Title
-						title='Installments'
-						description='Review/Issue Installments &amp; create reports.'
+						title="Installments"
+						description="Review/Issue Installments &amp; create reports."
 					/>
 				</Grid>
 
@@ -45,7 +45,7 @@ function Installments() {
 					</Paper>
 				</Grid>
 			</Grid>
-		</>
+		</React.Fragment>
 	)
 }
 

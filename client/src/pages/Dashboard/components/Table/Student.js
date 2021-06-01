@@ -52,7 +52,7 @@ const rows = [
 		'Galle',
 		'Computer Science',
 		130000.0
-	),
+	)
 ]
 
 function descendingComparator(a, b, orderBy) {
@@ -86,28 +86,33 @@ const headCells = [
 		id: 'regNo',
 		numeric: false,
 		disablePadding: true,
-		label: 'Registration No.',
+		label: 'Registration No.'
 	},
 	{ id: 'nic', numeric: false, disablePadding: false, label: 'NIC' },
 	{
 		id: 'name',
 		numeric: false,
 		disablePadding: false,
-		label: 'Name with Initials',
+		label: 'Name with Initials'
 	},
-	{ id: 'district', numeric: false, disablePadding: false, label: 'District' },
+	{
+		id: 'district',
+		numeric: false,
+		disablePadding: false,
+		label: 'District'
+	},
 	{
 		id: 'courseOfStudy',
 		numeric: false,
 		disablePadding: false,
-		label: 'Course of Study',
+		label: 'Course of Study'
 	},
 	{
 		id: 'grossIncome',
 		numeric: true,
 		disablePadding: false,
-		label: 'Gross Income',
-	},
+		label: 'Gross Income'
+	}
 ]
 
 function TableHead(props) {
@@ -118,7 +123,7 @@ function TableHead(props) {
 		orderBy,
 		numSelected,
 		rowCount,
-		onRequestSort,
+		onRequestSort
 	} = props
 	const createSortHandler = property => event => {
 		onRequestSort(event, property)
@@ -127,13 +132,15 @@ function TableHead(props) {
 	return (
 		<MuiTableHead>
 			<TableRow>
-				<TableCell padding='checkbox'>
+				<TableCell padding="checkbox">
 					<Checkbox
-						indeterminate={numSelected > 0 && numSelected < rowCount}
+						indeterminate={
+							numSelected > 0 && numSelected < rowCount
+						}
 						checked={rowCount > 0 && numSelected === rowCount}
 						onChange={onSelectAllClick}
 						inputProps={{ 'aria-label': 'select all desserts' }}
-						size='small'
+						size="small"
 					/>
 				</TableCell>
 				<TableCell />
@@ -152,7 +159,9 @@ function TableHead(props) {
 							{headCell.label}
 							{orderBy === headCell.id ? (
 								<span className={classes.visuallyHidden}>
-									{order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+									{order === 'desc'
+										? 'sorted descending'
+										: 'sorted ascending'}
 								</span>
 							) : null}
 						</TableSortLabel>
@@ -171,27 +180,27 @@ TableHead.propTypes = {
 	onSelectAllClick: PropTypes.func.isRequired,
 	order: PropTypes.oneOf(['asc', 'desc']).isRequired,
 	orderBy: PropTypes.string.isRequired,
-	rowCount: PropTypes.number.isRequired,
+	rowCount: PropTypes.number.isRequired
 }
 
 const useToolbarStyles = makeStyles(theme => ({
 	root: {
 		paddingLeft: theme.spacing(2),
-		paddingRight: theme.spacing(1),
+		paddingRight: theme.spacing(1)
 	},
 	highlight:
 		theme.palette.type === 'light'
 			? {
 					color: theme.palette.primary.main,
-					backgroundColor: lighten(theme.palette.secondary.main, 0.85),
+					backgroundColor: lighten(theme.palette.secondary.main, 0.85)
 			  }
 			: {
 					color: theme.palette.text.primary,
-					backgroundColor: theme.palette.secondary.dark,
+					backgroundColor: theme.palette.secondary.dark
 			  },
 	title: {
-		flex: '1 1 100%',
-	},
+		flex: '1 1 100%'
+	}
 }))
 
 const TableToolbar = props => {
@@ -201,38 +210,38 @@ const TableToolbar = props => {
 	return (
 		<Toolbar
 			className={clsx(classes.root, {
-				[classes.highlight]: numSelected > 0,
+				[classes.highlight]: numSelected > 0
 			})}
 		>
 			{numSelected > 0 ? (
 				<Typography
 					className={classes.title}
-					color='inherit'
-					variant='subtitle1'
-					component='div'
+					color="inherit"
+					variant="subtitle1"
+					component="div"
 				>
 					{numSelected} selected
 				</Typography>
 			) : (
 				<Typography
 					className={classes.title}
-					variant='h6'
-					id='tableTitle'
-					component='div'
+					variant="h6"
+					id="tableTitle"
+					component="div"
 				>
 					{/* Students */}
 				</Typography>
 			)}
 
 			{numSelected > 0 ? (
-				<Tooltip title='Delete'>
-					<IconButton aria-label='delete'>
-						<DeleteIcon fontSize='small' />
+				<Tooltip title="Delete">
+					<IconButton aria-label="delete">
+						<DeleteIcon fontSize="small" />
 					</IconButton>
 				</Tooltip>
 			) : (
-				<Tooltip title='Filter list'>
-					<IconButton aria-label='filter list'>
+				<Tooltip title="Filter list">
+					<IconButton aria-label="filter list">
 						<FilterListIcon />
 					</IconButton>
 				</Tooltip>
@@ -242,7 +251,7 @@ const TableToolbar = props => {
 }
 
 TableToolbar.propTypes = {
-	numSelected: PropTypes.number.isRequired,
+	numSelected: PropTypes.number.isRequired
 }
 
 const useContextMenuStyles = makeStyles(theme => ({
@@ -251,9 +260,9 @@ const useContextMenuStyles = makeStyles(theme => ({
 		background: theme.palette.error.main,
 		color: theme.palette.getContrastText(theme.palette.error.main),
 		'&:hover': {
-			background: theme.palette.error.main,
-		},
-	},
+			background: theme.palette.error.main
+		}
+	}
 }))
 
 const ContextMenu = () => {
@@ -271,17 +280,17 @@ const ContextMenu = () => {
 	return (
 		<div>
 			<IconButton
-				aria-label='actions'
-				aria-controls='context-menu'
-				aria-haspopup='true'
+				aria-label="actions"
+				aria-controls="context-menu"
+				aria-haspopup="true"
 				onClick={handleClick}
-				size='small'
+				size="small"
 			>
-				<MoreVertIcon fontSize='small' />
+				<MoreVertIcon fontSize="small" />
 			</IconButton>
 
 			<Menu
-				id='context-menu'
+				id="context-menu"
 				anchorEl={anchorEl}
 				keepMounted
 				open={Boolean(anchorEl)}
@@ -290,7 +299,11 @@ const ContextMenu = () => {
 				<MenuItem dense onClick={handleClose}>
 					Edit
 				</MenuItem>
-				<MenuItem dense onClick={handleClose} className={classes.delete}>
+				<MenuItem
+					dense
+					onClick={handleClose}
+					className={classes.delete}
+				>
 					Delete
 				</MenuItem>
 			</Menu>
@@ -310,24 +323,24 @@ const Row = props => {
 		<TableRow
 			hover
 			// onClick={event => handleClick(event, row.regNo)}
-			role='checkbox'
+			role="checkbox"
 			aria-checked={isItemSelected}
 			tabIndex={-1}
 			key={row.regNo}
 			selected={isItemSelected}
 		>
-			<TableCell padding='checkbox'>
+			<TableCell padding="checkbox">
 				<Checkbox
 					checked={isItemSelected}
 					inputProps={{ 'aria-labelledby': labelId }}
-					size='small'
+					size="small"
 					onClick={event => handleClick(event, row.regNo)}
 				/>
 			</TableCell>
 			<TableCell>
 				<IconButton
-					aria-label='expand row'
-					size='small'
+					aria-label="expand row"
+					size="small"
 					onClick={e => {
 						e.preventDefault()
 						setOpen(!open)
@@ -336,15 +349,15 @@ const Row = props => {
 					{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
 				</IconButton>
 			</TableCell>
-			<TableCell component='th' id={labelId} scope='row' padding='none'>
+			<TableCell component="th" id={labelId} scope="row" padding="none">
 				{row.regNo}
 			</TableCell>
-			<TableCell align='left'>{row.nic}</TableCell>
-			<TableCell align='left'>{row.name}</TableCell>
-			<TableCell align='left'>{row.district}</TableCell>
-			<TableCell align='left'>{row.courseOfStudy}</TableCell>
-			<TableCell align='right'>{row.grossIncome}</TableCell>
-			<TableCell align='right'>
+			<TableCell align="left">{row.nic}</TableCell>
+			<TableCell align="left">{row.name}</TableCell>
+			<TableCell align="left">{row.district}</TableCell>
+			<TableCell align="left">{row.courseOfStudy}</TableCell>
+			<TableCell align="right">{row.grossIncome}</TableCell>
+			<TableCell align="right">
 				<ContextMenu />
 			</TableCell>
 		</TableRow>
@@ -353,7 +366,7 @@ const Row = props => {
 
 const useStyles = makeStyles(theme => ({
 	table: {
-		minWidth: 750,
+		minWidth: 750
 	},
 	visuallyHidden: {
 		border: 0,
@@ -364,8 +377,8 @@ const useStyles = makeStyles(theme => ({
 		padding: 0,
 		position: 'absolute',
 		top: 20,
-		width: 1,
-	},
+		width: 1
+	}
 }))
 
 export default function Student() {
@@ -426,14 +439,14 @@ export default function Student() {
 		rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
 
 	return (
-		<>
+		<React.Fragment>
 			<TableToolbar numSelected={selected.length} />
 			<TableContainer>
 				<Table
 					className={classes.table}
-					aria-labelledby='tableTitle'
-					size='small'
-					aria-label='enhanced table'
+					aria-labelledby="tableTitle"
+					size="small"
+					aria-label="enhanced table"
 				>
 					<TableHead
 						classes={classes}
@@ -446,7 +459,10 @@ export default function Student() {
 					/>
 					<TableBody>
 						{stableSort(rows, getComparator(order, orderBy))
-							.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+							.slice(
+								page * rowsPerPage,
+								page * rowsPerPage + rowsPerPage
+							)
 							.map((row, index) => {
 								const isItemSelected = isSelected(row.regNo)
 								const labelId = `enhanced-table-checkbox-${index}`
@@ -470,13 +486,13 @@ export default function Student() {
 			</TableContainer>
 			<TablePagination
 				rowsPerPageOptions={[5, 10, 25]}
-				component='div'
+				component="div"
 				count={rows.length}
 				rowsPerPage={rowsPerPage}
 				page={page}
 				onChangePage={handleChangePage}
 				onChangeRowsPerPage={handleChangeRowsPerPage}
 			/>
-		</>
+		</React.Fragment>
 	)
 }

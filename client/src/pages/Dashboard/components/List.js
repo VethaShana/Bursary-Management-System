@@ -56,7 +56,7 @@ const ContextMenu = () => {
 	}
 
 	return (
-		<>
+		<React.Fragment>
 			<IconButton
 				aria-label="actions"
 				aria-controls="context-menu"
@@ -88,7 +88,7 @@ const ContextMenu = () => {
 					Delete
 				</MenuItem>
 			</Menu>
-		</>
+		</React.Fragment>
 	)
 }
 
@@ -121,7 +121,7 @@ const useStyles = makeStyles(theme => ({
 const List = () => {
 	const classes = useStyles()
 	return (
-		<>
+		<React.Fragment>
 			<Typography
 				component="h2"
 				variant="h6"
@@ -154,7 +154,7 @@ const List = () => {
 					))}
 				</MuiList>
 			</div>
-		</>
+		</React.Fragment>
 	)
 }
 

@@ -32,7 +32,7 @@ const rows = [
 		name: 'Ardil Mohamed',
 		district: 'Kandy',
 		faculty: 'Computer Science',
-		grossIncome: 120000,
+		grossIncome: 120000
 	},
 	{
 		regNo: '2017/MMA/025',
@@ -40,7 +40,7 @@ const rows = [
 		name: 'Sarath Piyasena',
 		district: 'Colombo',
 		faculty: 'Physical Science',
-		grossIncome: 180000,
+		grossIncome: 180000
 	},
 	{
 		regNo: '2017/A/012',
@@ -48,7 +48,7 @@ const rows = [
 		name: 'John Banda',
 		district: 'Anuradhapura',
 		faculty: 'Biological Science',
-		grossIncome: 210000,
+		grossIncome: 210000
 	},
 	{
 		regNo: '2017/CSC/025',
@@ -56,7 +56,7 @@ const rows = [
 		name: 'Sanasta',
 		district: 'Ratnapura',
 		faculty: 'Computer Science',
-		grossIncome: 350000,
+		grossIncome: 350000
 	},
 	{
 		regNo: '2017/MMA/015',
@@ -64,13 +64,13 @@ const rows = [
 		name: 'John Keells',
 		district: 'Kandy',
 		faculty: 'Physical Science',
-		grossIncome: 192000,
-	},
+		grossIncome: 192000
+	}
 ]
 
 const mapStateToProps = state => ({
 	students: state.students.data,
-	isLoading: state.students.isLoading,
+	isLoading: state.students.isLoading
 })
 
 const mapDispatchToProps = { getStudents }
@@ -107,43 +107,43 @@ const headCells = [
 		numeric: false,
 		disablePadding: false,
 		label: 'Registration No.',
-		skeleton: true,
+		skeleton: true
 	},
 	{
 		id: 'nic',
 		numeric: false,
 		disablePadding: false,
 		label: 'NIC',
-		skeleton: true,
+		skeleton: true
 	},
 	{
 		id: 'name',
 		numeric: false,
 		disablePadding: false,
 		label: 'Name with Initials',
-		skeleton: true,
+		skeleton: true
 	},
 	{
 		id: 'district',
 		numeric: false,
 		disablePadding: false,
 		label: 'District',
-		skeleton: true,
+		skeleton: true
 	},
 	{
 		id: 'faculty',
 		numeric: false,
 		disablePadding: false,
 		label: 'Faculty',
-		skeleton: true,
+		skeleton: true
 	},
 	{
 		id: 'grossIncome',
 		numeric: true,
 		disablePadding: false,
 		label: 'Gross Income',
-		skeleton: true,
-	},
+		skeleton: true
+	}
 ]
 
 function PendingApplicationsTable(props) {
@@ -154,7 +154,7 @@ function PendingApplicationsTable(props) {
 		orderBy,
 		numSelected,
 		rowCount,
-		onRequestSort,
+		onRequestSort
 	} = props
 	const createSortHandler = property => event => {
 		onRequestSort(event, property)
@@ -163,13 +163,15 @@ function PendingApplicationsTable(props) {
 	return (
 		<TableHead>
 			<TableRow>
-				<TableCell padding='checkbox'>
+				<TableCell padding="checkbox">
 					<Checkbox
-						indeterminate={numSelected > 0 && numSelected < rowCount}
+						indeterminate={
+							numSelected > 0 && numSelected < rowCount
+						}
 						checked={rowCount > 0 && numSelected === rowCount}
 						onChange={onSelectAllClick}
 						inputProps={{ 'aria-label': 'select all desserts' }}
-						size='small'
+						size="small"
 					/>
 				</TableCell>
 				<TableCell />
@@ -188,7 +190,9 @@ function PendingApplicationsTable(props) {
 							{headCell.label}
 							{orderBy === headCell.id ? (
 								<span className={classes.visuallyHidden}>
-									{order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+									{order === 'desc'
+										? 'sorted descending'
+										: 'sorted ascending'}
 								</span>
 							) : null}
 						</TableSortLabel>
@@ -207,27 +211,27 @@ PendingApplicationsTable.propTypes = {
 	onSelectAllClick: PropTypes.func.isRequired,
 	order: PropTypes.oneOf(['asc', 'desc']).isRequired,
 	orderBy: PropTypes.string.isRequired,
-	rowCount: PropTypes.number.isRequired,
+	rowCount: PropTypes.number.isRequired
 }
 
 const useToolbarStyles = makeStyles(theme => ({
 	root: {
 		paddingLeft: theme.spacing(2),
-		paddingRight: theme.spacing(1),
+		paddingRight: theme.spacing(1)
 	},
 	highlight:
 		theme.palette.type === 'light'
 			? {
 					color: theme.palette.primary.main,
-					backgroundColor: lighten(theme.palette.secondary.main, 0.85),
+					backgroundColor: lighten(theme.palette.secondary.main, 0.85)
 			  }
 			: {
 					color: theme.palette.text.primary,
-					backgroundColor: theme.palette.secondary.dark,
+					backgroundColor: theme.palette.secondary.dark
 			  },
 	title: {
-		flex: '1 1 100%',
-	},
+		flex: '1 1 100%'
+	}
 }))
 
 const EnhancedTableToolbar = props => {
@@ -237,38 +241,38 @@ const EnhancedTableToolbar = props => {
 	return (
 		<Toolbar
 			className={clsx(classes.root, {
-				[classes.highlight]: numSelected > 0,
+				[classes.highlight]: numSelected > 0
 			})}
 		>
 			{numSelected > 0 ? (
 				<Typography
 					className={classes.title}
-					color='inherit'
-					variant='subtitle1'
-					component='div'
+					color="inherit"
+					variant="subtitle1"
+					component="div"
 				>
 					{numSelected} selected
 				</Typography>
 			) : (
 				<Typography
 					className={classes.title}
-					variant='h6'
-					id='tableTitle'
-					component='div'
+					variant="h6"
+					id="tableTitle"
+					component="div"
 				>
 					{/* Students */}
 				</Typography>
 			)}
 
 			{numSelected > 0 ? (
-				<Tooltip title='Delete'>
-					<IconButton aria-label='delete'>
-						<DeleteIcon fontSize='small' />
+				<Tooltip title="Delete">
+					<IconButton aria-label="delete">
+						<DeleteIcon fontSize="small" />
 					</IconButton>
 				</Tooltip>
 			) : (
-				<Tooltip title='Filter list'>
-					<IconButton aria-label='filter list'>
+				<Tooltip title="Filter list">
+					<IconButton aria-label="filter list">
 						<FilterListIcon />
 					</IconButton>
 				</Tooltip>
@@ -278,7 +282,7 @@ const EnhancedTableToolbar = props => {
 }
 
 EnhancedTableToolbar.propTypes = {
-	numSelected: PropTypes.number.isRequired,
+	numSelected: PropTypes.number.isRequired
 }
 
 const useContextMenuStyles = makeStyles(theme => ({
@@ -287,9 +291,9 @@ const useContextMenuStyles = makeStyles(theme => ({
 		background: theme.palette.error.main,
 		color: theme.palette.getContrastText(theme.palette.error.main),
 		'&:hover': {
-			background: theme.palette.error.main,
-		},
-	},
+			background: theme.palette.error.main
+		}
+	}
 }))
 
 const ContextMenu = () => {
@@ -307,17 +311,17 @@ const ContextMenu = () => {
 	return (
 		<div>
 			<IconButton
-				aria-label='actions'
-				aria-controls='context-menu'
-				aria-haspopup='true'
+				aria-label="actions"
+				aria-controls="context-menu"
+				aria-haspopup="true"
 				onClick={handleClick}
-				size='small'
+				size="small"
 			>
-				<MoreVertIcon fontSize='small' />
+				<MoreVertIcon fontSize="small" />
 			</IconButton>
 
 			<Menu
-				id='context-menu'
+				id="context-menu"
 				anchorEl={anchorEl}
 				keepMounted
 				open={Boolean(anchorEl)}
@@ -326,7 +330,11 @@ const ContextMenu = () => {
 				<MenuItem dense onClick={handleClose}>
 					Edit
 				</MenuItem>
-				<MenuItem dense onClick={handleClose} className={classes.delete}>
+				<MenuItem
+					dense
+					onClick={handleClose}
+					className={classes.delete}
+				>
 					Delete
 				</MenuItem>
 			</Menu>
@@ -341,9 +349,9 @@ ContextMenu.propTypes = {
 const useRowStyles = makeStyles({
 	root: {
 		'& > *': {
-			borderBottom: 'unset',
-		},
-	},
+			borderBottom: 'unset'
+		}
+	}
 })
 
 const Row = props => {
@@ -356,42 +364,46 @@ const Row = props => {
 			<TableRow
 				hover
 				// onClick={event => handleClick(event, row.regNo)}
-				role='checkbox'
+				role="checkbox"
 				aria-checked={isItemSelected}
 				tabIndex={-1}
 				key={row.regNo}
 				selected={isItemSelected}
 				className={classes.root}
 			>
-				<TableCell padding='checkbox'>
+				<TableCell padding="checkbox">
 					<Checkbox
 						checked={isItemSelected}
 						inputProps={{ 'aria-labelledby': labelId }}
-						size='small'
+						size="small"
 						onClick={event => handleClick(event, row.regNo)}
 					/>
 				</TableCell>
 				<TableCell>
 					<IconButton
-						aria-label='expand row'
-						size='small'
+						aria-label="expand row"
+						size="small"
 						onClick={e => {
 							e.preventDefault()
 							setOpen(!open)
 						}}
 					>
-						{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+						{open ? (
+							<KeyboardArrowUpIcon />
+						) : (
+							<KeyboardArrowDownIcon />
+						)}
 					</IconButton>
 				</TableCell>
-				<TableCell component='th' id={labelId} scope='row'>
+				<TableCell component="th" id={labelId} scope="row">
 					{row.regNo}
 				</TableCell>
-				<TableCell align='left'>{row.nic}</TableCell>
-				<TableCell align='left'>{row.name}</TableCell>
-				<TableCell align='left'>{row.district}</TableCell>
-				<TableCell align='left'>{row.faculty}</TableCell>
-				<TableCell align='right'>{row.grossIncome}</TableCell>
-				<TableCell align='right'>
+				<TableCell align="left">{row.nic}</TableCell>
+				<TableCell align="left">{row.name}</TableCell>
+				<TableCell align="left">{row.district}</TableCell>
+				<TableCell align="left">{row.faculty}</TableCell>
+				<TableCell align="right">{row.grossIncome}</TableCell>
+				<TableCell align="right">
 					<ContextMenu />
 				</TableCell>
 			</TableRow>
@@ -400,28 +412,45 @@ const Row = props => {
 					style={{ paddingBottom: 0, paddingTop: 0 }}
 					colSpan={2}
 				></TableCell>
-				<TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-					<Collapse in={open} timeout='auto' unmountOnExit>
+				<TableCell
+					style={{ paddingBottom: 0, paddingTop: 0 }}
+					colSpan={6}
+				>
+					<Collapse in={open} timeout="auto" unmountOnExit>
 						<Box margin={1}>
-							<Typography variant='button' gutterBottom component='div'>
+							<Typography
+								variant="button"
+								gutterBottom
+								component="div"
+							>
 								Details
 							</Typography>
-							<Table size='small' aria-label='purchases'>
+							<Table size="small" aria-label="purchases">
 								<TableHead>
 									<TableRow>
 										<TableCell>Date</TableCell>
 										<TableCell>Customer</TableCell>
-										<TableCell align='right'>Amount</TableCell>
-										<TableCell align='right'>Total price ($)</TableCell>
-										<TableCell align='right'>Total price ($)</TableCell>
-										<TableCell align='right'>Total price ($)</TableCell>
-										<TableCell align='right'>Total price ($)</TableCell>
-										<TableCell align='right'>Total price ($)</TableCell>
+										<TableCell align="right">
+											Amount
+										</TableCell>
+										<TableCell align="right">
+											Total price ($)
+										</TableCell>
+										<TableCell align="right">
+											Total price ($)
+										</TableCell>
+										<TableCell align="right">
+											Total price ($)
+										</TableCell>
+										<TableCell align="right">
+											Total price ($)
+										</TableCell>
+										<TableCell align="right">
+											Total price ($)
+										</TableCell>
 									</TableRow>
 								</TableHead>
-								<TableBody>
-									{/* TODO: map() */}
-								</TableBody>
+								<TableBody>{/* TODO: map() */}</TableBody>
 							</Table>
 						</Box>
 					</Collapse>
@@ -438,7 +467,7 @@ const Row = props => {
 const RowSkeleton = () => {
 	return (
 		<TableRow>
-			<TableCell padding='checkbox'>
+			<TableCell padding="checkbox">
 				<Skeleton />
 			</TableCell>
 			<TableCell></TableCell>
@@ -457,7 +486,7 @@ const RowSkeleton = () => {
 
 const useStyles = makeStyles(theme => ({
 	table: {
-		minWidth: 750,
+		minWidth: 750
 	},
 	visuallyHidden: {
 		border: 0,
@@ -468,8 +497,8 @@ const useStyles = makeStyles(theme => ({
 		padding: 0,
 		position: 'absolute',
 		top: 20,
-		width: 1,
-	},
+		width: 1
+	}
 }))
 
 const EnhancedTable = props => {
@@ -534,14 +563,14 @@ const EnhancedTable = props => {
 		rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
 
 	return (
-		<>
+		<React.Fragment>
 			<EnhancedTableToolbar numSelected={selected.length} />
 			<TableContainer>
 				<Table
 					className={classes.table}
-					aria-labelledby='tableTitle'
-					size='small'
-					aria-label='enhanced table'
+					aria-labelledby="tableTitle"
+					size="small"
+					aria-label="enhanced table"
 				>
 					<PendingApplicationsTable
 						classes={classes}
@@ -554,10 +583,15 @@ const EnhancedTable = props => {
 					/>
 					<TableBody>
 						{isLoading &&
-							[...Array(rowsPerPage)].map((x, i) => <RowSkeleton key={i} />)}
+							[...Array(rowsPerPage)].map((x, i) => (
+								<RowSkeleton key={i} />
+							))}
 						{!isLoading &&
 							stableSort(rows, getComparator(order, orderBy))
-								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+								.slice(
+									page * rowsPerPage,
+									page * rowsPerPage + rowsPerPage
+								)
 								.map((row, index) => {
 									const isItemSelected = isSelected(row.regNo)
 									const labelId = `enhanced-table-checkbox-${index}`
@@ -582,14 +616,14 @@ const EnhancedTable = props => {
 			</TableContainer>
 			<TablePagination
 				rowsPerPageOptions={[5, 10, 25]}
-				component='div'
+				component="div"
 				count={rows.length}
 				rowsPerPage={rowsPerPage}
 				page={page}
 				onChangePage={handleChangePage}
 				onChangeRowsPerPage={handleChangeRowsPerPage}
 			/>
-		</>
+		</React.Fragment>
 	)
 }
 

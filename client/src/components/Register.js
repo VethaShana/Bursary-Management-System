@@ -59,13 +59,20 @@ const onSubmit = (action, history) => values => {
 	action(values, history)
 }
 
-function Register({ authView, onAuthViewChange, error, isLoading, ...props }) {
+function Register({
+	authView,
+	onAuthViewChange,
+	error,
+	isLoading,
+	registerUser,
+	...props
+}) {
 	const classes = useStyles()
 	const history = useHistory()
 	const formik = useFormik({
 		initialValues,
 		validationSchema,
-		onSubmit: onSubmit(props.registerUser, history)
+		onSubmit: onSubmit(registerUser, history)
 	})
 
 	const handleClick = e => {

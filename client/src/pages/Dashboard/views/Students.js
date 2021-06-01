@@ -12,23 +12,23 @@ const useStyles = makeStyles(theme => ({
 		padding: theme.spacing(2),
 		display: 'flex',
 		overflow: 'auto',
-		flexDirection: 'column',
+		flexDirection: 'column'
 	},
 	fixedHeight: {
-		height: 240,
-	},
+		height: 240
+	}
 }))
 
 function Students() {
 	const classes = useStyles()
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
 	return (
-		<>
+		<React.Fragment>
 			<Grid container spacing={3}>
 				<Grid item xs={12}>
 					<Title
-						title='Applications'
-						description='Review bursary recipients.'
+						title="Applications"
+						description="Review bursary recipients."
 					/>
 				</Grid>
 				<Grid item xs={12} md={4} lg={3}>
@@ -43,12 +43,12 @@ function Students() {
 					</Paper>
 				</Grid>
 
-				<Grid item container xs={12} display='flex' justify='flex-end'>
+				<Grid item container xs={12} display="flex" justify="flex-end">
 					<Button
-						variant='contained'
-						color='primary'
-						size='small'
-						startIcon={<AddIcon fontSize='small' />}
+						variant="contained"
+						color="primary"
+						size="small"
+						startIcon={<AddIcon fontSize="small" />}
 					>
 						Add Student
 					</Button>
@@ -61,7 +61,7 @@ function Students() {
 					</Paper>
 				</Grid>
 			</Grid>
-		</>
+		</React.Fragment>
 	)
 }
 

@@ -122,7 +122,7 @@ function Landing({ history }) {
 	}
 
 	return (
-		<>
+		<React.Fragment>
 			{process.env.NODE_ENV !== 'production' && (
 				<Snackbar handleClick={() => history.push('/dashboard')} />
 			)}
@@ -224,7 +224,7 @@ function Landing({ history }) {
 					</Grid>
 				</Grid>
 			</Container>
-		</>
+		</React.Fragment>
 	)
 }
 

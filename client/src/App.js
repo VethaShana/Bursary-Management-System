@@ -4,6 +4,7 @@ import './App.css'
 
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import { CssBaseline, Snackbar } from '@material-ui/core'
+import Alert from '@material-ui/lab/Alert'
 import theme from './utils/theme'
 
 import Landing from './pages/Landing'
@@ -12,10 +13,35 @@ import ExtendedApplication from './pages/ExtendedApplication'
 import SignIn from './pages/Dashboard/pages/SignIn'
 import SignUp from './pages/Dashboard/pages/SignUp'
 import Dashboard from './pages/Dashboard/Dashboard'
+
 import { connect } from 'react-redux'
-import Alert from '@material-ui/lab/Alert'
+import store from './store'
+import { setUser, logoutUser } from './actions/user'
+import axios from 'axios'
+import jwtDecode from 'jwt-decode'
 
 import ProtectedRoute from './components/ProtectedRoute'
+
+const setAuthToken = token => {
+	if (token) {
+		axios.defaults.headers.common['x-auth-token'] =
+			localStorage.getItem('token')
+	} else {
+		delete axios.defaults.headers.common['x-auth-token']
+	}
+}
+
+if (localStorage.token) {
+	setAuthToken(localStorage.token)
+	const decoded = jwtDecode(localStorage.token)
+	store.dispatch(setUser(decoded.user))
+
+	const currentTime = Date.now() / 1000
+	if (decoded.exp < currentTime) {
+		store.dispatch(logoutUser())
+		window.location.href = '/'
+	}
+}
 
 const handleClose = (event, reason) => {
 	if (reason === 'clickaway') {

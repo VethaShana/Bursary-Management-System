@@ -3,19 +3,18 @@ import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 const mapStateToProps = state => ({
-	user: state.user.data,
+	isAuthenticated: state.user.isAuthenticated,
 	isLoading: state.user.isLoading
 })
 
 const mapDispatchToProps = {}
 
-const ProtectedRoute = ({ component: Component, user, ...rest }) => {
-	console.log(user)
+const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest }) => {
 	return (
 		<Route
 			{...rest}
 			render={props => {
-				return user ? (
+				return isAuthenticated ? (
 					<Component {...props} />
 				) : (
 					<Redirect
