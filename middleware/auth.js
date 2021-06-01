@@ -10,10 +10,7 @@ export default (...roles) => {
 				.json({ error: 'Access denied, token missing!' })
 		} else {
 			try {
-				const payload = jwt.verify(
-					token,
-					process.env.ACCESS_TOKEN_SECRET
-				)
+				const payload = jwt.verify(token, process.env.JWT_SECRET)
 				if (roles && !roles.includes(payload.user.role)) {
 					res.status(403).json({ message: 'Forbidden' })
 				} else {
