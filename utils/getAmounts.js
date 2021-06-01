@@ -5,8 +5,8 @@ export default data => {
 		spouse: {
 			employment: { salary: spouseSalary }
 		},
-		siblingsUnder19,
-		siblingsAtUniversity,
+		siblingsUnder19 = [],
+		siblingsAtUniversity = [],
 		father,
 		mother,
 		guardian

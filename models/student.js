@@ -83,13 +83,13 @@ const studentSchema = mongoose.Schema({
 				type: Date,
 				required: true
 			},
-			school: {
+			schoolOrInstitute: {
 				type: String,
 				required: true
 			}
 		}
 	],
-	siblingsUniversity: [
+	siblingsAtUniversity: [
 		{
 			name: {
 				type: String,
