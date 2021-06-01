@@ -23,13 +23,13 @@ export const districts = [
 	'Monaragala',
 	'Hambantota',
 	'Matara',
-	'Galle',
+	'Galle'
 ]
 
 export const GSDivisions = [
 	{
 		division: 'Pahathadumbara',
-		divisionNo: '#GS10119',
+		divisionNo: '#GS10119'
 
 		/*
 //Batticaloa
@@ -1560,7 +1560,7 @@ Verugalmugaththuwaram	214E
 
 //Thoppur
 */
-	},
+	}
 ]
 
 export const DSDivisions = [
@@ -1585,8 +1585,8 @@ export const DSDivisions = [
 			'Sainthamarathu',
 			'Sammanthurai',
 			'Thirukkovil',
-			'Uhana',
-		],
+			'Uhana'
+		]
 	},
 
 	{
@@ -1613,8 +1613,8 @@ export const DSDivisions = [
 			'Rambewa',
 			'Thalawa',
 			'Thambuttegama',
-			'Thirappane',
-		],
+			'Thirappane'
+		]
 	},
 	{
 		district: 'Badulla',
@@ -1633,8 +1633,8 @@ export const DSDivisions = [
 			'Rideemaliyadda',
 			'Soranathota',
 			'Uva-Paranagama',
-			'Welimada',
-		],
+			'Welimada'
+		]
 	},
 	{
 		district: 'Batticaloa',
@@ -1652,8 +1652,8 @@ export const DSDivisions = [
 			'Manmunai South & Eruvil Pattu',
 			'Manmunai South West',
 			'Manmunai West',
-			'Porativu Pattu',
-		],
+			'Porativu Pattu'
+		]
 	},
 	{
 		district: 'Colombo',
@@ -1670,8 +1670,8 @@ export const DSDivisions = [
 			'Ratmalana',
 			'Seethawaka (Hanwella)',
 			'Sri Jayawardanapura Kotte',
-			'Thimbirigasyaya',
-		],
+			'Thimbirigasyaya'
+		]
 	},
 	{
 		district: 'Galle',
@@ -1694,8 +1694,8 @@ export const DSDivisions = [
 			'Niyagama',
 			'Thawalama',
 			'Welivitiya-Divithura',
-			'Yakkalamulla',
-		],
+			'Yakkalamulla'
+		]
 	},
 	{
 		district: 'Gampaha',
@@ -1712,8 +1712,8 @@ export const DSDivisions = [
 			'Minuwangoda',
 			'Mirigama',
 			'Negombo',
-			'Wattala',
-		],
+			'Wattala'
+		]
 	},
 	{
 		district: 'Hambantota',
@@ -1729,8 +1729,8 @@ export const DSDivisions = [
 			'Tangalle',
 			'Thissamaharama',
 			'Walasmulla',
-			'Weeraketiya',
-		],
+			'Weeraketiya'
+		]
 	},
 	{
 		district: 'Jaffna',
@@ -1749,8 +1749,8 @@ export const DSDivisions = [
 			'Valikamam North (Tellippalai)',
 			'Valikamam South (Uduvil)',
 			'Valikamam South-West (Sandilipay)',
-			'Valikamam West (Chankanai)',
-		],
+			'Valikamam West (Chankanai)'
+		]
 	},
 	{
 		district: 'Kalutara',
@@ -1768,8 +1768,8 @@ export const DSDivisions = [
 			'Millaniya',
 			'Palindanuwara',
 			'Panadura',
-			'Walallavita',
-		],
+			'Walallavita'
+		]
 	},
 	{
 		district: 'Kandy',
@@ -1793,8 +1793,8 @@ export const DSDivisions = [
 			'Udadumbara',
 			'Udapalatha',
 			'Udunuwara',
-			'Yatinuwara',
-		],
+			'Yatinuwara'
+		]
 	},
 
 	{
@@ -1810,13 +1810,13 @@ export const DSDivisions = [
 			'Rambukkana',
 			'Ruwanwella',
 			'Warakapola',
-			'Yatiyanthota',
-		],
+			'Yatiyanthota'
+		]
 	},
 
 	{
 		district: 'Kilinochchi',
-		division: ['Kandavalai', 'Karachchi', 'Pachchilaipalli', 'Poonakary'],
+		division: ['Kandavalai', 'Karachchi', 'Pachchilaipalli', 'Poonakary']
 	},
 
 	{
@@ -1851,13 +1851,19 @@ export const DSDivisions = [
 			'Rideegama',
 			'Udubaddawa',
 			'Wariyapola',
-			'Weerambugedara',
-		],
+			'Weerambugedara'
+		]
 	},
 
 	{
 		district: 'Mannar',
-		division: ['Madhu', 'Mannar Town', 'Manthai West', 'Musalai', 'Nanaddan'],
+		division: [
+			'Madhu',
+			'Mannar Town',
+			'Manthai West',
+			'Musalai',
+			'Nanaddan'
+		]
 	},
 
 	{
@@ -1873,8 +1879,8 @@ export const DSDivisions = [
 			'Rattota',
 			'Ukuwela',
 			'Wilgamuwa',
-			'Yatawatta',
-		],
+			'Yatawatta'
+		]
 	},
 
 	{
@@ -1895,8 +1901,8 @@ export const DSDivisions = [
 			'Pitabeddara',
 			'Thihagoda',
 			'Weligama',
-			'Welipitiya',
-		],
+			'Welipitiya'
+		]
 	},
 
 	{
@@ -1912,8 +1918,8 @@ export const DSDivisions = [
 			'Sevanagala',
 			'Siyambalanduwa',
 			'Thanamalvila',
-			'Wellawaya',
-		],
+			'Wellawaya'
+		]
 	},
 
 	{
@@ -1924,8 +1930,8 @@ export const DSDivisions = [
 			'Oddusuddan',
 			'Puthukudiyiruppu',
 			'Thunukkai',
-			'Welioya',
-		],
+			'Welioya'
+		]
 	},
 
 	{
@@ -1935,8 +1941,8 @@ export const DSDivisions = [
 			'Hanguranketha',
 			'Kothmale',
 			'Nuwara Eliya',
-			'Walapane',
-		],
+			'Walapane'
+		]
 	},
 
 	{
@@ -1948,8 +1954,8 @@ export const DSDivisions = [
 			'Lankapura',
 			'Medirigiriya',
 			'Thamankaduwa',
-			'Welikanda',
-		],
+			'Welikanda'
+		]
 	},
 
 	{
@@ -1970,8 +1976,8 @@ export const DSDivisions = [
 			'Pallama',
 			'Puttalam',
 			'Vanathavilluwa',
-			'Wennappuwa',
-		],
+			'Wennappuwa'
+		]
 	},
 
 	{
@@ -1993,8 +1999,8 @@ export const DSDivisions = [
 			'Opanayaka',
 			'Pelmadulla',
 			'Ratnapura',
-			'Weligepola',
-		],
+			'Weligepola'
+		]
 	},
 
 	{
@@ -2010,8 +2016,8 @@ export const DSDivisions = [
 			'Seruvila',
 			'Thambalagamuwa',
 			'Trincomalee Town and Gravets',
-			'Verugal (Echchilampattai)',
-		],
+			'Verugal (Echchilampattai)'
+		]
 	},
 
 	{
@@ -2020,9 +2026,9 @@ export const DSDivisions = [
 			'Vavuniya',
 			'Vavuniya North',
 			'Vavuniya South',
-			'Vengalacheddikulam',
-		],
-	},
+			'Vengalacheddikulam'
+		]
+	}
 ]
 
 export const administrativeDistricts = [
@@ -2050,13 +2056,13 @@ export const administrativeDistricts = [
 	'Monaragala',
 	'Hambantota',
 	'Matara',
-	'Galle',
+	'Galle'
 ]
 
 export const courses = [
 	'Computer Science',
 	'Biological Science',
-	'Physical Science',
+	'Physical Science'
 ]
 
 export const faculties = ['Science', 'Arts', 'Law']

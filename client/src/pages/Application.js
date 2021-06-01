@@ -16,9 +16,11 @@ import {
 	FormLabel,
 	useMediaQuery
 } from '@material-ui/core'
-import Alert from '@material-ui/lab/Alert'
-import { Formik, Form, Field } from 'formik'
+import { connect } from 'react-redux'
+import axios from 'axios'
 import * as yup from 'yup'
+import { Formik, Form, Field } from 'formik'
+import Alert from '@material-ui/lab/Alert'
 import { TextField, Checkbox } from 'formik-material-ui'
 import { KeyboardDatePicker } from 'formik-material-ui-pickers'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
@@ -205,13 +207,19 @@ const validationSchema = yup.object({
 		.oneOf(districts, 'Invalid district')
 		.required('This field is required'),
 	gsDivision: yup.string().when('district', (value, schema) => {
-		return yup
-			.string()
-			.oneOf(
-				DSDivisions.find(({ district }) => district === value).division,
-				'Invalid G. S. Division'
-			)
-			.required('This field is required')
+		return value === 'N/A'
+			? yup
+					.string()
+					.notOneOf(['N/A'], 'Invalid G. S. Division')
+					.required('This field is required')
+			: yup
+					.string()
+					.oneOf(
+						DSDivisions.find(({ district }) => district === value)
+							.division,
+						'Invalid G. S. Division'
+					)
+					.required('This field is required')
 	}),
 	email: yup.string().email('Invalid email').required('Email is required'),
 	course: yup
@@ -407,8 +415,17 @@ const validationSchema = yup.object({
 	})
 })
 
-const onSubmit = (values, { setSubmitting }) => {
-	alert(values)
+const onSubmit = async values => {
+	localStorage.setItem('application', JSON.stringify(values))
+	axios
+		.post('/students', values)
+		.then(res => {
+			console.log(res)
+			localStorage.removeItem('application')
+		})
+		.catch(err => {
+			console.log(err)
+		})
 }
 
 function Application() {
@@ -478,7 +495,10 @@ function Application() {
 				</Grid>
 
 				<Formik
-					initialValues={initialValues}
+					initialValues={
+						JSON.parse(localStorage.getItem('application')) ||
+						initialValues
+					}
 					validationSchema={validationSchema}
 					onSubmit={onSubmit}
 				>
@@ -487,6 +507,7 @@ function Application() {
 						isSubmitting,
 						touched,
 						errors,
+						setFieldValue,
 						values
 					}) => (
 						<MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -1554,4 +1575,8 @@ function Application() {
 	)
 }
 
-export default Application
+const mapStateToProps = state => ({
+	user: state.user.data
+})
+
+export default connect(mapStateToProps, null)(Application)
