@@ -8,6 +8,8 @@ export const LOGIN_USER = 'LOGIN_USER'
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'
 export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE'
 
+export const LOGOUT_USER = 'LOGOUT_USER'
+
 export const CLEAR_USER_ERROR = 'CLEAR_USER_ERROR'
 
 export const CLEAR_USER = 'CLEAR_USER'

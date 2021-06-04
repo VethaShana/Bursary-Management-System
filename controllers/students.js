@@ -99,7 +99,9 @@ export const updateStudent = async (req, res) => {
 	}
 }
 
-export const PDFStudent = async (req, res) => {
+export const createPDF = async (req, res) => {
+	const userId =
+		req.user.role === 'student' ? req.user._id : req.params.userId
 	const pdfDoc = pdfMake.createPdf(getDocDefinition('application', req.body))
 
 	pdfDoc.getBase64(data => {
@@ -111,8 +113,6 @@ export const PDFStudent = async (req, res) => {
 		const download = Buffer.from(data.toString('utf-8'), 'base64')
 		res.end(download)
 	})
-
-	console.log('sucessfully Done!')
 }
 
 export const getInstallments = async (req, res) => {

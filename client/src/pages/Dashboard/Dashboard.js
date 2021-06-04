@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
@@ -27,6 +27,8 @@ import PendingApplications from './components/PendingApplications'
 import Card from './components/Card'
 import Chart from './components/Chart'
 import Title from './components/Title'
+
+import Menu from './components/Menu'
 
 // redux
 import { connect } from 'react-redux'
@@ -115,8 +117,10 @@ const useStyles = makeStyles(theme => ({
 		height: 240
 	}
 }))
+
 function Dashboard({ user, getStudents }) {
 	const classes = useStyles()
+	const menuRef = useRef(null)
 	const [open, setOpen] = React.useState(true)
 	const handleDrawerOpen = () => {
 		setOpen(true)
@@ -159,9 +163,13 @@ function Dashboard({ user, getStudents }) {
 					>
 						Dashboard
 					</Typography>
-					<IconButton color="inherit">
+					<IconButton
+						color="inherit"
+						onClick={e => menuRef.current.handleClick(e)}
+					>
 						<AccountCircleIcon fontSize="default" />
 					</IconButton>
+					<Menu ref={menuRef} />
 				</Toolbar>
 			</AppBar>
 			<Drawer
@@ -196,7 +204,7 @@ function Dashboard({ user, getStudents }) {
 							<Grid container spacing={3}>
 								<Grid item xs={12}>
 									<Title
-										title={`Hi! ${user.name}`}
+										title={`Hi! ${user.firstName} ${user.lastName}`}
 										description="Welcome Back to the Dashboard"
 									/>
 								</Grid>

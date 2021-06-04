@@ -7,12 +7,13 @@ import {
 	LOGIN_USER_SUCCESS,
 	LOGIN_USER_FAILURE,
 	SET_USER,
-	CLEAR_USER
+	CLEAR_USER,
+	LOGOUT_USER
 } from '../actions/types'
 
 const initialState = {
 	data: {
-		_id: null,
+		id: null,
 		email: null,
 		role: null
 	},
@@ -65,7 +66,13 @@ export function user(state = initialState, action) {
 			return {
 				...state,
 				isAuthenticated: false,
-				user: { _id: null, email: null, role: null }
+				data: { _id: null, email: null, role: null }
+			}
+		case LOGOUT_USER:
+			return {
+				...state,
+				isAuthenticated: false,
+				data: { _id: null, email: null, role: null }
 			}
 		default:
 			return state

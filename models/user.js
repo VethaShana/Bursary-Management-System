@@ -11,12 +11,33 @@ const userSchema = mongoose.Schema({
 		unique: true
 	},
 
+	regNo: {
+		type: String,
+		trim: true,
+		unique: true
+	},
+
+	firstName: {
+		type: String,
+		trim: true
+	},
+
+	lastName: {
+		type: String,
+		trim: true
+	},
+
 	password: {
 		type: String,
 		required: true
 	},
 
 	isVerified: {
+		type: Boolean,
+		default: false
+	},
+
+	isApproved: {
 		type: Boolean,
 		default: false
 	},
@@ -41,12 +62,26 @@ userSchema.pre('save', async function (next) {
 
 userSchema.methods.createToken = async function () {
 	try {
-		const { _id, email, role } = this
-		const accessToken = jwt.sign(
-			{ user: { _id, email, role } },
-			process.env.JWT_SECRET,
-			{ expiresIn: '1w' }
-		)
+		let user = {}
+		if (this.role === 'student')
+			user = {
+				id: this._id,
+				email: this.email,
+				role: this.role
+			}
+		else
+			user = {
+				id: this._id,
+				email: this.email,
+				firstName: this.firstName,
+				lastName: this.lastName,
+				role: this.role,
+				isApproved: this.isApproved
+			}
+
+		const accessToken = jwt.sign({ user }, process.env.JWT_SECRET, {
+			expiresIn: '1w'
+		})
 		return accessToken
 	} catch (err) {
 		console.log(err)

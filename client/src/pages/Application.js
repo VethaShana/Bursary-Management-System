@@ -226,11 +226,11 @@ const validationSchema = yup.object().shape({
 		.required('Select a title'),
 	nameWithInitials: yup
 		.string()
-		.min(2, 'Too Short.')
+		.min(2, 'Too Short')
 		.required('This field is required'),
 	fullName: yup
 		.string()
-		.min(2, 'Too Short.')
+		.min(2, 'Too Short')
 		.required('This field is required'),
 	street: yup.string().required('This field is required'),
 	city: yup.string().required('This field is required'),
@@ -452,7 +452,7 @@ const validationSchema = yup.object().shape({
 			yup.object().shape({
 				name: yup
 					.string()
-					.min(2, 'Too Short.')
+					.min(2, 'Too Short')
 					.required('Name is required'),
 				dob: yup
 					.date()
@@ -476,7 +476,7 @@ const validationSchema = yup.object().shape({
 			yup.object().shape({
 				name: yup
 					.string()
-					.min(2, 'Too Short.')
+					.min(2, 'Too Short')
 					.required('Name is required'),
 				regNo: yup.string().required('Registration No. is required'),
 				institute: yup.string().required('Institute is required'),
@@ -499,7 +499,7 @@ const validationSchema = yup.object().shape({
 			yup.object().shape({
 				name: yup
 					.string()
-					.min(2, 'Too Short.')
+					.min(2, 'Too Short')
 					.required('Name is required'),
 				relationship: yup.string().required('Relationship is required'),
 				assessmentNo: yup
@@ -622,14 +622,7 @@ function Application() {
 					validationSchema={validationSchema}
 					onSubmit={onSubmit}
 				>
-					{({
-						submitForm,
-						isSubmitting,
-						touched,
-						errors,
-						setFieldValue,
-						values
-					}) => (
+					{({ submitForm, isSubmitting, values }) => (
 						<MuiPickersUtilsProvider utils={DateFnsUtils}>
 							<Form>
 								<Grid
@@ -1723,7 +1716,7 @@ function Application() {
 												color="initial"
 												style={{ fontWeight: '500' }}
 											>
-												Income from property( Estate /
+												Income from property ( Estate /
 												Fields / Lands )
 											</Typography>
 										</Grid>

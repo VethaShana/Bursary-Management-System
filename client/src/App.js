@@ -10,27 +10,16 @@ import theme from './utils/theme'
 import Landing from './pages/Landing'
 import Application from './pages/Application'
 import ExtendedApplication from './pages/ExtendedApplication'
-import SignIn from './pages/Dashboard/pages/SignIn'
-import SignUp from './pages/Dashboard/pages/SignUp'
-import Dashboard from './pages/Dashboard/Dashboard'
+import Dashboard from './pages/Dashboard'
 
 import { connect } from 'react-redux'
 import store from './store'
 import { setUser, logoutUser } from './actions/user'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
-import ROLES from './utils/roles'
+import { setAuthToken } from './utils/token'
 
 import ProtectedRoute from './components/ProtectedRoute'
-
-const setAuthToken = token => {
-	if (token) {
-		axios.defaults.headers.common['x-auth-token'] =
-			localStorage.getItem('token')
-	} else {
-		delete axios.defaults.headers.common['x-auth-token']
-	}
-}
 
 if (localStorage.token) {
 	setAuthToken(localStorage.token)
@@ -56,23 +45,12 @@ function App({ error }) {
 			<CssBaseline />
 			<Switch>
 				<Route exact path="/" component={Landing} />
-				<ProtectedRoute
-					path="/application"
-					role={[ROLES.STUDENT]}
-					component={Application}
-				/>
+				<ProtectedRoute path="/application" component={Application} />
 				<ProtectedRoute
 					path="/extended-application"
 					component={ExtendedApplication}
-					role={[ROLES.STUDENT]}
 				/>
-				<Route path="/dashboard/sign-in" component={SignIn} />
-				<Route path="/dashboard/sign-up" component={SignUp} />
-				<ProtectedRoute
-					path="/dashboard"
-					role={[ROLES.ADMIN, ROLES.DEAN]}
-					component={Dashboard}
-				/>
+				<Route path="/dashboard" component={Dashboard} />
 				<Route path="*" component={() => '404 NOT FOUND'} />
 			</Switch>
 			<Snackbar

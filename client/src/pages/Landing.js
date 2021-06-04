@@ -29,7 +29,8 @@ import { Close as CloseIcon } from '@material-ui/icons'
 import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { logoutUser } from '../actions/user'
 
 const Snackbar = ({ handleClick }) => {
 	const [open, setOpen] = useState(true)
@@ -118,6 +119,7 @@ const helpMail = 'help@welfare.jfn.ac.lk'
 
 function Landing({ history }) {
 	const isAuthenticated = useSelector(state => state.user.isAuthenticated)
+	const dispatch = useDispatch()
 	const classes = useStyles()
 	const [authView, setAuthView] = useState('register')
 
@@ -242,6 +244,7 @@ function Landing({ history }) {
 										// endIcon={<ArrowRightAltOutlinedIcon />}
 										variant="contained"
 										size={'small'}
+										onClick={e => dispatch(logoutUser())}
 									>
 										Log Out
 									</Button>

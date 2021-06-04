@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import { connect } from 'react-redux'
-import { registerUser } from '../actions/user'
+import { registerStudent } from '../actions/user'
 import { useHistory } from 'react-router-dom'
 import * as yup from 'yup'
 
@@ -54,7 +54,6 @@ const validationSchema = yup.object({
 		.oneOf([yup.ref('password'), null], 'Password does not match')
 		.required('Confirm your password')
 })
-
 const onSubmit = (action, history) => values => {
 	action(values, history)
 }
@@ -64,7 +63,7 @@ function Register({
 	onAuthViewChange,
 	error,
 	isLoading,
-	registerUser,
+	registerStudent,
 	...props
 }) {
 	const classes = useStyles()
@@ -72,7 +71,7 @@ function Register({
 	const formik = useFormik({
 		initialValues,
 		validationSchema,
-		onSubmit: onSubmit(registerUser, history)
+		onSubmit: onSubmit(registerStudent, history)
 	})
 
 	const handleClick = e => {
@@ -226,6 +225,6 @@ const mapStateToProps = state => ({
 	error: state.user.error
 })
 
-const mapDispatchToProps = { registerUser }
+const mapDispatchToProps = { registerStudent }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register)

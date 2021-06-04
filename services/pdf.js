@@ -43,7 +43,6 @@ const applicationDocDefinition = data => {
 		`${sib.isBursaryRecipient}`
 	])
 
-	console.log(incomeFromEstateFieldsLands)
 	const rows2 = incomeFromEstateFieldsLands.map(income => [
 		`${income.name}`,
 		`${income.relationship}`,

@@ -7,10 +7,12 @@ import {
 	LOGIN_USER,
 	LOGIN_USER_SUCCESS,
 	LOGIN_USER_FAILURE,
+	LOGOUT_USER,
 	CLEAR_USER_ERROR,
 	CLEAR_USER
 } from './types'
-import ROLES from '../utils/roles'
+import jwtDecode from 'jwt-decode'
+import { setAuthToken } from '../utils/token'
 
 export const setUser = data => {
 	return {
@@ -19,22 +21,50 @@ export const setUser = data => {
 	}
 }
 
-export const registerUser =
+export const registerStudent =
 	(data, history, formikHelpers) => async (dispatch, getState) => {
 		dispatch({
 			type: REGISTER_USER
 		})
 		return await axios
 			.post('/auth/register', data)
-			.then(({ data: { _id, email, role, token } }) => {
+			.then(({ data: { token } }) => {
 				localStorage.setItem('token', token)
+				const decoded = jwtDecode(token)
+				setAuthToken(token)
 				dispatch({
 					type: REGISTER_USER_SUCCESS,
-					payload: { _id, email, role }
+					payload: decoded.user
 				})
-				role === ROLES.STUDENT
-					? history.push('/application')
-					: history.push('/dashboard')
+			})
+			.catch(err => {
+				dispatch({
+					type: REGISTER_USER_FAILURE,
+					payload: {
+						status: err.response.status,
+						msg: err.response.data.error
+					}
+				})
+				setTimeout(() => {
+					dispatch({ type: CLEAR_USER_ERROR })
+				}, 6000)
+			})
+	}
+
+export const registerUser =
+	(data, history, formikHelpers) => async (dispatch, getState) => {
+		dispatch({
+			type: REGISTER_USER
+		})
+		return await axios
+			.post('/auth/register?role=dean', data)
+			.then(({ data: { token } }) => {
+				localStorage.setItem('token', token)
+				const decoded = jwtDecode(token)
+				dispatch({
+					type: REGISTER_USER_SUCCESS,
+					payload: decoded.user
+				})
 			})
 			.catch(err => {
 				dispatch({
@@ -57,15 +87,15 @@ export const loginUser =
 		})
 		return await axios
 			.post('/auth/login', data)
-			.then(({ data: { _id, email, role, token } }) => {
+			.then(({ data: { token } }) => {
 				localStorage.setItem('token', token)
+				console.log(token)
+				setAuthToken(token)
+				const decoded = jwtDecode(token)
 				dispatch({
 					type: LOGIN_USER_SUCCESS,
-					payload: { _id, email, role }
+					payload: decoded.user
 				})
-				role === ROLES.STUDENT
-					? history.push('/application')
-					: history.push('/dashboard')
 			})
 			.catch(err => {
 				dispatch({
@@ -83,8 +113,8 @@ export const loginUser =
 
 export const logoutUser = () => dispatch => {
 	localStorage.removeItem('token')
-	delete axios.defaults.headers.common['x-auth-token']
+	setAuthToken(false)
 	dispatch({
-		type: CLEAR_USER
+		type: LOGOUT_USER
 	})
 }

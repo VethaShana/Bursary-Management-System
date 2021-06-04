@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 const ProtectedRoute = ({
 	component: Component,
 	isAuthenticated,
+	isApproved,
 	role,
 	user,
 	...rest
@@ -13,11 +14,16 @@ const ProtectedRoute = ({
 		<Route
 			{...rest}
 			render={props => {
-				return isAuthenticated && role === 'student' ? (
+				return isAuthenticated &&
+					isApproved &&
+					(role === 'admin' || role === 'dean') ? (
 					<Component {...props} />
 				) : (
 					<Redirect
-						to={{ pathname: '/', state: { from: props.location } }}
+						to={{
+							pathname: '/dashboard/sign-up',
+							state: { from: props.location }
+						}}
 					/>
 				)
 			}}
@@ -28,6 +34,7 @@ const ProtectedRoute = ({
 const mapStateToProps = state => ({
 	role: state.user.data.role,
 	isAuthenticated: state.user.isAuthenticated,
+	isApproved: state.user.data.isApproved,
 	isLoading: state.user.isLoading
 })
 
