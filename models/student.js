@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import { titles } from '../utils/data.js'
-import studentValidationSchema from '../studentValidation.js'
+//import studentValidationSchema from '../studentValidation.js'
 
 const studentSchema = mongoose.Schema({
 	userId: {

@@ -11,7 +11,6 @@ export default (...roles) => {
 		} else {
 			try {
 				const payload = jwt.verify(token, process.env.JWT_SECRET)
-				console.log(payload)
 				if (roles && !roles.includes(payload.user.role)) {
 					res.status(403).json({ message: 'Forbidden' })
 				} else {

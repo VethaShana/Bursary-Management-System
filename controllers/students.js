@@ -12,10 +12,17 @@ import { getDocDefinition } from '../services/summary1.js'
 
 pdfMake.vfs = PDF_Fonts.pdfMake.vfs
 
+//@route GET /students/
 export const getStudents = async (req, res) => {
 	try {
-		const student = await Student.find()
-		res.status(200).json(student)
+		const { query } = req
+		let students = []
+		if (query) {
+			students = await Student.find(query)
+		} else {
+			students = await Student.find()
+		}
+		res.status(200).json(students)
 	} catch (error) {
 		res.status(400).json({ message: error.message })
 	}
@@ -54,7 +61,7 @@ export const createStudent = async (req, res, next) => {
 			sendMail({
 				to: email,
 				subject: 'Bursary Application',
-				text: 'some text',
+				text: 'Thank you for applying for Bursary Fund. Please carefully read the instructions given in the email attachment.',
 				attachments: {
 					filename: `Bursary Applicatoin - ${fullName}.pdf`,
 					content: download

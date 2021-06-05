@@ -258,7 +258,8 @@ const applicationDocDefinition = data => {
 				columns: [
 					marriage,
 					[
-						{ text: `\n\n\n\n\n` },
+						{ text: `\n\n` },
+						//{ text: `\n${marriage}` },
 						//...spouse.map(marry => [
 						{ text: `\n${spouse.dateOfMarriage}` },
 						{ text: `\n${spouse.name}` },
