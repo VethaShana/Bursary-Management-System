@@ -28,61 +28,71 @@ export const districts = [
 
 export const GSDivisions = [
 	{
+<<<<<<< HEAD
 		division: 'Pahathadumbara',
 		divisionNo: '#GS10119'
 
 		/*
+=======
+		DSDivision: 'Manmunai North',
+		divisions: [
+			'Amirthakali',
+			'Arasady',
+			'Barathypuram',
+			'Datch Bar',
+			'Gnasooriyam Squre',
+			'Iruthayapuram Central',
+			'Iruthayapuram East',
+			'Iruthayapuram West',
+			'Jayanthipuram',
+			'Kallady',
+			'Kallady Mugathuvaram',
+			'Kallady Uppodai',
+			'Kallady Veloor',
+			'Karuweppankeney',
+			'Koddamunai',
+			'Kokkuvil',
+			'Koolavadi East',
+			'Koolavady',
+			'Mamagam',
+			'Manjanthoduvai North',
+			'Manjanthoduvai South',
+			'Navalady',
+			'Navatkudah',
+			'Navatkudah East',
+			'Navatkudah South',
+			'Nochchimunai',
+			'Palameenmadu',
+			'Panichchayadi',
+			'Periya Uppodai',
+			'Periya Urani',
+			'Puliyanthivu Central',
+			'Puliyanthivu East',
+			'Puliyanthivu South',
+			'Puliyanthivu West',
+			'Punnachcholai',
+			'Puthunagar',
+			'Saththurukondan',
+			'Sethukudah',
+			'Sinna Urane',
+			'Thamaraikerny',
+			'Thandavanvely',
+			'Thimilathivu',
+			'Thiraimadu',
+			'Thiruchchenthur',
+			'Thirupperunthurai',
+			'Thissaveerasingam Squre',
+			'Veddukkadu',
+			'Veechikalmunai'
+		]
+	},
+	{
+		DSDivision: ''
+	}
+]
+/*
+>>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 //Batticaloa
-//Manmunai north
-
-Amirthakali 173
-Arasady 177A
-Barathypuram 173H
-Datch Bar 172C
-Gnasooriyam Squre 173B
-Iruthayapuram Central 176H
-Iruthayapuram East 173B
-Iruthayapuram West 176E
-Jayanthipuram 177G
-Kallady 171
-Kallady Mugathuvaram 172A
-Kallady Uppodai 171B
-Kallady Veloor 171A
-Karuweppankeney 176B
-Koddamunai 178
-Kokkuvil 176
-Koolavadi East 173I
-Koolavady 173F
-Mamagam 173A
-Manjanthoduvai North 168
-Manjanthoduvai South 168A
-Navalady 172
-Navatkudah 168B
-Navatkudah East 168C
-Navatkudah South 168D
-Nochchimunai 171C
-Palameenmadu 173C
-Panichchayadi 176D
-Periya Uppodai 178A
-Periya Urani 176C
-Puliyanthivu Central 179B
-Puliyanthivu East 179A
-Puliyanthivu South 179C
-Puliyanthivu West 179
-Punnachcholai 173D
-Puthunagar 181C
-Saththurukondan 176A
-Sethukudah 181D
-Sinna Urane 176F
-Thamaraikerny 177B
-Thandavanvely 177
-Thimilathivu 181
-Thiraimadu 173E
-Thiruchchenthur 172B
-Thirupperunthurai 181A
-Thissaveerasingam Squre 173J
-Veddukkadu 173K
-Veechikalmunai 181B
 
 
 //Koralai pattu North
@@ -1560,8 +1570,11 @@ Verugalmugaththuwaram	214E
 
 //Thoppur
 */
+<<<<<<< HEAD
 	}
 ]
+=======
+>>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 
 export const DSDivisions = [
 	{

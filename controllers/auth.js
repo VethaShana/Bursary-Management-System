@@ -3,16 +3,16 @@ import bcrypt from 'bcrypt'
 import ROLES from '../utils/roles.js'
 
 export const login = async (req, res) => {
-	const { email, _id, role } = req.body
+	const { email, password } = req.body
 	try {
-		let user = await User.findOne({ email })
+		const user = await User.findOne({ email })
 		if (!user) {
 			return res.status(404).json({ error: 'No user found!' })
 		} else {
-			let valid = await bcrypt.compare(req.body.password, user.password)
+			let valid = await bcrypt.compare(password, user.password)
 			if (valid) {
-				let token = await user.createToken()
-				return res.status(201).json({ _id, email, role, token })
+				const token = await user.createToken()
+				return res.status(201).json({ token })
 			} else {
 				return res.status(401).json({ error: 'Invalid password!' })
 			}
@@ -24,7 +24,7 @@ export const login = async (req, res) => {
 }
 
 export const register = async (req, res) => {
-	const { email, password } = req.body
+	const { email, password, firstName, lastName } = req.body
 	const { query } = req
 	try {
 		let user = await User.findOne({ email })
@@ -33,10 +33,15 @@ export const register = async (req, res) => {
 		} else {
 			const role =
 				query && query.role === ROLES.DEAN ? ROLES.DEAN : ROLES.STUDENT
-			user = await new User({ email, password, role }).save()
+			user = await new User({
+				email,
+				firstName,
+				lastName,
+				password,
+				role
+			}).save()
 			const token = await user.createToken()
-			const { _id } = user
-			return res.status(201).json({ _id, email, role, token })
+			return res.status(201).json({ token })
 		}
 	} catch (err) {
 		console.error(err)

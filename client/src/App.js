@@ -3,16 +3,25 @@ import { Switch, Route } from 'react-router-dom'
 import './App.css'
 
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
+<<<<<<< HEAD
 import { CssBaseline, Snackbar } from '@material-ui/core'
+=======
+import { CssBaseline, Snackbar, LinearProgress } from '@material-ui/core'
+>>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 import Alert from '@material-ui/lab/Alert'
 import theme from './utils/theme'
 
 import Landing from './pages/Landing'
 import Application from './pages/Application'
 import ExtendedApplication from './pages/ExtendedApplication'
-import SignIn from './pages/Dashboard/pages/SignIn'
-import SignUp from './pages/Dashboard/pages/SignUp'
-import Dashboard from './pages/Dashboard/Dashboard'
+import Dashboard from './pages/Dashboard'
+import FAQ from './pages/FAQ'
+
+import { connect } from 'react-redux'
+import store from './store'
+import { setUser, logoutUser } from './actions/user'
+import jwtDecode from 'jwt-decode'
+import { setAuthToken } from './utils/token'
 
 import { connect } from 'react-redux'
 import store from './store'
@@ -23,6 +32,7 @@ import ROLES from './utils/roles'
 
 import ProtectedRoute from './components/ProtectedRoute'
 
+<<<<<<< HEAD
 const setAuthToken = token => {
 	if (token) {
 		axios.defaults.headers.common['x-auth-token'] =
@@ -32,6 +42,8 @@ const setAuthToken = token => {
 	}
 }
 
+=======
+>>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 if (localStorage.token) {
 	setAuthToken(localStorage.token)
 	const decoded = jwtDecode(localStorage.token)
@@ -56,16 +68,22 @@ function App({ error }) {
 			<CssBaseline />
 			<Switch>
 				<Route exact path="/" component={Landing} />
+<<<<<<< HEAD
 				<ProtectedRoute
 					path="/application"
 					role={[ROLES.STUDENT]}
 					component={Application}
 				/>
 				<ProtectedRoute
+=======
+				<ProtectedRoute path="/application" component={Application} />
+				<Route
+>>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 					path="/extended-application"
 					component={ExtendedApplication}
 					role={[ROLES.STUDENT]}
 				/>
+<<<<<<< HEAD
 				<Route path="/dashboard/sign-in" component={SignIn} />
 				<Route path="/dashboard/sign-up" component={SignUp} />
 				<ProtectedRoute
@@ -73,6 +91,10 @@ function App({ error }) {
 					role={[ROLES.ADMIN, ROLES.DEAN]}
 					component={Dashboard}
 				/>
+=======
+				<Route path="/faq" component={FAQ} />
+				<Route path="/dashboard" component={Dashboard} />
+>>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 				<Route path="*" component={() => '404 NOT FOUND'} />
 			</Switch>
 			<Snackbar

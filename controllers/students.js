@@ -30,13 +30,14 @@ export const getStudents = async (req, res) => {
 
 export const createStudent = async (req, res, next) => {
 	try {
-		const [netAmount, capAmount] = getAmounts(req.body)
-		const isValidCandidate = netAmount <= capAmount
+		const [netIncome, capIncome] = getAmounts(req.body)
+		console.log(netIncome, capIncome)
+		const isValidCandidate = netIncome <= capIncome
 		const newStudent = new Student({
 			...req.body,
-			userId: req.user._id,
-			netAmount,
-			capAmount,
+			userId: req.user.id,
+			netIncome: netIncome,
+			capIncome: capIncome,
 			isValidCandidate
 		})
 		await newStudent.save()
@@ -63,7 +64,7 @@ export const createStudent = async (req, res, next) => {
 				subject: 'Bursary Application',
 				text: 'Thank you for applying for Bursary Fund. Please carefully read the instructions given in the email attachment.',
 				attachments: {
-					filename: `Bursary Applicatoin - ${fullName}.pdf`,
+					filename: `Bursary Application - ${fullName}.pdf`,
 					content: download
 				}
 			})
@@ -84,8 +85,8 @@ export const deleteStudent = async (req, res) => {
 }
 
 export const updateStudent = async (req, res) => {
-	const [netAmount, capAmount] = getAmounts(req.body)
-	const isValidCandidate = netAmount <= capAmount
+	const [netIncome, capIncome] = getAmounts(req.body)
+	const isValidCandidate = netIncome <= capIncome
 
 	try {
 		const student = await Student.findByIdAndUpdate(
@@ -93,8 +94,8 @@ export const updateStudent = async (req, res) => {
 			{
 				$set: {
 					...req.body,
-					netAmount,
-					capAmount,
+					netIncome: netIncome,
+					capIncome: capIncome,
 					isValidCandidate
 				}
 			},
@@ -106,7 +107,9 @@ export const updateStudent = async (req, res) => {
 	}
 }
 
-export const PDFStudent = async (req, res) => {
+export const createPDF = async (req, res) => {
+	const userId =
+		req.user.role === 'student' ? req.user._id : req.params.userId
 	const pdfDoc = pdfMake.createPdf(getDocDefinition('application', req.body))
 
 	pdfDoc.getBase64(data => {
@@ -118,8 +121,6 @@ export const PDFStudent = async (req, res) => {
 		const download = Buffer.from(data.toString('utf-8'), 'base64')
 		res.end(download)
 	})
-
-	console.log('sucessfully Done!')
 }
 
 export const getInstallments = async (req, res) => {

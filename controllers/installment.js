@@ -27,40 +27,13 @@ export const createInstallments = async (req, res) => {
 	})
 	try {
 		await newInstallment.save().then((doc, err) => {
-			// Student.updateMany(
-			// 	{ course: stream },
-			// 	{
-			// 		$push: {
-			// 			installments: {
-			// 				installmentId: doc._id,
-			// 				noOfInstallments
-			// 			}
-			// 		}
-			// 	},
-			// 	{ multi: true }
-			// )
 			Student.updateMany(
 				{ course: stream },
-
-				// {
-				// 	$let: {
-				// 		totalInstallments: {
-				// 			$sum: '$installments.noOfInstallments'
-				// 		}
-				// 	}
-				// },
 				{
-					installments: {
-						$push: {
-							noOfInstallments: {
-								$cond: {
-									if: {
-										$gte: ['$foo', 1]
-									},
-									then: 1,
-									else: 2
-								}
-							}
+					$push: {
+						installments: {
+							installmentId: doc._id,
+							noOfInstallments
 						}
 					}
 				},

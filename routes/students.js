@@ -8,7 +8,7 @@ const router = express.Router()
 
 router.get(
 	'/',
-	auth(ROLES.ADMIN, ROLES.STUDENT),
+	auth(ROLES.ADMIN, ROLES.STUDENT, ROLES.DEAN),
 	StudentsController.getStudents
 )
 router.get(
@@ -24,6 +24,10 @@ router.post(
 )
 router.delete('/:id', auth(ROLES.ADMIN), StudentsController.deleteStudent)
 router.put('/:id', auth(ROLES.ADMIN), StudentsController.updateStudent)
-router.post('/pdf', auth(ROLES.ADMIN), StudentsController.PDFStudent)
+router.get(
+	'/pdf/:userId',
+	auth(ROLES.ADMIN, ROLES.STUDENT),
+	StudentsController.createPDF
+)
 
 export default router

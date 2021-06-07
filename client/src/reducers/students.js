@@ -2,12 +2,15 @@ import {
 	SET_STUDENTS,
 	SET_STUDENTS_LOADING,
 	SET_STUDENTS_ERRORS,
+	REMOVE_STUDENT,
+	APPROVE_STUDENT,
+	ADD_INSTALLMENT
 } from '../actions/types'
 
 const initialState = {
 	data: [],
 	isLoading: false,
-	errors: undefined,
+	errors: undefined
 }
 
 export function students(state = initialState, action) {
@@ -18,6 +21,11 @@ export function students(state = initialState, action) {
 			return { ...state, isLoading: action.payload }
 		case SET_STUDENTS_ERRORS:
 			return { ...state, errors: action.payload }
+		case REMOVE_STUDENT:
+			return {
+				...state,
+				data: state.data.filter(({ _id }) => _id !== action.payload)
+			}
 		default:
 			return state
 	}
