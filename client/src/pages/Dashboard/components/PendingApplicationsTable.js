@@ -20,53 +20,15 @@ import FilterListIcon from '@material-ui/icons/FilterList'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
-import { Box, Button, Collapse, Menu, MenuItem } from '@material-ui/core'
+import { Box, Button, Collapse, Grid, Menu, MenuItem } from '@material-ui/core'
 import Skeleton from '@material-ui/lab/Skeleton'
-import { connect } from 'react-redux'
-import { getStudents } from '../../../actions/students'
-
-const rows = [
-	{
-		regNo: '2017/CSC/045',
-		nic: '961803420V',
-		name: 'Ardil Mohamed',
-		district: 'Kandy',
-		faculty: 'Computer Science',
-		grossIncome: 120000
-	},
-	{
-		regNo: '2017/MMA/025',
-		nic: '951202420V',
-		name: 'Sarath Piyasena',
-		district: 'Colombo',
-		faculty: 'Physical Science',
-		grossIncome: 180000
-	},
-	{
-		regNo: '2017/A/012',
-		nic: '941202420V',
-		name: 'John Banda',
-		district: 'Anuradhapura',
-		faculty: 'Biological Science',
-		grossIncome: 210000
-	},
-	{
-		regNo: '2017/CSC/025',
-		nic: '941202420V',
-		name: 'Sanasta',
-		district: 'Ratnapura',
-		faculty: 'Computer Science',
-		grossIncome: 350000
-	},
-	{
-		regNo: '2017/MMA/015',
-		nic: '952202420V',
-		name: 'John Keells',
-		district: 'Kandy',
-		faculty: 'Physical Science',
-		grossIncome: 192000
-	}
-]
+import { connect, useDispatch } from 'react-redux'
+import {
+	getStudents,
+	deleteStudent,
+	approveStudent,
+	disApproveStudent
+} from '../../../actions/students'
 
 const mapStateToProps = state => ({
 	students: state.students.data,
@@ -117,7 +79,7 @@ const headCells = [
 		skeleton: true
 	},
 	{
-		id: 'name',
+		id: 'nameWithInitials',
 		numeric: false,
 		disablePadding: false,
 		label: 'Name with Initials',
@@ -138,10 +100,17 @@ const headCells = [
 		skeleton: true
 	},
 	{
-		id: 'grossIncome',
+		id: 'netIncome',
 		numeric: true,
 		disablePadding: false,
-		label: 'Gross Income',
+		label: 'Net Income',
+		skeleton: true
+	},
+	{
+		id: 'status',
+		numeric: true,
+		disablePadding: false,
+		label: 'Status',
 		skeleton: true
 	}
 ]
@@ -296,9 +265,11 @@ const useContextMenuStyles = makeStyles(theme => ({
 	}
 }))
 
-const ContextMenu = () => {
+const ContextMenu = ({ id }) => {
 	const classes = useContextMenuStyles()
 	const [anchorEl, setAnchorEl] = React.useState(null)
+	const dispatch = useDispatch()
+	console.log(id)
 
 	const handleClick = event => {
 		setAnchorEl(event.currentTarget)
@@ -325,14 +296,17 @@ const ContextMenu = () => {
 				anchorEl={anchorEl}
 				keepMounted
 				open={Boolean(anchorEl)}
-				onClose={handleClose}
+				onClose={handleClick}
 			>
 				<MenuItem dense onClick={handleClose}>
 					Edit
 				</MenuItem>
 				<MenuItem
 					dense
-					onClick={handleClose}
+					onClick={e => {
+						dispatch(deleteStudent(id))
+						handleClick(e)
+					}}
 					className={classes.delete}
 				>
 					Delete
@@ -358,7 +332,8 @@ const Row = props => {
 	const classes = useRowStyles()
 	const { row, isItemSelected, labelId, handleClick } = props
 	const [open, setOpen] = React.useState(false)
-
+	const dispatch = useDispatch()
+	console.log(row)
 	return (
 		<React.Fragment>
 			<TableRow
@@ -399,12 +374,33 @@ const Row = props => {
 					{row.regNo}
 				</TableCell>
 				<TableCell align="left">{row.nic}</TableCell>
-				<TableCell align="left">{row.name}</TableCell>
+				<TableCell align="left">{row.nameWithInitials}</TableCell>
 				<TableCell align="left">{row.district}</TableCell>
 				<TableCell align="left">{row.faculty}</TableCell>
-				<TableCell align="right">{row.grossIncome}</TableCell>
+				<TableCell align="right">Rs. {row.netIncome}</TableCell>
 				<TableCell align="right">
-					<ContextMenu />
+					{row.isApproved ? (
+						<Button
+							color="secondary"
+							size="small"
+							variant="contained"
+							onClick={() => dispatch(disApproveStudent(row._id))}
+						>
+							Approved
+						</Button>
+					) : (
+						<Button
+							color="secondary"
+							size="small"
+							variant="contained"
+							onClick={() => dispatch(approveStudent(row._id))}
+						>
+							Approve
+						</Button>
+					)}
+				</TableCell>
+				<TableCell align="right">
+					<ContextMenu id={row._id} />
 				</TableCell>
 			</TableRow>
 			<TableRow>
@@ -414,7 +410,7 @@ const Row = props => {
 				></TableCell>
 				<TableCell
 					style={{ paddingBottom: 0, paddingTop: 0 }}
-					colSpan={6}
+					colSpan={7}
 				>
 					<Collapse in={open} timeout="auto" unmountOnExit>
 						<Box margin={1}>
@@ -423,35 +419,243 @@ const Row = props => {
 								gutterBottom
 								component="div"
 							>
-								Details
+								Other details
 							</Typography>
-							<Table size="small" aria-label="purchases">
-								<TableHead>
-									<TableRow>
-										<TableCell>Date</TableCell>
-										<TableCell>Customer</TableCell>
-										<TableCell align="right">
-											Amount
-										</TableCell>
-										<TableCell align="right">
-											Total price ($)
-										</TableCell>
-										<TableCell align="right">
-											Total price ($)
-										</TableCell>
-										<TableCell align="right">
-											Total price ($)
-										</TableCell>
-										<TableCell align="right">
-											Total price ($)
-										</TableCell>
-										<TableCell align="right">
-											Total price ($)
-										</TableCell>
-									</TableRow>
-								</TableHead>
-								<TableBody>{/* TODO: map() */}</TableBody>
-							</Table>
+							<Grid container spacing={2}>
+								{/* <Grid item xs={12}>
+									<Typography
+										gutterBottom
+										variant="subtitle2"
+									>
+										Income Information
+									</Typography>
+								</Grid> */}
+								<Grid item xs={12} md={4}>
+									<Typography
+										variant="subtitle1"
+										component="div"
+									>
+										Father
+									</Typography>
+									<Box
+										display="flex"
+										justifyContent="space-between"
+									>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											House &amp; Property
+										</Typography>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											Rs.
+											{
+												row.father.annualIncome
+													.houseAndProperty
+											}
+										</Typography>
+									</Box>
+									<Box
+										display="flex"
+										justifyContent="space-between"
+									>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											Occupation / Pension
+										</Typography>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											Rs.
+											{
+												row.father.annualIncome
+													.occupationOrPension
+											}
+										</Typography>
+									</Box>
+									<Box
+										display="flex"
+										justifyContent="space-between"
+									>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											Other sources
+										</Typography>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											Rs.
+											{
+												row.father.annualIncome
+													.otherSources
+											}
+										</Typography>
+									</Box>
+									<Box
+										display="flex"
+										justifyContent="space-between"
+									>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											Salary
+										</Typography>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											Rs.
+											{row.father.employment.salary}
+										</Typography>
+									</Box>
+								</Grid>
+								<Grid item xs={12} md={4}>
+									<Typography
+										variant="subtitle1"
+										component="div"
+									>
+										Mother
+									</Typography>
+									<Box
+										display="flex"
+										justifyContent="space-between"
+									>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											House &amp; Property
+										</Typography>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											Rs.
+											{
+												row.mother.annualIncome
+													.houseAndProperty
+											}
+										</Typography>
+									</Box>
+									<Box
+										display="flex"
+										justifyContent="space-between"
+									>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											Occupation / Pension
+										</Typography>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											Rs.
+											{
+												row.mother.annualIncome
+													.occupationOrPension
+											}
+										</Typography>
+									</Box>
+									<Box
+										display="flex"
+										justifyContent="space-between"
+									>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											Other sources
+										</Typography>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											Rs.
+											{
+												row.mother.annualIncome
+													.otherSources
+											}
+										</Typography>
+									</Box>
+									<Box
+										display="flex"
+										justifyContent="space-between"
+									>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											Salary
+										</Typography>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											Rs.
+											{row.mother.employment.salary}
+										</Typography>
+									</Box>
+								</Grid>
+								<Grid item xs={12} md={4}>
+									<Typography
+										variant="subtitle1"
+										component="div"
+									>
+										Guardian
+									</Typography>
+									<Box
+										display="flex"
+										justifyContent="space-between"
+									>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											Salary
+										</Typography>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											Rs.
+											{row.guardian.annualIncome.salary}
+										</Typography>
+									</Box>
+									<Box
+										display="flex"
+										justifyContent="space-between"
+									>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											House / Property / Temple
+										</Typography>
+										<Typography
+											variant="body2"
+											color="textSecondary"
+										>
+											Rs.
+											{
+												row.guardian.annualIncome
+													.houseAndPropertyOrTemple
+											}
+										</Typography>
+									</Box>
+								</Grid>
+							</Grid>
 						</Box>
 					</Collapse>
 				</TableCell>
@@ -502,16 +706,14 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const EnhancedTable = props => {
-	// const { students: rows, isLoading } = props
-	const { students, isLoading } = props
+	const { students: rows, isLoading } = props
+	// const { students, isLoading } = props
 	const classes = useStyles()
 	const [order, setOrder] = React.useState('asc')
-	const [orderBy, setOrderBy] = React.useState('grossIncome')
+	const [orderBy, setOrderBy] = React.useState('netIncome')
 	const [selected, setSelected] = React.useState([])
 	const [page, setPage] = React.useState(0)
 	const [rowsPerPage, setRowsPerPage] = React.useState(5)
-
-	console.log(rows)
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === 'asc'

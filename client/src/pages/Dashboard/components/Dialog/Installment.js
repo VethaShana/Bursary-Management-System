@@ -5,7 +5,7 @@ import {
 	InputAdornment,
 	Typography,
 	LinearProgress,
-	makeStyles,
+	makeStyles
 } from '@material-ui/core'
 import React, { forwardRef, useImperativeHandle } from 'react'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
@@ -21,16 +21,18 @@ import { TextField, Checkbox } from 'formik-material-ui'
 import { KeyboardDatePicker } from 'formik-material-ui-pickers'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns'
+import { addInstallment } from '../../../../actions/students'
+import { connect } from 'react-redux'
 
-import { faculties } from '../../../../utils/data'
+import { faculties, courses } from '../../../../utils/data'
 
 const useStyles = makeStyles(theme => ({
 	dialogContent: {
-		paddingBottom: theme.spacing(2),
+		paddingBottom: theme.spacing(2)
 	},
 	dialogActions: {
-		padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`,
-	},
+		padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`
+	}
 }))
 
 const academicYears = ((year, number) =>
@@ -41,9 +43,10 @@ const academicYears = ((year, number) =>
 const initialValues = {
 	date: new Date(),
 	faculty: 'N/A',
+	course: 'N/A',
 	academicYear: 'N/A',
 	description: '',
-	installments: 1,
+	installments: 1
 }
 
 const validationSchema = yup.object({
@@ -52,6 +55,10 @@ const validationSchema = yup.object({
 		.string()
 		.oneOf(faculties, 'Invalid Faculty')
 		.required('Faculty is required'),
+	course: yup
+		.string()
+		.oneOf(courses, 'Invalid Course')
+		.required('Course is required'),
 	academicYear: yup
 		.number()
 		.typeError('Academic Year is required')
@@ -66,10 +73,13 @@ const validationSchema = yup.object({
 		.min(1, 'Minimimum No. of Installments is one')
 		.max(10, 'Minimimum No. of Installments is ten')
 		.positive('Installment should be a positive number')
-		.required('Number of installments are required'),
+		.required('Number of installments are required')
 })
 
-const onSubmit = () => {}
+const onSubmit = action => values => {
+	console.log(values)
+	action(values)
+}
 
 const Installment = forwardRef((props, ref) => {
 	const [open, setOpen] = React.useState(false)
@@ -85,13 +95,9 @@ const Installment = forwardRef((props, ref) => {
 		setOpen(false)
 	}
 
-	const onSubmit = (values, { setSubmitting }) => {
-		alert(values)
-	}
-
 	useImperativeHandle(ref, () => {
 		return {
-			showDialog: showDialog,
+			showDialog: showDialog
 		}
 	})
 
@@ -99,18 +105,20 @@ const Installment = forwardRef((props, ref) => {
 		<Dialog
 			open={open}
 			onClose={handleClose}
-			aria-labelledby='form-dialog-title'
+			aria-labelledby="form-dialog-title"
 			fullScreen={fullScreen}
 			fullWidth
 		>
 			<Formik
 				initialValues={initialValues}
-				onSubmit={onSubmit}
+				onSubmit={onSubmit(props.addInstallment)}
 				validationSchema={validationSchema}
 			>
 				{({ submitForm, isSubmitting, touched, errors, values }) => (
 					<MuiPickersUtilsProvider utils={DateFnsUtils}>
-						<DialogTitle id='form-dialog-title'>Create Installment</DialogTitle>
+						<DialogTitle id="form-dialog-title">
+							Create Installment
+						</DialogTitle>
 						<DialogContent className={classes.dialogContent}>
 							{/* <DialogContentText>
 									Issue Installments for students.
@@ -120,19 +128,46 @@ const Installment = forwardRef((props, ref) => {
 									<Grid item xs={12} sm={12}>
 										<Field
 											component={TextField}
-											type='text'
-											name='faculty'
-											label='Faculty'
+											type="text"
+											name="faculty"
+											label="Faculty"
 											select
 											InputLabelProps={{
-												shrink: true,
+												shrink: true
 											}}
 										>
 											<MenuItem key={'N/A'} value={'N/A'}>
 												N/A
 											</MenuItem>
 											{faculties.map(option => (
-												<MenuItem key={option} value={option}>
+												<MenuItem
+													key={option}
+													value={option}
+												>
+													{option}
+												</MenuItem>
+											))}
+										</Field>
+									</Grid>
+									<Grid item xs={12} sm={12}>
+										<Field
+											component={TextField}
+											type="text"
+											name="course"
+											label="Course"
+											select
+											InputLabelProps={{
+												shrink: true
+											}}
+										>
+											<MenuItem key={'N/A'} value={'N/A'}>
+												N/A
+											</MenuItem>
+											{courses.map(option => (
+												<MenuItem
+													key={option}
+													value={option}
+												>
 													{option}
 												</MenuItem>
 											))}
@@ -141,19 +176,22 @@ const Installment = forwardRef((props, ref) => {
 									<Grid item xs={12} sm={6}>
 										<Field
 											component={TextField}
-											type='text'
-											name='academicYear'
-											label='Academic Year'
+											type="text"
+											name="academicYear"
+											label="Academic Year"
 											select
 											InputLabelProps={{
-												shrink: true,
+												shrink: true
 											}}
 										>
 											<MenuItem key={'N/A'} value={'N/A'}>
 												N/A
 											</MenuItem>
 											{academicYears.map(option => (
-												<MenuItem key={option} value={option}>
+												<MenuItem
+													key={option}
+													value={option}
+												>
 													{option}/{++option}
 												</MenuItem>
 											))}
@@ -162,26 +200,28 @@ const Installment = forwardRef((props, ref) => {
 									<Grid item xs={12} sm={6}>
 										<Field
 											component={TextField}
-											type='number'
-											label='No. of Installments'
+											type="number"
+											label="No. of Installments"
 											InputProps={{
 												startAdornment: (
-													<InputAdornment position='start'>#</InputAdornment>
+													<InputAdornment position="start">
+														#
+													</InputAdornment>
 												),
 												min: 1,
-												max: 10,
+												max: 10
 											}}
-											name='installments'
+											name="installments"
 										/>
 									</Grid>
 									<Grid item xs={12}>
 										<Field
 											component={TextField}
-											type='text'
+											type="text"
 											multiline
 											rows={3}
-											label='Description'
-											name='description'
+											label="Description"
+											name="description"
 										/>
 									</Grid>
 								</Grid>
@@ -189,15 +229,19 @@ const Installment = forwardRef((props, ref) => {
 						</DialogContent>
 						{isSubmitting && <LinearProgress />}
 						<DialogActions className={classes.dialogActions}>
-							<Button onClick={handleClose} variant='text' autoFocus>
+							<Button
+								onClick={handleClose}
+								variant="text"
+								autoFocus
+							>
 								Cancel
 							</Button>
 							<Button
 								disabled={isSubmitting}
 								onClick={submitForm}
 								autoFocus
-								variant='contained'
-								color='secondary'
+								variant="contained"
+								color="secondary"
 							>
 								Add Installment
 							</Button>
@@ -209,4 +253,8 @@ const Installment = forwardRef((props, ref) => {
 	)
 })
 
-export default Installment
+const mapDispatchToProps = { addInstallment }
+
+export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
+	Installment
+)

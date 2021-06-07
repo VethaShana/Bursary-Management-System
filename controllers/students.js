@@ -23,13 +23,14 @@ export const getStudents = async (req, res) => {
 
 export const createStudent = async (req, res, next) => {
 	try {
-		const [netAmount, capAmount] = getAmounts(req.body)
-		const isValidCandidate = netAmount <= capAmount
+		const [netIncome, capIncome] = getAmounts(req.body)
+		console.log(netIncome, capIncome)
+		const isValidCandidate = netIncome <= capIncome
 		const newStudent = new Student({
 			...req.body,
-			userId: req.user._id,
-			netAmount,
-			capAmount,
+			userId: req.user.id,
+			netIncome: netIncome,
+			capIncome: capIncome,
 			isValidCandidate
 		})
 		await newStudent.save()
@@ -54,9 +55,9 @@ export const createStudent = async (req, res, next) => {
 			sendMail({
 				to: email,
 				subject: 'Bursary Application',
-				text: 'some text',
+				text: 'Bursary Application - download PDF',
 				attachments: {
-					filename: `Bursary Applicatoin - ${fullName}.pdf`,
+					filename: `Bursary Application - ${fullName}.pdf`,
 					content: download
 				}
 			})
@@ -77,8 +78,8 @@ export const deleteStudent = async (req, res) => {
 }
 
 export const updateStudent = async (req, res) => {
-	const [netAmount, capAmount] = getAmounts(req.body)
-	const isValidCandidate = netAmount <= capAmount
+	const [netIncome, capIncome] = getAmounts(req.body)
+	const isValidCandidate = netIncome <= capIncome
 
 	try {
 		const student = await Student.findByIdAndUpdate(
@@ -86,8 +87,8 @@ export const updateStudent = async (req, res) => {
 			{
 				$set: {
 					...req.body,
-					netAmount,
-					capAmount,
+					netIncome: netIncome,
+					capIncome: capIncome,
 					isValidCandidate
 				}
 			},

@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import './App.css'
 
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
-import { CssBaseline, Snackbar } from '@material-ui/core'
+import { CssBaseline, Snackbar, LinearProgress } from '@material-ui/core'
 import Alert from '@material-ui/lab/Alert'
 import theme from './utils/theme'
 
@@ -11,11 +11,11 @@ import Landing from './pages/Landing'
 import Application from './pages/Application'
 import ExtendedApplication from './pages/ExtendedApplication'
 import Dashboard from './pages/Dashboard'
+import FAQ from './pages/FAQ'
 
 import { connect } from 'react-redux'
 import store from './store'
 import { setUser, logoutUser } from './actions/user'
-import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import { setAuthToken } from './utils/token'
 
@@ -46,10 +46,11 @@ function App({ error }) {
 			<Switch>
 				<Route exact path="/" component={Landing} />
 				<ProtectedRoute path="/application" component={Application} />
-				<ProtectedRoute
+				<Route
 					path="/extended-application"
 					component={ExtendedApplication}
 				/>
+				<Route path="/faq" component={FAQ} />
 				<Route path="/dashboard" component={Dashboard} />
 				<Route path="*" component={() => '404 NOT FOUND'} />
 			</Switch>

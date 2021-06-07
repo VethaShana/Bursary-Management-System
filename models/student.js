@@ -43,7 +43,7 @@ const studentSchema = mongoose.Schema({
 		required: true
 	},
 	phone: {
-		type: Number,
+		type: String,
 		required: true
 	},
 	email: {
@@ -52,6 +52,10 @@ const studentSchema = mongoose.Schema({
 	},
 	zScore: {
 		type: Number,
+		required: true
+	},
+	faculty: {
+		type: String,
 		required: true
 	},
 	course: {
@@ -265,7 +269,7 @@ const studentSchema = mongoose.Schema({
 			houseAndPropertyOrTemple: Number
 		}
 	},
-	netAmount: {
+	netIncome: {
 		type: Number,
 		required: true
 	},
@@ -286,7 +290,11 @@ const studentSchema = mongoose.Schema({
 				required: true
 			}
 		}
-	]
+	],
+	isApproved: {
+		type: Boolean,
+		default: false
+	}
 })
 
 const Student = mongoose.model('student', studentSchema)

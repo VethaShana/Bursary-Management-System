@@ -2,9 +2,7 @@ import Student from '../models/student.js'
 export default data => {
 	const {
 		married,
-		spouse: {
-			employment: { salary: spouseSalary }
-		},
+		spouse,
 		siblingsUnder19 = [],
 		siblingsAtUniversity = [],
 		father,
@@ -12,51 +10,50 @@ export default data => {
 		guardian
 	} = data
 
-	const siblingUnder19Fund = 24000 // to be changed
-	const siblingAtUniversityFund = 36000 // to be changed
+	const siblingUnder19Fund = 24000
+	const siblingAtUniversityFund = 36000
 
-	let netAmount = 0
-	let capAmount = 500000 // to be changed
+	let netIncome = 0
+	let capIncome = 500000
 
 	// check marriage status
-	if (married) netAmount += parseInt(spouseSalary)
+	if (married) netIncome += parseInt(salary)
 
 	// check guardian
-	if (guardian && guardian.annualIncome) {
-		const { salary = 0, houseAndPropertyOrTemple = 0 } =
-			guardian.annualIncome
-		netAmount += salary + houseAndPropertyOrTemple
-	} else {
-		// check father
-		{
-			const {
-				occupationOrPension = 0,
-				houseAndProperty = 0,
-				otherSources = 0
-			} = father.annualIncome
-			netAmount =
-				father && father.living
-					? parseInt(occupationOrPension) +
-					  parseInt(houseAndProperty) +
-					  parseInt(otherSources) +
-					  netAmount
-					: netAmount
-		}
-		{
-			const {
-				occupationOrPension = 0,
-				houseAndProperty = 0,
-				otherSources = 0
-			} = mother.annualIncome
-			netAmount =
-				mother && mother.living
-					? parseInt(occupationOrPension) +
-					  parseInt(houseAndProperty) +
-					  parseInt(otherSources) +
-					  netAmount
-					: netAmount
-		}
+	// if (guardian && guardian.annualIncome) {
+	const { salary = 0, houseAndPropertyOrTemple = 0 } = guardian.annualIncome
+	netIncome += parseInt(salary) + parseInt(houseAndPropertyOrTemple)
+	// } else {
+	// check father
+	{
+		const {
+			occupationOrPension = 0,
+			houseAndProperty = 0,
+			otherSources = 0
+		} = father.annualIncome
+		netIncome =
+			father && father.living
+				? parseInt(occupationOrPension) +
+				  parseInt(houseAndProperty) +
+				  parseInt(otherSources) +
+				  netIncome
+				: netIncome
 	}
+	{
+		const {
+			occupationOrPension = 0,
+			houseAndProperty = 0,
+			otherSources = 0
+		} = mother.annualIncome
+		netIncome =
+			mother && mother.living
+				? parseInt(occupationOrPension) +
+				  parseInt(houseAndProperty) +
+				  parseInt(otherSources) +
+				  netIncome
+				: netIncome
+	}
+	// }
 
 	/**
 	 * calculations for cap Amount
@@ -64,7 +61,7 @@ export default data => {
 
 	// check siblings
 	if (siblingsUnder19 && siblingsUnder19.length > 0)
-		capAmount +=
+		capIncome +=
 			siblingUnder19Fund *
 			(siblingsUnder19.length <= 3 ? siblingsUnder19.length : 3)
 
@@ -72,11 +69,12 @@ export default data => {
 	if (siblingsAtUniversity && siblingsAtUniversity.length > 0) {
 		const siblingsNotRecipientOfMahapolaOrBursary =
 			siblingsAtUniversity.filter(
-				({ mahapolaOrBursary }) => mahapolaOrBursary === false
+				({ isBursaryOrMahapolaRecipient }) =>
+					isBursaryOrMahapolaRecipient === false
 			)
 
 		//if maximum is thrice
-		capAmount +=
+		capIncome +=
 			siblingAtUniversityFund *
 			(siblingsNotRecipientOfMahapolaOrBursary.length <= 3
 				? siblingsNotRecipientOfMahapolaOrBursary.length
@@ -87,7 +85,7 @@ export default data => {
 		//   siblingAtUniversityFund * siblingsRecipientOfMahapolaOrBursary.length;
 	}
 
-	return [netAmount, capAmount]
+	return [netIncome, capIncome]
 
 	// var data = Student.req.body
 	// const query_married = data.find([

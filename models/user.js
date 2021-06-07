@@ -13,8 +13,8 @@ const userSchema = mongoose.Schema({
 
 	regNo: {
 		type: String,
-		trim: true,
-		unique: true
+		trim: true
+		// unique: true,
 	},
 
 	firstName: {
