@@ -11,7 +11,7 @@ const studentValidationSchema = yup.object().shape({
 
 	nic: yup.string().trim().required('nic number is required'),
 
-	title: yup.string().trim().oneOf(['Mr.', 'Mrs.', 'Miss']).required(),
+	//title: yup.string().trim().oneOf(['Mr.', 'Mrs.', 'Miss']).required(),
 
 	nameWithInitials: yup
 		.string()
@@ -25,7 +25,6 @@ const studentValidationSchema = yup.object().shape({
 
 	district: yup.string().required('district number is required'),
 
-	//phone: yup.number().required('phone number is required'),
 	phone: yup
 		.string()
 		.matches(/^(?:7|0|(?:\+94))[0-9]{9,10}$/, 'Invalid phone number.')
@@ -36,10 +35,6 @@ const studentValidationSchema = yup.object().shape({
 	zScore: yup.string().required('zScore number is required'),
 
 	course: yup.string().required('course number is required'),
-	// course: yup
-	// 	.string()
-	// 	.oneOf(course, 'Invalid course')
-	// 	.required('Select a course'),
 
 	gsDivision: yup.string().required('gsDivision number is required'),
 
@@ -51,19 +46,16 @@ const studentValidationSchema = yup.object().shape({
 		.array()
 		.of(
 			yup.object().shape({
-				name: yup
-					.string()
-					.min(2, 'Too Short.')
-					.required('Name is required'),
+				name: yup.string().required('Name is required'),
 				dob: yup
 					.date()
 					.max(new Date(), 'Date of Birth cannot be in future')
 					.required('Date of Birth is required'),
-				age: yup
-					.number()
-					.positive('Age cannot be negative')
-					.max(123, 'Invalid age')
-					.required('Age is required'),
+				// age: yup
+				// 	.number()
+				// 	.positive('Age cannot be negative')
+				// 	.max(123, 'Invalid age')
+				// 	.required('Age is required'),
 				schoolOrInstitute: yup
 					.string()
 					.max(123, 'Invalid age')
@@ -76,10 +68,7 @@ const studentValidationSchema = yup.object().shape({
 		.array()
 		.of(
 			yup.object().shape({
-				name: yup
-					.string()
-					.min(2, 'Too Short.')
-					.required('Name is required'),
+				name: yup.string().required('Name is required'),
 				regNo: yup.string().required('Registration No. is required'),
 				institute: yup.string().required('Institute is required'),
 				academicYear: yup
@@ -120,10 +109,7 @@ const studentValidationSchema = yup.object().shape({
 		.array()
 		.of(
 			yup.object().shape({
-				name: yup
-					.string()
-					.min(2, 'Too Short.')
-					.required('Name is required'),
+				name: yup.string().required('Name is required'),
 				relationship: yup.string().required('Relationship is required'),
 				assessmentNo: yup
 					.string()
@@ -142,7 +128,7 @@ const studentValidationSchema = yup.object().shape({
 		.required('DSDivision number is required')
 		.optional(),
 
-	employed: yup.string().required('employed number is required'),
+	employed: yup.boolean().required('employed number is required'),
 
 	employment: yup.object().when('employed', (employed, schema) =>
 		schema.shape({
@@ -158,6 +144,10 @@ const studentValidationSchema = yup.object().shape({
 						.positive('Salary cannot be negative')
 						.required('Salary is required')
 				: yup.string(),
+			salaryScale: employed
+				? yup.number().required('Salary scale required')
+				: yup.number(),
+
 			dateOfEmployment: employed
 				? yup
 						.date()
@@ -167,17 +157,18 @@ const studentValidationSchema = yup.object().shape({
 						)
 						.required('Date of Employment is required')
 				: yup.date(),
+
 			address: yup.object().shape({
-				city: employed
-					? yup.string().required('City is required')
-					: yup.string(),
 				street: employed
 					? yup.string().required('Street is required')
+					: yup.string(),
+				city: employed
+					? yup.string().required('City is required')
 					: yup.string(),
 				district: employed
 					? yup
 							.string()
-							.oneOf(districts, 'Invalid district')
+							//.oneOf(districts, 'Invalid district')
 							.required('Street is required')
 					: yup.string()
 			})
@@ -193,6 +184,12 @@ const studentValidationSchema = yup.object().shape({
 			name: married
 				? yup.string().required('Name is required')
 				: yup.string(),
+			dateOfMarriage: married
+				? yup
+						.date()
+						.max(new Date(), 'Date of Marriage cannot be in future')
+						.required('Date of Marriage is required')
+				: yup.date(),
 			employment: yup.object().shape({
 				establishment: married
 					? yup.string().required('Establishment is required')
@@ -205,16 +202,7 @@ const studentValidationSchema = yup.object().shape({
 							.number()
 							.positive('Salary cannot be negative')
 							.required('Salary is required')
-					: yup.string(),
-				dateOfEmployment: married
-					? yup
-							.date()
-							.max(
-								new Date(),
-								'Date of Employment cannot be in future'
-							)
-							.required('Date of Employment is required')
-					: yup.date()
+					: yup.string()
 			})
 		})
 	),
@@ -262,8 +250,11 @@ const studentValidationSchema = yup.object().shape({
 				.number()
 				.positive('Income cannot be negative')
 				.required('Income from other sources is required')
-		})
+		}),
+
+		fatherTotalAnnualIncome: yup.number().required()
 	}),
+
 	mother: yup.object().shape({
 		name: yup.string().required("Mother's name is required"),
 		living: yup.boolean().required('This field is required'),
@@ -307,8 +298,10 @@ const studentValidationSchema = yup.object().shape({
 				.number()
 				.positive('Income cannot be negative')
 				.required('Income from other sources is required')
-		})
+		}),
+		motherTotalAnnualIncome: yup.number().required()
 	}),
+
 	guardian: yup.object().shape({
 		name: yup.string().optional(),
 		living: yup.boolean().optional(),
@@ -327,33 +320,9 @@ const studentValidationSchema = yup.object().shape({
 		})
 	}),
 
-	netAmount: yup.number().required('netAmount number is required'),
+	//netAmount: yup.number().required('netAmount number is required'),
 
-	isValidCandidate: yup.required(),
-
-	siblingsAtUniversity: yup
-		.array()
-		.of(
-			yup.object().shape({
-				name: yup
-					.string()
-					.min(2, 'Too Short.')
-					.required('Name is required'),
-				regNo: yup.string().required('Registration No. is required'),
-				institute: yup.string().required('Institute is required'),
-				academicYear: yup
-					.number()
-					.min(new Date().getFullYear() - 7, 'Invalid Academic year')
-					.max(
-						new Date().getFullYear(),
-						'Academic year cannot exceed current year.'
-					)
-					.required('Academic year is required'),
-				course: yup.string().required('Course is required'),
-				isBursaryOrMahapolaRecipient: yup.boolean().required()
-			})
-		)
-		.optional(),
+	//isValidCandidate: yup.required(),
 
 	installments: yup.array().of(
 		yup.object().shape({

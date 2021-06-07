@@ -219,27 +219,28 @@ const studentSchema = mongoose.Schema({
 	father: {
 		name: { type: String, required: true },
 		living: { type: Boolean, required: true },
-		age: { type: Number },
+		age: { type: Number, required: true },
 		employment: {
-			occupation: { type: String },
-			dateOfEmployment: { type: Date },
-			salary: { type: Number },
-			address: { type: String }
+			occupation: { type: String, required: true },
+			dateOfEmployment: { type: Date, required: true },
+			salary: { type: Number, required: true },
+			address: { type: String, required: true }
 		},
 		annualIncome: {
-			occupationOrPension: { type: Number },
-			houseAndProperty: { type: Number },
-			otherSources: { type: Number }
+			occupationOrPension: { type: Number, required: true },
+			houseAndProperty: { type: Number, required: true },
+			otherSources: { type: Number, required: true }
 		},
 		fatherTotalAnnualIncome: {
-			type: Number
+			type: Number,
+			required: true
 		}
 	},
 
 	mother: {
 		name: { type: String, required: true },
 		living: { type: Boolean, required: true },
-		age: String,
+		age: { type: Number, required: true },
 		employment: {
 			occupation: String,
 			dateOfEmployment: Date,
@@ -258,7 +259,7 @@ const studentSchema = mongoose.Schema({
 
 	guardian: {
 		name: String,
-		age: String,
+		age: Number,
 		address: String,
 		post: String,
 		annualIncome: {
