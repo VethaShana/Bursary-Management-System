@@ -7,21 +7,13 @@ import {
 	LOGIN_USER_SUCCESS,
 	LOGIN_USER_FAILURE,
 	SET_USER,
-<<<<<<< HEAD
-	CLEAR_USER
-=======
 	CLEAR_USER,
 	LOGOUT_USER
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 } from '../actions/types'
 
 const initialState = {
 	data: {
-<<<<<<< HEAD
 		_id: null,
-=======
-		id: null,
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 		email: null,
 		role: null
 	},
@@ -74,9 +66,6 @@ export function user(state = initialState, action) {
 			return {
 				...state,
 				isAuthenticated: false,
-<<<<<<< HEAD
-				user: { _id: null, email: null, role: null }
-=======
 				data: { _id: null, email: null, role: null }
 			}
 		case LOGOUT_USER:
@@ -84,7 +73,6 @@ export function user(state = initialState, action) {
 				...state,
 				isAuthenticated: false,
 				data: { _id: null, email: null, role: null }
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 			}
 		default:
 			return state

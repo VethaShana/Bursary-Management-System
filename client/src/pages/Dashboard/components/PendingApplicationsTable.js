@@ -22,53 +22,6 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import { Box, Button, Collapse, Grid, Menu, MenuItem } from '@material-ui/core'
 import Skeleton from '@material-ui/lab/Skeleton'
-<<<<<<< HEAD
-import { connect } from 'react-redux'
-import { getStudents } from '../../../actions/students'
-
-const rows = [
-	{
-		regNo: '2017/CSC/045',
-		nic: '961803420V',
-		name: 'Ardil Mohamed',
-		district: 'Kandy',
-		faculty: 'Computer Science',
-		grossIncome: 120000
-	},
-	{
-		regNo: '2017/MMA/025',
-		nic: '951202420V',
-		name: 'Sarath Piyasena',
-		district: 'Colombo',
-		faculty: 'Physical Science',
-		grossIncome: 180000
-	},
-	{
-		regNo: '2017/A/012',
-		nic: '941202420V',
-		name: 'John Banda',
-		district: 'Anuradhapura',
-		faculty: 'Biological Science',
-		grossIncome: 210000
-	},
-	{
-		regNo: '2017/CSC/025',
-		nic: '941202420V',
-		name: 'Sanasta',
-		district: 'Ratnapura',
-		faculty: 'Computer Science',
-		grossIncome: 350000
-	},
-	{
-		regNo: '2017/MMA/015',
-		nic: '952202420V',
-		name: 'John Keells',
-		district: 'Kandy',
-		faculty: 'Physical Science',
-		grossIncome: 192000
-	}
-]
-=======
 import { connect, useDispatch } from 'react-redux'
 import {
 	getStudents,
@@ -76,7 +29,6 @@ import {
 	approveStudent,
 	disApproveStudent
 } from '../../../actions/students'
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 
 const mapStateToProps = state => ({
 	students: state.students.data,
@@ -151,9 +103,6 @@ const headCells = [
 		id: 'netIncome',
 		numeric: true,
 		disablePadding: false,
-<<<<<<< HEAD
-		label: 'Gross Income',
-=======
 		label: 'Net Income',
 		skeleton: true
 	},
@@ -162,7 +111,6 @@ const headCells = [
 		numeric: true,
 		disablePadding: false,
 		label: 'Status',
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 		skeleton: true
 	}
 ]
@@ -355,14 +303,10 @@ const ContextMenu = ({ id }) => {
 				</MenuItem>
 				<MenuItem
 					dense
-<<<<<<< HEAD
-					onClick={handleClose}
-=======
 					onClick={e => {
 						dispatch(deleteStudent(id))
 						handleClick(e)
 					}}
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 					className={classes.delete}
 				>
 					Delete
@@ -430,14 +374,6 @@ const Row = props => {
 					{row.regNo}
 				</TableCell>
 				<TableCell align="left">{row.nic}</TableCell>
-<<<<<<< HEAD
-				<TableCell align="left">{row.name}</TableCell>
-				<TableCell align="left">{row.district}</TableCell>
-				<TableCell align="left">{row.faculty}</TableCell>
-				<TableCell align="right">{row.grossIncome}</TableCell>
-				<TableCell align="right">
-					<ContextMenu />
-=======
 				<TableCell align="left">{row.nameWithInitials}</TableCell>
 				<TableCell align="left">{row.district}</TableCell>
 				<TableCell align="left">{row.faculty}</TableCell>
@@ -465,7 +401,6 @@ const Row = props => {
 				</TableCell>
 				<TableCell align="right">
 					<ContextMenu id={row._id} />
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 				</TableCell>
 			</TableRow>
 			<TableRow>
@@ -475,11 +410,7 @@ const Row = props => {
 				></TableCell>
 				<TableCell
 					style={{ paddingBottom: 0, paddingTop: 0 }}
-<<<<<<< HEAD
-					colSpan={6}
-=======
 					colSpan={7}
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 				>
 					<Collapse in={open} timeout="auto" unmountOnExit>
 						<Box margin={1}>
@@ -488,37 +419,6 @@ const Row = props => {
 								gutterBottom
 								component="div"
 							>
-<<<<<<< HEAD
-								Details
-							</Typography>
-							<Table size="small" aria-label="purchases">
-								<TableHead>
-									<TableRow>
-										<TableCell>Date</TableCell>
-										<TableCell>Customer</TableCell>
-										<TableCell align="right">
-											Amount
-										</TableCell>
-										<TableCell align="right">
-											Total price ($)
-										</TableCell>
-										<TableCell align="right">
-											Total price ($)
-										</TableCell>
-										<TableCell align="right">
-											Total price ($)
-										</TableCell>
-										<TableCell align="right">
-											Total price ($)
-										</TableCell>
-										<TableCell align="right">
-											Total price ($)
-										</TableCell>
-									</TableRow>
-								</TableHead>
-								<TableBody>{/* TODO: map() */}</TableBody>
-							</Table>
-=======
 								Other details
 							</Typography>
 							<Grid container spacing={2}>
@@ -756,7 +656,6 @@ const Row = props => {
 									</Box>
 								</Grid>
 							</Grid>
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 						</Box>
 					</Collapse>
 				</TableCell>

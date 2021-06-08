@@ -12,11 +12,7 @@ import {
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import { connect } from 'react-redux'
-<<<<<<< HEAD
-import { registerUser } from '../actions/user'
-=======
 import { registerStudent } from '../actions/user'
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 import { useHistory } from 'react-router-dom'
 import * as yup from 'yup'
 
@@ -62,23 +58,12 @@ const onSubmit = (action, history) => values => {
 	action(values, history)
 }
 
-<<<<<<< HEAD
-const onSubmit = (action, history) => values => {
-	action(values, history)
-}
-
-=======
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 function Register({
 	authView,
 	onAuthViewChange,
 	error,
 	isLoading,
-<<<<<<< HEAD
-	registerUser,
-=======
 	registerStudent,
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 	...props
 }) {
 	const classes = useStyles()
@@ -86,11 +71,7 @@ function Register({
 	const formik = useFormik({
 		initialValues,
 		validationSchema,
-<<<<<<< HEAD
-		onSubmit: onSubmit(registerUser, history)
-=======
 		onSubmit: onSubmit(registerStudent, history)
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 	})
 
 	const handleClick = e => {
@@ -244,10 +225,6 @@ const mapStateToProps = state => ({
 	error: state.user.error
 })
 
-<<<<<<< HEAD
-const mapDispatchToProps = { registerUser }
-=======
 const mapDispatchToProps = { registerStudent }
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register)

@@ -28,70 +28,10 @@ export const districts = [
 
 export const GSDivisions = [
 	{
-<<<<<<< HEAD
 		division: 'Pahathadumbara',
 		divisionNo: '#GS10119'
 
 		/*
-=======
-		DSDivision: 'Manmunai North',
-		divisions: [
-			'Amirthakali',
-			'Arasady',
-			'Barathypuram',
-			'Datch Bar',
-			'Gnasooriyam Squre',
-			'Iruthayapuram Central',
-			'Iruthayapuram East',
-			'Iruthayapuram West',
-			'Jayanthipuram',
-			'Kallady',
-			'Kallady Mugathuvaram',
-			'Kallady Uppodai',
-			'Kallady Veloor',
-			'Karuweppankeney',
-			'Koddamunai',
-			'Kokkuvil',
-			'Koolavadi East',
-			'Koolavady',
-			'Mamagam',
-			'Manjanthoduvai North',
-			'Manjanthoduvai South',
-			'Navalady',
-			'Navatkudah',
-			'Navatkudah East',
-			'Navatkudah South',
-			'Nochchimunai',
-			'Palameenmadu',
-			'Panichchayadi',
-			'Periya Uppodai',
-			'Periya Urani',
-			'Puliyanthivu Central',
-			'Puliyanthivu East',
-			'Puliyanthivu South',
-			'Puliyanthivu West',
-			'Punnachcholai',
-			'Puthunagar',
-			'Saththurukondan',
-			'Sethukudah',
-			'Sinna Urane',
-			'Thamaraikerny',
-			'Thandavanvely',
-			'Thimilathivu',
-			'Thiraimadu',
-			'Thiruchchenthur',
-			'Thirupperunthurai',
-			'Thissaveerasingam Squre',
-			'Veddukkadu',
-			'Veechikalmunai'
-		]
-	},
-	{
-		DSDivision: ''
-	}
-]
-/*
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 //Batticaloa
 
 
@@ -1570,11 +1510,8 @@ Verugalmugaththuwaram	214E
 
 //Thoppur
 */
-<<<<<<< HEAD
 	}
 ]
-=======
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 
 export const DSDivisions = [
 	{

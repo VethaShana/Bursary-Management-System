@@ -163,14 +163,10 @@ function Dashboard({ user, getStudents }) {
 					>
 						Dashboard
 					</Typography>
-<<<<<<< HEAD
-					<IconButton color="inherit">
-=======
 					<IconButton
 						color="inherit"
 						onClick={e => menuRef.current.handleClick(e)}
 					>
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 						<AccountCircleIcon fontSize="default" />
 					</IconButton>
 					<Menu ref={menuRef} />
@@ -208,11 +204,7 @@ function Dashboard({ user, getStudents }) {
 							<Grid container spacing={3}>
 								<Grid item xs={12}>
 									<Title
-<<<<<<< HEAD
-										title={`Hi! ${user.name}`}
-=======
 										title={`Hi! ${user.firstName} ${user.lastName}`}
->>>>>>> 5d0d5be93a043dca6dc2ab83f205c743ae635079
 										description="Welcome Back to the Dashboard"
 									/>
 								</Grid>

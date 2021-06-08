@@ -65,13 +65,13 @@ userSchema.methods.createToken = async function () {
 		let user = {}
 		if (this.role === 'student')
 			user = {
-				id: this._id,
+				_id: this._id,
 				email: this.email,
 				role: this.role
 			}
 		else
 			user = {
-				id: this._id,
+				_id: this._id,
 				email: this.email,
 				firstName: this.firstName,
 				lastName: this.lastName,
