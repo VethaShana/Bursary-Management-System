@@ -45,7 +45,7 @@ function App({ error }) {
 			<CssBaseline />
 			<Switch>
 				<Route exact path="/" component={Landing} />
-				<ProtectedRoute path="/application" component={Application} />
+				<Route path="/application" component={Application} />
 				<Route
 					path="/extended-application"
 					component={ExtendedApplication}

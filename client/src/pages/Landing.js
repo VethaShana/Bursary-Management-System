@@ -255,6 +255,8 @@ function Landing({ history }) {
 									variant="text"
 									style={{ marginLeft: '10px' }}
 									size={'small'}
+									component={Link}
+									to="/faq"
 								>
 									FAQ
 								</Button>
