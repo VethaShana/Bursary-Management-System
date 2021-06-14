@@ -1542,28 +1542,6 @@ function Application() {
 										Apply
 									</Button>
 								</Grid>
-								<Grid
-									container
-									item
-									xs={12}
-									justify="flex-end"
-									style={{
-										padding: '0 16px',
-										paddingTop: '32px'
-									}}
-								>
-									<Button
-										disabled={isSubmitting}
-										onClick={submitForm}
-										variant="contained"
-										color="primary"
-										margin="normal"
-										slot="right"
-										className={classes.btn}
-									>
-										Logout
-									</Button>
-								</Grid>
 							</Form>
 						</MuiPickersUtilsProvider>
 					)}

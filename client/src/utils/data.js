@@ -2132,9 +2132,7 @@ export const courses = [
 			'Agricultural Biology',
 			'Agricultural Chemistry',
 			'Agricultural Engineering',
-			'Agricultural Echonomics',
-			'Auxiliary Core Courses',
-			'Common Core Courses'
+			'Agricultural Echonomics'
 		]
 	}
 ]
