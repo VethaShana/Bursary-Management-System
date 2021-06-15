@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 		paddingBottom: theme.spacing(2)
 	},
 	dialogActions: {
-		padding: `${theme.spacing(2)}px ${theme.spacing(3)}px`
+		padding: `${theme.spacing(2)}px ${theme.spacing(2)}px`
 	}
 }))
 
