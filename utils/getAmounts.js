@@ -2,7 +2,9 @@ import Student from '../models/student.js'
 export default data => {
 	const {
 		married,
-		spouse: { salary },
+		spouse: {
+			employment: { salary }
+		},
 		siblingsUnder19 = [],
 		siblingsAtUniversity = [],
 		father,
@@ -85,6 +87,6 @@ export default data => {
 		// capAmount +=
 		//   siblingAtUniversityFund * siblingsRecipientOfMahapolaOrBursary.length;
 	}
-
+	console.log(netIncome)
 	return [netIncome, capIncome]
 }

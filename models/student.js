@@ -76,101 +76,104 @@ const studentSchema = mongoose.Schema({
 	siblingsUnder19: [
 		{
 			name: {
-				type: String,
-				required: true
+				type: String
+				//	required: true
 			},
 
 			dob: {
-				type: Date,
-				required: true
+				type: Date
+				//required: true
 			},
 			schoolOrInstitute: {
-				type: String,
-				required: true
+				type: String
+				//required: true
 			}
 		}
 	],
 	siblingsAtUniversity: [
 		{
 			name: {
-				type: String,
-				required: true
+				type: String
+				//required: true
 			},
 			regNo: {
-				type: String,
-				required: true
+				type: String
+				//required: true
 			},
 			institute: {
-				type: String,
-				required: true
+				type: String
+				//required: true
 			},
 			course: {
-				type: String,
-				required: true
+				type: String
+				//required: true
 			},
 			academicYear: {
-				type: String,
-				required: true
+				type: String
+				//required: true
 			},
 			isBursaryOrMahapolaRecipient: {
-				type: Boolean,
-				required: true
+				type: Boolean
+				//required: true
 			}
 		}
 	],
 	incomeFromEstateFieldsLands: [
 		{
 			name: {
-				type: String,
-				required: true
+				type: String
+				//required: true
 			},
 			relationship: {
-				type: String,
-				required: true
+				type: String
+				//required: true
 			},
 			location: {
-				type: String,
-				required: true
+				type: String
+				//required: true
 			},
 			natureOfCultivation: {
-				type: String,
-				required: true
+				type: String
+				//required: true
 			},
 			extentOfLandAndDetails: {
-				type: String,
-				required: true
+				type: String
+				//required: true
 			},
 			annualIncome: {
-				type: Number,
-				required: true
+				type: Number
+				//required: true
 			}
 		}
 	],
 	incomeFromHouses: [
 		{
 			name: {
-				type: String,
-				required: true
+				type: String
+				//required: true
 			},
 			relationship: {
-				type: String,
-				required: true
+				type: String
+				//required: true
 			},
 			assessmentNo: {
-				type: String,
-				required: true
+				type: String
+				//required: true
 			},
 			noOfHouseholders: {
-				type: String,
-				required: true
+				type: String
+				//required: true
 			},
 			address: {
-				type: String,
-				required: true
+				type: String
+				//required: true
 			},
 			annualIncome: {
-				type: Number,
-				required: true
+				type: Number
+				//required: true
+			},
+			rent_lease: {
+				type: String
 			}
 		}
 	],
