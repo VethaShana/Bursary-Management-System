@@ -1,4 +1,5 @@
 import Student from '../models/student.js'
+//import Deadline from '../models/student.js'
 import pdfMake from 'pdfmake/build/pdfmake.js'
 import PDF_Fonts from 'pdfmake/build/vfs_fonts.js'
 import { json, response } from 'express'
@@ -8,6 +9,7 @@ import { getDocumentDefinition } from '../services/pdf.js'
 import getAmounts from '../utils/getAmounts.js'
 import sendMail from '../services/sendMail.js'
 import { getDocDefinition } from '../services/summary1.js'
+import Deadline from '../models/deadline.js'
 //import JSON  from 'nodemon/lib/utils'
 
 pdfMake.vfs = PDF_Fonts.pdfMake.vfs
@@ -23,6 +25,17 @@ export const getStudents = async (req, res) => {
 			students = await Student.find()
 		}
 		res.status(200).json(students)
+	} catch (error) {
+		res.status(400).json({ message: error.message })
+	}
+}
+
+export const createDeadline = async (req, res, next) => {
+	try {
+		const newDate = new Deadline({
+			Deadline: req.body.Deadline
+		})
+		await newDate.save()
 	} catch (error) {
 		res.status(400).json({ message: error.message })
 	}
@@ -102,6 +115,18 @@ export const updateStudent = async (req, res) => {
 			{ new: true }
 		)
 		res.status(200).json(student)
+	} catch (error) {
+		res.status(400).json({ message: error.message })
+	}
+}
+
+export const updateDeadline = async (req, res, next) => {
+	try {
+		const deadline = await Deadline.findByIdAndUpdate(
+			req.params.id,
+			{ $set: { ...req.body } },
+			{ new: true }
+		)
 	} catch (error) {
 		res.status(400).json({ message: error.message })
 	}
