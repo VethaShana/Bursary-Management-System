@@ -6,7 +6,7 @@ import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
+import MuiTableHead from '@material-ui/core/TableHead'
 import TablePagination from '@material-ui/core/TablePagination'
 import TableRow from '@material-ui/core/TableRow'
 import TableSortLabel from '@material-ui/core/TableSortLabel'
@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography'
 import Checkbox from '@material-ui/core/Checkbox'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
+import Chip from '@material-ui/core/Chip'
 import DeleteIcon from '@material-ui/icons/Delete'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
@@ -100,22 +101,29 @@ const headCells = [
 		skeleton: true
 	},
 	{
+		id: 'status',
+		numeric: false,
+		disablePadding: false,
+		label: 'Status',
+		skeleton: true
+	},
+	{
+		id: 'action',
+		numeric: false,
+		disablePadding: false,
+		label: 'Action',
+		skeleton: true
+	},
+	{
 		id: 'netIncome',
 		numeric: true,
 		disablePadding: false,
 		label: 'Net Income',
 		skeleton: true
-	},
-	{
-		id: 'status',
-		numeric: true,
-		disablePadding: false,
-		label: 'Status',
-		skeleton: true
 	}
 ]
 
-function PendingApplicationsTable(props) {
+function TableHead(props) {
 	const {
 		classes,
 		onSelectAllClick,
@@ -130,7 +138,7 @@ function PendingApplicationsTable(props) {
 	}
 
 	return (
-		<TableHead>
+		<MuiTableHead>
 			<TableRow>
 				<TableCell padding="checkbox">
 					<Checkbox
@@ -169,11 +177,11 @@ function PendingApplicationsTable(props) {
 				))}
 				<TableCell />
 			</TableRow>
-		</TableHead>
+		</MuiTableHead>
 	)
 }
 
-PendingApplicationsTable.propTypes = {
+TableHead.propTypes = {
 	classes: PropTypes.object.isRequired,
 	numSelected: PropTypes.number.isRequired,
 	onRequestSort: PropTypes.func.isRequired,
@@ -269,7 +277,6 @@ const ContextMenu = ({ id }) => {
 	const classes = useContextMenuStyles()
 	const [anchorEl, setAnchorEl] = React.useState(null)
 	const dispatch = useDispatch()
-	console.log(id)
 
 	const handleClick = event => {
 		setAnchorEl(event.currentTarget)
@@ -377,7 +384,15 @@ const Row = props => {
 				<TableCell align="left">{row.nameWithInitials}</TableCell>
 				<TableCell align="left">{row.district}</TableCell>
 				<TableCell align="left">{row.faculty}</TableCell>
-				<TableCell align="right">Rs. {row.netIncome}</TableCell>
+				<TableCell align="right">
+					<Chip
+						label={
+							row.isValidCandidate ? 'Not Competent' : 'Competent'
+						}
+						size="small"
+						variant="outlined"
+					/>
+				</TableCell>
 				<TableCell align="right">
 					{row.isApproved ? (
 						<Button
@@ -399,6 +414,7 @@ const Row = props => {
 						</Button>
 					)}
 				</TableCell>
+				<TableCell align="right">Rs. {row.netIncome}</TableCell>
 				<TableCell align="right">
 					<ContextMenu id={row._id} />
 				</TableCell>
@@ -705,7 +721,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-const EnhancedTable = props => {
+const PendingApplicationsTable = props => {
 	const { students: rows, isLoading } = props
 	// const { students, isLoading } = props
 	const classes = useStyles()
@@ -774,7 +790,7 @@ const EnhancedTable = props => {
 					size="small"
 					aria-label="enhanced table"
 				>
-					<PendingApplicationsTable
+					<TableHead
 						classes={classes}
 						numSelected={selected.length}
 						order={order}
@@ -829,4 +845,7 @@ const EnhancedTable = props => {
 	)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EnhancedTable)
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(PendingApplicationsTable)

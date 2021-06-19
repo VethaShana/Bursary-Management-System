@@ -12,6 +12,11 @@ router.get(
 	StudentsController.getStudents
 )
 router.get(
+	'/:userId',
+	auth(ROLES.ADMIN, ROLES.STUDENT, ROLES.DEAN),
+	StudentsController.getStudent
+)
+router.get(
 	'/:id/installments',
 	auth(ROLES.ADMIN),
 	StudentsController.getInstallments

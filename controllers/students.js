@@ -30,6 +30,15 @@ export const getStudents = async (req, res) => {
 	}
 }
 
+export const getStudent = async (req, res) => {
+	try {
+		const student = await Student.findOne({ userId: req.params.userId })
+		res.status(200).json(student)
+	} catch (error) {
+		res.status(400).json({ message: error.message })
+	}
+}
+
 export const createStudent = async (req, res, next) => {
 	try {
 		const [netIncome, capIncome] = getAmounts(req.body)
@@ -45,7 +54,7 @@ export const createStudent = async (req, res, next) => {
 			deadline.getDate()
 		const newStudent = new Student({
 			...req.body,
-			userId: req.user.id,
+			userId: req.user._id,
 			netIncome: netIncome,
 			capIncome: capIncome,
 			isValidCandidate,

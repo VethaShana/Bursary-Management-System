@@ -21,12 +21,12 @@ function Header(props) {
 			<Typography variant="subtitle1" color="initial" gutterBottom>
 				{subTitle}
 			</Typography>
-			<Chip
+			{/* <Chip
 				label="Deadline: 10/01/2020"
 				icon={<TimerIcon />}
 				color="secondary"
 				size="small"
-			/>
+			/> */}
 		</header>
 	)
 }

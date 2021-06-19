@@ -64,8 +64,8 @@ const studentSchema = mongoose.Schema({
 		required: true
 	},
 	GSDivision: {
-		type: String,
-		required: true
+		type: String
+		// required: true
 	},
 	DSDivision: {
 		type: String
@@ -237,10 +237,6 @@ const studentSchema = mongoose.Schema({
 			occupationOrPension: { type: Number, required: true },
 			houseAndProperty: { type: Number, required: true },
 			otherSources: { type: Number, required: true }
-		},
-		fatherTotalAnnualIncome: {
-			type: Number,
-			required: true
 		}
 	},
 
@@ -258,9 +254,6 @@ const studentSchema = mongoose.Schema({
 			occupationOrPension: Number,
 			houseAndProperty: Number,
 			otherSources: Number
-		},
-		motherTotalAnnualIncome: {
-			type: Number
 		}
 	},
 

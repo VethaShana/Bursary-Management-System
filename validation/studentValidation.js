@@ -53,7 +53,7 @@ const studentValidationSchema = yup.object().shape({
 				//	.required('Date of Birth is required'),
 				// age: yup
 				// 	.number()
-				// 	.positive('Age cannot be negative')
+				// 	.min(0, 'Age cannot be negative')
 				// 	.max(123, 'Invalid age')
 				// 	.required('Age is required'),
 				schoolOrInstitute: yup.string().max(123, 'Invalid age')
@@ -129,7 +129,7 @@ const studentValidationSchema = yup.object().shape({
 			salary: employed
 				? yup
 						.number()
-						.positive('Salary cannot be negative')
+						.min(0, 'Salary cannot be negative')
 						.required('Salary is required')
 				: yup.string(),
 			// salaryScale: employed
@@ -188,7 +188,7 @@ const studentValidationSchema = yup.object().shape({
 				salary: married
 					? yup
 							.number()
-							.positive('Salary cannot be negative')
+							.min(0, 'Salary cannot be negative')
 							.required('Salary is required')
 					: yup.string()
 			})
@@ -202,7 +202,7 @@ const studentValidationSchema = yup.object().shape({
 			is: true,
 			then: yup
 				.number()
-				.positive('Age cannot be negative')
+				.min(0, 'Age cannot be negative')
 				.max(
 					123,
 					'World record for oldest person is 122 years and 164 days :)'
@@ -210,14 +210,14 @@ const studentValidationSchema = yup.object().shape({
 				.required('Age is required, if living'),
 			otherwise: yup
 				.number()
-				.positive('Age cannot be negative')
+				.min(0, 'Age cannot be negative')
 				.max(123, 'Invalid age')
 		}),
 		employment: yup.object().shape({
 			occupation: yup.string().required('Occupation is required'),
 			salary: yup
 				.number()
-				.positive('Salary cannot be negative')
+				.min(0, 'Salary cannot be negative')
 				.required('Salary is required'),
 			dateOfEmployment: yup
 				.date()
@@ -228,19 +228,17 @@ const studentValidationSchema = yup.object().shape({
 		annualIncome: yup.object().shape({
 			occupationOrPension: yup
 				.number()
-				.positive('Income cannot be negative')
+				.min(0, 'Income cannot be negative')
 				.required('Occupation or pension income is required'),
 			houseAndProperty: yup
 				.number()
-				.positive('Income cannot be negative')
+				.min(0, 'Income cannot be negative')
 				.required('House & property income is required'),
 			otherSources: yup
 				.number()
-				.positive('Income cannot be negative')
+				.min(0, 'Income cannot be negative')
 				.required('Income from other sources is required')
-		}),
-
-		fatherTotalAnnualIncome: yup.number().required()
+		})
 	}),
 
 	mother: yup.object().shape({
@@ -250,7 +248,7 @@ const studentValidationSchema = yup.object().shape({
 			is: true,
 			then: yup
 				.number()
-				.positive('Age cannot be negative')
+				.min(0, 'Age cannot be negative')
 				.max(
 					123,
 					'World record for oldest person is 122 years and 164 days :)'
@@ -258,14 +256,14 @@ const studentValidationSchema = yup.object().shape({
 				.required('Age is required, if living'),
 			otherwise: yup
 				.number()
-				.positive('Age cannot be negative')
+				.min(0, 'Age cannot be negative')
 				.max(123, 'Invalid age')
 		}),
 		employment: yup.object().shape({
 			occupation: yup.string().required('Occupation is required'),
 			salary: yup
 				.number()
-				.positive('Salary cannot be negative')
+				.min(0, 'Salary cannot be negative')
 				.required('Salary is required'),
 			dateOfEmployment: yup
 				.date()
@@ -276,18 +274,17 @@ const studentValidationSchema = yup.object().shape({
 		annualIncome: yup.object().shape({
 			occupationOrPension: yup
 				.number()
-				.positive('Income cannot be negative')
+				.min(0, 'Income cannot be negative')
 				.required('Occupation or pension income is required'),
 			houseAndProperty: yup
 				.number()
-				.positive('Income cannot be negative')
+				.min(0, 'Income cannot be negative')
 				.required('House & property income is required'),
 			otherSources: yup
 				.number()
-				.positive('Income cannot be negative')
+				.min(0, 'Income cannot be negative')
 				.required('Income from other sources is required')
-		}),
-		motherTotalAnnualIncome: yup.number().required()
+		})
 	}),
 
 	guardian: yup.object().shape({
@@ -296,15 +293,15 @@ const studentValidationSchema = yup.object().shape({
 		address: yup.string().optional(),
 		age: yup
 			.number()
-			.positive('Age cannot be negative')
+			.min(0, 'Age cannot be negative')
 			.max(123, 'Invalid age')
 			.optional(),
 		post: yup.string(),
 		annualIncome: yup.object().shape({
 			houseAndPropertyOrTemple: yup
 				.number()
-				.positive('Income cannot be negative'),
-			salary: yup.number().positive('Income cannot be negative')
+				.min(0, 'Income cannot be negative'),
+			salary: yup.number().min(0, 'Income cannot be negative')
 		})
 	}),
 
