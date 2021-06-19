@@ -299,6 +299,11 @@ const studentSchema = mongoose.Schema({
 	isApproved: {
 		type: Boolean,
 		default: false
+	},
+
+	deadline: {
+		type: Date,
+		default: false
 	}
 })
 

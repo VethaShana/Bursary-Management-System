@@ -3,11 +3,13 @@ import header from './layout/header.js'
 import stuD from './layout/stuD.js'
 import office from './layout/OfficeUse.js'
 import instruction from './layout/Instruction.js'
+import instruction2 from './layout/Instruction2.js'
 import Father from './layout/Father.js'
 import Mother from './layout/Mother.js'
 import employee from './layout/Empolyee.js'
 import marriage from './layout/marriage.js'
 import footer from './layout/Footer.js'
+import footer2 from './layout/Footer2.js'
 import guard from './layout/guard.js'
 
 const applicationDocDefinition = data => {
@@ -24,7 +26,8 @@ const applicationDocDefinition = data => {
 		employment,
 		father,
 		mother,
-		guardian
+		guardian,
+		deadline
 	} = data
 
 	const table = (theads, data) => {
@@ -97,6 +100,8 @@ const applicationDocDefinition = data => {
 			},
 			...office,
 			...instruction,
+			{ text: `${deadline}`, bold: 'true' },
+			...instruction2,
 
 			{ text: '2. Family Details:', bold: 'true' },
 			{
@@ -471,7 +476,9 @@ const applicationDocDefinition = data => {
 					]
 				]
 			},
-			footer
+			...footer,
+			{ text: `${deadline}`, bold: 'true' },
+			...footer2
 		],
 		styles: {
 			header: {
