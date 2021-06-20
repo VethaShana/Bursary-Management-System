@@ -47,18 +47,17 @@ export const createStudent = async (req, res, next) => {
 		var deadline = new Date()
 		deadline.setDate(deadline.getDate() + 7)
 		deadline =
-			deadline.getFullYear() +
-			'-' +
+			deadline.getDate() +
+			' - ' +
 			deadline.getMonth() +
-			'-' +
-			deadline.getDate()
+			' - ' +
+			deadline.getFullYear()
 		const newStudent = new Student({
 			...req.body,
 			userId: req.user._id,
 			netIncome: netIncome,
 			capIncome: capIncome,
-			isValidCandidate,
-			deadline
+			isValidCandidate
 		})
 		await newStudent.save()
 		const pdfDoc = pdfMake.createPdf(
