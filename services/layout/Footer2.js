@@ -1,7 +1,4 @@
 export default [
-	{
-		text: 'Applicant will hand over an envelope of 9" x 4" in size with stamps to the appropriate value pasted to the Grama Sevaka for this purpose.\n\n'
-	},
 	{ text: 'Postal Address', bold: 'true' },
 	{
 		columns: [
@@ -24,7 +21,7 @@ export default [
 		text: '\nGrama Sevaka Division and No : ...........................................................'
 	},
 	{
-		text: '\nI certify that the gross annual income of parents / guarians given in cages 7/9 is rupees\n....................................................................................................(in words)'
+		text: '\nI certify that the gross annual income of parents / guardians given in cages 7/9 is rupees\n....................................................................................................(in words)'
 	},
 	{
 		text: "and the details regarding property , brothers and sisters the applicant's declaration are correct to my knowledge and belief. I do not certify due to following reasons.\n\n..................................................................................................................................................................................................................................................................................................................................................................................................................................................................\n\n\n"

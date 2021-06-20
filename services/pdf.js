@@ -59,10 +59,13 @@ const applicationDocDefinition = data => {
 				alignment: 'justify',
 
 				table: {
-					widths: [110, 100],
+					widths: [200, 100],
 					body: [
 						[
-							{ text: 'Registration No:', fontSize: 15 },
+							{
+								text: 'Student registration No. :',
+								fontSize: 15
+							},
 							{ text: `${data.regNo ? data.regNo : 'N/A'}` }
 						]
 					]
@@ -100,7 +103,9 @@ const applicationDocDefinition = data => {
 			},
 			...office,
 			...instruction,
-			{ text: `${deadline}`, bold: 'true' },
+			{
+				text: `\n3. The application should be duly perfected and hande over to Grama Seveka, so as to reach this office before ..${deadline}.. the Grama Seveka will forward the application to the DS as specified in cage 11. As the application has to be returned by registered post and an envelope of 9" x 4" in size with stamps to the appropriate value pasted should be handed over to the Grama Sevaka along with the application. Tha words "Bursary Application" should be indicated on the left hand top corner of the envelop. This application should not be handed over to this office personally under any circumstances.\n`
+			},
 			...instruction2,
 
 			{ text: '2. Family Details:', bold: 'true' },
@@ -477,7 +482,9 @@ const applicationDocDefinition = data => {
 				]
 			},
 			...footer,
-			{ text: `${deadline}`, bold: 'true' },
+			{
+				text: `\n3. The D.S having certified the Grama Sevakas signature should forward the application to the following address under registered cover, so as to reach on or before ..${deadline}.. Applicant will hand over an envelope of 9" x 4" in size with stamps to the appropriate value pasted to the Grama Sevaka for this purpose.\n\n`
+			},
 			...footer2
 		],
 		styles: {

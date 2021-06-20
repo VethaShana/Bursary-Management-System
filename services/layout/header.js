@@ -4,12 +4,12 @@ export default [
 	{ alignment: 'center', fit: [100, 100], image: uojLogo },
 
 	{
-		text: 'University of Jaffna, Sri Lanka\n',
+		text: 'UNIVERSITY OF JAFFNA, SRILANKA\n',
 		style: 'header',
 		alignment: 'center'
 	},
 	{
-		text: 'Application For Bursary\n\n',
+		text: 'APPLICATION FOR BURSARY\n\n',
 		bold: 'true',
 		alignment: 'center',
 		fontSize: 15

@@ -1,6 +1,6 @@
 export default [
 	[
-		{ text: '\n01. ', bold: 'true' },
+		{ text: '\n01. Student Details', bold: 'true' },
 		{ text: '\nFull Name of the Applicant :' },
 		{ text: '\nPermanent Address :' },
 		{ text: '\n\n' },

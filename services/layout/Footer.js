@@ -31,8 +31,5 @@ export default [
 	},
 	{
 		text: '\n2. Application should not be handed over to be applicant under any circumstances.'
-	},
-	{
-		text: '\n3. The D.S having certified the Grama Sevakas signature should forward the application to the following address under registered cover, so as to reach on or before,s'
 	}
 ]

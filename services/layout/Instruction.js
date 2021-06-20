@@ -10,7 +10,5 @@ export default [
 	{
 		text: '\n2. No cage should be left blank with lines drawn across. If you have nothing to state it should be stated. Incomplete applications or applications that do not reach this office before closing date or applications that are not channeled through Grama Sevaka an Ds will be rejected.\n'
 	},
-	{
-		text: '\n3. The application should be duly perfected and hande over to Grama Seveka, so as to reach this office before,'
-	}
+
 ]
