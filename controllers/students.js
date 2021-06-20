@@ -1,4 +1,5 @@
 import Student from '../models/student.js'
+//import Deadline from '../models/student.js'
 import pdfMake from 'pdfmake/build/pdfmake.js'
 import PDF_Fonts from 'pdfmake/build/vfs_fonts.js'
 import { getDocumentDefinition } from '../services/pdf.js'
@@ -61,16 +62,25 @@ export const createStudent = async (req, res, next) => {
 		const [netIncome, capIncome] = getAmounts(req.body)
 		console.log(netIncome, capIncome)
 		const isValidCandidate = netIncome <= capIncome
+		var deadline = new Date()
+		deadline.setDate(deadline.getDate() + 7)
+		deadline =
+			deadline.getFullYear() +
+			'-' +
+			deadline.getMonth() +
+			'-' +
+			deadline.getDate()
 		const newStudent = new Student({
 			...req.body,
 			userId: req.user._id,
 			netIncome: netIncome,
 			capIncome: capIncome,
-			isValidCandidate
+			isValidCandidate,
+			deadline
 		})
 		await newStudent.save()
 		const pdfDoc = pdfMake.createPdf(
-			getDocumentDefinition('application', req.body)
+			getDocumentDefinition('application', { ...req.body, deadline })
 		)
 
 		var data

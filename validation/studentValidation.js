@@ -36,9 +36,9 @@ const studentValidationSchema = yup.object().shape({
 
 	course: yup.string().required('course number is required'),
 
-	gsDivision: yup.string().required('gsDivision number is required'),
+	GSDivision: yup.string().required('gsDivision number is required'),
 
-	dsDivision: yup.string(),
+	DSDivision: yup.string(),
 
 	indexNo: yup.string(),
 
@@ -46,20 +46,18 @@ const studentValidationSchema = yup.object().shape({
 		.array()
 		.of(
 			yup.object().shape({
-				name: yup.string().required('Name is required'),
+				name: yup.string(), //.required('Name is required'),
 				dob: yup
 					.date()
-					.max(new Date(), 'Date of Birth cannot be in future')
-					.required('Date of Birth is required'),
+					.max(new Date(), 'Date of Birth cannot be in future'),
+				//	.required('Date of Birth is required'),
 				// age: yup
 				// 	.number()
 				// 	.min(0, 'Age cannot be negative')
 				// 	.max(123, 'Invalid age')
 				// 	.required('Age is required'),
-				schoolOrInstitute: yup
-					.string()
-					.max(123, 'Invalid age')
-					.required('Academic year is required')
+				schoolOrInstitute: yup.string().max(123, 'Invalid age')
+				//.required('Academic year is required')
 			})
 		)
 		.optional(),
@@ -68,19 +66,18 @@ const studentValidationSchema = yup.object().shape({
 		.array()
 		.of(
 			yup.object().shape({
-				name: yup.string().required('Name is required'),
-				regNo: yup.string().required('Registration No. is required'),
-				institute: yup.string().required('Institute is required'),
-				academicYear: yup
-					.number()
-					.min(new Date().getFullYear() - 7, 'Invalid Academic year')
-					.max(
-						new Date().getFullYear(),
-						'Academic year cannot exceed current year.'
-					)
-					.required('Academic year is required'),
-				course: yup.string().required('Course is required'),
-				isBursaryOrMahapolaRecipient: yup.boolean().required()
+				name: yup.string(), //.required('Name is required'),
+				regNo: yup.string(), //.required('Registration No. is required'),
+				institute: yup.string(), //.required('Institute is required'),
+				academicYear: yup.string(),
+				//.min(new Date().getFullYear() - 10, 'Invalid Academic year')
+				// .max(
+				// 	new Date().getFullYear(),
+				// 	'Academic year cannot exceed current year.'
+				// ),
+				//.required('Academic year is required'),
+				course: yup.string(), //.required('Course is required'),
+				isBursaryOrMahapolaRecipient: yup.boolean() //.required()
 			})
 		)
 		.optional(),
@@ -89,18 +86,13 @@ const studentValidationSchema = yup.object().shape({
 		.array()
 		.of(
 			yup.object().shape({
-				name: yup.string().required('Name is required'),
-				relationship: yup
-					.string()
-					.required('Relationship No. is required'),
-				location: yup.string().required('Location is required'),
-				natureOfCultivation: yup
-					.string()
-					.required('Nature of Cultivation is required'),
-				extentOfLandAndDetails: yup
-					.string()
-					.required('Extent of Land & Details are required'),
-				annualIncome: yup.number().required('Annual Income is requied')
+				name: yup.string(), //.required('Name is required'),
+				relationship: yup.string(),
+				//.required('Relationship No. is required'),
+				location: yup.string(), //.required('Location is required'),
+				natureOfCultivation: yup.string(), //.required('Nature of Cultivation is required'),
+				extentOfLandAndDetails: yup.string(), //.required('Extent of Land & Details are required'),
+				annualIncome: yup.number() //.required('Annual Income is requied')
 			})
 		)
 		.optional(),
@@ -109,16 +101,12 @@ const studentValidationSchema = yup.object().shape({
 		.array()
 		.of(
 			yup.object().shape({
-				name: yup.string().required('Name is required'),
-				relationship: yup.string().required('Relationship is required'),
-				assessmentNo: yup
-					.string()
-					.required('Assessment No. is required'),
-				noOfHouseholders: yup
-					.number()
-					.required('No. of Householders is required'),
-				address: yup.string().required('Address is required'),
-				annualIncome: yup.number().required('Annual Income is requied')
+				name: yup.string(), //.required('Name is required'),
+				relationship: yup.string(), //.required('Relationship is required'),
+				assessmentNo: yup.string(), //.required('Assessment No. is required'),
+				noOfHouseholders: yup.number(), //.required('No. of Householders is required'),
+				address: yup.string(), //.required('Address is required'),
+				annualIncome: yup.number() //.required('Annual Income is requied')
 			})
 		)
 		.optional(),
@@ -144,9 +132,9 @@ const studentValidationSchema = yup.object().shape({
 						.min(0, 'Salary cannot be negative')
 						.required('Salary is required')
 				: yup.string(),
-			salaryScale: employed
-				? yup.number().required('Salary scale required')
-				: yup.number(),
+			// salaryScale: employed
+			// 	? yup.number().required('Salary scale required')
+			// 	: yup.number(),
 
 			dateOfEmployment: employed
 				? yup

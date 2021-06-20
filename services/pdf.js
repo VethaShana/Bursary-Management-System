@@ -3,11 +3,13 @@ import header from './layout/header.js'
 import stuD from './layout/stuD.js'
 import office from './layout/OfficeUse.js'
 import instruction from './layout/Instruction.js'
+import instruction2 from './layout/Instruction2.js'
 import Father from './layout/Father.js'
 import Mother from './layout/Mother.js'
 import employee from './layout/Empolyee.js'
 import marriage from './layout/marriage.js'
 import footer from './layout/Footer.js'
+import footer2 from './layout/Footer2.js'
 import guard from './layout/guard.js'
 
 const applicationDocDefinition = data => {
@@ -24,43 +26,29 @@ const applicationDocDefinition = data => {
 		employment,
 		father,
 		mother,
-		guardian
+		guardian,
+		deadline
 	} = data
 
-	const rows = siblingsUnder19.map(sibling => [
-		`${sibling.name}`,
-		`${moment(sibling.dob).format('L')}`,
-		`${moment().diff(sibling.dob, 'years')}`,
-		`${sibling.school}`
-	])
-
-	const rows1 = siblingsAtUniversity.map(sib => [
-		`${sib.name}`,
-		`${sib.regNo}`,
-		`${sib.university}`,
-		`${sib.siblingCourse}`,
-		`${sib.academicYear}`,
-		`${sib.isBursaryRecipient}`
-	])
-
-	console.log(incomeFromEstateFieldsLands)
-	const rows2 = incomeFromEstateFieldsLands.map(income => [
-		`${income.name}`,
-		`${income.relationship}`,
-		`${income.location}`,
-		`${income.natureOfCultivation}`,
-		`${income.extentOfLandAndDetails}`,
-		`${income.annualIncome}`
-	])
-
-	const rows3 = incomeFromHouses.map(income => [
-		`${income.name}`,
-		`${income.relationship}`,
-		`${income.assessmentNo}`,
-		`${income.noOfHouseholders}`,
-		`${income.address}`,
-		`${income.annualIncome}`
-	])
+	const table = (theads, data) => {
+		if (data.length > 0) {
+			return {
+				headerRows: 1,
+				widths: theads.map(({ width = 'auto' }) => width),
+				// widths: theads.map(thead => thead.width),
+				body: [
+					theads.map(({ text }) => text),
+					...data.map(x => Object.values(x).map(y => (y ? y : 'N/A')))
+				]
+			}
+		}
+		return {
+			headerRows: 1,
+			// widths: theads.map(({width = 'auto'}) => width),
+			widths: theads.map(thead => thead.width),
+			body: [theads.map(({ text }) => text), theads.map(thead => 'N/A')]
+		}
+	}
 
 	return {
 		pageMargins: [60, 60, 60, 60],
@@ -75,7 +63,7 @@ const applicationDocDefinition = data => {
 					body: [
 						[
 							{ text: 'Registration No:', fontSize: 15 },
-							{ text: `${data.regNo}` }
+							{ text: `${data.regNo ? data.regNo : 'N/A'}` }
 						]
 					]
 				}
@@ -84,18 +72,26 @@ const applicationDocDefinition = data => {
 				columns: [
 					...stuD,
 					[
-						{ text: '\n\n\n' },
+						{ text: '\n\n' },
 						{ text: `\n${title}.${fullName}` },
 						{
 							text: `\n${data.street}, ${data.city}, ${data.district} `
 						},
 						{ text: '\n' },
-						{ text: `\n${data.gsDivision}&${data.gsNo}` },
-						{ text: `\n${data.dsDivision}` },
+						{
+							text: `\n\n${
+								data.gsDivision ? data.gsDivision : 'N/A'
+							}`
+						},
+						{
+							text: `\n${
+								data.dsDivision ? data.gsDivision : 'N/A'
+							}`
+						},
 						{ text: `\n${data.district}` },
 						{ text: `\n${data.phone}` },
 						{ text: `\n\n${data.alDistrict}` },
-						{ text: `\n${data.indexNo}` },
+						{ text: `\n${data.indexNo ? data.indexNo : 'N/A'}` },
 						{ text: `\n${data.zScore}` },
 						{ text: `\n\n${data.course}` },
 						{ text: `\n${data.nic}` }
@@ -104,31 +100,25 @@ const applicationDocDefinition = data => {
 			},
 			...office,
 			...instruction,
+			{ text: `${deadline}`, bold: 'true' },
+			...instruction2,
 
-			{ text: '2.Family Details:', bold: 'true' },
+			{ text: '2. Family Details:', bold: 'true' },
 			{
-				text: ' \nA.  state details of school going bothers, sisters / Rev.brothers/children, if married who are 19 years or under, you should prepared to produce birth certificate if necessary.\n'
+				text: ' \nA.  state details of school going bothers, sisters / Rev.brothers/children, if married who are 19 years or under, you should prepared to produce birth certificate if necessary.\n\n'
 			},
 			{
-				style: 'tableExample',
-				table: {
-					headerRows: 1,
-					heights: 40,
-					body: [
-						[
-							{ text: 'Name', style: 'tableHeader' },
-							{ text: 'Date of Birth', style: 'tableHeader' },
-							{ text: 'Age', style: 'tableHeader' },
-							{
-								text: 'Name of school/Institute attenden ',
-								style: 'tableHeader'
-							},
-							...rows
-						]
-					]
-				}
+				layout: 'lightHorizontalLines', // optional
+				table: table(
+					[
+						{ text: 'Name' },
+						{ text: 'Date of Birth', width: 'auto' },
+						{ text: 'Age', width: 'auto' },
+						{ text: 'School/Institute', width: 100 }
+					],
+					siblingsUnder19
+				)
 			},
-
 			{
 				text: `\nB. Distance from the student\'s permanent residence to the University of Jaffna(k.m) : ${data.Distance} km`
 			},
@@ -136,89 +126,70 @@ const applicationDocDefinition = data => {
 				text: '\nC. If you have any brother or sisters following courses of study in a University, or any Campus, Institute of Athletic studies or Institute of Indigenous Medicine , give details:\n'
 			},
 			{
-				style: 'tableExample',
-				table: {
-					headerRows: 1,
-					heights: 40,
-					body: [
-						[
-							{ text: 'Name', style: 'tableHeader' },
-							{
-								text: 'Registration No of the Higher Education',
-								style: 'tableHeader'
-							},
-							{
-								text: 'Name of the Institution where the course of study is being followed ',
-								style: 'tableHeader'
-							},
-							{ text: 'Course ', style: 'tableHeader' },
-							{ text: 'Acadamic Year', style: 'tableHeader' },
-							{ text: 'getBursary', style: 'tableHeader' },
-							...rows1
-						]
-					]
-				}
+				layout: 'lightHorizontalLines', // optional
+				table: table(
+					[
+						{ text: 'Name' },
+						{
+							text: 'Registration No of the Higher Education',
+							width: 'auto'
+						},
+						{
+							text: 'Name of the Institution where the course of study is being followed ',
+							width: 'auto'
+						},
+						{ text: 'Course', width: 'auto' },
+						{ text: 'Acadamic Year', width: 'auto' },
+						{ text: 'getBursary', width: 100 }
+					],
+
+					siblingsAtUniversity
+				)
 			},
 
 			{
-				text: '\n3. Income from Estates,Fields,Lands etc.:',
+				text: '\n3. Income from Estates,Fields,Lands etc.:\n\n',
 				bold: 'true'
 			},
 			{
-				style: 'tableExample',
-				table: {
-					headerRows: 1,
-					heights: 40,
-					body: [
-						[
-							{ text: 'Name of Owner', style: 'tableHeader' },
-							{ text: 'Relationship', style: 'tableHeader' },
-							{ text: 'Location', style: 'tableHeader' },
-							{
-								text: 'Nature of Cultivation ',
-								style: 'tableHeader'
-							},
-							{
-								text: 'Extent of Land & Details of Property',
-								style: 'tableHeader'
-							},
-							{
-								text: 'Annual income in Rupees ',
-								style: 'tableHeader'
-							},
-							...rows2
-						]
-					]
-				}
+				layout: 'lightHorizontalLines', // optional
+				table: table(
+					[
+						{ text: 'Name of Owner' },
+						{ text: 'Relationship', width: 'auto' },
+						{ text: 'Location ', width: 'auto' },
+						{ text: 'Nature of Cultivation', width: 'auto' },
+						{
+							text: 'Extent of Land & Details of Property',
+							width: 'auto'
+						},
+						{ text: 'Annual income in Rupees ', width: 100 }
+					],
+
+					incomeFromEstateFieldsLands
+				)
 			},
 
-			{ text: '\n4. Income from the Houses:', bold: 'true' },
+			{ text: '\n4. Income from the Houses:\n\n', bold: 'true' },
 			{
-				style: 'tableExample',
-				table: {
-					headerRows: 1,
-					heights: 40,
-					body: [
-						[
-							{ text: 'Name of Owner', style: 'tableHeader' },
-							{ text: 'Relationship', style: 'tableHeader' },
-							{ text: 'Assessment No', style: 'tableHeader' },
-							{
-								text: 'No. of house holders List',
-								style: 'tableHeader'
-							},
-							{ text: 'Address', style: 'tableHeader' },
-							{ text: 'Annual income', style: 'tableHeader' },
-							{
-								text: 'If given on rent/lease names and addresses of tenant/lease',
-								style: 'tableHeader'
-							},
-							...rows3
-						]
-					]
-				}
-			},
+				layout: 'lightHorizontalLines', // optional
+				table: table(
+					[
+						{ text: 'Name of Owner' },
+						{ text: 'Relationship', width: 'auto' },
+						{ text: 'Assessment No', width: 'auto' },
+						{ text: 'No. of house holders List', width: 'auto' },
+						{ text: 'Address', width: 'auto' },
+						{ text: 'Annual income', width: 'auto' },
+						{
+							text: 'If given on rent/lease names and addresses of tenant/lease',
+							width: 100
+						}
+					],
 
+					incomeFromHouses
+				)
+			},
 			{
 				columns: [
 					[
@@ -229,9 +200,17 @@ const applicationDocDefinition = data => {
 						{ text: '\n 3.Name of the Local Authority :' }
 					],
 					[
-						{ text: `\n\n${data.GSDNo}` },
-						{ text: `\n${data.DSDivision}` },
-						{ text: `\n${data.LocalAthority}` }
+						{ text: `\n\n${data.GSDNo ? data.GSDNo : 'N/A'}` },
+						{
+							text: `\n${
+								data.DSDivision ? data.DSDivision : 'N/A'
+							}`
+						},
+						{
+							text: `\n${
+								data.LocalAthority ? data.LocalAthority : 'N/A'
+							}`
+						}
 					]
 				]
 			},
@@ -242,14 +221,52 @@ const applicationDocDefinition = data => {
 					[
 						{ text: '\n\n\n' },
 						//...employment.map(work => [
-						{ text: `\n${employed}` },
+						{ text: `\n${employed ? 'Yes' : 'No'}` },
 						{
-							text: `\n\n${employment.establishment} from ${employment.address.street},${employment.address.city},${employment.address.district}`
+							text: `\n\n${
+								employment.establishment
+									? employment.establishment
+									: 'N/A'
+							} from ${
+								employment.address.street
+									? employment.address.street
+									: null
+							},${
+								employment.address.city
+									? employment.address.city
+									: null
+							},${
+								employment.address.district
+									? employment.address.district
+									: null
+							}`
 						},
-						{ text: `\n${employment.designation}` },
-						{ text: `\n${employment.salaryScale}` },
-						{ text: `\n${employment.salary}` },
-						{ text: `\n${employment.dateOfEmployment}` }
+						{
+							text: `\n${
+								employment.designation
+									? employment.designation
+									: 'N/A'
+							}`
+						},
+						{
+							text: `\n${
+								employment.salaryScale
+									? employment.salaryScale
+									: 'N/A'
+							}`
+						},
+						{
+							text: `\n${
+								employment.salary ? employment.salary : 'N/A'
+							}`
+						},
+						{
+							text: `\n${
+								employment.dateOfEmployment
+									? employment.dateOfEmployment
+									: 'N/A'
+							}`
+						}
 						//])
 					]
 				]
@@ -258,14 +275,39 @@ const applicationDocDefinition = data => {
 				columns: [
 					marriage,
 					[
-						{ text: `\n\n` },
+						{ text: `\n\n\n` },
 						//{ text: `\n${marriage}` },
 						//...spouse.map(marry => [
-						{ text: `\n${spouse.dateOfMarriage}` },
-						{ text: `\n${spouse.name}` },
-						{ text: `\n\n${spouse.employment.establishment}` },
-						{ text: `\n${spouse.employment.designation}` },
-						{ text: `\n\n${spouse.employment.salary}` }
+						{ text: `\n${married ? 'Yes' : 'No'}` },
+						{
+							text: `\n${
+								spouse.dateOfMarriage
+									? spouse.dateOfMarriage
+									: 'N/A'
+							}`
+						},
+						{ text: `\n${spouse.name ? spouse.name : 'N/A'}` },
+						{
+							text: `\n\n${
+								spouse.employment.establishment
+									? spouse.employment.establishment
+									: 'N/A'
+							}`
+						},
+						{
+							text: `\n${
+								spouse.employment.designation
+									? spouse.employment.designation
+									: 'N/A'
+							}`
+						},
+						{
+							text: `\n\n${
+								spouse.employment.salary
+									? spouse.employment.salary
+									: 'N/A'
+							}`
+						}
 						//])
 					]
 				]
@@ -281,18 +323,54 @@ const applicationDocDefinition = data => {
 					[
 						//...father.map(attr => [
 						{ text: `\n${father.name}` },
-						{ text: `\n\n\n${father.living}` },
-						{ text: `\n${father.age}` },
-						{ text: `\n\n\n${father.employment.occupation}` },
-						{ text: `\n\n${father.employment.address}` },
 						{
-							text: `\n\n\n${father.annualIncome.occupationOrPension}`
+							text: `\n\n\n${
+								father.living ? 'Living' : 'Not alive'
+							}`
+						},
+						{ text: `\n${father.age ? father.age : 'N/A'}` },
+						{
+							text: `\n\n\n${
+								father.employment.occupation
+									? father.employment.occupation
+									: 'N/A'
+							}`
 						},
 						{
-							text: `\n\n${father.annualIncome.houseAndProperty}`
+							text: `\n\n${
+								father.employment.address
+									? father.employment.address
+									: 'N/A'
+							}`
 						},
-						{ text: `\n${father.annualIncome.otherSources}` },
-						{ text: `\n${father.fatherTotalAnnualIncome}` }
+						{
+							text: `\n\n\n${
+								father.annualIncome.occupationOrPension
+									? father.annualIncome.occupationOrPension
+									: 'N/A'
+							}`
+						},
+						{
+							text: `\n\n${
+								father.annualIncome.houseAndProperty
+									? father.annualIncome.houseAndProperty
+									: 'N/A'
+							}`
+						},
+						{
+							text: `\n${
+								father.annualIncome.otherSources
+									? father.annualIncome.otherSources
+									: 'N/A'
+							}`
+						},
+						{
+							text: `\n${
+								father.fatherTotalAnnualIncome
+									? father.fatherTotalAnnualIncome
+									: 'N/A'
+							}`
+						}
 						//])
 					]
 				]
@@ -305,18 +383,54 @@ const applicationDocDefinition = data => {
 					[
 						//	...mother.map(attr => [
 						{ text: `\n${mother.name}` },
-						{ text: `\n\n\n${mother.living}` },
-						{ text: `\n${mother.age}` },
-						{ text: `\n\n\n${mother.employment.occupation}` },
-						{ text: `\n\n${mother.employment.address}` },
 						{
-							text: `\n\n\n${mother.annualIncome.occupationOrPension}`
+							text: `\n\n\n${
+								mother.living ? 'Living' : 'Not alive'
+							}`
+						},
+						{ text: `\n${mother.age ? mother.age : 'N/A'}` },
+						{
+							text: `\n\n\n${
+								mother.employment.occupation
+									? mother.employment.occupation
+									: 'N/A'
+							}`
 						},
 						{
-							text: `\n\n${mother.annualIncome.houseAndProperty}`
+							text: `\n\n${
+								mother.employment.address
+									? mother.employment.address
+									: 'N/A'
+							}`
 						},
-						{ text: `\n${mother.annualIncome.otherSources}` },
-						{ text: `\n${mother.motherTotalAnnualIncome}` }
+						{
+							text: `\n\n\n${
+								mother.annualIncome.occupationOrPension
+									? mother.annualIncome.occupationOrPension
+									: 'N/A'
+							}`
+						},
+						{
+							text: `\n\n${
+								mother.annualIncome.houseAndProperty
+									? mother.annualIncome.houseAndProperty
+									: 'N/A'
+							}`
+						},
+						{
+							text: `\n${
+								mother.annualIncome.otherSources
+									? mother.annualIncome.otherSources
+									: 'N/A'
+							}`
+						},
+						{
+							text: `\n${
+								mother.motherTotalAnnualIncome
+									? mother.motherTotalAnnualIncome
+									: 'N/A'
+							}`
+						}
 						//])
 					]
 				]
@@ -335,19 +449,36 @@ const applicationDocDefinition = data => {
 					guard,
 					[
 						//...guardian.map(attr => [
-						{ text: `\n${guardian.name}` },
-						{ text: `\n${guardian.address}` },
-						{ text: `\n${guardian.post}` },
-						{ text: `\n\n\n\n${guardian.annualIncome.salary}` },
+						{ text: `\n${guardian.name ? guardian.name : 'N/A'}` },
 						{
-							text: `\n\n${guardian.annualIncome.houseAndPropertyOrTemple}`
+							text: `\n${
+								guardian.address ? guardian.address : 'N/A'
+							}`
 						},
-						{ text: `\n${guardian.age}` }
+						{ text: `\n${guardian.post ? guardian.post : 'N/A'}` },
+						{
+							text: `\n\n\n\n${
+								guardian.annualIncome.salary
+									? guardian.annualIncome.salary
+									: 'N/A'
+							}`
+						},
+						{
+							text: `\n\n${
+								guardian.annualIncome.houseAndPropertyOrTemple
+									? guardian.annualIncome
+											.houseAndPropertyOrTemple
+									: 'N/A'
+							}`
+						},
+						{ text: `\n${guardian.age ? guardian.age : 'N/A'}` }
 						//	])
 					]
 				]
 			},
-			footer
+			...footer,
+			{ text: `${deadline}`, bold: 'true' },
+			...footer2
 		],
 		styles: {
 			header: {

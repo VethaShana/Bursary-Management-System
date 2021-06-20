@@ -4,7 +4,7 @@ export default [
 	{ alignment: 'center', fit: [100, 100], image: uojLogo },
 
 	{
-		text: 'University of Jaffne, Sri Lanka\n',
+		text: 'University of Jaffna, Sri Lanka\n',
 		style: 'header',
 		alignment: 'center'
 	},
