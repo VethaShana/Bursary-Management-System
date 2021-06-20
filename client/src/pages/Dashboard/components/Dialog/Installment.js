@@ -21,10 +21,11 @@ import { TextField, Checkbox } from 'formik-material-ui'
 import { KeyboardDatePicker } from 'formik-material-ui-pickers'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns'
-import { addInstallment } from '../../../../actions/students'
+import { addInstallment } from '../../../../actions/installments'
 import { connect } from 'react-redux'
 
-import { faculties, courses } from '../../../../utils/data'
+import { courses } from '../../../../utils/data'
+const faculties = courses.map(x => x.faculty)
 
 const useStyles = makeStyles(theme => ({
 	dialogContent: {
@@ -35,10 +36,12 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-const academicYears = ((year, number) =>
-	Array(number)
+const academicYears = ((year, number) => {
+	year -= number
+	return Array(number)
 		.fill()
-		.map(() => year++))(new Date().getUTCFullYear() - 5, 5)
+		.map(() => `${year}/${++year}`)
+})(new Date().getUTCFullYear(), 7)
 
 const initialValues = {
 	date: new Date(),
@@ -46,7 +49,7 @@ const initialValues = {
 	course: 'N/A',
 	academicYear: 'N/A',
 	description: '',
-	installments: 1
+	noOfInstallments: 1
 }
 
 const validationSchema = yup.object({
@@ -55,20 +58,30 @@ const validationSchema = yup.object({
 		.string()
 		.oneOf(faculties, 'Invalid Faculty')
 		.required('Faculty is required'),
-	course: yup
-		.string()
-		.oneOf(courses, 'Invalid Course')
-		.required('Course is required'),
+	course: yup.string().when('faculty', (value, schema) => {
+		return value === 'N/A'
+			? yup
+					.string()
+					.notOneOf(['N/A'], 'Invalid course')
+					.required('Course is required')
+			: yup
+					.string()
+					.oneOf(
+						courses.find(({ faculty }) => faculty === value)
+							.courses,
+						'Invalid course'
+					)
+					.required('Select a course')
+	}),
 	academicYear: yup
-		.number()
-		.typeError('Academic Year is required')
+		.string()
 		.oneOf(academicYears, 'Invalid Academic year')
 		.required('Academic year is required'),
 	description: yup
 		.string()
 		.min(3, 'Description must be atleast 3 characters')
 		.required('Description is required'),
-	installments: yup
+	noOfInstallments: yup
 		.number()
 		.min(1, 'Minimimum No. of Installments is one')
 		.max(10, 'Minimimum No. of Installments is ten')
@@ -76,12 +89,8 @@ const validationSchema = yup.object({
 		.required('Number of installments are required')
 })
 
-const onSubmit = action => values => {
-	console.log(values)
-	action(values)
-}
-
 const Installment = forwardRef((props, ref) => {
+	const { addInstallment } = props
 	const [open, setOpen] = React.useState(false)
 	const classes = useStyles()
 	const theme = useTheme()
@@ -111,7 +120,9 @@ const Installment = forwardRef((props, ref) => {
 		>
 			<Formik
 				initialValues={initialValues}
-				onSubmit={onSubmit(props.addInstallment)}
+				onSubmit={values => {
+					addInstallment(values).then(setOpen(false))
+				}}
 				validationSchema={validationSchema}
 			>
 				{({ submitForm, isSubmitting, touched, errors, values }) => (
@@ -139,9 +150,9 @@ const Installment = forwardRef((props, ref) => {
 											<MenuItem key={'N/A'} value={'N/A'}>
 												N/A
 											</MenuItem>
-											{faculties.map(option => (
+											{faculties.map((option, idx) => (
 												<MenuItem
-													key={option}
+													key={idx}
 													value={option}
 												>
 													{option}
@@ -163,14 +174,23 @@ const Installment = forwardRef((props, ref) => {
 											<MenuItem key={'N/A'} value={'N/A'}>
 												N/A
 											</MenuItem>
-											{courses.map(option => (
-												<MenuItem
-													key={option}
-													value={option}
-												>
-													{option}
-												</MenuItem>
-											))}
+											{values.faculty !== 'N/A' &&
+												courses
+													.find(
+														({ faculty }) =>
+															faculty ===
+															values.faculty
+													)
+													.courses.map(
+														(option, idx) => (
+															<MenuItem
+																key={idx}
+																value={option}
+															>
+																{option}
+															</MenuItem>
+														)
+													)}
 										</Field>
 									</Grid>
 									<Grid item xs={12} sm={6}>
@@ -187,14 +207,16 @@ const Installment = forwardRef((props, ref) => {
 											<MenuItem key={'N/A'} value={'N/A'}>
 												N/A
 											</MenuItem>
-											{academicYears.map(option => (
-												<MenuItem
-													key={option}
-													value={option}
-												>
-													{option}/{++option}
-												</MenuItem>
-											))}
+											{academicYears.map(
+												(option, idx) => (
+													<MenuItem
+														key={idx}
+														value={option}
+													>
+														{option}
+													</MenuItem>
+												)
+											)}
 										</Field>
 									</Grid>
 									<Grid item xs={12} sm={6}>
@@ -211,7 +233,7 @@ const Installment = forwardRef((props, ref) => {
 												min: 1,
 												max: 10
 											}}
-											name="installments"
+											name="noOfInstallments"
 										/>
 									</Grid>
 									<Grid item xs={12}>

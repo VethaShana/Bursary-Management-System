@@ -22,7 +22,8 @@ import { KeyboardDatePicker } from 'formik-material-ui-pickers'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns'
 
-import { faculties } from '../../../../utils/data'
+import { courses } from '../../../../utils/data'
+const faculties = courses.map(x => x.faculty)
 
 const useStyles = makeStyles(theme => ({
 	dialogContent: {

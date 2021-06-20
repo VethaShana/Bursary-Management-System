@@ -9,7 +9,7 @@ function Toolbar() {
 	const installmentRef = useRef(null)
 	const summaryRef = useRef(null)
 	return (
-		<Grid container xs={12} display="flex" spacing={2} justify="flex-end">
+		<Grid container display="flex" spacing={2} justify="flex-end">
 			<Grid item>
 				<Button
 					variant="contained"

@@ -7,7 +7,8 @@ import {
 	APPROVE_STUDENT,
 	DISAPPROVE_STUDENT,
 	REMOVE_STUDENT,
-	ADD_INSTALLMENT
+	APPROVE_STUDENTS,
+	DISAPPROVE_STUDENTS
 } from './types'
 
 export const getStudents = () => async (dispatch, getState) => {
@@ -52,13 +53,39 @@ export const deleteStudent = id => async (dispatch, getState) => {
 		})
 }
 
-export const approveStudent = id => async (dispatch, getState) => {
-	const student = getState().students.data.find(({ _id }) => _id === id)
+export const approveStudents = ids => async (dispatch, getState) => {
 	await axios
-		.put(`/students/${id}`, { ...student, isApproved: true })
+		.patch('/students', { ids, data: { isApproved: true } })
 		.then(res => {
-			dispatch({ type: APPROVE_STUDENT })
-			dispatch(getStudents())
+			dispatch({ type: APPROVE_STUDENTS, payload: ids })
+		})
+		.catch(err => {
+			dispatch({
+				type: SET_STUDENTS_ERRORS,
+				payload: err.response.data.error
+			})
+		})
+}
+
+export const approveStudent = id => async (dispatch, getState) => {
+	await axios
+		.patch(`/students/${id}`, { isApproved: true })
+		.then(res => {
+			dispatch({ type: APPROVE_STUDENT, payload: id })
+		})
+		.catch(err => {
+			dispatch({
+				type: SET_STUDENTS_ERRORS,
+				payload: err.response.data.error
+			})
+		})
+}
+
+export const disApproveStudents = ids => async (dispatch, getState) => {
+	await axios
+		.patch('/students', { ids, data: { isApproved: false } })
+		.then(res => {
+			dispatch({ type: DISAPPROVE_STUDENTS, payload: ids })
 		})
 		.catch(err => {
 			dispatch({
@@ -69,27 +96,10 @@ export const approveStudent = id => async (dispatch, getState) => {
 }
 
 export const disApproveStudent = id => async (dispatch, getState) => {
-	const student = getState().students.data.find(({ _id }) => _id === id)
 	await axios
-		.put(`/students/${id}`, { ...student, isApproved: false })
+		.patch(`/students/${id}`, { isApproved: false })
 		.then(res => {
-			dispatch({ type: DISAPPROVE_STUDENT })
-			dispatch(getStudents())
-		})
-		.catch(err => {
-			dispatch({
-				type: SET_STUDENTS_ERRORS,
-				payload: err.response.data.error
-			})
-		})
-}
-
-export const addInstallment = data => async (dispatch, getState) => {
-	await axios
-		.post(`/installments/`, data)
-		.then(res => {
-			dispatch({ type: ADD_INSTALLMENT })
-			dispatch(getStudents())
+			dispatch({ type: DISAPPROVE_STUDENT, payload: id })
 		})
 		.catch(err => {
 			dispatch({

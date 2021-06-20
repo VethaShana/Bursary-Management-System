@@ -23,7 +23,6 @@ import Installments from './views/Installments'
 import Users from './views/Users'
 import Settings from './views/Settings'
 import { Paper, Grid } from '@material-ui/core'
-import PendingApplications from './components/PendingApplications'
 import Card from './components/Card'
 import Chart from './components/Chart'
 import Title from './components/Title'
@@ -33,12 +32,13 @@ import Menu from './components/Menu'
 // redux
 import { connect } from 'react-redux'
 import { getStudents } from '../../actions/students'
+import { getInstallments } from '../../actions/installments'
 
 const mapStateToProps = state => ({
 	user: state.user.data
 })
 
-const mapDispatchToProps = { getStudents }
+const mapDispatchToProps = { getStudents, getInstallments }
 
 const drawerWidth = 240
 
@@ -118,7 +118,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-function Dashboard({ user, getStudents }) {
+function Dashboard({ user, getStudents, getInstallments }) {
 	const classes = useStyles()
 	const menuRef = useRef(null)
 	const [open, setOpen] = React.useState(true)
@@ -133,6 +133,7 @@ function Dashboard({ user, getStudents }) {
 
 	useEffect(() => {
 		getStudents()
+		getInstallments()
 	}, [])
 
 	return (
@@ -223,7 +224,7 @@ function Dashboard({ user, getStudents }) {
 								{/* Pending Applications */}
 								<Grid item xs={12}>
 									<Paper className={classes.paper}>
-										<PendingApplications />
+										{/* some data */}
 									</Paper>
 								</Grid>
 							</Grid>
