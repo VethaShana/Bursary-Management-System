@@ -1,14 +1,11 @@
 import Student from '../models/student.js'
 import pdfMake from 'pdfmake/build/pdfmake.js'
 import PDF_Fonts from 'pdfmake/build/vfs_fonts.js'
-import { json, response } from 'express'
-import bodyParser from 'body-parser'
 import { getDocumentDefinition } from '../services/pdf.js'
 
 import getAmounts from '../utils/getAmounts.js'
 import sendMail from '../services/sendMail.js'
 import { getDocDefinition } from '../services/summary1.js'
-//import JSON  from 'nodemon/lib/utils'
 
 pdfMake.vfs = PDF_Fonts.pdfMake.vfs
 
@@ -34,6 +31,28 @@ export const getStudent = async (req, res) => {
 		res.status(200).json(student)
 	} catch (error) {
 		res.status(400).json({ message: error.message })
+	}
+}
+
+export const patchStudent = async (req, res) => {
+	try {
+		const student = await Student.findOneAndUpdate(req.params.id, req.body)
+		res.status(200).json(student)
+	} catch (error) {
+		res.status(200).json({ message: error.message })
+	}
+}
+
+export const patchStudents = async (req, res) => {
+	try {
+		const { ids, data } = req.body
+		const students = await Student.updateMany(
+			{ _id: { $in: ids } },
+			{ $set: data }
+		)
+		res.status(200).json(students)
+	} catch (error) {
+		res.status(200).json({ message: error.message })
 	}
 }
 

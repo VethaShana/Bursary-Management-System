@@ -34,13 +34,14 @@ import {
 	districts,
 	GSDivisions,
 	courses,
-	faculties,
 	DSDivisions
 } from '../utils/data'
 
 import Copyright from '../components/Copyright'
 import Header from '../components/Header'
 import Instruction from '../components/Instruction'
+
+const faculties = courses.map(x => x.faculty)
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -260,14 +261,31 @@ const validationSchema = yup.object().shape({
 					.required('This field is required')
 	}),
 	email: yup.string().email('Invalid email').required('Email is required'),
-	course: yup
-		.string()
-		.oneOf(courses, 'Invalid course')
-		.required('Select a course'),
 	faculty: yup
 		.string()
 		.oneOf(faculties, 'Invalid faculties')
 		.required('Select a faculty'),
+	course: yup.string().when('faculty', (value, schema) => {
+		return value === 'N/A'
+			? yup
+					.string()
+					.notOneOf(['N/A'], 'Invalid course')
+					.required('Select a course')
+			: yup
+					.string()
+					.oneOf(
+						courses.find(({ faculty }) => faculty === value)
+							.courses,
+						'Invalid course'
+					)
+					.required('Select a course')
+	}),
+	zScore: yup
+		.number('Invalid Z score')
+		// .matches(/^[0-4](\.[0-9]{2})$/, 'Invalid Z score')
+		.min(0, 'Minimum is 0.0')
+		.max(4.0, 'Maximum is 4.0')
+		.required('Z score is required'),
 	phone: yup
 		.string()
 		.matches(/^(?:7|0|(?:\+94))[0-9]{9,10}$/, 'Invalid phone number.')
@@ -822,20 +840,36 @@ function Application({ isSubmitted, getApplicationStatus, setApplication }) {
 													>
 														N/A
 													</MenuItem>
-													{courses.map(option => (
-														<MenuItem
-															key={option}
-															value={option}
-														>
-															{option}
-														</MenuItem>
-													))}
+													{values.faculty !== 'N/A' &&
+														courses
+															.find(
+																({ faculty }) =>
+																	faculty ===
+																	values.faculty
+															)
+															.courses.map(
+																option => (
+																	<MenuItem
+																		key={
+																			option
+																		}
+																		value={
+																			option
+																		}
+																	>
+																		{option}
+																	</MenuItem>
+																)
+															)}
 												</Field>
 											</Grid>
 											<Grid item xs={12} sm={3}>
 												<Field
+													inputProps={{
+														step: '0.01'
+													}}
 													component={TextField}
-													type="text"
+													type="number"
 													label="Z score"
 													name="zScore"
 												/>

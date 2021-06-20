@@ -4,7 +4,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 function ApplicationStatus({ isApproved }) {
-	console.log(isApproved)
 	return (
 		<Paper>
 			<Box p={3}>

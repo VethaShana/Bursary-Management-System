@@ -6,6 +6,12 @@ import validate from '../middleware/validate.js'
 import studentValidationSchema from '../validation/studentValidation.js'
 const router = express.Router()
 
+router.post(
+	'/',
+	auth(ROLES.STUDENT),
+	validate({ schema: studentValidationSchema, path: 'body' }),
+	StudentsController.createStudent
+)
 router.get(
 	'/',
 	auth(ROLES.ADMIN, ROLES.STUDENT, ROLES.DEAN),
@@ -21,12 +27,8 @@ router.get(
 	auth(ROLES.ADMIN),
 	StudentsController.getInstallments
 )
-router.post(
-	'/',
-	auth(ROLES.STUDENT),
-	validate({ schema: studentValidationSchema, path: 'body' }),
-	StudentsController.createStudent
-)
+router.patch('/:id', auth(ROLES.ADMIN), StudentsController.patchStudent)
+router.patch('/', auth(ROLES.ADMIN), StudentsController.patchStudents)
 router.delete('/:id', auth(ROLES.ADMIN), StudentsController.deleteStudent)
 router.put('/:id', auth(ROLES.ADMIN), StudentsController.updateStudent)
 router.get(

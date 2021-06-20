@@ -2010,11 +2010,74 @@ export const administrativeDistricts = [
 ]
 
 export const courses = [
-	'Computer Science',
-	'Biological Science',
-	'Physical Science'
-]
+	{
+		faculty: 'Science',
+		courses: ['Computer Science', 'Physical Science', 'Bio Science']
+	},
 
-export const faculties = ['Science', 'Arts', 'Law']
+	{
+		faculty: 'Arts',
+		courses: [
+			'Arts in English',
+			'Arts in Tamil',
+			'Fine Arts in English',
+			'Fine Arts in Tamil',
+			'Law'
+		]
+	},
+
+	{
+		faculty: 'Management & Commerce',
+		courses: ['Business Administartion', 'Commerce', 'Business Management']
+	},
+
+	{
+		faculty: 'Medicine',
+		courses: ['MBBS']
+	},
+
+	{
+		faculty: 'Alied Health Science',
+		courses: [
+			'Medical Laboratory Science',
+			'Nursing',
+			'Pharmacy',
+			'Sports Scince Unit'
+		]
+	},
+
+	{
+		faculty: 'Engineering',
+		courses: [
+			'Civil Engineering',
+			'Computer Engineering',
+			'Electrical & Electronic Engineering',
+			'Interdisciplinary Studies'
+		]
+	},
+
+	{
+		faculty: 'Technologies',
+		courses: [
+			'Engineering Technology',
+			'Bio Systems Technology',
+			'Interdisciplinary Studies'
+		]
+	},
+
+	{
+		faculty: 'Agriculture',
+		courses: [
+			'Agronomy',
+			'Animal Science',
+			'Agricultural Biology',
+			'Agricultural Chemistry',
+			'Agricultural Engineering',
+			'Agricultural Echonomics',
+			'Auxiliary Core Courses',
+			'Common Core Courses'
+		]
+	}
+]
 
 export const titles = ['Mr', 'Mrs', 'Miss', 'Rev']

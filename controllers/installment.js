@@ -16,19 +16,26 @@ export const getInstallments = async (req, res) => {
 }
 
 export const createInstallments = async (req, res) => {
-	const { stream, year, acadamicYear, from, to, noOfInstallments } = req.body
+	const {
+		date,
+		faculty,
+		course,
+		academicYear,
+		description,
+		noOfInstallments
+	} = req.body
 	const newInstallment = new Installment({
-		stream,
-		year,
-		acadamicYear,
-		from,
-		to,
+		date,
+		faculty,
+		course,
+		academicYear,
+		description,
 		noOfInstallments
 	})
 	try {
 		await newInstallment.save().then((doc, err) => {
 			Student.updateMany(
-				{ course: stream },
+				{ course },
 				{
 					$push: {
 						installments: {

@@ -588,6 +588,6 @@ function Table(props) {
 }
 
 const mapStateToProps = state => ({
-	data: state.students.data.filter(x => x.isApproved === true)
+	data: state.students.data.filter(x => x.isApproved === false)
 })
 export default connect(mapStateToProps)(Table)
