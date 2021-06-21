@@ -44,6 +44,6 @@ function Card(props) {
 }
 const mapStateToProps = state => ({
 	count: state.students.data.filter(x => x.isApproved === true).length,
-	date: state.students.data.reduce((x, y) => (x < y ? x : y))
+	date: new Date()
 })
 export default connect(mapStateToProps)(Card)

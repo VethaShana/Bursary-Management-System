@@ -28,11 +28,10 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-function ApplicationDialog({ open, onClose, submitApplication }) {
+function ApplicationDialog({ open, onClose, submitApplication, isSubmitted }) {
 	const classes = useStyles()
 	const theme = useTheme()
 	const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
-	const [isSubmitted, setIsSubmitted] = useState(false)
 	const [isVerified, setIsVerified] = useState(false)
 
 	const handleChange = e => {
@@ -40,7 +39,7 @@ function ApplicationDialog({ open, onClose, submitApplication }) {
 	}
 
 	const onSubmit = e => {
-		if (isVerified) submitApplication().then(() => setIsSubmitted(true))
+		if (isVerified) submitApplication()
 	}
 
 	return (
@@ -51,6 +50,7 @@ function ApplicationDialog({ open, onClose, submitApplication }) {
 			aria-describedby="alert-dialog-description"
 			fullScreen={fullScreen}
 			fullWidth
+			disableBackdropClick
 		>
 			{isSubmitted ? (
 				<React.Fragment>

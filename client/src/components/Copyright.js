@@ -11,7 +11,7 @@ function Copyright() {
 			gutterBottom
 		>
 			{'Copyright © '}
-			<Link color="inherit" href="#">
+			<Link color="inherit" href="http://www.jfn.ac.lk">
 				University of Jaffna
 			</Link>
 			{` ${new Date().getFullYear()}.`}
