@@ -53,6 +53,33 @@ const applicationDocDefinition = data => {
 	return {
 		pageMargins: [60, 60, 60, 60],
 
+		footer: function (currentPage, pageCount) {
+			return {
+				margin: 10,
+				columns: [
+					{
+						fontSize: 9,
+						text: [
+							{
+								text:
+									'------------------------------------------------------------------------' +
+									'\n',
+								margin: [0, 20]
+							},
+							{
+								text:
+									'© University of Jaffna, SriLanka. ' +
+									currentPage.toString() +
+									' of ' +
+									pageCount
+							}
+						],
+						alignment: 'center'
+					}
+				]
+			}
+		},
+
 		content: [
 			...header,
 			{
