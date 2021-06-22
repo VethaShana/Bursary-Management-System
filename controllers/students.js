@@ -58,6 +58,7 @@ export const patchStudents = async (req, res) => {
 }
 
 export const createStudent = async (req, res, next) => {
+	console.log(req.body)
 	try {
 		const [netIncome, capIncome] = getAmounts(req.body)
 		console.log(netIncome, capIncome)
