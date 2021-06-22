@@ -32,16 +32,16 @@ const studentSchema = mongoose.Schema({
 		required: true
 	},
 	street: {
-		type: String,
-		required: true
+		type: String
+		//required: true
 	},
 	city: {
-		type: String,
-		required: true
+		type: String
+		//required: true
 	},
 	district: {
-		type: String,
-		required: true
+		type: String
+		//required: true
 	},
 	phone: {
 		type: String,
@@ -70,7 +70,8 @@ const studentSchema = mongoose.Schema({
 	DSDivision: {
 		type: String
 	},
-	indexNo: {
+	//indexNo
+	ALIndexNo: {
 		type: String
 	},
 	siblingsUnder19: [
@@ -177,7 +178,7 @@ const studentSchema = mongoose.Schema({
 			}
 		}
 	],
-	DSDivision: {
+	dsDivision: {
 		type: String
 	},
 	employed: {
@@ -256,7 +257,7 @@ const studentSchema = mongoose.Schema({
 			otherSources: Number
 		}
 	},
-
+	isLivingWithGuardian: { type: Boolean },
 	guardian: {
 		name: String,
 		age: Number,
