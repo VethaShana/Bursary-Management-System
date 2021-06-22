@@ -67,24 +67,25 @@ const useStyles = makeStyles(theme => ({
 const initialValues = {
 	regNo: '',
 	nic: '',
-	ALIndexNo: '',
-	title: titles[0],
+	title: '',
 	nameWithInitials: '',
 	fullName: '',
 	address: {
-		distance: ''
+		distance: '',
+		street: '',
+		city: '',
+		district: '',
+		DSDivision: '',
+		GSDivision: ''
 	},
-	street: '',
-	city: '',
-	district: '',
-	DSDivision: '',
-	GSDivision: '',
-	ALDistrict: '',
 	phone: '',
 	email: '',
+	// academic details
 	faculty: '',
 	course: '',
 	zScore: '',
+	ALDistrict: '',
+	ALIndexNo: '',
 	employed: false,
 	employment: {
 		establishment: '',
@@ -94,50 +95,50 @@ const initialValues = {
 			district: ''
 		},
 		designation: '',
-		salary: 0,
-		dateOfEmployment: new Date()
+		salary: '',
+		dateOfEmployment: ''
 	},
 	married: false,
 	spouse: {
 		name: '',
-		//date of marriage
+		dateOfMarriage: '',
 		employment: {
 			establishment: '',
 			designation: '',
-			salary: 0,
-			dateOfEmployment: new Date()
+			salary: '',
+			dateOfEmployment: ''
 		}
 	},
 	father: {
 		name: '',
 		living: true,
-		// age: '',
+		age: '',
 		employment: {
 			occupation: '',
-			salary: 0,
-			dateOfEmployment: new Date(),
+			salary: '',
+			dateOfEmployment: '',
 			address: ''
 		},
 		annualIncome: {
-			occupationOrPension: 0,
-			houseAndProperty: 0,
-			otherSources: 0
+			occupationOrPension: '',
+			houseAndProperty: '',
+			otherSources: ''
 		}
 	},
 	mother: {
 		name: '',
 		living: true,
-		// age: '',
+		age: '',
 		employment: {
 			occupation: '',
-			salary: 0,
-			dateOfEmployment: new Date(),
+			salary: '',
+			dateOfEmployment: '',
 			address: ''
 		},
 		annualIncome: {
-			occupationOrPension: 0,
-			houseAndProperty: 0,
-			otherSources: 0
+			occupationOrPension: '',
+			houseAndProperty: '',
+			otherSources: ''
 		}
 	},
 	isLivingWithGuardian: false,
@@ -147,24 +148,19 @@ const initialValues = {
 		address: '',
 		post: '',
 		annualIncome: {
-			salary: 0,
-			houseAndPropertyOrTemple: 0
+			salary: '',
+			houseAndPropertyOrTemple: ''
 		}
 	},
 	siblingsUnder19: [
-		// {
-		// 	name: '',
-		// 	dob: new Date(),
-		// 	age: 19,
-		// 	schoolOrInstitute: ''
-		// }
+		// { name: '', dob: '', age: '', schoolOrInstitute: '' }
 	],
 	siblingsAtUniversity: [
 		// {
 		// 	name: '',
 		// 	regNo: '',
 		// 	institute: '',
-		// 	academicYear: new Date().getFullYear(),
+		// 	academicYear: '',
 		// 	course: '',
 		// 	isBursaryOrMahapolaRecipient: false
 		// }
@@ -176,7 +172,7 @@ const initialValues = {
 		// 	assessmentNo: '',
 		// 	noOfHouseholders: '',
 		// 	address: '',
-		// 	annualIncome: 0
+		// 	annualIncome: ''
 		// }
 	],
 	incomeFromEstateFieldsLands: [
@@ -186,7 +182,7 @@ const initialValues = {
 		// 	location: '',
 		// 	natureOfCultivation: '',
 		// 	extentOfLandAndDetails: '',
-		// 	annualIncome: 0
+		// 	annualIncome: ''
 		// }
 	]
 }
@@ -208,9 +204,16 @@ const validationSchema = yup.object().shape({
 			'Enter a valid NIC'
 		)
 		.required('NIC is required'),
+	ALDistrict: yup
+		.string()
+		.oneOf(
+			districts.map(({ district }) => district),
+			'Invalid district'
+		)
+		.required('A/L Administrative District is required'),
 	ALIndexNo: yup
 		.string()
-		.matches(/^[0-9]{7}$/)
+		.matches(/^[0-9]{7}$/, 'Invalid Index No.')
 		.required('A/L Index No. is required'),
 	title: yup
 		.string()
@@ -302,7 +305,7 @@ const validationSchema = yup.object().shape({
 	zScore: yup
 		.number('Invalid Z score')
 		// .matches(/^[0-4](\.[0-9]{2})$/, 'Invalid Z score')
-		.min(0, 'Minimum is 0.0')
+		.min(0.0, 'Minimum is 0.0')
 		.max(4.0, 'Maximum is 4.0')
 		.required('Z score is required'),
 	phone: yup
@@ -313,86 +316,68 @@ const validationSchema = yup.object().shape({
 		.boolean()
 		.default(false)
 		.required('State whether employed or not'),
-	employment: yup.object().when('employed', (employed, schema) =>
-		schema.shape({
-			establishment: employed
-				? yup.string().required('Establishment is required')
-				: yup.string(),
-			designation: employed
-				? yup.string().required('Designation is required')
-				: yup.string(),
-			salary: employed
-				? yup
-						.number()
-						.transform(value => (isNaN(value) ? 0 : value))
-						.min(0, 'Salary cannot be negative')
-						.required('Salary is required')
-				: yup.string(),
-			dateOfEmployment: employed
-				? yup
-						.date()
-						.max(
-							new Date(),
-							'Date of Employment cannot be in future'
+	employment: yup.object().when(
+		'employed',
+
+		{
+			is: true,
+			then: yup.object().shape({
+				establishment: yup
+					.string()
+					.required('Establishment is required'),
+				designation: yup.string().required('Designation is required'),
+				salary: yup
+					.number()
+					.min(0, 'Salary cannot be negative')
+					.required('Salary is required'),
+				dateOfEmployment: yup
+					.date()
+					.max(new Date(), 'Date of Employment cannot be in future')
+					.required('Date of Employment is required'),
+				address: yup.object().shape({
+					city: yup.string().required('City is required'),
+					street: yup.string().required('Street is required'),
+					district: yup
+						.string()
+						.oneOf(
+							districts.map(({ district }) => district),
+							'Invalid district'
 						)
-						.required('Date of Employment is required')
-				: yup.date(),
-			address: yup.object().shape({
-				city: employed
-					? yup.string().required('City is required')
-					: yup.string(),
-				street: employed
-					? yup.string().required('Street is required')
-					: yup.string(),
-				district: employed
-					? yup
-							.string()
-							.oneOf(
-								districts.map(({ district }) => district),
-								'Invalid district'
-							)
-							.required('Street is required')
-					: yup.string()
-			})
-		})
+						.required('Street is required')
+				})
+			}),
+			otherwise: yup.object().strip()
+		}
 	),
 	married: yup
 		.boolean()
 		.default(false)
 		.required('State whether married or not'),
-	spouse: yup.object().when('married', (married, schema) =>
-		schema
-			.shape({
-				name: married
-					? yup.string().required('Name is required')
-					: yup.string(),
-				employment: yup.object().shape({
-					establishment: married
-						? yup.string().required('Establishment is required')
-						: yup.string(),
-					designation: married
-						? yup.string().required('Designation is required')
-						: yup.string(),
-					salary: married
-						? yup
-								.number()
-								.transform(value => (isNaN(value) ? 0 : value))
-								.min(0, 'Salary cannot be negative')
-								.required('Salary is required')
-						: yup.string(),
-					dateOfEmployment: married
-						? yup
-								.date()
-								.max(
-									new Date(),
-									'Date of Employment cannot be in future'
-								)
-								.required('Date of Employment is required')
-						: yup.date()
-				})
+	spouse: yup.object().when('married', {
+		is: true,
+		then: yup.object().shape({
+			name: yup.string().required('Name is required'),
+			dateOfMarriage: yup
+				.date()
+				.max(new Date(), 'Date of Marriage cannot be in future')
+				.required('Date of Marriage is required'),
+			employment: yup.object().shape({
+				establishment: yup
+					.string()
+					.required('Establishment is required'),
+				designation: yup.string().required('Designation is required'),
+				salary: yup
+					.number()
+					.min(0, 'Salary cannot be negative')
+					.required('Salary is required'),
+				dateOfEmployment: yup
+					.date()
+					.max(new Date(), 'Date of Employment cannot be in future')
+					.required('Date of Employment is required')
 			})
-			.optional()
-	),
+		}),
+		otherwise: yup.object().strip()
+	}),
 	father: yup.object().shape({
 		name: yup.string().required("Father's name is required"),
 		living: yup.boolean().required('This field is required'),
@@ -400,13 +385,13 @@ const validationSchema = yup.object().shape({
 			is: true,
 			then: yup
 				.number()
-				// .transform(value => (isNaN(value) ? 0 : value))
 				.positive('Age cannot be negative')
 				.max(
 					123,
 					'World record for oldest person is 122 years and 164 days :)'
 				)
-				.required('Age is required, if living')
+				.required('Age is required, if living'),
+			otherwise: yup.number().strip()
 		}),
 		employment: yup.object().when('living', {
 			is: true,
@@ -414,7 +399,6 @@ const validationSchema = yup.object().shape({
 				occupation: yup.string().required('Occupation is required'),
 				salary: yup
 					.number()
-					.transform(value => (isNaN(value) ? 0 : value))
 					.min(0, 'Salary cannot be negative')
 					.required('Salary is required'),
 				dateOfEmployment: yup
@@ -428,17 +412,14 @@ const validationSchema = yup.object().shape({
 		annualIncome: yup.object().shape({
 			occupationOrPension: yup
 				.number()
-				.transform(value => (isNaN(value) ? 0 : value))
 				.min(0, 'Income cannot be negative')
 				.required('Occupation or pension income is required'),
 			houseAndProperty: yup
 				.number()
-				.transform(value => (isNaN(value) ? 0 : value))
 				.min(0, 'Income cannot be negative')
 				.required('House & property income is required'),
 			otherSources: yup
 				.number()
-				.transform(value => (isNaN(value) ? 0 : value))
 				.min(0, 'Income cannot be negative')
 				.required('Income from other sources is required')
 		})
@@ -450,13 +431,13 @@ const validationSchema = yup.object().shape({
 			is: true,
 			then: yup
 				.number()
-				.transform(value => (isNaN(value) ? 0 : value))
 				.positive('Age cannot be negative')
 				.max(
 					123,
 					'World record for oldest person is 122 years and 164 days :)'
 				)
-				.required('Age is required, if living')
+				.required('Age is required, if living'),
+			otherwise: yup.number().strip()
 		}),
 		employment: yup.object().when('living', {
 			is: true,
@@ -464,7 +445,6 @@ const validationSchema = yup.object().shape({
 				occupation: yup.string().required('Occupation is required'),
 				salary: yup
 					.number()
-					.transform(value => (isNaN(value) ? 0 : value))
 					.min(0, 'Salary cannot be negative')
 					.required('Salary is required'),
 				dateOfEmployment: yup
@@ -478,17 +458,14 @@ const validationSchema = yup.object().shape({
 		annualIncome: yup.object().shape({
 			occupationOrPension: yup
 				.number()
-				.transform(value => (isNaN(value) ? 0 : value))
 				.min(0, 'Income cannot be negative')
 				.required('Occupation or pension income is required'),
 			houseAndProperty: yup
 				.number()
-				.transform(value => (isNaN(value) ? 0 : value))
 				.min(0, 'Income cannot be negative')
 				.required('House & property income is required'),
 			otherSources: yup
 				.number()
-				.transform(value => (isNaN(value) ? 0 : value))
 				.min(0, 'Income cannot be negative')
 				.required('Income from other sources is required')
 		})
@@ -502,7 +479,6 @@ const validationSchema = yup.object().shape({
 			address: yup.string().required(),
 			age: yup
 				.number()
-				.transform(value => (isNaN(value) ? 0 : value))
 				.positive('Age cannot be negative')
 				.max(123, 'Invalid age')
 				.required(),
@@ -510,14 +486,10 @@ const validationSchema = yup.object().shape({
 			annualIncome: yup.object().shape({
 				houseAndPropertyOrTemple: yup
 					.number()
-					.transform(value => (isNaN(value) ? 0 : value))
-					.default(0)
 					.min(0, 'Income cannot be negative')
 					.required(),
 				salary: yup
 					.number()
-					.transform(value => (isNaN(value) ? 0 : value))
-					.default(0)
 					.min(0, 'Income cannot be negative')
 					.required()
 			})
@@ -534,11 +506,16 @@ const validationSchema = yup.object().shape({
 					.required('Name is required'),
 				dob: yup
 					.date()
+					// .min(
+					// 	new Date(
+					// 		new Date().setYear(new Date().getFullYear() - 19)
+					// 	),
+					// 	'Invalid date'
+					// )
 					.max(new Date(), 'Date of Birth cannot be in future')
 					.required('Date of Birth is required'),
 				age: yup
 					.number()
-					.transform(value => (isNaN(value) ? 0 : value))
 					.positive('Age cannot be negative')
 					.max(123, 'Invalid age')
 					.required('Age is required'),
@@ -561,7 +538,7 @@ const validationSchema = yup.object().shape({
 				institute: yup.string().required('Institute is required'),
 				academicYear: yup
 					.number()
-					.transform(value => (isNaN(value) ? 0 : value))
+
 					.min(new Date().getFullYear() - 7, 'Invalid Academic year')
 					.max(
 						new Date().getFullYear(),
@@ -587,12 +564,11 @@ const validationSchema = yup.object().shape({
 					.required('Assessment No. is required'),
 				noOfHouseholders: yup
 					.number()
-					.transform(value => (isNaN(value) ? 0 : value))
 					.required('No. of Householders is required'),
 				address: yup.string().required('Address is required'),
 				annualIncome: yup
 					.number()
-					.transform(value => (isNaN(value) ? 0 : value))
+
 					.min(0, 'Annual income cannot be negative')
 					.required('Annual Income is requied')
 			})
@@ -615,7 +591,6 @@ const validationSchema = yup.object().shape({
 					.required('Extent of Land & Details are required'),
 				annualIncome: yup
 					.number()
-					.transform(value => (isNaN(value) ? 0 : value))
 					.min(0, 'Annual income cannot be negative')
 					.required('Annual Income is requied')
 			})
@@ -631,10 +606,11 @@ function ApplicationForm({ setApplication, onClick }) {
 			<Instruction />
 
 			<Formik
-				initialValues={
-					JSON.parse(localStorage.getItem('application')) ||
-					initialValues
-				}
+				// initialValues={
+				// 	JSON.parse(localStorage.getItem('application')) ||
+				// 	initialValues
+				// }
+				initialValues={initialValues}
 				validationSchema={validationSchema}
 				onSubmit={(values, { setSubmitting }) => {
 					console.log(validationSchema.cast(values))
@@ -783,6 +759,36 @@ function ApplicationForm({ setApplication, onClick }) {
 												name="ALIndexNo"
 												placeholder="XXXXXXX"
 											/>
+										</Grid>
+										<Grid item xs={12} sm={4}>
+											<Field
+												component={TextField}
+												type="text"
+												name="ALDistrict"
+												label="A/L Administrative District"
+												select
+												InputLabelProps={{
+													shrink: true
+												}}
+											>
+												<MenuItem value="">
+													N/A
+												</MenuItem>
+												{districts
+													.map(
+														({ district }) =>
+															district
+													)
+													.sort()
+													.map(option => (
+														<MenuItem
+															key={option}
+															value={option}
+														>
+															{option}
+														</MenuItem>
+													))}
+											</Field>
 										</Grid>
 										<Grid item xs={12} sm={3}>
 											<Field
@@ -1401,8 +1407,8 @@ function ApplicationForm({ setApplication, onClick }) {
 																	arrayHelpers.push(
 																		{
 																			name: '',
-																			dob: new Date(),
-																			age: 19,
+																			dob: '',
+																			age: '',
 																			schoolOrInstitute:
 																				''
 																		}
@@ -1596,7 +1602,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																			institute:
 																				'',
 																			academicYear:
-																				new Date().getFullYear(),
+																				'',
 																			course: '',
 																			isBursaryOrMahapolaRecipient: false
 																		}
@@ -2082,6 +2088,16 @@ function ApplicationForm({ setApplication, onClick }) {
 														type="text"
 														label="Name of Spouse"
 														name="spouse.name"
+													/>
+												</Grid>
+												<Grid item xs={12} sm={6}>
+													<Field
+														component={
+															KeyboardDatePicker
+														}
+														name="spouse.dateOfMarriage"
+														label="Date of Marriage"
+														format="dd/MM/yyyy"
 													/>
 												</Grid>
 												<Grid item xs={12}>

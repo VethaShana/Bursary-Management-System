@@ -1,3 +1,5 @@
+export const titles = ['Mr.', 'Mrs.', 'Miss.', 'Rev.']
+
 export const courses = [
 	{
 		faculty: 'Science',
@@ -69,7 +71,6 @@ export const courses = [
 	}
 ]
 
-export const titles = ['Mr', 'Mrs', 'Miss', 'Rev']
 
 export const districts = [
 	{

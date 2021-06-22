@@ -76,106 +76,40 @@ const studentSchema = mongoose.Schema({
 	},
 	siblingsUnder19: [
 		{
-			name: {
-				type: String
-				//	required: true
-			},
-
-			dob: {
-				type: Date
-				//required: true
-			},
-			schoolOrInstitute: {
-				type: String
-				//required: true
-			}
+			name: String,
+			dob: Date,
+			schoolOrInstitute: String
 		}
 	],
 	siblingsAtUniversity: [
 		{
-			name: {
-				type: String
-				//required: true
-			},
-			regNo: {
-				type: String
-				//required: true
-			},
-			institute: {
-				type: String
-				//required: true
-			},
-			course: {
-				type: String
-				//required: true
-			},
-			academicYear: {
-				type: String
-				//required: true
-			},
-			isBursaryOrMahapolaRecipient: {
-				type: Boolean
-				//required: true
-			}
+			name: String,
+			regNo: String,
+			institute: String,
+			course: String,
+			academicYear: String,
+			isBursaryOrMahapolaRecipient: String
 		}
 	],
 	incomeFromEstateFieldsLands: [
 		{
-			name: {
-				type: String
-				//required: true
-			},
-			relationship: {
-				type: String
-				//required: true
-			},
-			location: {
-				type: String
-				//required: true
-			},
-			natureOfCultivation: {
-				type: String
-				//required: true
-			},
-			extentOfLandAndDetails: {
-				type: String
-				//required: true
-			},
-			annualIncome: {
-				type: Number
-				//required: true
-			}
+			name: String,
+			relationship: String,
+			location: String,
+			natureOfCultivation: String,
+			extentOfLandAndDetails: String,
+			annualIncome: Number
 		}
 	],
 	incomeFromHouses: [
 		{
-			name: {
-				type: String
-				//required: true
-			},
-			relationship: {
-				type: String
-				//required: true
-			},
-			assessmentNo: {
-				type: String
-				//required: true
-			},
-			noOfHouseholders: {
-				type: String
-				//required: true
-			},
-			address: {
-				type: String
-				//required: true
-			},
-			annualIncome: {
-				type: Number
-				//required: true
-			},
-			rent_lease: {
-				type: String
-			}
+			name: String,
+			relationship: String,
+			assessmentNo: String,
+			noOfHouseholders: String,
+			address: String,
+			annualIncome: Number,
+			rent_lease: String
 		}
 	],
 	dsDivision: {
@@ -186,26 +120,16 @@ const studentSchema = mongoose.Schema({
 		required: true
 	},
 	employment: {
-		establishment: {
-			type: String
-		},
+		establishment: String,
 		address: {
-			street: {
-				type: String
-			},
-			city: {
-				type: String
-			},
-			district: {
-				type: String
-			}
+			street: String,
+			city: String,
+			district: String
 		},
-		designation: { type: String },
-		salary: { type: Number },
-		dateOfEmployment: { type: Date },
-		salaryScale: {
-			type: Number
-		}
+		designation: String,
+		salary: Number,
+		dateOfEmployment: Date,
+		salaryScale: Number
 	},
 
 	married: {
@@ -213,26 +137,24 @@ const studentSchema = mongoose.Schema({
 		required: true
 	},
 	spouse: {
-		name: { type: String },
-		dateOfMarriage: {
-			type: Date
-		},
+		name: String,
+		dateOfMarriage: Date,
 		employment: {
-			establishment: { type: String },
-			designation: { type: String },
-			salary: { type: Number }
+			establishment: String,
+			designation: String,
+			salary: Number
 		}
 	},
 
 	father: {
 		name: { type: String, required: true },
 		living: { type: Boolean, required: true },
-		age: { type: Number, required: true },
+		age: Number,
 		employment: {
-			occupation: { type: String, required: true },
-			dateOfEmployment: { type: Date, required: true },
-			salary: { type: Number, required: true },
-			address: { type: String, required: true }
+			occupation: String,
+			dateOfEmployment: Date,
+			salary: Number,
+			address: String
 		},
 		annualIncome: {
 			occupationOrPension: { type: Number, required: true },
@@ -244,7 +166,7 @@ const studentSchema = mongoose.Schema({
 	mother: {
 		name: { type: String, required: true },
 		living: { type: Boolean, required: true },
-		age: { type: Number, required: true },
+		age: Number,
 		employment: {
 			occupation: String,
 			dateOfEmployment: Date,
@@ -252,12 +174,15 @@ const studentSchema = mongoose.Schema({
 			address: String
 		},
 		annualIncome: {
-			occupationOrPension: Number,
-			houseAndProperty: Number,
-			otherSources: Number
+			occupationOrPension: { type: Number, required: true },
+			houseAndProperty: { type: Number, required: true },
+			otherSources: { type: Number, required: true }
 		}
 	},
-	isLivingWithGuardian: { type: Boolean },
+	isLivingWithGuardian: {
+		type: Boolean,
+		required: true
+	},
 	guardian: {
 		name: String,
 		age: Number,
@@ -294,115 +219,8 @@ const studentSchema = mongoose.Schema({
 		type: Boolean,
 		default: false
 	}
-
-	// deadline: {
-	// 	type: Date,
-	// 	default: false
-	// }
 })
 
 const Student = mongoose.model('student', studentSchema)
 
 export default Student
-
-// NOTE by ardil: delete the comments before pushing (if not needed)
-
-/*
-	regNo: '',ok
-	indexNo: '',ok
-	nic: '',ok
-	title: titles[0],ok
-	nameWithInitials: '',ok
-	fullName: '',ok
-	street: '',// for address - ok 
-	city: '',// for address - ok
-	district: 'N/A',// for address and require one - ok
-	gsDivision: 'N/A',ok
-
-  dsDivision //didn't add - ok
-  gsNo //didn't add - ok
-
-	alDistrict: '',ok
-	phone: '',ok
-	email: '',ok
-	course: 'N/A',ok
-	zScore: '',ok
-
-  siblingsUnder19 //didn't add -ok
-  Distance //didn't add -ok
-  siblingsUniversity //didn't add -ok
-  incomeFromEstateFieldsLands //didn't add -ok
-  incomeFromHouses //didn't add -ok
-  GSDNo //didn't add -ok
-  DSDivision //didn't add -ok
-  LocalAthority //didn't add -ok
- 
-	employed: false,ok
-	employment: {
-		establishment: '',ok
-		address: {
-			street: '',ok
-			city: '',ok
-			district: 'N/A',ok
-		},
-		designation: '',ok
-		salary: '',ok
-		dateOfEmployment: new Date(),ok
-    salaryScale //didn't add -ok
-	},
-	married: false, ok
-	spouse: {
-		name: '', ok
-		//date of marriage ok
-		employment: {
-			establishment: '',ok
-			designation: '',ok
-			salary: '',ok
-			dateOfEmployment: new Date(), //no need
-		},
-	},
-	father: {
-		name: '', ok
-		living: true, ok
-		age: '', ok
-		employment: {
-			occupation: '', ok
-			salary: '', //no need - ok
-			dateOfEmployment: new Date(),//no need - ok
-			address: '', ok
-		},
-		annualIncome: {
-			occupationOrPension: '', ok
-			houseAndProperty: '', ok
-			otherSources: '', ok
-		},
-    fatherTotalAnnualIncome //didn't add -ok
-	},
-	mother: {
-		name: '',ok
-		living: true,ok
-		age: '',ok
-		employment: {
-			occupation: '',ok
-			salary: '',//no need - ok
-			dateOfEmployment: new Date(),//no need - ok
-			address: '',ok
-		},
-		annualIncome: {
-			occupationOrPension: '',ok
-			houseAndProperty: '',ok
-			otherSources: '',ok
-		},
-    motherTotalAnnualIncome //didn't add -ok
-	},
-	guardian: {
-		name: '',ok
-		age: '',ok
-		address: '',ok
-		post: '',ok
-		annualIncome: {
-			salary: '',ok
-			houseAndPropertyOrTemple: '',ok
-		},
-	},
-*/
