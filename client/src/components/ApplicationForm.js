@@ -26,13 +26,7 @@ import DateFnsUtils from '@date-io/date-fns'
 import { connect } from 'react-redux'
 import { setApplication } from '../actions/application'
 
-import {
-	titles,
-	districts,
-	GSDivisions,
-	courses,
-	DSDivisions
-} from '../utils/data'
+import { titles, courses, districts } from '../utils/data'
 
 import Instruction from './Instruction'
 
@@ -73,19 +67,23 @@ const useStyles = makeStyles(theme => ({
 const initialValues = {
 	regNo: '',
 	nic: '',
+	ALIndexNo: '',
 	title: titles[0],
 	nameWithInitials: '',
 	fullName: '',
+	address: {
+		distance: ''
+	},
 	street: '',
 	city: '',
-	district: 'N/A',
-	DSDivision: 'N/A',
-	GSDivision: 'N/A',
-	alDistrict: '',
+	district: '',
+	DSDivision: '',
+	GSDivision: '',
+	ALDistrict: '',
 	phone: '',
 	email: '',
-	faculty: 'N/A',
-	course: 'N/A',
+	faculty: '',
+	course: '',
 	zScore: '',
 	employed: false,
 	employment: {
@@ -93,7 +91,7 @@ const initialValues = {
 		address: {
 			street: '',
 			city: '',
-			district: 'N/A'
+			district: ''
 		},
 		designation: '',
 		salary: 0,
@@ -210,58 +208,96 @@ const validationSchema = yup.object().shape({
 			'Enter a valid NIC'
 		)
 		.required('NIC is required'),
+	ALIndexNo: yup
+		.string()
+		.matches(/^[0-9]{7}$/)
+		.required('A/L Index No. is required'),
 	title: yup
 		.string()
 		.oneOf(titles, 'Invalid title')
-		.required('Select a title'),
+		.required('Title is required'),
 	nameWithInitials: yup
 		.string()
 		.min(2, 'Too Short')
-		.required('This field is required'),
+		.required('Name with Initials is required'),
 	fullName: yup
 		.string()
 		.min(2, 'Too Short')
-		.required('This field is required'),
-	street: yup.string().required('This field is required'),
-	city: yup.string().required('This field is required'),
-	district: yup
-		.string()
-		.oneOf(districts, 'Invalid district')
-		.required('This field is required'),
-	DSDivision: yup.string().when('district', (value, schema) => {
-		return value === 'N/A'
-			? yup
-					.string()
-					.notOneOf(['N/A'], 'Invalid G. S. Division')
-					.required('This field is required')
-			: yup
-					.string()
-					.oneOf(
-						DSDivisions.find(({ district }) => district === value)
-							.division,
-						'Invalid D. S. Division'
-					)
-					.required('This field is required')
+		.required('Full name is required'),
+	address: yup.object().shape({
+		distance: yup
+			.number()
+			.min(0, 'Distance cannot be negative')
+			.max(1340, 'Invalid distance')
+			.required('Distance to University is required'),
+		street: yup.string().required('Street is required'),
+		city: yup.string().required('City is required'),
+		district: yup
+			.string()
+			.oneOf(
+				districts.map(({ district }) => district),
+				'Invalid district'
+			)
+			.required('District is required'),
+		DSDivision: yup.string().when('district', (value, schema) => {
+			return value
+				? yup
+						.string()
+						.oneOf(
+							districts
+								.find(({ district }) => district === value)
+								.DSDivisions.map(({ division }) => division),
+							'Invalid D. S. Division'
+						)
+						.required('D. S. Division is required')
+				: yup.string().required('D. S. Division is required')
+		}),
+		GSDivision: yup
+			.string()
+			.when(
+				['district', 'DSDivision'],
+				(district, DSDivision, schema) => {
+					return district &&
+						DSDivision &&
+						districts
+							.find(({ district: x }) => x === district)
+							.DSDivisions.find(
+								({ division }) => division === DSDivision
+							)
+						? yup
+								.string()
+								.oneOf(
+									districts
+										.find(
+											({ district: x }) => x === district
+										)
+										.DSDivisions.find(
+											({ division }) =>
+												division === DSDivision
+										).GSDivisions,
+									'Invalid G. S. Division'
+								)
+								.required()
+						: yup.string().required('G. S. Division is required')
+				}
+			)
 	}),
 	email: yup.string().email('Invalid email').required('Email is required'),
 	faculty: yup
 		.string()
 		.oneOf(faculties, 'Invalid faculties')
-		.required('Select a faculty'),
+		.required('Faculty is required'),
 	course: yup.string().when('faculty', (value, schema) => {
-		return value === 'N/A'
+		return value
 			? yup
-					.string()
-					.notOneOf(['N/A'], 'Invalid course')
-					.required('Select a course')
-			: yup
 					.string()
 					.oneOf(
 						courses.find(({ faculty }) => faculty === value)
 							.courses,
 						'Invalid course'
 					)
-					.required('Select a course')
+					.required('Course of Study is required')
+			: yup.string().required('Course of Study is required')
 	}),
 	zScore: yup
 		.number('Invalid Z score')
@@ -311,7 +347,10 @@ const validationSchema = yup.object().shape({
 				district: employed
 					? yup
 							.string()
-							.oneOf(districts, 'Invalid district')
+							.oneOf(
+								districts.map(({ district }) => district),
+								'Invalid district'
+							)
 							.required('Street is required')
 					: yup.string()
 			})
@@ -375,7 +414,7 @@ const validationSchema = yup.object().shape({
 				occupation: yup.string().required('Occupation is required'),
 				salary: yup
 					.number()
-					// .transform(value => (isNaN(value) ? 0 : value))
+					.transform(value => (isNaN(value) ? 0 : value))
 					.min(0, 'Salary cannot be negative')
 					.required('Salary is required'),
 				dateOfEmployment: yup
@@ -482,7 +521,8 @@ const validationSchema = yup.object().shape({
 					.min(0, 'Income cannot be negative')
 					.required()
 			})
-		})
+		}),
+		otherwise: yup.object().strip()
 	}),
 	siblingsUnder19: yup
 		.array()
@@ -683,20 +723,19 @@ function ApplicationForm({ setApplication, onClick }) {
 													shrink: true
 												}}
 											>
-												<MenuItem
-													key={'N/A'}
-													value={'N/A'}
-												>
+												<MenuItem value="">
 													N/A
 												</MenuItem>
-												{faculties.map(option => (
-													<MenuItem
-														key={option}
-														value={option}
-													>
-														{option}
-													</MenuItem>
-												))}
+												{faculties
+													.sort()
+													.map(option => (
+														<MenuItem
+															key={option}
+															value={option}
+														>
+															{option}
+														</MenuItem>
+													))}
 											</Field>
 										</Grid>
 										<Grid item xs={12} sm={5}>
@@ -710,20 +749,23 @@ function ApplicationForm({ setApplication, onClick }) {
 													shrink: true
 												}}
 											>
-												<MenuItem
-													key={'N/A'}
-													value={'N/A'}
-												>
+												<MenuItem value="">
 													N/A
 												</MenuItem>
-												{values.faculty !== 'N/A' &&
+												{values.faculty &&
+													courses.find(
+														({ faculty }) =>
+															faculty ===
+															values.faculty
+													).courses &&
 													courses
 														.find(
 															({ faculty }) =>
 																faculty ===
 																values.faculty
 														)
-														.courses.map(option => (
+														.courses.sort()
+														.map(option => (
 															<MenuItem
 																key={option}
 																value={option}
@@ -732,6 +774,15 @@ function ApplicationForm({ setApplication, onClick }) {
 															</MenuItem>
 														))}
 											</Field>
+										</Grid>
+										<Grid item xs={12} sm={3}>
+											<Field
+												component={TextField}
+												type="text"
+												label="A / L Index No."
+												name="ALIndexNo"
+												placeholder="XXXXXXX"
+											/>
 										</Grid>
 										<Grid item xs={12} sm={3}>
 											<Field
@@ -833,12 +884,12 @@ function ApplicationForm({ setApplication, onClick }) {
 								</Grid>
 								<Grid container item md={9}>
 									<Grid container spacing={2}>
-										<Grid item xs={12} sm={12}>
+										<Grid item xs={12} sm={8}>
 											<Field
 												component={TextField}
 												type="text"
 												label="Street"
-												name="street"
+												name="address.street"
 											/>
 										</Grid>
 										<Grid item xs={12} sm={4}>
@@ -846,53 +897,30 @@ function ApplicationForm({ setApplication, onClick }) {
 												component={TextField}
 												type="text"
 												label="City"
-												name="city"
+												name="address.city"
 											/>
 										</Grid>
 										<Grid item xs={12} sm={4}>
 											<Field
 												component={TextField}
 												type="text"
-												name="district"
+												name="address.district"
 												label="District"
 												select
 												InputLabelProps={{
 													shrink: true
 												}}
 											>
-												<MenuItem value="N/A">
+												<MenuItem value="">
 													N/A
 												</MenuItem>
-												{districts.map(option => (
-													<MenuItem
-														key={option}
-														value={option}
-													>
-														{option}
-													</MenuItem>
-												))}
-											</Field>
-										</Grid>
-										<Grid item xs={12} sm={4}>
-											<Field
-												component={TextField}
-												type="text"
-												name="DSDivision"
-												label="D. S. Division"
-												select
-												InputLabelProps={{
-													shrink: true
-												}}
-											>
-												<MenuItem value="N/A">
-													N/A
-												</MenuItem>
-												{values.district !== 'N/A' &&
-													DSDivisions.find(
+												{districts
+													.map(
 														({ district }) =>
-															district ===
-															values.district
-													).division.map(option => (
+															district
+													)
+													.sort()
+													.map(option => (
 														<MenuItem
 															key={option}
 															value={option}
@@ -901,6 +929,121 @@ function ApplicationForm({ setApplication, onClick }) {
 														</MenuItem>
 													))}
 											</Field>
+										</Grid>
+										<Grid item xs={12} sm={4}>
+											<Field
+												component={TextField}
+												type="text"
+												name="address.DSDivision"
+												label="D. S. Division"
+												select
+												InputLabelProps={{
+													shrink: true
+												}}
+											>
+												<MenuItem value="">
+													N/A
+												</MenuItem>
+												{values.address.district &&
+													districts.find(
+														({ district }) =>
+															district ===
+															values.address
+																.district
+													) &&
+													districts
+														.find(
+															({ district }) =>
+																district ===
+																values.address
+																	.district
+														)
+														.DSDivisions.map(
+															({ division }) =>
+																division
+														)
+														.sort()
+														.map(option => (
+															<MenuItem
+																key={option}
+																value={option}
+															>
+																{option}
+															</MenuItem>
+														))}
+											</Field>
+										</Grid>
+										<Grid item xs={12} sm={4}>
+											<Field
+												component={TextField}
+												type="text"
+												name="address.GSDivision"
+												label="G. S. Division"
+												select
+												InputLabelProps={{
+													shrink: true
+												}}
+											>
+												<MenuItem value="">
+													N/A
+												</MenuItem>
+												{values.address.district &&
+													values.address.DSDivision &&
+													districts
+														.find(
+															({ district }) =>
+																district ===
+																values.address
+																	.district
+														)
+														.DSDivisions.find(
+															({ division }) =>
+																division ===
+																values.address
+																	.DSDivision
+														) &&
+													districts
+														.find(
+															({ district }) =>
+																district ===
+																values.address
+																	.district
+														)
+														.DSDivisions.find(
+															({ division }) =>
+																division ===
+																values.address
+																	.DSDivision
+														)
+														.GSDivisions.sort()
+														.map(option => (
+															<MenuItem
+																key={option}
+																value={option}
+															>
+																{option}
+															</MenuItem>
+														))}
+											</Field>
+										</Grid>
+										<Grid item xs={12} sm={3}>
+											<Field
+												component={TextField}
+												type="number"
+												label="Distance to University"
+												inputProps={{
+													step: 1
+												}}
+												InputProps={{
+													endAdornment: (
+														<InputAdornment position="start">
+															km
+														</InputAdornment>
+													)
+												}}
+												name="address.distance"
+												helperText="Distance from permanent address to university in km."
+											/>
 										</Grid>
 									</Grid>
 								</Grid>
@@ -1050,11 +1193,17 @@ function ApplicationForm({ setApplication, onClick }) {
 															shrink: true
 														}}
 													>
-														<MenuItem value="N/A">
+														<MenuItem value="">
 															N/A
 														</MenuItem>
-														{districts.map(
-															option => (
+														{districts
+															.map(
+																({
+																	district
+																}) => district
+															)
+															.sort()
+															.map(option => (
 																<MenuItem
 																	key={option}
 																	value={
@@ -1063,8 +1212,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																>
 																	{option}
 																</MenuItem>
-															)
-														)}
+															))}
 													</Field>
 												</Grid>
 												<Grid item xs={12} sm={4}>
@@ -2452,7 +2600,7 @@ function ApplicationForm({ setApplication, onClick }) {
 														<Field
 															component={Checkbox}
 															type="checkbox"
-															name="employed"
+															name="isLivingWithGuardian"
 															color="primary"
 															size="small"
 														/>
@@ -2461,87 +2609,149 @@ function ApplicationForm({ setApplication, onClick }) {
 												/>
 											</Box>
 										</Grid>
-										<Grid item xs={12} md={10}>
-											<Field
-												component={TextField}
-												type="text"
-												label="Full name"
-												name="guardian.name"
-											/>
-										</Grid>
-										<Grid item xs={12} sm={4} md={2}>
-											<Field
-												component={TextField}
-												type="number"
-												label="Age"
-												name="guardian.age"
-											/>
-										</Grid>
-										<Grid item xs={12} sm={8}>
-											<Field
-												component={TextField}
-												type="text"
-												label="Address"
-												name="guardian.address"
-												helperText="State the permanent address here"
-											/>
-										</Grid>
-										<Grid item xs={12} sm={5} md={4}>
-											<Field
-												component={TextField}
-												type="text"
-												label="Post"
-												name="guardian.post"
-												helperText="State the post, if employed"
-											/>
-										</Grid>
 										<Grid item xs={12}>
-											<Typography
-												variant="body2"
-												color="initial"
+											<Collapse
+												in={values.isLivingWithGuardian}
 											>
-												Guardian's Annual Income
-											</Typography>
-											<Typography
-												variant="caption"
-												color="textSecondary"
-											>
-												State annual income of
-												particulars from 01
-												<sup>st</sup> of January to 31
-												<sup>st</sup> December{' '}
-												{new Date().getFullYear()}
-											</Typography>
-										</Grid>
-										<Grid item xs={12} sm={5}>
-											<Field
-												component={TextField}
-												type="number"
-												label="Salary"
-												InputProps={{
-													startAdornment: (
-														<InputAdornment position="start">
-															Rs.{' '}
-														</InputAdornment>
-													)
-												}}
-												name="guardian.annualIncome.salary"
-											/>
-										</Grid>
-										<Grid item xs={12} sm={7}>
-											<Field
-												component={TextField}
-												type="number"
-												label="Income from house & property/temple"
-												InputProps={{
-													startAdornment: (
-														<InputAdornment position="start">
-															Rs.{' '}
-														</InputAdornment>
-													)
-												}}
-												name="guardian.annualIncome.houseAndPropertyOrTemple"
-											/>
+												<Fade
+													{...(values.isLivingWithGuardian
+														? { timeout: 700 }
+														: {})}
+													in={
+														values.isLivingWithGuardian
+													}
+												>
+													<Grid container spacing={2}>
+														<Grid
+															item
+															xs={12}
+															sm={10}
+														>
+															<Field
+																component={
+																	TextField
+																}
+																type="text"
+																label="Full name"
+																name="guardian.name"
+															/>
+														</Grid>
+														<Grid
+															item
+															xs={12}
+															sm={2}
+														>
+															<Field
+																component={
+																	TextField
+																}
+																type="number"
+																label="Age"
+																name="guardian.age"
+															/>
+														</Grid>
+														<Grid
+															item
+															xs={12}
+															sm={8}
+														>
+															<Field
+																component={
+																	TextField
+																}
+																type="text"
+																label="Address"
+																name="guardian.address"
+																helperText="State the permanent address here"
+															/>
+														</Grid>
+														<Grid
+															item
+															xs={12}
+															sm={4}
+														>
+															<Field
+																component={
+																	TextField
+																}
+																type="text"
+																label="Post"
+																name="guardian.post"
+																helperText="State the post, if employed"
+															/>
+														</Grid>
+														<Grid item xs={12}>
+															<Typography
+																variant="body2"
+																color="initial"
+															>
+																Guardian's
+																Annual Income
+															</Typography>
+															<Typography
+																variant="caption"
+																color="textSecondary"
+															>
+																State annual
+																income of
+																particulars from
+																01
+																<sup>st</sup> of
+																January to 31
+																<sup>
+																	st
+																</sup>{' '}
+																December{' '}
+																{new Date().getFullYear()}
+															</Typography>
+														</Grid>
+														<Grid
+															item
+															xs={12}
+															sm={5}
+														>
+															<Field
+																component={
+																	TextField
+																}
+																type="number"
+																label="Salary"
+																InputProps={{
+																	startAdornment:
+																		(
+																			<InputAdornment position="start">
+																				Rs.{' '}
+																			</InputAdornment>
+																		)
+																}}
+																name="guardian.annualIncome.salary"
+															/>
+														</Grid>
+														<Grid
+															item
+															xs={12}
+															sm={7}
+														>
+															<Field
+																component={
+																	TextField
+																}
+																type="number"
+																label="Income from house & property/temple"
+																InputProps={{
+																	startAdornment:
+																		(
+																			<InputAdornment position="start">
+																				Rs.{' '}
+																			</InputAdornment>
+																		)
+																}}
+																name="guardian.annualIncome.houseAndPropertyOrTemple"
+															/>
+														</Grid>
+													</Grid>
+												</Fade>
+											</Collapse>
 										</Grid>
 									</Grid>
 								</Grid>
@@ -2568,7 +2778,7 @@ function ApplicationForm({ setApplication, onClick }) {
 }
 
 const mapStateToProps = state => ({
-	user: state.user.data
+	email: state.user.data.email
 })
 
 export default connect(mapStateToProps, {

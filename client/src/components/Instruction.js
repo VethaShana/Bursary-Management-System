@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Content = () => (
-	<Typography>
+	<Typography component="div">
 		<Typography variant="body2" color="initial" paragraph>
 			Particulars regarding sources of income of should be stated in full.
 			Particulars of income supplied by you will be checked with relevant
