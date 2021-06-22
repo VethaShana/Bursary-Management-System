@@ -1,2014 +1,3 @@
-export const districts = [
-	'Jaffna',
-	'Kilinochchi',
-	'Mannar',
-	'Mullaitivu',
-	'Vavuniya',
-	'Puttalam',
-	'Kurunegala',
-	'Gampaha',
-	'Colombo',
-	'Kalutara',
-	'Anuradhapura',
-	'Polonnaruwa',
-	'Matale',
-	'Kandy',
-	'Nuwara Eliya',
-	'Kegalle',
-	'Ratnapura',
-	'Trincomalee',
-	'Batticaloa',
-	'Ampara',
-	'Badulla',
-	'Monaragala',
-	'Hambantota',
-	'Matara',
-	'Galle'
-]
-
-export const GSDivisions = [
-	{
-		division: 'Pahathadumbara',
-		divisionNo: '#GS10119'
-
-		/*
-//Batticaloa
-
-
-//Koralai pattu North
-
-
-Ammanthanavely	213D
-Kaddumurivu	213B
-Kathiravely	213
-Kayankerny	211A
-Kirmichai	211F
-Mankerny Central	211
-Mankerny South	211G
-Mathurankernikulam	211E
-Palchenai	213A
-Panichchankerni	211C
-Puchchakerny	213C
-Punanai East	211B
-Uriyankaddu	212B
-Vakarai Central	212
-Vakarai North	212A
-Vattavan	211D
-
-//Koralai Pattu West(Oddamavadi)
-
-Mancholai	207A
-Meeravodai  Muslim  East	207B
-Meeravodai Muslim West	207
-Oddamavadi  02	208C
-Oddamavadi 01 North	208B/2
-Oddamavadi 01 South	208B
-Oddamavadi 03	208
-Paper Town	210B
-
-//Koralai pattu (Valaichenai)
-
-Kalkuda	204
-Kalmadu	204A
-Kannagipuram	205D
-Kanniyadi    #	202B
-Karuwakerni	202A
-Kumburumoolai	203B
-Meeravodai Tamil	202
-Nasivanthivu 205C
-Pethalai	205B
-Puthukudiyiruppu	205A
-Sungankerny	202C
-Valaichenai Tamil	205
-
-//Eravur pattu
-
-Arumugathan Kudiyiruppu 2	189C
-ArumugathanKudiruppu 1	189
-Chenkalady 1	195/1
-Chenkalady 2	195
-Ellainagar	174
-Eralakkulam	201A
-Eravur 4	194
-Eravur 5	194/1
-Gamunupura	135A
-Iyankerny	193C
-Kaluvankerny I	198
-Kaluwankerny 2	198A
-Karadiyanaru	185A
-Kithulwewa	185B
-Koduwamadu	195A
-Kommathurai East	196
-Kommathurai North	196B
-Kommathurai West	196A
-Koppavely	146A
-Kumaraveliar Kiramam	195B
-Marappalam	185C
-Mavadivembu 2	197E
-Mavadivembu I	197A
-Mayilavaddavan	197D
-Mylampavely	189B
-Palachcholai	197C
-Pankudahvely	186
-Periya pullumalai	146
-Savukkady	193A
-Siththandi  I	201/1
-Siththandi 2	201/02
-Siththandi 3	201/3
-Siththandi 4	201
-Thalavai	193
-Thannamunai	189A
-Urugamam	185
-Vantharumoolai East	197
-Vantharumoolai West	197B
-Veppavedduwan	186A
-
-
-// Eravur Town
-
-
-Eravur 01	190
-Eravur 01A	190A
-Eravur 01B	190B
-Eravur 02	191
-Eravur 02B	191B
-Eravur 02C	191C
-Eravur 03	192
-Eravur 03A	192B
-Eravur 06	192A
-Eravur 06A	192C
-Eravur 06D	192D
-
-
-
-//Manmunai west
-
-
-Ayithiyamalai North	184B
-Ayithiyamalai South	184C
-Eachchantheivu	182
-Ilupadichenai	148
-Kanchirankudah	148D
-Kannankudah	149
-Kanthinagar	148C
-Karaveddy	183
-Karayakkanteivu	149A
-Kothiyapulai	148E
-Kurinchamunai	149B
-Mahilavedduvan	184
-Mandapathady	149C
-Mankikaddu	182C
-Narippulthoddam	184D
-Navatkadu	182B
-Nediyamadu	184E
-Panchenai	148B
-Paruthichenai	149D
-Pavakkodichenai	148A
-Puthumandapathady	149E
-Unnichchei	184A
-Vavunatheivu	182A
-Vilavedduwan	183A
-	
-	
-//Kattankudy
-	
-	
-	
-165 A Div.3 West Kattankudy	165A
-Div.05, South Kattankudy	164B
-Division 04, Kattankudy	164
-Kattankudy 1 south	167E
-Kattankudy 2	166
-Kattankudy 2 North	166A
-Kattankudy 3	165
-Kattankudy 3 East	165B
-Kattankudy 4 West	164C
-Kattankudy 5	164A
-Kattankudy 6 south	162
-Kattankudy 6 west	162B
-Kattankudy Division 1	167
-Kattankudy Division 6 South	162A
-New Kattankudy Div. North	167A
-New Kattankudy East	167B
-New Kattankudy South	167C
-New Kattankudy West	167D
-
-//Manmunai pattu(Araiyampathy)
-
-
-Araipattay East	157C
-Araipatti 02	157
-Araipatti 03	156
-Araipatti Central	156D
-Araiyampathy South	156B
-Arayampathy 01	158
-Arayampathy North	157D
-Arayampathy West	158A
-Kankeyanodai	155
-Kankeyanodai South	155B
-Kirankulam	150B
-Kirankulam Central	150C
-Kirankulam North	150
-Kirankulam South	150A
-Kovilkulam	156C
-Manmunai	153A
-Mavilankanthurai	154
-Ollikulam	155A
-Palamunai	152
-Puthukudiyiruppu	151
-Puthukudiyiruppu North	151B
-Puthukudiyiruppu South	151A
-Rajathurai Gramam	156A
-Selvanagar East	157A
-Selvanagar East	157B
-Thalankudah	153
-Vedarkudiyiruppu	153B
-
-
-//Manmunai south-west
-
-Ampilanthurai	127
-Ampilanthurai North	127B
-Ampilanthurai West	127A
-Arasaditivu	128
-Arasaditivu North	128C
-Kachchakodi	135D    C
-Kadukkamunai	128A
-Katchenai	127C
-Kokkadichcholai	134
-Kokkadichcholai South	134A
-Kuluvinamadu	135B
-Mahiladithivu	129B
-Mahiladithivu South	129A
-Mavadimunmaari	135
-Munaikadu East	133
-Munaikkadu North	133C
-Munaikkadu South	133B
-Munaikkadu West Part	133A
-Muthalaikkudah	131
-Muthalaikkudah West	131A
-Paddippalai	128B
-Pandariyavelly	129
-Panichchiyadimunmari	135A      D
-Thanthamalai	135C    A 
-
-// porativu pattu
-
-
-
-Anaikaddiyaveli	99E
-Ganeshapuram	98C
-Kakkachchivattai	99A
-Kalumunthanvely	107E
-Kannapuram	99G
-Kannapuram East	99K
-Kanthipuram	107B
-Kovilporativu	109
-Kovilporativu South	109A
-Kovilporativu West	109B
-Malayarkaddu	99H
-Mandur 1 and 2 South	97B
-Mandur 1, 2 (North Part)	97
-Mandur 3	96
-Mandur Kodamunai	96A
-Mavetkudah	107D
-Munaiththeevu	108A
-Navagirinagar	107A
-Nellikkadu	99F
-Palacholai	99I
-Palamunai	97A
-Palayadivaddai	99B
-Palugamam 02	106
-Paluhamam I	107
-Pattapuram	108C
-Periyaporativu	108
-Punnakulam	108B
-Ranamadu	98A
-Sankarpuram	98B
-Saravanaiyadiyoottu	106E
-Selvapuram	107F
-Sinnawaththai	99C
-Thambalawaththai	98
-Thikkodai	106A
-Thumbankerny	106C
-Thumpankerny (Y.F.S.)	107H
-Vammiyadiyoottu	107C
-Vanninakar	106D
-Veeranchenai	106B
-Vellaveli	99
-Vilanthoddam	99D
-Vipulananthapuram	107G
-Vivekananthapuram	99J
-
-
-//Manmunai south and eruvil pattu
-
- Cheddipalayam North	126A 1
-Cheddipalayam South	126A
-Eruvil East	115B
-Eruvil North	115
-Eruvil South	115A
-Kaluthavalai  01	119
-Kaluthavalai 02	119A
-Kaluthavalai 03	117
-Kaluthavalai 04	117A
-Kaluthavalai 04 Santhipuram	117B
-Kaluthavalai Central	119B
-Kaluwanchikudy - South	116A
-Kaluwanchikudy North	116B
-Kaluwanchikudy North 1	116
-Koddaikallar  South	113B
-Koddaikallar East	113A
-Koddaikallar North	113
-Koddaikallar West	113C
-Kurukkalmadam North	126C
-Kurukkalmadam South	126
-Kurumanvelly 11 West	114B
-Kurumanvely - 12	114A
-Kurumanvely 11 East	114
-Mahiloor East	110A
-Mahiloor South West	110C
-Mahiloor West	110
-Mahiloormunai	110B
-Mangkaadu	123
-Ondachchimadam North	111
-Ondachchimadam South	111A
-Paddiruppu	116C
-Periyakallar 01	76
-Periyakallar 2 West	76B
-Periyakallar 3	75B
-Periyakallar 3 South	75C
-Periyakallaru 01 South	76A
-Periyakallaru 2	75A
-Thethatheevu South - 02	122A
-Thettaththatheevu North	122
-Thettaththeevu South	122C
-Thetthaththeevu South - 01	122B
-Thuraineelavanai North	74
-Thuraineelavanai North - 01	74B
-Thuraineelavanai South	74A
-Thuraineelavanai South - 01	74C
-
-
-//Koralai pattu South(Kiran)
-
-Devapuram	199A #
-Kallichchai	210A #
-Kiran East	203 #
-Kiran West	203A #
-Korakallimadu	203C #
-Koraveli	209B #
-Kudumpimalai	209D #
-Murakkottanchenai	199 #
-Muruththanai	209A #
-Palaiyadithona	200B #
-Perillaveli	209 #
-Poolakkadu	209C #
-Punanai West	210E #
-Santhiveli	200 #
-Thihikilivaddai	200A #
-Uthuchchenai	210A/II #
-Vadamunai	210A/1 #
-Vahaneri	210 #
-
-//Koralai pattu central
-
-
-//Batticaloa
-//Manmunai north
-
-Amirthakali 173
-Arasady 177A
-Barathypuram 173H
-Datch Bar 172C
-Gnasooriyam Squre 173B
-Iruthayapuram Central 176H
-Iruthayapuram East 173B
-Iruthayapuram West 176E
-Jayanthipuram 177G
-Kallady 171
-Kallady Mugathuvaram 172A
-Kallady Uppodai 171B
-Kallady Veloor 171A
-Karuweppankeney 176B
-Koddamunai 178
-Kokkuvil 176
-Koolavadi East 173I
-Koolavady 173F
-Mamagam 173A
-Manjanthoduvai North 168
-Manjanthoduvai South 168A
-Navalady 172
-Navatkudah 168B
-Navatkudah East 168C
-Navatkudah South 168D
-Nochchimunai 171C
-Palameenmadu 173C
-Panichchayadi 176D
-Periya Uppodai 178A
-Periya Urani 176C
-Puliyanthivu Central 179B
-Puliyanthivu East 179A
-Puliyanthivu South 179C
-Puliyanthivu West 179
-Punnachcholai 173D
-Puthunagar 181C
-Saththurukondan 176A
-Sethukudah 181D
-Sinna Urane 176F
-Thamaraikerny 177B
-Thandavanvely 177
-Thimilathivu 181
-Thiraimadu 173E
-Thiruchchenthur 172B
-Thirupperunthurai 181A
-Thissaveerasingam Squre 173J
-Veddukkadu 173K
-Veechikalmunai 181B
-
-
-//Koralai pattu North
-
-
-Ammanthanavely	213D
-Kaddumurivu	213B
-Kathiravely	213
-Kayankerny	211A
-Kirmichai	211F
-Mankerny Central	211
-Mankerny South	211G
-Mathurankernikulam	211E
-Palchenai	213A
-Panichchankerni	211C
-Puchchakerny	213C
-Punanai East	211B
-Uriyankaddu	212B
-Vakarai Central	212
-Vakarai North	212A
-Vattavan	211D
-
-//Koralai Pattu West(Oddamavadi)
-
-Mancholai	207A
-Meeravodai  Muslim  East	207B
-Meeravodai Muslim West	207
-Oddamavadi  02	208C
-Oddamavadi 01 North	208B/2
-Oddamavadi 01 South	208B
-Oddamavadi 03	208
-Paper Town	210B
-
-//Koralai pattu (Valaichenai)
-
-Kalkuda	204
-Kalmadu	204A
-Kannagipuram	205D
-Kanniyadi    #	202B
-Karuwakerni	202A
-Kumburumoolai	203B
-Meeravodai Tamil	202
-Nasivanthivu 205C
-Pethalai	205B
-Puthukudiyiruppu	205A
-Sungankerny	202C
-Valaichenai Tamil	205
-
-//Eravur pattu
-
-Arumugathan Kudiyiruppu 2	189C
-ArumugathanKudiruppu 1	189
-Chenkalady 1	195/1
-Chenkalady 2	195
-Ellainagar	174
-Eralakkulam	201A
-Eravur 4	194
-Eravur 5	194/1
-Gamunupura	135A
-Iyankerny	193C
-Kaluvankerny I	198
-Kaluwankerny 2	198A
-Karadiyanaru	185A
-Kithulwewa	185B
-Koduwamadu	195A
-Kommathurai East	196
-Kommathurai North	196B
-Kommathurai West	196A
-Koppavely	146A
-Kumaraveliar Kiramam	195B
-Marappalam	185C
-Mavadivembu 2	197E
-Mavadivembu I	197A
-Mayilavaddavan	197D
-Mylampavely	189B
-Palachcholai	197C
-Pankudahvely	186
-Periya pullumalai	146
-Savukkady	193A
-Siththandi  I	201/1
-Siththandi 2	201/02
-Siththandi 3	201/3
-Siththandi 4	201
-Thalavai	193
-Thannamunai	189A
-Urugamam	185
-Vantharumoolai East	197
-Vantharumoolai West	197B
-Veppavedduwan	186A
-
-
-// Eravur Town
-
-
-Eravur 01	190
-Eravur 01A	190A
-Eravur 01B	190B
-Eravur 02	191
-Eravur 02B	191B
-Eravur 02C	191C
-Eravur 03	192
-Eravur 03A	192B
-Eravur 06	192A
-Eravur 06A	192C
-Eravur 06D	192D
-
-
-
-//Manmunai west
-
-
-Ayithiyamalai North	184B
-Ayithiyamalai South	184C
-Eachchantheivu	182
-Ilupadichenai	148
-Kanchirankudah	148D
-Kannankudah	149
-Kanthinagar	148C
-Karaveddy	183
-Karayakkanteivu	149A
-Kothiyapulai	148E
-Kurinchamunai	149B
-Mahilavedduvan	184
-Mandapathady	149C
-Mankikaddu	182C
-Narippulthoddam	184D
-Navatkadu	182B
-Nediyamadu	184E
-Panchenai	148B
-Paruthichenai	149D
-Pavakkodichenai	148A
-Puthumandapathady	149E
-Unnichchei	184A
-Vavunatheivu	182A
-Vilavedduwan	183A
-	
-	
-//Kattankudy
-	
-	
-	
-165 A Div.3 West Kattankudy	165A
-Div.05, South Kattankudy	164B
-Division 04, Kattankudy	164
-Kattankudy 1 south	167E
-Kattankudy 2	166
-Kattankudy 2 North	166A
-Kattankudy 3	165
-Kattankudy 3 East	165B
-Kattankudy 4 West	164C
-Kattankudy 5	164A
-Kattankudy 6 south	162
-Kattankudy 6 west	162B
-Kattankudy Division 1	167
-Kattankudy Division 6 South	162A
-New Kattankudy Div. North	167A
-New Kattankudy East	167B
-New Kattankudy South	167C
-New Kattankudy West	167D
-
-//Manmunai pattu(Araiyampathy)
-
-
-Araipattay East	157C
-Araipatti 02	157
-Araipatti 03	156
-Araipatti Central	156D
-Araiyampathy South	156B
-Arayampathy 01	158
-Arayampathy North	157D
-Arayampathy West	158A
-Kankeyanodai	155
-Kankeyanodai South	155B
-Kirankulam	150B
-Kirankulam Central	150C
-Kirankulam North	150
-Kirankulam South	150A
-Kovilkulam	156C
-Manmunai	153A
-Mavilankanthurai	154
-Ollikulam	155A
-Palamunai	152
-Puthukudiyiruppu	151
-Puthukudiyiruppu North	151B
-Puthukudiyiruppu South	151A
-Rajathurai Gramam	156A
-Selvanagar East	157A
-Selvanagar East	157B
-Thalankudah	153
-Vedarkudiyiruppu	153B
-
-
-//Manmunai south-west
-
-Ampilanthurai	127
-Ampilanthurai North	127B
-Ampilanthurai West	127A
-Arasaditivu	128
-Arasaditivu North	128C
-Kachchakodi	135D    C
-Kadukkamunai	128A
-Katchenai	127C
-Kokkadichcholai	134
-Kokkadichcholai South	134A
-Kuluvinamadu	135B
-Mahiladithivu	129B
-Mahiladithivu South	129A
-Mavadimunmaari	135
-Munaikadu East	133
-Munaikkadu North	133C
-Munaikkadu South	133B
-Munaikkadu West Part	133A
-Muthalaikkudah	131
-Muthalaikkudah West	131A
-Paddippalai	128B
-Pandariyavelly	129
-Panichchiyadimunmari	135A      D
-Thanthamalai	135C    A 
-
-// porativu pattu
-
-
-
-Anaikaddiyaveli	99E
-Ganeshapuram	98C
-Kakkachchivattai	99A
-Kalumunthanvely	107E
-Kannapuram	99G
-Kannapuram East	99K
-Kanthipuram	107B
-Kovilporativu	109
-Kovilporativu South	109A
-Kovilporativu West	109B
-Malayarkaddu	99H
-Mandur 1 and 2 South	97B
-Mandur 1, 2 (North Part)	97
-Mandur 3	96
-Mandur Kodamunai	96A
-Mavetkudah	107D
-Munaiththeevu	108A
-Navagirinagar	107A
-Nellikkadu	99F
-Palacholai	99I
-Palamunai	97A
-Palayadivaddai	99B
-Palugamam 02	106
-Paluhamam I	107
-Pattapuram	108C
-Periyaporativu	108
-Punnakulam	108B
-Ranamadu	98A
-Sankarpuram	98B
-Saravanaiyadiyoottu	106E
-Selvapuram	107F
-Sinnawaththai	99C
-Thambalawaththai	98
-Thikkodai	106A
-Thumbankerny	106C
-Thumpankerny (Y.F.S.)	107H
-Vammiyadiyoottu	107C
-Vanninakar	106D
-Veeranchenai	106B
-Vellaveli	99
-Vilanthoddam	99D
-Vipulananthapuram	107G
-Vivekananthapuram	99J
-
-
-//Manmunai south and eruvil pattu
-
- Cheddipalayam North	126A 1
-Cheddipalayam South	126A
-Eruvil East	115B
-Eruvil North	115
-Eruvil South	115A
-Kaluthavalai  01	119
-Kaluthavalai 02	119A
-Kaluthavalai 03	117
-Kaluthavalai 04	117A
-Kaluthavalai 04 Santhipuram	117B
-Kaluthavalai Central	119B
-Kaluwanchikudy - South	116A
-Kaluwanchikudy North	116B
-Kaluwanchikudy North 1	116
-Koddaikallar  South	113B
-Koddaikallar East	113A
-Koddaikallar North	113
-Koddaikallar West	113C
-Kurukkalmadam North	126C
-Kurukkalmadam South	126
-Kurumanvelly 11 West	114B
-Kurumanvely - 12	114A
-Kurumanvely 11 East	114
-Mahiloor East	110A
-Mahiloor South West	110C
-Mahiloor West	110
-Mahiloormunai	110B
-Mangkaadu	123
-Ondachchimadam North	111
-Ondachchimadam South	111A
-Paddiruppu	116C
-Periyakallar 01	76
-Periyakallar 2 West	76B
-Periyakallar 3	75B
-Periyakallar 3 South	75C
-Periyakallaru 01 South	76A
-Periyakallaru 2	75A
-Thethatheevu South - 02	122A
-Thettaththatheevu North	122
-Thettaththeevu South	122C
-Thetthaththeevu South - 01	122B
-Thuraineelavanai North	74
-Thuraineelavanai North - 01	74B
-Thuraineelavanai South	74A
-Thuraineelavanai South - 01	74C
-
-
-//Koralai pattu South(Kiran)
-
-Devapuram	199A #
-Kallichchai	210A #
-Kiran East	203 #
-Kiran West	203A #
-Korakallimadu	203C #
-Koraveli	209B #
-Kudumpimalai	209D #
-Murakkottanchenai	199 #
-Muruththanai	209A #
-Palaiyadithona	200B #
-Perillaveli	209 #
-Poolakkadu	209C #
-Punanai West	210E #
-Santhiveli	200 #
-Thihikilivaddai	200A #
-Uthuchchenai	210A/II #
-Vadamunai	210A/1 #
-Vahaneri	210 #
-
-//Koralai pattu central
-
--
-
-
-
-
-//Ampara
-//Dehiattakandiya
-
-Bakmeedeniya	142K
-Dehiattakandiya	142J
-Ihalagama	142D
-Kadirapura	142N
-Lihiniyagama	142H
-Mawanagama	142I
-Nawa Medagama	142B
-Paranagama	142C
-Ridee Ela	142L
-Sadamadulla	142F
-Sandunpura	142E
-Serupitiya	142G
-Wewmedagama	142A
-
-
-//padiyathalawa
-
-
-Dorakumbura	139
-Galode	141A
-Hagamwela	141C
-Holike	138
-Kehelulla	140
-Kirawana	140C
-Kolamanthalawa	138B
-Komana	139B
-Marangala	139A
-Miriswatta	138A
-Moradeniya	137B
-Padiyathalawa	140A
-Palathuruwella	137C
-Pallegama	141
-Pulungasmulla	137D
-Saranagama	141D
-Serankada	137A
-Thalapitaoya Left	140D
-Thalapitaoya South	140B
-Unapana	141B
-	
-	
-//Mahaoya
-
-
-Aranthalawa	136A
-Bedirekka	144C
-Bogamuyaya	144B/1
-Borapola	136A/1
-Dambadeniya	137A/1
-Eddapola	144A/1
-Kekirihena	144A
-Kelavinna	136
-Kudaharasgala	137A/2
-Lahugala	137
-Mahaoya	144
-Pollebedda	136B
-Poolawala	145A
-Samagipura	136A/2
-Tempitiya	145
-Thapelpola	144D
-Unuwathura Bubula	144B
-	
-	
-	
-//Uhana
-
-
-Abhayapura	W/88C/01
-Bakkiella	W/104
-Bandaradoowa	W/104B/2
-Bokkabedda	W/100
-Bridge Camp	W/88/3
-Buddhangala	W/93C
-Dadayamthalawa East	W/93B
-Dadayamthalawa West	W/93B/1
-Dematamalpelessa	W/88A/2
-Galahitiyagoda	W/88A
-Galapitagala East	W/104C
-Galapitagala West	W/104C/1
-Gamunupura	W/94A/4
-Gonagala	W/104C/2
-Gonagolla	W/104B/1
-Himidurawa	W/88C
-Kahatagasyaya	W/100A
-Kohombana	W/102
-Komariya	W/88B/2
-Kothmale	W/104A/1
-Kumarigama	W/88B/3
-Kumudugama	W/93C/2
-Lathugala	W/100/1
-Mahakandiya	W/100A/1
-Mayadunna	W/104A
-Nawagiriyawa	W/104B
-Nugelanda North	W/104/1
-Nugelanda South	W/104/2
-Piyangala	W/104/5
-Rajagalathenna North	W/104/3
-Rajagalathenna South	W/104/4
-Rajagama North	W/94A
-Rajagama South	W/94A/1
-Ruhunugama	W/93C/1
-Sandanadapura	W/93A
-Senagama North	W/102A/1
-Senagama South	W/102A/2
-Siyambalawewa	W/94A/5
-Suhadagama South	W/93A/3
-Udagirigama East	W/88B
-Udagirigama West	W/88B/1
-Udayapura	W/93A/1
-Uhana	W/88
-Uhana Thissapura East	W/88/2
-Uhana Thissapura West	W/88/1
-Veheragama East	W/94A/2
-Veheragama West	W/94A/3
-Vijayapura East	W/93B/2
-Vijayapura West	W/93B/3
-Walgampura	W/102/1
-Weeragoda North	W/93C/4
-Weeragoda South	W/93C/3
-Weeranketagoda	W/102A
-Welikahagolla	W/88A/1
-	
-	
-//ampara
-
-
-Ambagahawella	W/86B
-Ambamalthalawa	W/86H
-Dambethalawa	W/86C
-Gemunupura	W/89G
-Indrasarapura	W/89E
-Jayawardhanapura	W/89A
-Karangawa	W/89J
-Kotavehera	W/86K
-Mihindupura	W/89H
-Namal Oya (i)	W/86A
-Namal Oya 02	W/86G
-Namalthalawa	W/86I
-Nawagampura	W/89I
-Paragahakele East	W/86J
-Paragahakele West	W/86
-Saddhathissapura	W/89F
-Samapura	W/89B
-Senanayakepura	W/89D
-Thissapura	W/89C
-Wavinna North	W/86D
-Wavinna South	W/86E
-
-//Navithanvelly
-
-
-Annamalai 02	SP/95/B
-Annamalai 03	SP/95/C
-Annamale 01	SP/95A
-Central Camp 01	SP/93/A
-Central Camp 02	SP/93/B
-Central Camp 03	SP/93C
-Central Camp 04	SP/93D
-Central Camp 05	SP/93E
-Central Camp 06	SP/93/6
-Chalambaikeny 03	SP/94D
-Chalambaikerny 02	SP/94C
-Chalampakeny 01	SP/94A
-Chalampakeny 04	SP/94E
-Chalampakeny 05	SP/94F
-Chavalakade	SP/93
-Navithanveli 01	SP/94/1
-Navithanveli 02	SP/94/2
-Sorrikkalmunai 1	SP/90
-Sorrikkalmunai 2	SP/90A
-Sorrikkalmunai 3	SP/90B
-	
-	
-//Samanthurai
-
-//Kalmunai
-
-
-Kalmunai Muslim Section	KP/59
-Kalmunaikudy 01	KP/58
-Kalmunaikudy 02	KP/58C
-Kalmunaikudy 03	KP/58A
-Kalmunaikudy 04	KP/58B
-Kalmunaikudy 05	KP/56
-Kalmunaikudy 06	KP/56F
-Kalmunaikudy 07	KP/56E
-Kalmunaikudy 08	KP/56D
-Kalmunaikudy 09	KP/56B
-Kalmunaikudy 10	KP/56C
-Kalmunaikudy 11	KP/56A
-Kalmunaikudy 12	KP/55
-Kalmunaikudy 13	KP/54A
-Kalmunaikudy 14	KP/54
-Maruthamunai 01	KP/67B
-Maruthamunai 02	KP/67
-Maruthamunai 03	KP/67A
-Maruthamunai 04	KP/67C
-Maruthamunai 05	KP/67D
-Maruthamunai 06	KP/68
-Natpittimanai Muslim Division 03	KP/64
-Natpittimunai Muslim Diviosion 05	KP/64D
-Natpittimunai Muslim Division 01	KP/64A
-Natpittimunai Muslim Division 02	KP/64B
-Natpittimunai Muslim Division 04	KP/64C
-Periyaneelavanai Muslim Section 01	KP/72
-Periyaneelavanai Muslim Section 02	KP/72A
-
-
-//Sainthamarathu
-
-
-Sainthamaruthu 1	KP/53
-Sainthamaruthu 10	KP/50C
-Sainthamaruthu 11	KP/47A
-Sainthamaruthu 12	KP/47B
-Sainthamaruthu 13	KP/47D
-Sainthamaruthu 14	KP/47E
-Sainthamaruthu 15	KP/47F
-Sainthamaruthu 16	KP/47C
-Sainthamaruthu 17	KP/47
-Sainthamaruthu 2	KP/53A
-Sainthamaruthu 3	KP/52
-Sainthamaruthu 4	KP/52B
-Sainthamaruthu 5	KP/52A
-Sainthamaruthu 6	KP/52C
-Sainthamaruthu 7	KP/50A
-Sainthamaruthu 8	KP/50B
-Sainthamaruthu 9	KP/50
-
-//Karaitivu
-
-Karaitivu 01	44
-Karaitivu 02	45
-Karaitivu 03	45A
-Karaitivu 04	45B
-Karaitivu 05	45C
-Karaitivu 06	44D
-Karaitivu 07	42
-Karaitivu 08	42B
-Karaitivu 09	42C
-Karaitivu 10	42A
-Karaitivu 11	42D
-Karaitivu 12	42E
-Maligaikadu Central	44B
-Maligaikadu East	44C
-Maligaikadu West	44A
-Mavadippalli East	43
-Mavadippalli West	43A
-
-//Nintavur
-	
-Nintavur 01	41
-Nintavur 02	40
-Nintavur 03	39
-Nintavur 04	38
-Nintavur 05	37
-Nintavur 06	38A
-Nintavur 07	37A
-Nintavur 08	37B
-Nintavur 09	37C
-Nintavur 10	36A
-Nintavur 11	41A
-Nintavur 12	41B
-Nintavur 13	40A
-Nintavur 14	39A
-Nintavur 15	39B
-Nintavur 16	38B
-Nintavur 17	38C
-Nintavur 18	37D
-Nintavur 19	38D
-Nintavur 20	37E
-Nintavur 21	37F
-Nintavur 22	37G
-Nintavur 23	36A
-Nintavur 24	39C
-Nintavur 25	38E
-
-	
-//Addalaichenai	
-
-Addalaichenai 05	AD/30B
-Addalaichenai 06	AD/30C
-Addalaichenai 07	AD/30C/1
-Addalaichenai 08	AD/30C/2
-Addalaichenai 09	AD/33A
-Addalaichenai 15	AD/30B/1
-Addalaichenai 16	AD/30B/2
-Addalaichenai 17	AD/30B/3
-Deegawapi-01	AD/35A
-Deegawapiya 02	AD/35D
-Oluvil 01	AD/35
-Palamunai 03	AD/34B
-Palamunai-01	AD/34
-Palamunai-02	AD/34A
-Palamunai-04	AD/34A/1
-Palamunai-06	AD/34B/1
-	
-	
-//Irakkamam
-
-Irakkamam 01	IR84B
-Irakkamam 02	IR84G
-Irakkamam 03	IR84A
-Irakkamam 04	IR84E
-Irakkamam 05	IR84F
-Irakkamam 06	IR84
-Irakkamam 07	IR84C
-Irakkamam 08	IR84D
-Irakkamam 09	IR84H
-Varipathanchenai 01	IR85
-Varipathanchenai 02	IR85A
-Varipathanchenai 03	IR85B
-
-//Akkaraipattu	
-
-Akkaraipattu-1	AP/15
-Akkaraipattu-10	AP/15/1
-Akkaraipattu-11	AP/15/2
-Akkaraipattu-12	AP/15/3
-Akkaraipattu-13	AP/15/4
-Akkaraipattu-14	AP/15/5
-Akkaraipattu-15	AP/16A
-Akkaraipattu-16	AP/17A
-Akkaraipattu-17	AP/18A
-Akkaraipattu-18	AP/19A
-Akkaraipattu-19	AP/18/19/20
-Akkaraipattu-2	AP/16
-Akkaraipattu-20	AP/20/1
-Akkaraipattu-21	AP/20/2
-Akkaraipattu-3	AP/17
-Akkaraipattu-4	AP/18
-Akkaraipattu-5	AP/19
-Akkaraipattu-6	AP/20
-Alim Nagar	AP/20A/4
-Issanganicheemai	AP/20A/3
-Paddiyadippiddy	AP/20A
-Pallikudiyiruppu 02	AP/20A2
-Pallikudiyiruppu-1	AP/20A1
-Town Division-1	AP/15A
-Town Division-2	AP/15A/1
-Town Division-3	AP/15A/2
-Town Division-4	AP/15A/3
-Town Division-5	AP/15A/4
-
-//Alayadivembu
-
-Akkaraipattu 7	AP/21
-Akkaraipattu 7/1	AV/05
-Akkaraipattu 7/2	AV/06
-Akkaraipattu 7/3	AV/07
-Akkaraipattu 7/4	AV/08
-Akkaraipattu 8	AP/22
-Akkaraipattu 8/1	AV/10
-Akkaraipattu 8/2	AV/11
-Akkaraipattu 8/3	AV/12
-Akkaraipattu 9	AP/22A
-Alayadivembu	AP/21A
-Aligambai	Av/22
-Kannakikiramam 01	AV/20
-Kannakikiramam 02	AV/21
-Kolavil 01	AV/16
-Kolavil 01	AV/16
-Kolavil 02	AV/17
-Kolavil 03	AP/23
-Navatkadu	AV/03
-Panamkadu	AP/13
-Sinnamugathuwaram	AV/14
-Sinnapanamkadu	AV/19
-Wachchikuda	AV/1
-
-//Damana
-
-
-18A . Janapadaya	W/25E
-Alahena	W/27C
-Ambalanoya	W/24D
-Bakmitiyawa	W/25B
-Damana	W/27
-Dewalahida	W/26E
-Diviyagala	W/27D
-Eggaloya	W/24B
-Galkanda	W/26D
-Galmaduwa	W/27H
-Helagampura	W/27G
-Hindakalugama	W/28D
-Hingurana	W/27A
-Kalugolla	W/28E
-Karalewa	W/27F
-Keenawatta	W/27E
-Kethsirigama	W/26A
-Kivulegama	W/26C
-Koknahara	W/28B
-Kumana	W/25D
-Madana	W/24
-Madawalalanda	W/24A
-Moragahapallama	W/28C
-Muwangala	W/27B
-Padagoda	W/28
-Pahalalanda	W/28A
-Pallanoya	W/26B
-Pannalgama	W/25A
-Thimbirigolla	W/24C
-Thottama	W/25
-Uksiripura	W/27I
-Veheragala	W/25C
-Wadinagala	W/26
-
-
-//Thirukkovil
-
-
-Kanchikudiyaru	TK/10B
-Kanchirankuda	TK/10D/1
-Sagamam	TK/11C
-Sangamankiramam	TK/10D
-Thambattai 1	TK/12A
-Thambattai 2	TK/12A/1
-Thambiluvil 1 East	TK/12C
-Thambiluvil 1 South	TK/12B
-Thambiluvil 1 West	TK/12
-Thambiluvil 2 East	TK/11A
-Thambiluvil 2 North	TK/11
-Thambiluvil 2 West	TK/11B
-Thandiyadi	TK/10C
-Thangavelayuthapuram	TK/10E
-Thirukkovil 1	TK/10
-Thirukkovil 2	TK/10/1
-Thirukkovil 3	TK/10/2
-Thirukkovil 4	TK/10E/1
-Vinayagapuram-01	TK/10A
-Vinayagapuram-02	TK/10A/1
-Vinayagapuram-03	TK/10A/2
-Vinayagapuram04	TK/10A/3
-
-//Pothuvil	
-
-Hijra Nagar	P/26
-Hithayapuram Unit1	P/20
-Kalappukattu	P/15
-Pothuvil 01  - Unit II	P/02
-Pottuvil 01 - Unit I	P/01
-Pottuvil 01 - Unit III	P/03
-Sangaman Kandy	P/22
-Sarvothayapuram	P/05
-Sinna Ulla	P/18
-Vattivelly	P/11
-
-//Lahugala
-	
-
-Dewalagoda	PP/08
-Hulannuge	PP/11
-Hulannuge West	PP/12
-Kandahindagama	PP/13
-Lahugala	PP/09
-Lahugala Peranigama	PP/10
-Panama Central	PP/05
-Panama North	PP/04
-Panama South	PP/02
-Panama West	PP/03
-Pansalgoda	PP/07
-Shasthrawela	PP/06
-
-//Kalmunayi north
-
-
-//Trincomalee
-
-//Padavi Sri Pura
-
-Gemunu Pura	31N
-Jayanthi Wewa	31I
-Kavanthissa Pura	31H
-Lassana Gama	31P
-Paranamedawachchiya	31F
-Samanpura	31M
-Sewajanapadaya	31K
-Singhapura	31J
-Sri Pura	31D
-Sri Thissapura	31L
-
-//Kuchchaveli
-
-
-Cassim Nagar	239D
-Gopalapuram	241B
-Iqbal Nagar	241D
-Irakkandy	241A
-Iranaikkeni	239A
-Jaya Nagar	239C
-Kaddu kulam	237C
-Kallampaththai	237D
-Kuchchaveli	239
-Kumburupitiya East	240B
-Kumburupitiya North	240A
-Kumburupitiya South	240
-Nilaveli	241
-Periyakulam	241E
-Pulmoddai 01	31I
-Pulmoddai 02	31H
-Pulmoddai 03	31G
-Pulmoddai 04	31J
-Senthoor	237B
-Thennamaravadi	31E
-Thiriyai	237
-Valaiyuttu	241G
-Veerancholai	239B
-Veloor	241C
-
-//Gomarankadawala
-
-Bakmeegama	233D
-Galkadawala	232
-Gomarankadawala	231
-Kalyanapura	231C
-Kandamalawa	232B
-Kivulakadawela	233A
-Madawachchiya	233
-Maila Wewa	233C
-Pamburugaswewa	232A
-Pulikandykulama	233B
-	
-//Morawewa
-
-Awwai Nagar	231G
-Kitul Ultuwa	231E
-Mahadiwul Wewa Stage 02	230B
-Mahathulwewa	230A
-Morawewa North	231B
-Morawewa Pankulama	231F
-Morawewa South	231A
-Namalwatta	231D
-Nochchikulam	230C
-Penikatiyawa	230
-
-//Trincomalee Town and Gravets
-
-
-Abayapura	244N
-Andankulam	243A
-Anpuvalipuram	243C
-Arasady	244J
-Arunagirinagar	224G
-China Bay	229A
-Illapaikulam	242B
-Jinnanagar	244O
-Kanniya	243B
-Kappalthurai	229E
-Kavattikudah	22D
-Kovilady	243P
-Linganagar	244R
-Manayaveli	244F
-Mangaiyuthu	243K
-Mihindupura	244I
-Mudcove	244M
-Murugapuri	243G
-Muththunagar	229F
-Nachchikuda	229C
-Orr's Hill	244P
-Palaiyoottu	243D
-Pattanatheru	245K
-Peeliyadi	243J
-Peruntheru	244L
-Poompuhar	243O
-Puliyankulam	243L
-Salli	242A
-Sampalthivu	242
-Selvanayagapuram	243M
-Singhapura	243H
-Sivapuri	244Q
-Sonagavadi	244I
-Sumedhankarapura	229B
-Thillainagar	244N
-Thirikkadaloor	243F
-Uppuveli	243
-Varothyanagar	243N
-Vellaimanal	229
-Velveri	243Q
-Vilgama	243E
-Villundy	244E
-
-//Thambalagamuwa
-
-Galmetiyawa North	228L
-Galmetiyawa South	228C
-Kovil Kudiyiruppu	228K
-Meera Nagar	228H
-Mollipothana	228B
-Mollipothana East	228F
-Mollipothana North	228G
-Palampataru	228
-Potkerny	228I
-Puthukkudieruppu	228J
-Siraj Nagar	228E
-Thambalagamuwa	228A
-
-//Kantalai
-
-
-Agbopura	227C
-Batukachchiya	227T
-Bhathiya Gama	227L
-Gantalawa, Unit 11	227P
-Ganthalawa, Unit 12	227S
-Jayanthipura	227J
-Kanthale  Town South	227K
-Kanthale Town	227
-Pansal Godella	227W
-Peraru East	227O
-Peraru Unit 02	227G
-Peraru West	227H
-Raja Ela Unit 03	227B
-Raja Ela Unit 04	227M
-Raja Ela Unit 05	227N
-Rajawewa	227U
-Seenipura	227E
-Sooriyapura	227F
-Vaan Ela East	227D
-Vanela West	227V
-Wandrasanpura, Unit 14	227A
-Wandrasapura Unit 15	227Q
-Wendrasapura Unit 16	227R
-
-//kinniya
-
-
-Alenkany	225J
-Annal Nagar	225F
-Ayliyady	226Q
-Echchan Teevu	225L
-Ehuthar Nagar	226A
-Faizal Nagar	225G
-Ideman	226F
-Kachchakoditheevu	226J
-Kakamunai	226K
-Kattayaru	225B
-Kinniya	226D
-Kurinchakany	226G
-Kuttikarach	226E
-Magaru Gramam	226L
-Maharoof Nagar	225E
-Majeeth Nagar	226O
-Malinthurai	226C
-Mancholai	225C
-Mancholai Chanai	225D
-Maniyarasankulam	226P
-Munaichana	226I
-Naduoothu	226M
-Nadutheevu  #	226H
-Pariya Kainniya	226B
-Periyathumunai	226
-Poovarasantheevu	225H
-Rahumaniya Nagar	225
-Samavechchatheevu	225I
-SinnaKinniya	225A
-Surangal	226N
-Upparu	225K
-
-//Muthur
-
-Alim Nagar	224B
-Allai Nagar East	216A
-Allai Nagar West	216E
-Anaichenai	223B
-Azath Nagar	218H
-Barathipuram	218G
-Chenaiyoor	222A
-Iqbal Nagar	216B
-Iruthayapuram	218E
-Jaya Nagar	244G
-Jinna Nagar	216D
-Jinna Nagar	244E
-Kadatkaraichenai	222C
-Kaddaiparichchan North	222B
-Kaddaiparichchan South	222
-Kanguveli	218C
-Kiliveddy	218A
-Koonithevu	221
-Mallihaitheevu	218
-Menkamam	219 I
-Muthur Central	223F
-Muthur East	223A
-Muthur West	224
-Nadutheevu	223E
-Nallur	219A
-Navareththinapuram	221A
-Neithal Nagar	223D
-Paddalipuram	219B
-Paddithidal	218B
-Palanagar	223G
-Palathoppur	216C
-Palaththadichenai	218F
-Pallikudyjiruppu	219
-Periyapalam	224A
-Peyaveli	218D
-Ralkuli	224D
-Sampoor East	220
-Sampoor West	220A
-Shafi Nagar	244F
-Thaha Nagar	224C
-Thoppur	216
-Thqwa Nagar	223C
-
-//Seruwila
-
-
-Ariyamankani	217D
-Dehiwaththa	217
-Kawanthissapura	215E
-Lingapuram	217E
-Mahaweligama	215A
-Mahindapura	215C
-Nawakkenikadu	215B
-Nilapola	217B
-Samagipura	217C
-Serunuwara	215F
-Seruwila	215
-Sirimangalapura	217G
-Sivapuram	217F
-Somapura	217A
-Sumedhankarapura	215D
-Tanganagar	215G
-
-//Verugal
-
-Anaithivu	214D
-Eachchilampattu	214T
-Elangaithurai	214C
-Elangaithuraimugaththuwara	214F
-Karukkamunai	214G
-Poomaraththadichenai	214H
-Poonagar	214B
-Uppooral	
-Verugal	214A
-Verugalmugaththuwaram	214E
-
-//Thoppur
-*/
-	}
-]
-
-export const DSDivisions = [
-	{
-		district: 'Ampara',
-		division: [
-			'Addalachchenai',
-			'Akkaraipattu',
-			'Alayadiwembu',
-			'Ampara',
-			'Damana',
-			'Dehiattakandiya',
-			'Eragama (Irakkamam)',
-			'Kalmunai (incl. Tamil Division with 29,800 pop. in 2012)',
-			'Karativu',
-			'Lahugala',
-			'Mahaoya',
-			'Navithanveli',
-			'Ninthavur',
-			'Padiyathalawa',
-			'Pothuvil',
-			'Sainthamarathu',
-			'Sammanthurai',
-			'Thirukkovil',
-			'Uhana'
-		]
-	},
-
-	{
-		district: 'Anuradhapura',
-		division: [
-			'Galenbindunuwewa',
-			'Galnewa',
-			'Horowpothana',
-			'Ipalogama',
-			'Kahatagasdigiliya',
-			'Kebithigollewa',
-			'Kekirawa',
-			'Mahavilachchiya',
-			'Medawachchiya',
-			'Mihinthale',
-			'Nachchadoowa',
-			'Nochchiyagama',
-			'Nuwaragam Palatha Central',
-			'Nuwaragam Palatha East',
-			'Padaviya',
-			'Palagala',
-			'Palugaswewa',
-			'Rajanganaya',
-			'Rambewa',
-			'Thalawa',
-			'Thambuttegama',
-			'Thirappane'
-		]
-	},
-	{
-		district: 'Badulla',
-		division: [
-			'Badulla',
-			'Bandarawela',
-			'Ella',
-			'Haldummulla',
-			'Hali-Ela',
-			'Haputale',
-			'Kandaketiya',
-			'Lunugala',
-			'Mahiyanganaya',
-			'Meegahakivula',
-			'Passara',
-			'Rideemaliyadda',
-			'Soranathota',
-			'Uva-Paranagama',
-			'Welimada'
-		]
-	},
-	{
-		district: 'Batticaloa',
-		division: [
-			'Eravur Pattu',
-			'Eravur Town',
-			'Kattankudy',
-			'Koralai Pattu (Valachenai)',
-			'Koralai Pattu Central',
-			'Koralai Pattu North (Vaharai)',
-			'Koralai Pattu South (Kiran)',
-			'Koralai Pattu West (Oddamavadi)',
-			'Manmunai North',
-			'Manmunai Pattu (Araipattai)',
-			'Manmunai South & Eruvil Pattu',
-			'Manmunai South West',
-			'Manmunai West',
-			'Porativu Pattu'
-		]
-	},
-	{
-		district: 'Colombo',
-		division: [
-			'Colombo',
-			'Dehiwala',
-			'Homagama',
-			'Kaduwela',
-			'Kesbewa',
-			'Kolonnawa',
-			'Maharagama',
-			'Moratuwa',
-			'Padukka',
-			'Ratmalana',
-			'Seethawaka (Hanwella)',
-			'Sri Jayawardanapura Kotte',
-			'Thimbirigasyaya'
-		]
-	},
-	{
-		district: 'Galle',
-		division: [
-			'Akmeemana',
-			'Ambalangoda',
-			'Baddegama',
-			'Balapitiya',
-			'Benthota',
-			'Bope-Poddala',
-			'Elpitiya',
-			'Galle Four Gravets (Kadawath Sathra)',
-			'Gonapinuwala',
-			'Habaraduwa',
-			'Hikkaduwa',
-			'Imaduwa',
-			'Karandeniya',
-			'Nagoda',
-			'Neluwa',
-			'Niyagama',
-			'Thawalama',
-			'Welivitiya-Divithura',
-			'Yakkalamulla'
-		]
-	},
-	{
-		district: 'Gampaha',
-		division: [
-			'Attanagalla',
-			'Biyagama',
-			'Divulapitiya',
-			'Dompe',
-			'Gampaha',
-			'Ja-Ela',
-			'Katana',
-			'Kelaniya',
-			'Mahara',
-			'Minuwangoda',
-			'Mirigama',
-			'Negombo',
-			'Wattala'
-		]
-	},
-	{
-		district: 'Hambantota',
-		division: [
-			'Ambalantota',
-			'Angunakolapelessa',
-			'Beliatta',
-			'Hambantota',
-			'Katuwana',
-			'Lunugamvehera',
-			'Okewela',
-			'Sooriyawewa',
-			'Tangalle',
-			'Thissamaharama',
-			'Walasmulla',
-			'Weeraketiya'
-		]
-	},
-	{
-		district: 'Jaffna',
-		division: [
-			'Delft',
-			'Island North (Kayts)',
-			'Island South (Velanai)',
-			'Jaffna',
-			'Karainagar',
-			'Nallur',
-			'Thenmaradchi (Chavakachcheri)',
-			'Vadamaradchi East (Maruthnkerny)',
-			'Vadamaradchi North (Point Pedro)',
-			'Vadamaradchi South-West (Karaveddy)',
-			'Valikamam East (Kopay)',
-			'Valikamam North (Tellippalai)',
-			'Valikamam South (Uduvil)',
-			'Valikamam South-West (Sandilipay)',
-			'Valikamam West (Chankanai)'
-		]
-	},
-	{
-		district: 'Kalutara',
-		division: [
-			'Agalawatta',
-			'Bandaragama',
-			'Beruwala',
-			'Bulathsinhala',
-			'Dodangoda',
-			'Horana',
-			'Ingiriya',
-			'Kalutara',
-			'Madurawela',
-			'Mathugama',
-			'Millaniya',
-			'Palindanuwara',
-			'Panadura',
-			'Walallavita'
-		]
-	},
-	{
-		district: 'Kandy',
-		division: [
-			'Akurana',
-			'Delthota',
-			'Doluwa',
-			'Ganga Ihala Korale',
-			'Harispattuwa',
-			'Hatharaliyadda',
-			'Kandy Four Gravets & Gangawata Korale',
-			'Kundasale',
-			'Medadumbara',
-			'Minipe',
-			'Panvila',
-			'Pasbage Korale',
-			'Pathadumbara',
-			'Pathahewaheta',
-			'Poojapitiya',
-			'Thumpane',
-			'Udadumbara',
-			'Udapalatha',
-			'Udunuwara',
-			'Yatinuwara'
-		]
-	},
-
-	{
-		district: 'Kegalle',
-		division: [
-			'Aranayaka',
-			'Bulathkohupitiya',
-			'Dehiovita',
-			'Deraniyagala',
-			'Galigamuwa',
-			'Kegalle',
-			'Mawanella',
-			'Rambukkana',
-			'Ruwanwella',
-			'Warakapola',
-			'Yatiyanthota'
-		]
-	},
-
-	{
-		district: 'Kilinochchi',
-		division: ['Kandavalai', 'Karachchi', 'Pachchilaipalli', 'Poonakary']
-	},
-
-	{
-		district: 'Kurunegala',
-		division: [
-			'Alawwa',
-			'Ambanpola',
-			'Bamunakotuwa',
-			'Bingiriya',
-			'Ehetuwewa',
-			'Galgamuwa',
-			'Ganewatta',
-			'Giribawa',
-			'Ibbagamuwa',
-			'Kobeigane',
-			'Kotavehera',
-			'Kuliyapitiya East',
-			'Kuliyapitiya West',
-			'Kurunegala',
-			'Mahawa',
-			'Mallawapitiya',
-			'Maspotha',
-			'Mawathagama',
-			'Narammala',
-			'Nikaweratiya',
-			'Panduwasnuwara East (Katupotha)',
-			'Panduwasnuwara West',
-			'Pannala',
-			'Polgahawela',
-			'Polpithigama',
-			'Rasnayakapura',
-			'Rideegama',
-			'Udubaddawa',
-			'Wariyapola',
-			'Weerambugedara'
-		]
-	},
-
-	{
-		district: 'Mannar',
-		division: [
-			'Madhu',
-			'Mannar Town',
-			'Manthai West',
-			'Musalai',
-			'Nanaddan'
-		]
-	},
-
-	{
-		district: 'Matale',
-		division: [
-			'Ambanganga Korale',
-			'Dambulla',
-			'Galewela',
-			'Laggala-Pallegama',
-			'Matale',
-			'Naula',
-			'Pallepola',
-			'Rattota',
-			'Ukuwela',
-			'Wilgamuwa',
-			'Yatawatta'
-		]
-	},
-
-	{
-		district: 'Matara',
-		division: [
-			'Akuressa',
-			'Athuraliya',
-			'Devinuwara',
-			'Dickwella',
-			'Hakmana',
-			'Kamburupitiya',
-			'Kirinda Puhulwella',
-			'Kotapola',
-			'Malimbada',
-			'Matara Four Gravets',
-			'Mulatiyana',
-			'Pasgoda',
-			'Pitabeddara',
-			'Thihagoda',
-			'Weligama',
-			'Welipitiya'
-		]
-	},
-
-	{
-		district: 'Moneragala',
-		division: [
-			'Badalkumbura',
-			'Bibile',
-			'Buttala',
-			'Katharagama',
-			'Madulla',
-			'Medagama',
-			'Moneragala',
-			'Sevanagala',
-			'Siyambalanduwa',
-			'Thanamalvila',
-			'Wellawaya'
-		]
-	},
-
-	{
-		district: 'Mullaitivu',
-		division: [
-			'Manthai East (Pandiyankulam)',
-			'Maritimepattu',
-			'Oddusuddan',
-			'Puthukudiyiruppu',
-			'Thunukkai',
-			'Welioya'
-		]
-	},
-
-	{
-		district: 'Nuwara Eliya',
-		division: [
-			'Ambagamuwa',
-			'Hanguranketha',
-			'Kothmale',
-			'Nuwara Eliya',
-			'Walapane'
-		]
-	},
-
-	{
-		district: 'Polonnaruwa',
-		division: [
-			'Dimbulagala',
-			'Elahera',
-			'Hingurakgoda',
-			'Lankapura',
-			'Medirigiriya',
-			'Thamankaduwa',
-			'Welikanda'
-		]
-	},
-
-	{
-		district: 'Puttalam',
-		division: [
-			'Anamaduwa',
-			'Arachchikattuwa',
-			'Chilaw',
-			'Dankotuwa',
-			'Kalpitiya',
-			'Karuwalagaswewa',
-			'Madampe',
-			'Mahakumbukkadawala',
-			'Mahawewa',
-			'Mundalama',
-			'Nattandiya',
-			'Nawagattegama',
-			'Pallama',
-			'Puttalam',
-			'Vanathavilluwa',
-			'Wennappuwa'
-		]
-	},
-
-	{
-		district: 'Ratnapura',
-		division: [
-			'Ayagama',
-			'Balangoda',
-			'Eheliyagoda',
-			'Elapattha',
-			'Embilipitiya',
-			'Godakawela',
-			'Imbulpe',
-			'Kahawatta',
-			'Kalawana',
-			'Kiriella',
-			'Kolonna',
-			'Kuruvita',
-			'Nivithigala',
-			'Opanayaka',
-			'Pelmadulla',
-			'Ratnapura',
-			'Weligepola'
-		]
-	},
-
-	{
-		district: 'Trincomalee',
-		division: [
-			'Gomarankadawala',
-			'Kantalai',
-			'Kinniya',
-			'Kuchchaveli',
-			'Morawewa',
-			'Muttur',
-			'Padavi Sri Pura',
-			'Seruvila',
-			'Thambalagamuwa',
-			'Trincomalee Town and Gravets',
-			'Verugal (Echchilampattai)'
-		]
-	},
-
-	{
-		district: 'Vavuniya',
-		division: [
-			'Vavuniya',
-			'Vavuniya North',
-			'Vavuniya South',
-			'Vengalacheddikulam'
-		]
-	}
-]
-
-export const administrativeDistricts = [
-	'Jaffna',
-	'Kilinochchi',
-	'Mannar',
-	'Mullaitivu',
-	'Vavuniya',
-	'Puttalam',
-	'Kurunegala',
-	'Gampaha',
-	'Colombo',
-	'Kalutara',
-	'Anuradhapura',
-	'Polonnaruwa',
-	'Matale',
-	'Kandy',
-	'Nuwara Eliya',
-	'Kegalle',
-	'Ratnapura',
-	'Trincomalee',
-	'Batticaloa',
-	'Ampara',
-	'Badulla',
-	'Monaragala',
-	'Hambantota',
-	'Matara',
-	'Galle'
-]
-
 export const courses = [
 	{
 		faculty: 'Science',
@@ -2081,3 +70,2392 @@ export const courses = [
 ]
 
 export const titles = ['Mr', 'Mrs', 'Miss', 'Rev']
+
+export const districts = [
+	{
+		district: 'Kandy',
+		DSDivisions: [
+			{
+				division: 'Thumpane',
+				GSDivisions: [
+					'Dehideniya',
+					'Thahalpitiya',
+					'Udahenepola',
+					'Poholiyadda',
+					'Etambegoda',
+					'Minigamuwa',
+					'Thennewela',
+					'Minigamuwa Ihala',
+					'Hiyadala Walpola',
+					'Hiyadala',
+					'Weththewa',
+					'Hikgodawalpola',
+					'Naranwala',
+					'Galagedara',
+					'Galagedara West',
+					'Rockhill',
+					'Akkarawatta',
+					'Bonakot',
+					'Haddapitiya',
+					'Damunugasthenna',
+					'Udalagama',
+					'Delgasyaya',
+					'Pethigewela',
+					'Udapitiya',
+					'Uduwa',
+					'Poththila',
+					'Kinigama East',
+					'Kinigama',
+					'Kaluwana',
+					'Kannadeniya',
+					'Gangodapitiya',
+					'Pubbiliya',
+					'Barandara',
+					'Niyangoda',
+					'Diyapalagoda',
+					'Adungama Palkumbura',
+					'Kandekumbura',
+					'Ethamulla',
+					'Ban Anga',
+					'Kuragama',
+					'Kuragama North',
+					'Paranagama',
+					'Galagedara Madige',
+					'Galagedara Madige south',
+					'Kobbegala',
+					'Ambagahahena',
+					'Gunadaha',
+					'Opalla',
+					'Meegahahena South',
+					'Pallekotuwa',
+					'Pavulpawa',
+					'Kumburegama',
+					'Alawattegama',
+					'Namalthenna',
+					'Marawanagoda',
+					'Idamegama',
+					'Henegama Palkumbura',
+					'Medagoda Pahala',
+					'Medagoda Ihala',
+					'Kirindiwelpola',
+					'Nikathenna',
+					'Palukopiwatta',
+					'Gallenawatta',
+					'Galabawa',
+					'Meegahahena',
+					'Kandanhena East',
+					'Niyambepola'
+				]
+			},
+			{
+				division: 'Poojapitiya',
+				GSDivisions: [
+					'Gallella',
+					'Maruddana',
+					'Harankahawa',
+					'Henegama',
+					'Ambaruppa',
+					'Pathirada',
+					'Molagoda',
+					'Udahigulwala',
+					'Udahena',
+					'Siyapathgama',
+					'Bokkawala',
+					'Wewala',
+					'Waldeniya',
+					'Morankanda',
+					'Wewala North',
+					'Pahala Hingulwala',
+					'Marathugoda North',
+					'Marathugoda South',
+					'Alagoda',
+					'Madadeniya',
+					'Warakadeniya',
+					'Medagoda',
+					'Ukgahakumbura',
+					'Dombagammana',
+					'Weligalla',
+					'Rambukewala',
+					'Dolapihilla North',
+					'Dolapihilla South',
+					'Kahatagasthenna',
+					'Godahena',
+					'Watagalathenna',
+					'Galkanda',
+					'Galhinna',
+					'Kovila muduna',
+					'Palliya Kotuwa',
+					'Batagolladeniya',
+					'Ihalamulla',
+					'Dehiwatta',
+					'Egodamulla South',
+					'Egodamulla North',
+					'Ankumbura South',
+					'Ankumbura North',
+					'Pahala Pallegama',
+					'Uggala Janapadaya',
+					'Ankumbura Udagama',
+					'Welgala',
+					'Alawatta',
+					'Uda Kithulgolla',
+					'Pahala Kithulgolla',
+					'Watagoda',
+					'Ovissa North',
+					'Ovissa South',
+					'Bamunupola',
+					'Kiralagama',
+					'Palipana',
+					'Diddeniya',
+					'Batagalla North',
+					'Batagalla South',
+					'Batugoda North',
+					'Batugoda South',
+					'Diwanawatta',
+					'Mullegama South',
+					'Mullegama North',
+					'Kaluwana North',
+					'Kaluwana South',
+					'Kahawatta North',
+					'Kahawatta South'
+				]
+			},
+			{
+				division: 'Akurana',
+				GSDivisions: [
+					'Bulugohothanna',
+					'Kasawatta',
+					'Udaweliketiya',
+					'Pallewelikatiya',
+					'Dodangolla',
+					'Akurana',
+					'Telambugahawatta Gama',
+					'Waragashinna',
+					'Neeralla',
+					'Melchena',
+					'Malwanahinna',
+					'Kurugoda',
+					'Hureegolla',
+					'Delgasthenne',
+					'Pangollamada',
+					'Rathkoho',
+					'Palledeegala',
+					'Dunuvila North',
+					'Dunuvila South',
+					'Konakalagala',
+					'Marahela',
+					'Walahena',
+					'Vilana Pallegama',
+					'Kurudugahaela',
+					'Uggala',
+					'Malgamandeniya',
+					'Dippitiya',
+					'Mawathupola',
+					'Arambepola',
+					'Vilana Udagama',
+					'Balakaduwa',
+					'Delgasgoda',
+					'Rambuke Ela',
+					'Deegala',
+					'Alawathugoda'
+				]
+			},
+			{
+				division: 'Pathadumbara',
+				GSDivisions: [
+					'Wattegama',
+					'Wattegama North',
+					'Gunembill',
+					'Udurawana',
+					'Doragamuwa',
+					'Walpaladeniya',
+					'Meegammana West',
+					'Meegamawatta',
+					'Kalugalawatta',
+					'Galewatta',
+					'Nawayalathenna',
+					'Balanagala',
+					'Galadeniya',
+					'Pallethalavinna Ihala',
+					'Millanga',
+					'Megodagama',
+					'Yatawara',
+					'Yatawara Kandagama',
+					'Ihala Yatawara',
+					'Deegahawathura',
+					'Mahakumbura',
+					'Bogahakumbura',
+					'Moonamale',
+					'Ambathanna',
+					'Kendaliyadda',
+					'Girakaduwa',
+					'Mandandawela',
+					'Napana',
+					'Hamindagoda',
+					'Abasingama',
+					'Leemagahadeniya',
+					'Gunnepana Madige',
+					'Madawala',
+					'Yatirawana',
+					'Walala',
+					'Ketakahala',
+					'Thalkotuwa',
+					'Eriyagasthenna',
+					'Puwakgahadeniya',
+					'Meegammana',
+					'Kahalla',
+					'Polgolla',
+					'Udathalavinna',
+					'Pallethalavinna',
+					'Udathalavinna Madige',
+					'Egodagama',
+					'Molagodayawatta',
+					'Aluthgama',
+					'Paranagama',
+					'Madawala Madige',
+					'Pihilladeniya',
+					'Pitiyegedara'
+				]
+			},
+			{
+				division: 'Panvila',
+				GSDivisions: [
+					'Beddegama',
+					'Angammana',
+					'Thawalanthenna',
+					'Gomaraya',
+					'Hathale',
+					'Arattana',
+					'Panvila',
+					'Udugoda',
+					'Kelebokka',
+					'Watakele',
+					'Madulkele',
+					'Kosgama',
+					'Mahapathana',
+					'Pitawala'
+				]
+			},
+			{
+				division: 'Udadumbara',
+				GSDivisions: [
+					'Pamunethenna',
+					'Bamgarabedda East',
+					'Bambarabedda West',
+					'Devinnegama',
+					'Ganegala',
+					'Nugethenna West',
+					'Nugethenna East',
+					'Hunnasgiriya',
+					'Denapitiya',
+					'Halyala',
+					'Mediriya',
+					'Udadumbara',
+					'Rambukwella West',
+					'Rambukwella East',
+					'Kiripattiya',
+					'Mediwaka',
+					'Karandagolla',
+					'Godakumbura',
+					'Gangoda',
+					'Madugalla North',
+					'Dewahandiya West',
+					'Dumbaragama',
+					'Pitigoda',
+					'Kevulgama',
+					'Minuwangamuwa',
+					'Kalalgamuwa',
+					'Madugalla Udagammedda',
+					'Madugalla South',
+					'Kalawala',
+					'Dewahandiya East',
+					'Hapukanda West',
+					'Hapukanda East',
+					'Udapitawala',
+					'Pitawala',
+					'Pitawala Udagammedda',
+					'Mahawala',
+					'Poppitiya',
+					'Oyathenna',
+					'Udakumbura',
+					'Padupola',
+					'Thalagune',
+					'Gedaramada',
+					'Kirigankumbura',
+					'Pallewela',
+					'Gerandigala',
+					'Moonamalpelessa',
+					'Hanwella',
+					'Dambagahapitiya',
+					'Andideniya',
+					'Kalugaloya',
+					'Udailuka',
+					'Udawela',
+					'Kandegama',
+					'Wadawalakanda',
+					'Kobonilla',
+					'Pallekanda',
+					'Meemure',
+					'Kaikawala',
+					'Kumbukgolla',
+					'Karambaketiya',
+					'Pusse Ela',
+					'Kalugala',
+					'Nawanagala'
+				]
+			},
+			{
+				division: 'Minipe',
+				GSDivisions: [
+					'Bebiya',
+					'Kolonyaya',
+					'Minipe',
+					'Muttettuthenna',
+					'Ambagahapelessa',
+					'Asamodagamyaya',
+					'Udayagala',
+					'Batumulla',
+					'Handaganawa',
+					'Diyabubula',
+					'Lunumadalaketiya',
+					'Morayaya',
+					'Weraganthota',
+					'Bulathwelkandura',
+					'Weragama',
+					'Pallewatta',
+					'Waragolla',
+					'Gurulupotha',
+					'Rathnella',
+					'Mahaassedduma',
+					'Hasalaka',
+					'Welgala',
+					'Mahagalahinna',
+					'Keenapelessa',
+					'Thorapitiya',
+					'Welgahawadiya',
+					'Mahayaya South',
+					'Dambepitiya',
+					'Ambagolla',
+					'Udaththawa',
+					'Udattawa North',
+					'Udawela',
+					'Kindigoda South',
+					'Kindigoda North',
+					'Wewere',
+					'Palugolla',
+					'Dehemigama',
+					'Thotillagasella',
+					'Himbutuwa',
+					'Dambagahawela',
+					'Pallegaladebokka',
+					'Dungolla',
+					'Galamuduna',
+					'Udagaladebokka',
+					'Ulpathagama',
+					'Mahayaya North',
+					'08 Ela',
+					'Hasalaka Nagaraya'
+				]
+			},
+			{
+				division: 'Medadumbara',
+				GSDivisions: [
+					'Gonawala',
+					'Kotaganga',
+					'Thunisgala',
+					'Galabodawatta',
+					'Nagolla',
+					'Elliyadda',
+					'Galkotuwa',
+					'Werapitiya',
+					'Werathenna',
+					'Bulathwatta',
+					'Dunhinna',
+					'Maneluwa',
+					'Giddawa-Waradiwela',
+					'Randiwela',
+					'Weliketiya',
+					'Putuhapuwa',
+					'Giddawa',
+					'Ambalagala',
+					'Watapana',
+					'Nugepathana',
+					'Gangasirigama',
+					'Madapola',
+					'Karalliyadda',
+					'Kandegama',
+					'Vilamuna',
+					'Randeniya',
+					'Udawela',
+					'Wellethota',
+					'Rambukwella',
+					'Rambukwella East',
+					'Meegahamaditta',
+					'Wegala',
+					'Rangala',
+					'Ranmulla',
+					'Bobebila',
+					'Duckwariya',
+					'Makuldeniya',
+					'Udispattuwa',
+					'Godamunna',
+					'Thangappuwa',
+					'Siridigana',
+					'Madeniyawaka',
+					'Ferndail',
+					'Pallebage',
+					'Maharawela',
+					'Birnside',
+					'Gabbela',
+					'Heeloya',
+					'Kurukohogama',
+					'Kiribattalawa',
+					'Doraliyadda South',
+					'Hakmana',
+					'Retiyagama',
+					'Nilgala',
+					'Poddalgoda',
+					'Kandekumbura',
+					'Weladarada',
+					'Metideniya',
+					'Katugoda',
+					'Hathiyalwela',
+					'Rangala Aluthwatta',
+					'Namadagala',
+					'Welapahala',
+					'Meda Gammedda',
+					'Mangoda',
+					'Udagammedda',
+					'Nithulemada',
+					'Maberiyathenna',
+					'Rambukpotha',
+					'Rajagala',
+					'Senarathwela',
+					'Wewegama',
+					'Bomure',
+					'Ellepola',
+					'Medamahanuwara',
+					'Udathenna',
+					'Galambalama',
+					'Hijrapura',
+					'Moragahamula',
+					'Ambagahalanda',
+					'Wathuliyadda',
+					'Mahadoraliyadda',
+					'Ambale',
+					'Meeriyagolla',
+					'Sandasiri Dunuvila',
+					'Puwakgahadiwela',
+					'Thennalanda',
+					'Bambaragahadeniya',
+					'Meegahalanda',
+					'Embalagama',
+					'Amupitiya',
+					'Udabage'
+				]
+			},
+			{
+				division: 'Kundasale',
+				GSDivisions: [
+					'Galpihilla',
+					'Dunuhappawa',
+					'Makkanigama',
+					'Alawathugiriya gama',
+					'Sirimalwatta East',
+					'Sirimalwatte West',
+					'Degaldoruwa',
+					'Sirimalwatte Pallegama',
+					'Karattamada',
+					'Lewellagama',
+					'Amunugama North',
+					'Amunugama South',
+					'Hapuwala',
+					'Deekirimadawala',
+					'Pilawala North',
+					'Bogaskumbura',
+					'Pilawala South',
+					'Galapitambe',
+					'Pallegunnepana North',
+					'Pallegunnepana South',
+					'Udagunnepana North',
+					'Udagunnepana South',
+					'Gabadagama South',
+					'Gabadagama North',
+					'Pallegama',
+					'Wavinna',
+					'Udagama North',
+					'Udagama South',
+					'Maharathenna East',
+					'Maharathenna West',
+					'Ihala Gonagama',
+					'Hurikaduwa West',
+					'Hurikaduwa North',
+					'Hurikaduwa South',
+					'Hurikaduwa East',
+					'Nithulethenna',
+					'Dodamgolla',
+					'Galmaduwa',
+					'Nattarampotha',
+					'Arangala North',
+					'Arangala South',
+					'Mahawatta South',
+					'Mahawatta West',
+					'Mahawatta North',
+					'Mahawatta East',
+					'Kundasale North',
+					'Kundasale South',
+					'Wijaya Sri Gama',
+					'Aluth Pallekele',
+					'Ambakotewatta',
+					'Rajawella North',
+					'Rajawella South',
+					'Balagolla East',
+					'Balagolla West',
+					'Kengalla',
+					'Ihalawela',
+					'Aswalapitiya',
+					'Diyabubula',
+					'Hurikaduwa Madige',
+					'Manikhinna',
+					'Dambarawa',
+					'Hathamuna',
+					'Delgaslanda',
+					'Lunuketiyamaditta',
+					'Deliwalathenna',
+					'Heepitiya',
+					'Malpana',
+					'Galamuna',
+					'Ahaspokuna North',
+					'Ahaspokuna South',
+					'Kumbukkandura North',
+					'Kumbukkandura South',
+					'Gonawala North',
+					'Gonawala South',
+					'Maluwegama',
+					'Wepathana',
+					'Kuruambemuduna',
+					'Naranpanawa East',
+					'Kandekumbura',
+					'Naranpanawa West'
+				]
+			},
+			{
+				division: 'Kandy Four Gravets & Gangawata Korale',
+				GSDivisions: [
+					'Boowelikada',
+					'Thalwatta',
+					'Lewella',
+					'Aruppala West',
+					'Aruppala East',
+					'Nittawela',
+					'Siyambalagasthenna',
+					'Mawilmada',
+					'Watapuluwa',
+					'Watapuluwa West',
+					'Watapuluwa South',
+					'Mahaweli Uyana',
+					'Nuwara Dodanwala',
+					'Aniwatta West',
+					'Aniwatta East',
+					'Asgiriya',
+					'Bahirawa Kanda',
+					'Mapanawathura',
+					'Wattaranthenna',
+					'Mahaiyawa',
+					'Poornawatta West',
+					'Poorna Watta East',
+					'Heeressagala',
+					'Mulgampala',
+					'Udabowala',
+					'Bowala',
+					'Ogastawatta',
+					'Bowalawatta',
+					'Palle Peradeniya',
+					'Uda Peradeniya',
+					'Pitakanda Gama',
+					'Senkadagala',
+					'Ampitiya North',
+					'Ampitiya South',
+					'Malwatta',
+					'Katukele',
+					'Katukele West',
+					'Mahanuwara',
+					'Ihala Katukele',
+					'Gatambe',
+					'Welata',
+					'Deiyannewela',
+					'Nagasthenna',
+					'Hanthana Place',
+					'Bogambara',
+					'Suduhumpala East',
+					'Suduhumpala West',
+					'Hindagala',
+					'Mahakanda',
+					'Ampitiya Udagama North',
+					'Ampitiya Udagama South',
+					'Ampitiya Pallegama',
+					'Meddegama',
+					'Ulpathakumbura',
+					'Wewathenna',
+					'Thennekumbura',
+					'Gurudeniya East',
+					'Gurudeniya Dambawela',
+					'Gurudeniya West',
+					'Maligathenna',
+					'Lewla',
+					'Ketawala',
+					'Pahala Eriyagama',
+					'Godagandeniya'
+				]
+			},
+			{
+				division: 'Harispattuwa',
+				GSDivisions: [
+					'Waratenna',
+					'Yatihalagala Pallegama',
+					'Kumburegedara',
+					'Udadoolwala',
+					'Pahala Doolwala',
+					'Bulathgolla',
+					'Yatihalagala Udagama',
+					'Seewaleekanda',
+					'Kulugammana',
+					'Kurundugahamada',
+					'Dadahogama',
+					'Mapamadulla',
+					'Hapugoda',
+					'Ranawana West',
+					'Ranawana East',
+					'Udabokalawela',
+					'Pallebokalawela',
+					'Katugasthota',
+					'Etamurungagoda',
+					'Yatiwawala',
+					'Inigala',
+					'Uduwawala West',
+					'Uduwawala North',
+					'Uduwawala East',
+					'Polwatta',
+					'Wegiriya',
+					'Rathmale',
+					'Kondadeniya',
+					'Senarathgama South',
+					'Senarathgama North',
+					'Uguressapitiya',
+					'Uggalla',
+					'Madapathagama',
+					'Gohagoda',
+					'Narangaskumbura',
+					'Banwelgolla',
+					'Pallemulla',
+					'Udamulla',
+					'Hal Pallegama',
+					'Haloluwa',
+					'Hamangoda North',
+					'Hamangoda South',
+					'Bogahakanda',
+					'Malagammana',
+					'Nugawela',
+					'Embulpure',
+					'Batuambe',
+					'Hiriyalagammana',
+					'Kurunduwatta',
+					'Yahalathenna Kanda',
+					'Mahatenna',
+					'Yahalathenna West',
+					'Ruwanpuraya',
+					'Thittapajjala',
+					'Thittapajjala North',
+					'Rajapihilla',
+					'Endaruthenna',
+					'Ulladupitiya East',
+					'Ulladupitiya West',
+					'Gonigoda',
+					'Gonigoda-Palkumbura',
+					'Viguhumpola',
+					'Arambegama',
+					'Aladeniya',
+					'Hedeniya',
+					'Narangoda',
+					'Kurundugolla',
+					'Palkumbura',
+					'Rajasinhagama',
+					'Ihala Karanduwawala]',
+					'Pahala Karanduwawala',
+					'Owathenna',
+					'Attaragama',
+					'Attaragama East',
+					'Attaragama South',
+					'Bothota',
+					'Medawala',
+					'Angoda',
+					'Dembaralawa',
+					'Doranegama',
+					'Amuwandeniya',
+					'Ihagama',
+					'Wathuwala',
+					'Uyanwatta'
+				]
+			},
+			{
+				division: 'Hatharaliyadda',
+				GSDivisions: [
+					'Welivita Ihalagama',
+					'Pelena Pahalagama',
+					'Welivita Pahalagama',
+					'Aluthgama Ihala',
+					'Walpalagolla South',
+					'Walpalagolla East',
+					'Meegasthenna',
+					'Paragoda',
+					'Welagama',
+					'Damunupola',
+					'Lechchimimenila',
+					'Kolugala Pahala',
+					'Walpalagolla North',
+					'Yaggala',
+					'Kanakkarapola North',
+					'Pelena',
+					'Welivita Pahalagama South',
+					'Alagalla Ihala',
+					'Ilpemada',
+					'Sivurupitiya',
+					'Welivita Ihalagama North',
+					'Imbulethenna',
+					'Kithuldora',
+					'Alagalla Pahalagama',
+					'Aludeniya South',
+					'Polwatta Ihalagama',
+					'Dedunupitiya Ihala',
+					'Amboruwa',
+					'Weligodapola',
+					'Aludeniya North',
+					'Aluthgama Pahala',
+					'Pallepola',
+					'Dehideniya Madige',
+					'Kalotuwawa',
+					'Kolugala',
+					'Andiyathenna',
+					'Polwatta',
+					'Avulbodale',
+					'Mudagammana',
+					'Pattapola Ihalagama',
+					'Dedunupitiya Pahalagama',
+					'Rangamuwa',
+					'Hatharaliyadda',
+					'Dunkumbura',
+					'Narangaspitiya',
+					'Mawathagama',
+					'Ambawa',
+					'Godathale',
+					'Handabowa',
+					'Alakolamaditta',
+					'Eramuduliyadda',
+					'Muruddeniya',
+					'Kandemeeya',
+					'Nikathenna',
+					'Pattapola Pahala',
+					'Kanakkarapola South',
+					'Galdola'
+				]
+			},
+			{
+				division: 'Yatinuwara',
+				GSDivisions: [
+					'Bulumulla',
+					'Pilapitiya',
+					'Sooriyagoda',
+					'Karuwalawatta',
+					'Kiribathkumbura East',
+					'Kiribathkumbura West',
+					'Edanduwawa East',
+					'Edanduwawa West',
+					'Gannoruwa East',
+					'Kendakaduwa',
+					'Gannoruwa West',
+					'Gannoruwa Central',
+					'Pelawa Pahalagama',
+					'Pelawa Ihalagama',
+					'Pelawa Ihala Meda',
+					'Yahalathenna',
+					'Kobbekaduwa',
+					'Ihala Kobbekaduwa',
+					'Dehigama East',
+					'Dehigama North',
+					'Dehigama South',
+					'Mangalagama',
+					'Diyapalagoda',
+					'Moladanda',
+					'Malgammana',
+					'Ranawana',
+					'Uda Eriyagama East',
+					'Uda Eriyagama West]',
+					'Dehideniya East',
+					'Dehideniya West',
+					'Ihala Dodamwala',
+					'Pahala Dodamwala',
+					'Wathurakumbura',
+					'Gurugama',
+					'Dehianga North',
+					'Dehianga South',
+					'Danthure',
+					'Munwathugoda',
+					'Siyambalagoda',
+					'Aranbegama East',
+					'Arambegama West',
+					'Embilmeegama North',
+					'Embilmeegama South',
+					'Urapola',
+					'Kurunduwatta',
+					'Kudaoya',
+					'Govindala',
+					'Pilimathalawa',
+					'Ilukwatta',
+					'Haliyadda',
+					'Kotabogoda',
+					'Madarangoda',
+					'Udawela Nadithalawa',
+					'Udawela Pallemaditta',
+					'Udawela Pahalagama',
+					'Giragama',
+					'Parakatawella',
+					'Imbulmalgama',
+					'Yatigammana',
+					'Pahala Yatigammana',
+					'Pottepitiya',
+					'Thismada',
+					'Kirimetiya Watta',
+					'Ihala Alagalla',
+					'Godigamuwa',
+					'Gondeniya',
+					'Alagalla Watta',
+					'Amunupura',
+					'Weralugolla',
+					'Moragolla Mahakanda',
+					'Mudaliwatta',
+					'Pahala Mudaliwatta',
+					'Madiligama',
+					'Udarathmeewala',
+					'Pahala Rathmeewala',
+					'Balana',
+					'Motana Dekinda',
+					'Mamudawala',
+					'Ketakumbura',
+					'Maligathenna',
+					'Kadawathgama',
+					'Kadugannawa Town',
+					'Walgowwagoda',
+					'Kavudupana',
+					'Kandangama North',
+					'Kandangama South',
+					'Panabokka',
+					'Walgampaya',
+					'Bathgoda',
+					'Doluwa East',
+					'Doluwa West',
+					'Kotaligoda North',
+					'Kotaligoda South',
+					'Menikdiwela',
+					'Deldeniya'
+				]
+			},
+			{
+				division: 'Udunuwara',
+				GSDivisions: [
+					'Gangoda',
+					'Gangoda South',
+					'Gangoda North',
+					'Thalawaththa',
+					'Werellamana',
+					'Boyagama',
+					'Rajagiriya',
+					'Hendeniya West',
+					'Hendeniya East',
+					'Yalegoda East',
+					'Yalegoda West',
+					'Handessa',
+					'Naranwala',
+					'Alapalawala East',
+					'Alapalawala West',
+					'Angunawala East',
+					'Angunawala West',
+					'Sangabogama',
+					'Penideniya',
+					'Meewathura',
+					'Karamada South',
+					'New Peradeniya',
+					'Godapola East',
+					'Godapola West',
+					'Palle Aludeniya',
+					'Pethiyagoda East',
+					'Pethiyagoda West',
+					'Meewaladeniya',
+					'Ihala Pethiyagoda',
+					'Muruthagahamula',
+					'Dehipagoda West',
+					'Dehipagoda East',
+					'Gelioya',
+					'New Elpitiya North',
+					'Weligalla',
+					'Uda Aludeniya',
+					'Pitawalawatta',
+					'Polgahaanga',
+					'Delgahapitiya',
+					'Palkumbura',
+					'Wegiriya West',
+					'Wegiriya East',
+					'Thalawathura',
+					'Lunugama',
+					'Hondiyadeniya',
+					'Eladhetta East',
+					'Eladhetha West',
+					'Arattana',
+					'Davulagala',
+					'Boowelikada',
+					'Ambarapola',
+					'Daskara',
+					'Hathnagoda',
+					'Bambaradeniya',
+					'Rangoda',
+					'Wathupola',
+					'Ganhatha',
+					'Werawala West',
+					'Ambagasthenna',
+					'Werawala East',
+					'Embakka',
+					'Meddegoda',
+					'Siyambalagoda',
+					'Rangama',
+					'Hiyarapitiya',
+					'Arawwawela',
+					'Imbuldeniya',
+					'Heeyawala',
+					'Walgama',
+					'Rabbegamuwa North',
+					'Rabbegamuwa South',
+					'Gadaladeniya South',
+					'Pamunuwa East',
+					'Pamunuwa West',
+					'Deliwala',
+					'Warakagoda',
+					'Hepana',
+					'Hiddavulla West',
+					'Gadaladeniya North',
+					'Kiriwavula West',
+					'Ganguldeniya',
+					'Pilapitiya',
+					'Dihitideniya',
+					'Appallagoda East',
+					'Appallagoda West',
+					'Kotagaloluwa',
+					'Deldeniya',
+					'Viharagama',
+					'Welamboda',
+					'Liyangahawaththa',
+					'Maweekumbura North',
+					'Maveekumbura South',
+					'Ambanwala',
+					'Kooradeniya',
+					'Manikkawa',
+					'Nikahetiya',
+					'Wattappola',
+					'Walagedara South',
+					'Sadikkawatta',
+					'Kovilakanda	  ',
+					'Lagamuwa',
+					'Belungala',
+					'Aluthkanda',
+					'Kurukuttala Ihala',
+					'Pahala Kurukuttla',
+					'Mathgamuwa',
+					'Udagama',
+					'Urulewaththa',
+					'Aladuwaka',
+					'Panabokka',
+					'Karamada North',
+					'Walagedara North',
+					'Kiriwavula East',
+					'Hiddavulla East',
+					'Mampitiya',
+					'Piligalla East',
+					'Piligalla West',
+					'Kamburadeniya',
+					'New Elpitiya South',
+					'Ketakumbura',
+					'Batupitiya',
+					'Dodandeniya',
+					'Watadeniya',
+					'Elpitikanda'
+				]
+			},
+			{
+				division: 'Doluwa',
+				GSDivisions: [
+					'Mulgama',
+					'Pitawala',
+					'Ududeniya',
+					'Gurukele',
+					'Nawa Nillamba',
+					'Gurukele',
+					'Nawa Gurukele',
+					'Thumpelawaka',
+					'Nillamba',
+					'Masgolla',
+					'Hunugala',
+					'Thundeniya',
+					'Kahawatta',
+					'Gothatuwela',
+					'Legumdeniya',
+					'Panvilathenna',
+					'Pambadeniya',
+					'Naranvita',
+					'Gampolawatta',
+					'Atuwewatta',
+					'Wewathenna',
+					'Inguruwatta',
+					'Orayanwatta',
+					'Doluwa',
+					'Godawela',
+					'Megoda Kalugamuwa',
+					'Ganegoda',
+					'Haloya',
+					'Wariyagala',
+					'Galoya',
+					'Millagahamula',
+					'Pupuressa',
+					'Rajathalawa'
+				]
+			},
+			{
+				division: 'Pathahewaheta',
+				GSDivisions: [
+					'Udawela Pallegama West',
+					'Galthenna',
+					'Moragolla',
+					'Ankelipitiya',
+					'Haputhale Pallegama',
+					'Sriyagama',
+					'Nugaliyadda Ihala',
+					'Kapuliyadda West',
+					'Letiyagolla',
+					'Ethulgama South',
+					'Ethulgama West',
+					'Godalawela',
+					'Narangasthenna',
+					'Godamunna West',
+					'Nugaliyadda Pahala',
+					'Uduwela Udagama West',
+					'Haragama',
+					'Kapuliyadda East',
+					'Oluwawatta',
+					'Doolmure',
+					'Ududeniya',
+					'Hewavissa West',
+					'Pothgoda',
+					'Medadeniya',
+					'Nilawala',
+					'Elikewela',
+					'Damunugolla',
+					'Bopitiya',
+					'Ududeniya Madihe',
+					'Kethigannawela',
+					'Marassana',
+					'Galagoda',
+					'Bolepa',
+					'Unuvinna East',
+					'Pathamailapitiya South',
+					'Udamailapitiya North',
+					'Pathamailapitiya North',
+					'Godompitiya',
+					'Ethulgama North',
+					'Thalathuoya  East',
+					'Haputhale Udagama',
+					'Sigharagama',
+					'Nehiniwela',
+					'Pussathenna',
+					'Batagalla',
+					'Hippola',
+					'Thalathuoya  West',
+					'Pinnagolla',
+					'Uduwela Pallegama East',
+					'Ratemulla',
+					'Pooliyadda',
+					'Uduwela Pallegama South',
+					'Medagama Pallegama',
+					'Unuvinna West',
+					'Hewavissa East',
+					'Welegama',
+					'Wathuliyadda',
+					'Udawelawatta Colony',
+					'Medagama Udagama',
+					'Haputhale Egodagama',
+					'Ethulgama East',
+					'Udamailapitiya South',
+					'Kiriwanagoda',
+					'Uduwela Udagama East',
+					'Bootawatta North',
+					'Kossinna',
+					'Bawlana',
+					'Kandewela',
+					'Godamunna East',
+					'Monarangala',
+					'Bootawatta South',
+					'Meeruppa',
+					'Kahambiliyawa'
+				]
+			},
+			{
+				division: 'Delthota',
+				GSDivisions: [
+					'Pattiyagama Pallegama',
+					'Bopitiya Nagaraya',
+					'Maussawa',
+					'Nawaneliya',
+					'Kotagepitiya',
+					'Murapola West',
+					'Pattiyagama Gabadama North',
+					'Pattiyagama Udagama',
+					'Bawlanawatta Janapadaya',
+					'Kolambissa West',
+					'Kandegama',
+					'Perawatta West',
+					'Suduwella',
+					'Palugama',
+					'Galaha',
+					'Udadelthota',
+					'Perawatta East',
+					'Greatweliya',
+					'Kirawanaketiya',
+					'Medakekila',
+					'Karagaskada South',
+					'Pattiyagama Gabadama South',
+					'Kolambissa East',
+					'Wadiyagoda',
+					'Watakepotha',
+					'Murapola East',
+					'Wanahapuwa',
+					'Karagaskada North',
+					'Gonangoda'
+				]
+			},
+			{
+				division: 'Udapalatha',
+				GSDivisions: [
+					'Illawathura',
+					'Gampola East',
+					'Bothalapitiya',
+					'Gampola West',
+					'Polkumbura',
+					'Eragoda',
+					'Kurukude',
+					'Kudamake',
+					'Jayamalapuraya',
+					'Godagama',
+					'Sinhapitiya South',
+					'Kahatapitiya',
+					'Ilangawatta',
+					'Unambuwa',
+					'Mount Temple',
+					'Kirinda',
+					'Galgediyawa',
+					'Udovita',
+					'Rathmalkaduwa',
+					'Sinhapitiya North',
+					'Hapugaspitiya',
+					'Keerapane',
+					'Ranawala',
+					'Bowala',
+					'Egoda Kalugamuwa',
+					'Angammana East',
+					'Angammana West',
+					'Amunupuraya',
+					'Delpitiya',
+					'Nawa Devita',
+					'Pallegama',
+					'Amuhena',
+					'Wattehena',
+					'Udagama',
+					'Millagaspitiya',
+					'Ihalagama',
+					'Hunukotugama',
+					'Pussellawa',
+					'Wahugapitiya',
+					'Paradeka',
+					'Pussellawagama',
+					'Doragala',
+					'Dunukeulla',
+					'Wanahapuwa',
+					'Galatha',
+					'Kekulanda',
+					'Mawathura',
+					'Weliganga',
+					'Kalugalhinna'
+				]
+			},
+			{
+				division: 'Ganga Ihala Korale',
+				GSDivisions: [
+					'Galpaya',
+					'Herakola',
+					'Pitakanda',
+					'Mallwattagama',
+					'Karagala',
+					'Ethgala  East',
+					'Alugolla',
+					'Pellapitiya North',
+					'Ulapane North',
+					'Miyanagolla',
+					'Maligapurana',
+					'Watakedeniya',
+					'Giraulla',
+					'Ulapane South',
+					'Uduwella',
+					'Patithalawa',
+					'Kelly Group',
+					'Rakshawa',
+					'Yatapana',
+					'Kohowala',
+					'Polmalagama',
+					'Pellapitiya South',
+					'Wallahagoda',
+					'Udahenthenna',
+					'Gamunupura',
+					'Udagama',
+					'Thembiligala',
+					'Ethgala North',
+					'Ethgala West',
+					'Sinhapura',
+					'Gampolawela'
+				]
+			},
+			{
+				division: 'Pasbage Korale',
+				GSDivisions: [
+					'Pallegama',
+					'Mapakanda North',
+					'Warakawa',
+					'Nawalapitiya East',
+					'Bawwagama',
+					'Nawalapitiya South',
+					'Imbulpitiya',
+					'Dekinda',
+					'Balanthota north',
+					'Kendopitiya',
+					'Balanthota South',
+					'Westhole',
+					'Hydry',
+					'Wewegama',
+					'Inguruoya South',
+					'Inguruoya North',
+					'Weligodawatta',
+					'Kadiyanlena',
+					'Mapakanda South',
+					'Dandubendiruppa',
+					'Phala Rambukpitiya',
+					'Penithuduwa',
+					'Nawalapitiya West',
+					'Uda Rambukpitiya',
+					'Aluthgama',
+					'Weligampala',
+					'Karahandungala',
+					'Nawalapitiya North',
+					'Greenwood'
+				]
+			}
+		]
+	},
+	{
+		district: 'Colombo',
+		DSDivisions: [
+			{
+				division: 'Colombo',
+				GSDivisions: [
+					'Aluthkade East',
+					'Aluthkade West',
+					'Aluthmawatha',
+					'Grandpass North',
+					'Grandpass South',
+					'Ibbanwala',
+					'Jinthupitiya',
+					'Keselwatta',
+					'Kettarama',
+					'Pettah',
+					'Kochchikade North',
+					'Lunupokuna',
+					'Madampitiya',
+					'Maligakanda',
+					'Maligawatta West',
+					'Maradana',
+					'Massangar Street',
+					'Mattakkuliya',
+					'Panchikawatta',
+					'New Bazaar',
+					'Suduwella',
+					'Wekanda',
+					'Kotahena West',
+					'Maligawatta East',
+					'Sammanthranapura',
+					'Hunupitiya',
+					'Slave Island',
+					'Fort',
+					'Bloemendhal',
+					'Galle Face',
+					'Nawagampura',
+					'Kotahena East',
+					'Mahawatta',
+					'Modara',
+					'Kochchikade South'
+				]
+			},
+			{
+				division: 'Dehiwala-Mount Lavinia',
+				GSDivisions: [
+					'Kalubowila',
+					'Nedimala',
+					'Udyanaya',
+					'Vilawala',
+					'Dutugemunu',
+					'Kohuwala',
+					'Galwala',
+					'Hathbodhiya',
+					'Sri Saranankara',
+					'Karagampitiya',
+					'Malwatta',
+					'Kawdana East',
+					'Dehiwala East',
+					'Dehiwala West',
+					'Jayathilaka'
+				]
+			},
+			{
+				division: 'Homagama',
+				GSDivisions: [
+					'Niyadagala',
+					'Brahmanagama',
+					'Heraliyawala',
+					'Siddamulla South',
+					'Siddamulla North',
+					'Mattegoda West',
+					'Mattegoda East',
+					'Habarakada South',
+					'Kithulavila',
+					'Panagoda Town',
+					'Kahathuduwa North',
+					'Pitipana South',
+					'Watareka South',
+					'Moonamale - Yakahaluwa',
+					'Uduwana',
+					'Hiripitiya',
+					'Prasannapura',
+					'Kurunduwatta',
+					'Magammana West',
+					'Mawathagama',
+					'Mullegama North',
+					'Galavilawatta North',
+					'Mambulgoda',
+					'Kahathuduwa East',
+					'Batawala',
+					'Homagama North',
+					'Kithulhena',
+					'Panagoda East',
+					'Kahathuduwa South',
+					'Katuwana',
+					'Pitipana Town',
+					'Habarakada Watta',
+					'Kandhanawatta',
+					'Kudamaduwa',
+					'Diyagama West',
+					'Henpita',
+					'Rilawala',
+					'Deepangoda',
+					'Suwapubudugama',
+					'Nawalamulla',
+					'Meegasmulla',
+					'Kiriwattuduwa North',
+					'Ovitigama',
+					'Habarakada North',
+					'Mullegama South',
+					'Sangarama',
+					'Siyambalagoda South',
+					'Meegoda North',
+					'Panagoda West',
+					'Diyagama East',
+					'Weniwelkola',
+					'Mattegoda Central B',
+					'Palagama',
+					'Atigala East',
+					'Wethara',
+					'Undurugoda',
+					'Henawatta',
+					'Gehenuwala',
+					'Kiriberiyakele',
+					'Galavilawatta South',
+					'Homagama South',
+					'Kirigampamunuwa',
+					'Pitipana North',
+					'Homagama East',
+					'Homagama West',
+					'Mattegoda Central "A"',
+					'Meegoda South',
+					'Panaluwa',
+					'Watareka North',
+					'Jalthara',
+					'Walpita',
+					'Godagama North',
+					'Godagama South',
+					'Dolahena',
+					'Homagama Town',
+					'Magammana East',
+					'Siyambalagoda North',
+					'Ambalangoda',
+					'Kahathuduwa West',
+					'Kiriwattuduwa South',
+					'Atigala West'
+				]
+			},
+			{
+				division: 'Kaduwela',
+				GSDivisions: [
+					'Nawagamuwa',
+					'Ranala',
+					'Nawagamuwa South',
+					'Ihala Bomiriya',
+					'Wekewatta',
+					'Pahala Bomiriya',
+					'Pahala Bomiriya B',
+					'Kothalawala',
+					'Kaduwela',
+					'Hewagama'
+				]
+			},
+			{
+				division: 'Kesbewa',
+				GSDivisions: [
+					'Thumbovila South',
+					'Morenda',
+					'Batakettara South',
+					'Boralesgamuwa East A',
+					'Boralesgamuwa West C',
+					'Divulpitiya East',
+					'Divulpitiya West',
+					'Suwarapola West',
+					'Hedigama',
+					'Polhena',
+					'Nivungama',
+					'Makandana West',
+					'Kesbewa South',
+					'Horathuduwa',
+					'Mampe North',
+					'Vishwakalawa',
+					'Mampe South',
+					'Mampe East',
+					'Bokundara',
+					'Bodhirajapura',
+					'Wewala East',
+					'Katuwawala South',
+					'Kaliyammahara',
+					'Niwanthidiya',
+					'Bangalawatta',
+					'Pelenwatta North',
+					'Pelenwatta West',
+					'Erewwala North',
+					'Mahalwarawa',
+					'Makuludoowa',
+					'Paligedara',
+					'Honnanthara South',
+					'Batuwandara South',
+					'Jamburaliya',
+					'Regidel Watta',
+					'Mampe West',
+					'Boralesgamuwa West A',
+					'Boralesgamuwa West B',
+					'Pepiliyana West',
+					'Erewwala East',
+					'Pepiliyana East',
+					'Boralesgamuwa East B',
+					'Rattanapitiya',
+					'Egodawatta',
+					'Bellanvila',
+					'Mavittara North',
+					'Delthara East',
+					'Delthara West',
+					'Dampe',
+					'Madapatha',
+					'Wewala West',
+					'Batakettara North',
+					'Makandana East',
+					'Halpita',
+					'Kesbewa East',
+					'Suwarapola East',
+					'Kesbewa North',
+					'Kolamunna',
+					'Thumbovila West',
+					'Thumbovila North',
+					'Werahera North',
+					'Werahera South',
+					'Katuwawala North',
+					'Neelammahara',
+					'Erewwala West',
+					'Rathmaldeniya',
+					'Pelenwatta East',
+					'Gorakapitiya',
+					'Nampamunuwa',
+					'Honnanthara North',
+					'Mavittara South',
+					'Batuwandara North',
+					'Kahapola'
+				]
+			},
+			{
+				division: 'Kolonnawa',
+				GSDivisions: [
+					'Mulleriyawa North',
+					'Ambathale',
+					'Udumulla North',
+					'Udumulla South',
+					'Maligagodella',
+					'Rajasinghagama',
+					'Himbutana West',
+					'Mulleriyawa South',
+					'Himbutana East',
+					'Malgama',
+					'Kelanimulla',
+					'Belagama',
+					'Kotikawatta East',
+					'Malpura',
+					'Kotikawatta West',
+					'Gothatuwa New Town',
+					'Dodamgahahena',
+					'Maha Buthgamuwa A',
+					'Kuda Buthgamuwa',
+					'Batalandahena',
+					'Maha Buthgamuwa B',
+					'Maha Buthgamuwa C',
+					'Wennawatta',
+					'Kiththampahuwa',
+					'Welewaththa',
+					'Kotuvila',
+					'Sedawatta',
+					'Veheragoda',
+					'Halmulla',
+					'Wathulla',
+					'Meethotamulla',
+					'Orugodawatta',
+					'Kuriniyawatta',
+					'Wellampitiya',
+					'Dahampura',
+					'Kolonnawa',
+					'Salamulla',
+					'Singhapura',
+					'Gajabapura',
+					'Wijayapura',
+					'Gothatuwa',
+					'Megoda Kolonnawa',
+					'Madinnagoda',
+					'Kajugahawatta',
+					'Bopeththa',
+					'Elhena'
+				]
+			},
+			{
+				division: 'Maharagama',
+				GSDivisions: [
+					'Kalalgoda',
+					'Thalawathugoda West',
+					'Thalawathugoda East',
+					'Kottawa South',
+					'Kottawa East',
+					'Kottawa Town',
+					'Kottawa North',
+					'Kottawa West',
+					'Liyanagoda',
+					'Rukmale West',
+					'Rukmale East A',
+					'Rukmale East B',
+					'Malapalla East',
+					'Makumbura North',
+					'Malapalla West',
+					'Makumbura South',
+					'Mirihana North',
+					'Mirihana South',
+					'Madiwela',
+					'Pragathipura',
+					'Thalapathpitiya',
+					'Udahamulla East',
+					'Udahamulla West',
+					'Gangodavila South B',
+					'Wijerama',
+					'Jambugasmulla',
+					'Navinna',
+					'Pathiragoda',
+					'Maharagama East',
+					'Maharagama West',
+					'Pamunuwa',
+					'Dambahena',
+					'Polwatta',
+					'Depanama',
+					'Maharagama Town',
+					'Pannipitiya North',
+					'Pannipitiya South',
+					'Godigamuwa North',
+					'Godigamuwa South',
+					'Godigamuwa South B',
+					'Wattegedara'
+				]
+			},
+			{
+				division: 'Moratuwa',
+				GSDivisions: [
+					'Angulana South',
+					'Angulana North',
+					'Dahampura',
+					'Egoda Uyana Central',
+					'Egoda Uyana North',
+					'Egoda Uyana South',
+					'Molpe',
+					'Indibedda East',
+					'Indibedda West',
+					'Kadalana',
+					'Kaldemulla',
+					'Katubedda',
+					'Katukurunda North',
+					'Katukurunda South',
+					'Koralawella East',
+					'Koralawella North',
+					'Koralawella West',
+					'Kuduwamulla',
+					'Lakshapathiya Central',
+					'Lakshapathiya North',
+					'Lakshapathiya South',
+					'Moratuwella West',
+					'Moratuwella North',
+					'Rawathawatta East',
+					'Rawathawatta South',
+					'Rawathawatta West',
+					'Soysapura North',
+					'Soysapura South',
+					'Koralawella South',
+					'Thelawala South',
+					'Thelawala North',
+					'Uswatta',
+					'Uyana North',
+					'Uyana South',
+					'Villorawatta East',
+					'Villorawatta West',
+					'Borupana',
+					'Idama',
+					'Moratumulla North',
+					'Moratumwella South',
+					'Moratumulla East',
+					'Moratumulla West'
+				]
+			},
+			{
+				division: 'Padukka',
+				GSDivisions: [
+					'Kahawala',
+					'Yatawathura',
+					'Galagedara South',
+					'Pitumpe North',
+					'Liyanwala',
+					'Galagedara East',
+					'Beliattavila',
+					'Waga North',
+					'Waga West',
+					'Arukwatta South',
+					'Ihala Bope',
+					'Angampitiya',
+					'Gurulana',
+					'Uggalla',
+					'Udumulla',
+					'Miriyagalla',
+					'Thummodara',
+					'Pahala Padukka',
+					'Padukka',
+					'Poregedara',
+					'Arukwatta North',
+					'Madulawa North',
+					'Waga South',
+					'Pinnawala South',
+					'Weragala',
+					'Horagala East',
+					'Madulawa South',
+					'Wewelpanawa',
+					'Ganegoda',
+					'Pahala Bope',
+					'Pinnawala North',
+					'Kurugala',
+					'Malagala',
+					'Horagala West',
+					'Beruketiya',
+					'Udagama',
+					'Dabora',
+					'Mahingala',
+					'Galagedara North',
+					'Dampe',
+					'Horakandawala',
+					'Waga East',
+					'Halpe',
+					'Siyambalawa',
+					'Angamuwa',
+					'Pitumpe South'
+				]
+			},
+			{
+				division: 'Ratmalana',
+				GSDivisions: [
+					'Mount Lavinia',
+					'Kawdana West',
+					'Watarappala',
+					'Wathumulla',
+					'Katukurunduwatta',
+					'Attidiya North',
+					'Attidiya South',
+					'Piriwena',
+					'Wedikanda',
+					'Vihara',
+					'Rathmalana West',
+					'Rathmalana East',
+					'Kandawala'
+				]
+			},
+			{
+				division: 'Hanwella',
+				GSDivisions: [
+					'Kanampella East',
+					'Kanampella West',
+					'Thawalgoda',
+					'Muruthagama',
+					'Pahala Kosgama East',
+					'Salawa',
+					'Pahala Kosagama West',
+					'Ihala Kosgama North',
+					'Aluth Ambalama',
+					'Ihala Kosgama South',
+					'Miriswatta',
+					'Eswatta North',
+					'Hingurala',
+					'Manakada',
+					'Eswatta South',
+					'Kadugoada North',
+					'Kadugoda South',
+					'Puwakpitiya',
+					'Kiriwandala North',
+					'Puwakpitiya South',
+					'Egodagama',
+					'Kiriwandala South',
+					'Weragolla South',
+					'Seethawaka',
+					'Ukwatta',
+					'Kotahera',
+					'Aradhana Kanda',
+					'Seethagama',
+					'Agra place',
+					'Bollathawa',
+					'Akaravita',
+					'Kahatapitiya',
+					'Gira Imbula',
+					'Kalu Aggala',
+					'Suduwella',
+					'Mawalgama',
+					'Diddeniya North',
+					'Diddeniya South',
+					'Brandigampala',
+					'Mabula',
+					'Kahahena',
+					'Welikanna',
+					'Pagnagula',
+					'Ilukovita',
+					'Ihala Hanwella North',
+					'Pelpola',
+					'Pahathgama',
+					'Hanwella Town',
+					'Ihala Hanwella South',
+					'Jayaweeragoda',
+					'Thunnana East',
+					'Thunnana West',
+					'Mawathagama East',
+					'Kudakanda',
+					'Pahala Hanwella',
+					'Walauwathta',
+					'Weragolla North',
+					'Avissawella',
+					'Kudagama',
+					'Weralupitiya',
+					'Niripola',
+					'Neluwattuduwa',
+					'Elamalawala',
+					'Koswatta',
+					'Digana',
+					'Mawathagama West',
+					'Koodaluvila',
+					'Lahirugama'
+				]
+			},
+			{
+				division: 'Sri Jayawardanapura Kotte',
+				GSDivisions: [
+					'Gangodavila North',
+					'Nawala West',
+					'Gangodavila East',
+					'Obesekarapura',
+					'Welikada East',
+					'Ethulkotte',
+					'Rajagiriya',
+					'Koswatta',
+					'Welikada West',
+					'Welikada North',
+					'Nugegoda',
+					'Pagoda',
+					'Nugegoda West',
+					'Pagoda East',
+					'Nawala  East',
+					'Ethulkotte West',
+					'Pitakotte West',
+					'Pitakotte',
+					'Pitakotte East',
+					'Gangodavila South'
+				]
+			},
+			{
+				division: 'Thimbirigasyaya',
+				GSDivisions: [
+					'Bambalapitiya',
+					'Borella North',
+					'Borella South',
+					'Dematagoda',
+					'Gothamipura',
+					'Havelock Town',
+					'Kirula',
+					'Kirulapone',
+					'Kollupitiya',
+					'Kuppiyawatta East',
+					'Kuppiyawatta West',
+					'Kurunduwatta',
+					'Milagiriya',
+					'Narahenpita',
+					'Wellawatta North',
+					'Pamankada West',
+					'Pamankada East',
+					'Wanathamulla',
+					'Wellawatta South',
+					'Thimbirigasyaya'
+				]
+			}
+		]
+	},
+	{
+		district: 'Jaffna',
+		DSDivisions: [
+			{
+				division: 'Delft',
+				GSDivisions: [
+					'Delft West',
+					'Delft South',
+					'Delft Centre West',
+					'Delft Centre',
+					'Delft Center East',
+					'Delft East'
+				]
+			},
+			{
+				division: 'Island North (Kayts)',
+				GSDivisions: [
+					'Analativu North',
+					'Analaitivu South',
+					'Kayts',
+					'Paruthiyadaippu',
+					'Eluvaitivu',
+					'Karampon',
+					'Karampon East',
+					'Karampon South East',
+					'Karampon West',
+					'Naranthanai North',
+					'Naranthanai North West',
+					'Naranthanai',
+					'Naranthanai South',
+					'Suruvil',
+					'Puliyankoodal'
+				]
+			},
+			{
+				division: 'Island South (Velanai)',
+				GSDivisions: [
+					'Velanai South East',
+					'Velanai center west',
+					'Pungudutivu North East',
+					'Pungudutivu East',
+					'Velanai North East',
+					'Nainativu North',
+					'Pungudutivu Centre west',
+					'Pungudutivu East South',
+					'Mankumpan',
+					'Velanai West',
+					'Mandaitivu East',
+					'Mandaitivu West',
+					'Pungudutivu Centre North',
+					'Pungudutivu South West',
+					'Allaipiddy',
+					'Velanai Center East',
+					'Saravanai West',
+					'Velanai South',
+					'Saravanai East',
+					'Mandaitivu South',
+					'Nainativu Center',
+					'Nainativu South',
+					'Pungudutivu South',
+					'Velanai North',
+					'Velanai East',
+					'Pungudutivu South East',
+					'Pungudutivu North',
+					'Pungudutivu Centre East',
+					'Pungudutivu North West',
+					'Pungudutivu West'
+				]
+			},
+			{
+				division: 'Jaffna',
+				GSDivisions: [
+					'Small Bazaar',
+					'Fort',
+					'Jaffna Town East',
+					'Thirunagar',
+					'Gurunagar East',
+					'Eachchamoddai',
+					'Gurunagar West',
+					'Koddady',
+					'Aththiady',
+					'Navanthurai North',
+					'Jaffna Town West',
+					'Sirampiyady',
+					'Grand Bazaar',
+					'Columbuthurai West',
+					'Passaiyoor East',
+					'Passaiyoor West',
+					'Vannarpannai',
+					'Navanthurai South',
+					'Reclamation West',
+					'Moor Street North',
+					'New Moor Street',
+					'Chundikuly North',
+					'Moor Street South',
+					'Nedunkulam',
+					'Columbuthurai East',
+					'Reclamation East',
+					'Chundikuly South',
+					'Maruthady'
+				]
+			},
+			{
+				division: 'Karainagar',
+				GSDivisions: [
+					'Karainagar West',
+					'Karainagar Centre',
+					'Karainagar East',
+					'Karainagar South West',
+					'Karainagar North',
+					'Karainagar North East',
+					'Karainagar South',
+					'Karainagar South East',
+					'Karainagar North West'
+				]
+			},
+			{
+				division: 'Nallur',
+				GSDivisions: [
+					'Ariyalai South West(East)',
+					'Ariyalai East',
+					'Ariyalai Center West',
+					'Ariyalai North West',
+					'Ariyalai South West',
+					'Ariyalai Center South',
+					'Iyanar Kovilady',
+					'Vannarpannai North',
+					'Vannarponnai North West',
+					'Vannarpannai North East ( Part )',
+					'Ariyalai Centre North',
+					'Ariyalai Centre',
+					'Vannarponnai N.E.(South)',
+					'Kantharmadam North West',
+					'Kantharmadam North East (Part)',
+					'Kantharmadam South West',
+					'Kantharmadam South East',
+					'Nallur North',
+					'Nallur Rajadaniya',
+					'Nallur South',
+					'Sangiliyanthoppu',
+					'Thirunelvelly West',
+					'Thirunelvely Centre South',
+					'Thirunelvely  South East',
+					'Thirunelve‍ly North East',
+					'Thirunelvelly Centre North',
+					'Kondavil North West',
+					'Kondavil South West',
+					'Kondavil Centre  West',
+					'Kondavil Centre  East',
+					'Kondavil North East',
+					'Kondavil South East',
+					'Kokuvil North East',
+					'Kokuvil East',
+					'Kokuvil South East',
+					'Kokuvil North West',
+					'Kokuvil West',
+					'Kokuvil Centre East',
+					'Kokuvil South West',
+					'Kokuvil Centre West'
+				]
+			},
+			{
+				division: 'Thenmaradchi (Chavakachcheri)',
+				GSDivisions: [
+					'Kovilkudiiruppu',
+					'Eluthumadduval South',
+					'Kodikamam Centre',
+					'Thavalai Iyattalai',
+					'Varani Iyattalai',
+					'Sarasalai North',
+					'Kaithady South',
+					'Ketpely',
+					'Kaithady Navatkuli',
+					'Navatkuli East',
+					'Sarasalai South',
+					'Meesalai West',
+					'Palavi',
+					'Chandrapuram',
+					'Kaithady West',
+					'Mirusuvil South',
+					'Meesalai North',
+					'Nunavil Centre',
+					'Ramavil',
+					'Karambaikurichchi',
+					'Madduvil Nunavil',
+					'Mirusuvil North',
+					'Idaikkurichchi',
+					'Usan',
+					'Kodikamam South',
+					'Madduvil North',
+					'Karampagam',
+					'Kaithady North',
+					'Kovilakkandy',
+					'Thanankalappu',
+					'Masery',
+					'Kudamiyan',
+					'Navatkuli West',
+					'Sangaththanai',
+					'Manthuvil West',
+					'Kachchai',
+					'Eluthumadduval North',
+					'Vidaththtpalai',
+					'Vellampokkadi',
+					'Nunavil West',
+					'Kaithady Nunavil',
+					'Madduvil East',
+					'Kalvayal',
+					'Then Madduvil',
+					'Maravanpulo',
+					'Kodikamam North',
+					'Chavakachcheri Town',
+					'Varani North',
+					'Kaithady East',
+					'Chavakachcheri North',
+					'Manduvil',
+					'Nunavil East',
+					'Madduvil Centre',
+					'Meesalai East',
+					'Allarai',
+					'Navatkadu',
+					'Manthuvil East',
+					'Manthuvil North',
+					'Kaithady Centre',
+					'Kaithady South East'
+				]
+			},
+			{
+				division: 'Vadamaradchi North (Point Pedro) ',
+				GSDivisions: [
+					'Thondamanaru South',
+					'Thondamanaru North',
+					'Kerudavil South',
+					'Kerudavil North',
+					'Kerudavil East',
+					'Valvettithurai North West',
+					'Valvettiturai North Centre',
+					'Valvettiturai North East',
+					'Valvettithurai South West',
+					'Valvettiturai South East',
+					'Polikandy West',
+					'Polikandy East',
+					'Polikandy South',
+					'Alvai West',
+					'Alvai North West',
+					'Alvai North Centre',
+					'Viyaparimoolai',
+					'Alvai North',
+					'Point Pedro',
+					'Point Pedro South',
+					'Point Pedro East',
+					'Thumpalai',
+					'Thumpalai East',
+					'Katkovalam',
+					'Puloly North',
+					'Puloly North East',
+					'Puloly Centre',
+					'Puloly West',
+					'Puloly South West',
+					'Puloly North West',
+					'Puloly East',
+					'Puloly South',
+					'Manthikai',
+					'Vallipuram',
+					'Thunnalai North'
+				]
+			},
+			{
+				division: 'Vadamaradchi East (Maruthnkerny) ',
+				GSDivisions: [
+					'Manalkadu',
+					'Kudaththanai',
+					'Kudathanai Karaiyoor',
+					'Potpathy',
+					'Ampan',
+					'Nagar Kovil East',
+					'Nagar Kovil South',
+					'Nagar Kovil West',
+					'Chempiyanpattu North',
+					'Maruthankerny',
+					'Vathirayan',
+					'Aliyavalai',
+					'Uduththurai',
+					'Vetrilaikerny',
+					'Mullian',
+					'Pokkaruppu',
+					'Chundikulam',
+					'Chempianpattu South'
+				]
+			},
+			{
+				division: 'Vadamaradchy South-West (Karaveddy)',
+				GSDivisions: [
+					'Karaveddy West',
+					'Karanavai North West',
+					'Imayanan',
+					'Karanavai',
+					'Alvai South',
+					'Karaveddy North',
+					'Karaveddy Centre',
+					'Samarabahu',
+					'Kaddaiveli',
+					'Nelliady',
+					'Karanavai South',
+					'Nelliady East',
+					'Karaveddy East',
+					'Alvai',
+					'Uduppidy',
+					'Aththai',
+					'Thunnalai',
+					'Thunnalai Centre',
+					'Thunnalai West',
+					'Karanavai West',
+					'Thunnalai East',
+					'Valvetty Centre',
+					'Uduppidy South',
+					'Karanavai East',
+					'Karanavai Centre',
+					'Karanavai North',
+					'Alvai East',
+					'Uduppidy North',
+					'Maththony',
+					'Karaveddy  South',
+					'Nelliaddy North',
+					'Thunnalai South',
+					'Kapputhu',
+					'Imayanan West',
+					'Valvetty'
+				]
+			},
+			{
+				division: 'valikamam-East (kopayi) ',
+				GSDivisions: [
+					'Irupalai South',
+					'Irupalai  East',
+					'Kalviyankadu',
+					'Kopay South',
+					'Kopay Center',
+					'Kopay North',
+					'Urumpirai West',
+					'Urumpirai North',
+					'Urumpirai South',
+					'Urumpirai East',
+					'Urelu',
+					'Neervely South',
+					'Neervely North',
+					'Neervely West',
+					'Siruppiddy East',
+					'Siruppiddy West',
+					'Puttur West',
+					'Puttur North',
+					'Navakkiri',
+					'Avaranhal East',
+					'Avarankal West',
+					'Puttur East',
+					'Achchelu',
+					'Watharawaththai',
+					'Paththaimeny',
+					'Thampalai Kathirippai',
+					'Idaikaddu',
+					'Valalai',
+					'Atchuvely North',
+					'Atchuvely South',
+					'Atchuvely West'
+				]
+			},
+			{
+				division: 'Valikamam North (Tellipallai)',
+				GSDivisions: [
+					'Alaveddy West',
+					'Kurumpasiddy East',
+					'Thaiyiddy East',
+					'Mallakam South',
+					'Mallakam Centre',
+					'Mallakam North',
+					'Alavedy North',
+					'Alaveddy Centre',
+					'Alaveddy East',
+					'Ganeswaram',
+					'Alaveddy South',
+					'Ilavalai North',
+					'Ilavalai North West',
+					'Vithahapuram',
+					'Pannalai',
+					'Kollankaladdy',
+					'Naguleswaram',
+					'Tellippalai East',
+					'Tellippalai',
+					'Thanthai Chelvapuram',
+					'Maviddapuram',
+					'Maviddapuram South',
+					'Kankesanthurai West',
+					'Kankesanthurai Centre',
+					'Kankesanthurai South',
+					'Palai Veemankamam North',
+					'Palai Veemankamam South',
+					'Kadduvan',
+					'Kadduvan West',
+					'Thenmaylai',
+					'Kurumpasiddy',
+					'Vasavilan East',
+					'Vasavilan West',
+					'Myliddy North',
+					'Thaiyiddy North',
+					'Thaiyiddy South',
+					'Myliddythurai North',
+					'Palaly South',
+					'Palaly East',
+					'Palaly North',
+					'Thurkkapuram',
+					'Varuththalaivilan',
+					'Myliddithurai South',
+					'Palaly North West',
+					'Palaly West'
+				]
+			},
+			{
+				division: 'Valikamam South (Uduvil) ',
+				GSDivisions: [
+					'Earlalai South West',
+					'Chunnakam Town South',
+					'Inuvil North  East',
+					'Uduvil North',
+					'Earlalai South',
+					'Punnalaikadduvan South',
+					'Evinai',
+					'Earlalai North',
+					'Chunnakam  Town Centre',
+					'Inuvil East',
+					'Uduvil South  East',
+					'Earlalai Centre',
+					'Kuppilan  North',
+					'Kuppilan South',
+					'Inuvil South West',
+					'Thavady South',
+					'Sanguvely',
+					'Punnalaikadduvan  North',
+					'Earlalai East',
+					'Chunnakam Town North',
+					'Thavady East',
+					'Earlalai West',
+					'Uduvil Centre North',
+					'Chunnakam  Town West',
+					'Chunnakam Town East',
+					'Uduvil South West',
+					'Uduvil Centre',
+					'Kantharodai',
+					'Thavady North',
+					'Inuvil West'
+				]
+			},
+			{
+				division: 'Valikamam South-West (Sandilipay)',
+				GSDivisions: [
+					'Suthumalai North',
+					'Suthumalai South',
+					'Savalkaddu',
+					'Uyarappulam',
+					'Ana‍icoddai',
+					'Navali North',
+					'Navaly East',
+					'Navali South',
+					'Manipay North',
+					'Manipay East',
+					'Manipay South',
+					'Manipay West',
+					'Sandilipay North',
+					'Sandilipay Centre',
+					'Sandilipay West',
+					'Mahiyappiddy',
+					'Vadaliyadaippu',
+					'Pandaththarippu',
+					'Piranpattu',
+					'Si‍lalai North',
+					'S‍ilalai South',
+					'Mathagal East',
+					'Mathagal South',
+					'Mathagal West',
+					'Periyavilan',
+					'Maresankoodal',
+					'Ilavalai',
+					'Mullanai'
+				]
+			},
+			{
+				division: 'Valikamam West (Chankanai)',
+				GSDivisions: [
+					'Sithankerny',
+					'Vadducoddai  West',
+					'Araly West',
+					'Chankanai West',
+					'Chulipuram  Centre',
+					'Chankanai Centre',
+					'Araly Centre',
+					'Panfippulam',
+					'Chankanai South',
+					'Chulipuram  East',
+					'Vadducoddai North',
+					'Sangarathai',
+					'Arali North',
+					'Vedducoddai South',
+					'Araly East',
+					'Vadducoddai South West (North)',
+					'Araly South',
+					'Tholpuram East',
+					'Ponnalai',
+					'Pannagam',
+					'Chankanai East',
+					'Moolai',
+					'Tholpuram  West',
+					'Vadducoddai East',
+					'Chulipuram West'
+				]
+			}
+		]
+	}
+]

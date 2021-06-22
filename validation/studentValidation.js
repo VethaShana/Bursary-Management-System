@@ -1,63 +1,72 @@
 import * as yup from 'yup'
 const studentValidationSchema = yup.object().shape({
-	// userId: {
-	// 	type: mongoose.Schema.Types.ObjectId,
-	// 	ref: 'user',
-	// 	required: true,
-	// 	unique: true
-	// },
+	regNo: yup.string().required(),
 
-	regNo: yup.string().required('registration number is required'),
-
-	nic: yup.string().trim().required('nic number is required'),
-
-	//title: yup.string().trim().oneOf(['Mr.', 'Mrs.', 'Miss']).required(),
-
-	nameWithInitials: yup
+	nic: yup
 		.string()
-		.required('nameWithInitials number is required'),
+		.trim()
+		.matches(/^(?:19|20)?\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$/)
+		.required(),
 
-	fullName: yup.string().required('fullName number is required'),
+	title: yup
+		.string()
+		.trim()
+		.oneOf(['Mr.', 'Mrs.', '.Rev', 'Miss'])
+		.required(),
 
-	street: yup.string().required('street number is required'),
+	nameWithInitials: yup.string().required(),
 
-	city: yup.string().required('city number is required'),
+	fullName: yup.string().required(),
 
-	district: yup.string().required('district number is required'),
+	street: yup.string().required(),
+
+	city: yup.string().required(),
+
+	district: yup.string().required(),
 
 	phone: yup
 		.string()
 		.matches(/^(?:7|0|(?:\+94))[0-9]{9,10}$/, 'Invalid phone number.')
-		.required('Phone is required'),
+		.required(),
 
-	email: yup.string().required('email number is required'),
+	email: yup.string().required(),
 
-	zScore: yup.string().required('zScore number is required'),
+	zScore: yup.string().required(),
 
-	course: yup.string().required('course number is required'),
+	course: yup.string().required(),
 
-	GSDivision: yup.string().required('gsDivision number is required'),
+	GSDivision: yup.string().required(),
 
-	DSDivision: yup.string(),
+	DSDivision: yup.string(), // DSDivision: yup.string().required(),
 
-	indexNo: yup.string(),
+	// indexNo: yup
+	// 	.string()
+	// 	.trim()
+	// 	.matches(/^S\s[0-9]{5}$/)
+	// 	.required(),
 
 	siblingsUnder19: yup
 		.array()
 		.of(
 			yup.object().shape({
-				name: yup.string(), //.required('Name is required'),
+				name: yup
+					.string()
+					.min(2, 'Too Short')
+					.required('Name is required'),
 				dob: yup
 					.date()
-					.max(new Date(), 'Date of Birth cannot be in future'),
-				//	.required('Date of Birth is required'),
-				// age: yup
-				// 	.number()
-				// 	.min(0, 'Age cannot be negative')
-				// 	.max(123, 'Invalid age')
-				// 	.required('Age is required'),
-				schoolOrInstitute: yup.string().max(123, 'Invalid age')
-				//.required('Academic year is required')
+					.max(new Date(), 'Date of Birth cannot be in future')
+					.required('Date of Birth is required'),
+				age: yup
+					.number()
+					.transform(value => (isNaN(value) ? 0 : value))
+					.positive('Age cannot be negative')
+					.max(123, 'Invalid age')
+					.required('Age is required'),
+				schoolOrInstitute: yup
+					.string()
+					.max(123, 'Invalid age')
+					.required('Academic year is required')
 			})
 		)
 		.optional(),

@@ -160,9 +160,17 @@ function Dashboard({ user, getStudents, getInstallments }) {
 						variant="h6"
 						color="inherit"
 						// noWrap
+
 						className={classes.title}
 					>
-						Dashboard
+						Bursary &nbsp;
+						<Typography
+							component="span"
+							variant="subtitle1"
+							color="inherit"
+						>
+							Welfare Department
+						</Typography>
 					</Typography>
 					<IconButton
 						color="inherit"
