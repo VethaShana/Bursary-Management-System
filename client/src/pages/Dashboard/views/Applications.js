@@ -10,7 +10,6 @@ import Card from '../components/Card'
 import PendingApplicationsTable from '../components/Table/PendingApplicationsTable'
 import AddIcon from '@material-ui/icons/Add'
 import Title from '../components/Title'
-import MaterialTable from '../components/MaterialTable'
 
 const useStyles = makeStyles(theme => ({
 	title: {
@@ -64,19 +63,6 @@ function Applications() {
 					<Paper className={classes.paper}>
 						<PendingApplicationsTable />
 					</Paper>
-					{/* <Grid item xs={12}>
-						<Paper className={classes.paper}>
-							<Typography
-								component="h2"
-								variant="h6"
-								color="primary"
-								gutterBottom
-							>
-								MaterialTable
-							</Typography>
-							<MaterialTable />
-						</Paper>
-					</Grid> */}
 				</Grid>
 			</Grid>
 		</React.Fragment>
