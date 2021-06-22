@@ -69,5 +69,5 @@ export default [
 	{
 		text: '\nDate: ...........................................................'
 	},
-	{ text: '\nDelete the Inapplicable words', alignment: 'center' }
+	{ text: '\nStrike through the Inapplicable words', alignment: 'center' }
 ]

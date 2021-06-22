@@ -27,9 +27,11 @@ export default [
 		bold: 'true'
 	},
 	{
+		alignment: 'Justify',
 		text: '\n1. You are required to check the details , the status of the applicant in relation to the area, and the income from house and property as given in cages 3 and 4 . You are also required to certify the annual income of the applicants parents as given in the cages 7,8 if the applicants is employed his annual income in cage 5 and also the details given by the applicant regarding his brothers and sisters. In addition you should certify the accuracy of the applicants declaration by placing your signature and official seal.  '
 	},
 	{
+		alignment: 'Justify',
 		text: '\n2. Application should not be handed over to be applicant under any circumstances.'
 	}
 ]

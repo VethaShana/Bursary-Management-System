@@ -38,7 +38,9 @@ const applicationDocDefinition = data => {
 				// widths: theads.map(thead => thead.width),
 				body: [
 					theads.map(({ text }) => text),
-					...data.map(x => Object.values(x).map(y => (y ? y : 'N/A')))
+					...data.map(x =>
+						Object.values(x).map(y => (y ? y : 'None'))
+					)
 				]
 			}
 		}
@@ -46,7 +48,7 @@ const applicationDocDefinition = data => {
 			headerRows: 1,
 			// widths: theads.map(({width = 'auto'}) => width),
 			widths: theads.map(thead => thead.width),
-			body: [theads.map(({ text }) => text), theads.map(thead => 'N/A')]
+			body: [theads.map(({ text }) => text), theads.map(thead => 'None')]
 		}
 	}
 
@@ -93,7 +95,7 @@ const applicationDocDefinition = data => {
 								text: 'Student registration No. :',
 								fontSize: 15
 							},
-							{ text: `${data.regNo ? data.regNo : 'N/A'}` }
+							{ text: `${data.regNo ? data.regNo : 'None'}` }
 						]
 					]
 				}
@@ -109,19 +111,19 @@ const applicationDocDefinition = data => {
 						},
 						{ text: '\n' },
 						{
-							text: `\n\n${
-								data.gsDivision ? data.gsDivision : 'N/A'
+							text: `\n${
+								data.GSDivision ? data.GSDivision : 'None'
 							}`
 						},
 						{
 							text: `\n${
-								data.dsDivision ? data.gsDivision : 'N/A'
+								data.DSDivision ? data.DSDivision : 'None'
 							}`
 						},
 						{ text: `\n${data.district}` },
 						{ text: `\n${data.phone}` },
 						{ text: `\n\n${data.alDistrict}` },
-						{ text: `\n${data.indexNo ? data.indexNo : 'N/A'}` },
+						{ text: `\n${data.indexNo ? data.indexNo : 'None'}` },
 						{ text: `\n${data.zScore}` },
 						{ text: `\n\n${data.course}` },
 						{ text: `\n${data.nic}` }
@@ -131,6 +133,7 @@ const applicationDocDefinition = data => {
 			...office,
 			...instruction,
 			{
+				alignment: 'Justify',
 				text: `\n3. The application should be duly perfected and hande over to Grama Seveka, so as to reach this office before ..${deadline}.. the Grama Seveka will forward the application to the DS as specified in cage 11. As the application has to be returned by registered post and an envelope of 9" x 4" in size with stamps to the appropriate value pasted should be handed over to the Grama Sevaka along with the application. Tha words "Bursary Application" should be indicated on the left hand top corner of the envelop. This application should not be handed over to this office personally under any circumstances.\n`
 			},
 			...instruction2,
@@ -152,7 +155,8 @@ const applicationDocDefinition = data => {
 				)
 			},
 			{
-				text: `\nB. Distance from the student\'s permanent residence to the University of Jaffna(k.m) : ${data.Distance} km`
+				text: `\nB. Distance from the student\'s permanent residence to the University of Jaffna(k.m) : ${data.Distance} km`,
+				pageBreak: 'after'
 			},
 			{
 				text: '\nC. If you have any brother or sisters following courses of study in a University, or any Campus, Institute of Athletic studies or Institute of Indigenous Medicine , give details:\n\n'
@@ -248,8 +252,8 @@ const applicationDocDefinition = data => {
 						},
 						{
 							text: `\n${
-								data.DSDivision
-									? data.DSDivision
+								data.dsDivision
+									? data.dsDivision
 									: '..............................................................'
 							}`
 						},
@@ -261,59 +265,60 @@ const applicationDocDefinition = data => {
 							}`
 						}
 					]
-				]
+				],
+				pageBreak: 'after'
 			},
 
 			{
 				columns: [
 					employee,
 					[
-						{ text: '\n\n\n' },
+						{ text: '\n' },
 						//...employment.map(work => [
 						{ text: `\n${employed ? 'Yes' : 'No'}` },
 						{
 							text: `\n\n${
 								employment.establishment
 									? employment.establishment
-									: 'N/A'
-							} from ${
+									: 'None'
+							} , Address : ${
 								employment.address.street
 									? employment.address.street
-									: null
-							},${
+									: ''
+							}-${
 								employment.address.city
 									? employment.address.city
-									: null
-							},${
+									: 'None'
+							}-${
 								employment.address.district
 									? employment.address.district
-									: null
+									: '\n\n'
 							}`
 						},
 						{
 							text: `\n${
 								employment.designation
 									? employment.designation
-									: 'N/A'
+									: 'None'
 							}`
 						},
 						{
 							text: `\n${
 								employment.salaryScale
 									? employment.salaryScale
-									: 'N/A'
+									: '..................................................................'
 							}`
 						},
 						{
 							text: `\n${
-								employment.salary ? employment.salary : 'N/A'
+								employment.salary ? employment.salary : 'None'
 							} ${employment.salary ? 'LKR' : ''}`
 						},
 						{
 							text: `\n${
 								employment.dateOfEmployment
 									? employment.dateOfEmployment
-									: 'N/A'
+									: 'None'
 							}`
 						}
 						//])
@@ -332,29 +337,29 @@ const applicationDocDefinition = data => {
 							text: `\n${
 								spouse.dateOfMarriage
 									? spouse.dateOfMarriage
-									: 'N/A'
+									: 'None'
 							}`
 						},
-						{ text: `\n${spouse.name ? spouse.name : 'N/A'}` },
+						{ text: `\n${spouse.name ? spouse.name : 'None'}` },
 						{
 							text: `\n\n${
 								spouse.employment.establishment
 									? spouse.employment.establishment
-									: 'N/A'
+									: 'None'
 							}`
 						},
 						{
 							text: `\n${
 								spouse.employment.designation
 									? spouse.employment.designation
-									: 'N/A'
+									: 'None'
 							}`
 						},
 						{
 							text: `\n\n${
 								spouse.employment.salary
 									? spouse.employment.salary
-									: 'N/A'
+									: 'None'
 							} ${spouse.employment.salary ? 'LKR' : ''}`
 						}
 						//])
@@ -377,26 +382,26 @@ const applicationDocDefinition = data => {
 								father.living ? 'Living' : 'Not alive'
 							}`
 						},
-						{ text: `\n${father.age ? father.age : 'N/A'}` },
+						{ text: `\n${father.age ? father.age : 'None'}` },
 						{
 							text: `\n\n\n${
 								father.employment.occupation
 									? father.employment.occupation
-									: 'N/A'
+									: 'None'
 							}`
 						},
 						{
 							text: `\n\n${
 								father.employment.address
 									? father.employment.address
-									: 'N/A'
+									: 'None'
 							}`
 						},
 						{
 							text: `\n\n\n${
 								father.annualIncome.occupationOrPension
 									? father.annualIncome.occupationOrPension
-									: 'N/A'
+									: 'None'
 							} ${
 								father.annualIncome.occupationOrPension
 									? 'LKR'
@@ -407,7 +412,7 @@ const applicationDocDefinition = data => {
 							text: `\n\n${
 								father.annualIncome.houseAndProperty
 									? father.annualIncome.houseAndProperty
-									: 'N/A'
+									: 'None'
 							} ${
 								father.annualIncome.houseAndProperty
 									? 'LKR'
@@ -418,14 +423,14 @@ const applicationDocDefinition = data => {
 							text: `\n${
 								father.annualIncome.otherSources
 									? father.annualIncome.otherSources
-									: 'N/A'
+									: 'None'
 							} ${father.annualIncome.otherSources ? 'LKR' : ''}`
 						},
 						{
 							text: `\n${
 								father.fatherTotalAnnualIncome
 									? father.fatherTotalAnnualIncome
-									: 'N/A'
+									: 'None'
 							} ${father.fatherTotalAnnualIncome ? 'LKR' : ''}`
 						}
 						//])
@@ -433,7 +438,7 @@ const applicationDocDefinition = data => {
 				]
 			},
 
-			{ text: '\n\n\n08. Details of Mother ', bold: 'true' },
+			{ text: '\n\n08. Details of Mother ', bold: 'true' },
 			{
 				columns: [
 					Mother,
@@ -445,26 +450,26 @@ const applicationDocDefinition = data => {
 								mother.living ? 'Living' : 'Not alive'
 							}`
 						},
-						{ text: `\n${mother.age ? mother.age : 'N/A'}` },
+						{ text: `\n${mother.age ? mother.age : 'None'}` },
 						{
 							text: `\n\n\n${
 								mother.employment.occupation
 									? mother.employment.occupation
-									: 'N/A'
+									: 'None'
 							}`
 						},
 						{
 							text: `\n\n${
 								mother.employment.address
 									? mother.employment.address
-									: 'N/A'
+									: 'None'
 							}`
 						},
 						{
 							text: `\n\n\n${
 								mother.annualIncome.occupationOrPension
 									? mother.annualIncome.occupationOrPension
-									: 'N/A'
+									: 'None'
 							} ${
 								mother.annualIncome.occupationOrPension
 									? 'LKR'
@@ -475,7 +480,7 @@ const applicationDocDefinition = data => {
 							text: `\n\n${
 								mother.annualIncome.houseAndProperty
 									? mother.annualIncome.houseAndProperty
-									: 'N/A'
+									: 'None'
 							} ${
 								mother.annualIncome.houseAndProperty
 									? 'LKR'
@@ -486,14 +491,14 @@ const applicationDocDefinition = data => {
 							text: `\n${
 								mother.annualIncome.otherSources
 									? mother.annualIncome.otherSources
-									: 'N/A'
+									: 'None'
 							} ${mother.annualIncome.otherSources ? 'LKR' : ''}`
 						},
 						{
 							text: `\n${
 								mother.motherTotalAnnualIncome
 									? mother.motherTotalAnnualIncome
-									: 'N/A'
+									: 'None'
 							} ${mother.motherTotalAnnualIncome ? 'LKR' : ''}`
 						}
 						//])
@@ -514,18 +519,18 @@ const applicationDocDefinition = data => {
 					guard,
 					[
 						//...guardian.map(attr => [
-						{ text: `\n${guardian.name ? guardian.name : 'N/A'}` },
+						{ text: `\n${guardian.name ? guardian.name : 'None'}` },
 						{
 							text: `\n${
-								guardian.address ? guardian.address : 'N/A'
+								guardian.address ? guardian.address : 'None'
 							}`
 						},
-						{ text: `\n${guardian.post ? guardian.post : 'N/A'}` },
+						{ text: `\n${guardian.post ? guardian.post : 'None'}` },
 						{
 							text: `\n\n\n\n${
 								guardian.annualIncome.salary
 									? guardian.annualIncome.salary
-									: 'N/A'
+									: 'None'
 							} ${guardian.annualIncome.salary ? 'LKR' : ''}`
 						},
 						{
@@ -533,20 +538,21 @@ const applicationDocDefinition = data => {
 								guardian.annualIncome.houseAndPropertyOrTemple
 									? guardian.annualIncome
 											.houseAndPropertyOrTemple
-									: 'N/A'
+									: 'None'
 							} ${
 								guardian.annualIncome.houseAndPropertyOrTemple
 									? 'LKR'
 									: ''
 							}`
 						},
-						{ text: `\n${guardian.age ? guardian.age : 'N/A'}` }
+						{ text: `\n${guardian.age ? guardian.age : 'None'}` }
 						//	])
 					]
 				]
 			},
 			...footer,
 			{
+				alignment: 'Justify',
 				text: `\n3. The D.S having certified the Grama Sevakas signature should forward the application to the following address under registered cover, so as to reach on or before ..${deadline}.. Applicant will hand over an envelope of 9" x 4" in size with stamps to the appropriate value pasted to the Grama Sevaka for this purpose.\n\n`
 			},
 			...footer2
