@@ -155,7 +155,7 @@ const applicationDocDefinition = data => {
 				text: `\nB. Distance from the student\'s permanent residence to the University of Jaffna(k.m) : ${data.Distance} km`
 			},
 			{
-				text: '\nC. If you have any brother or sisters following courses of study in a University, or any Campus, Institute of Athletic studies or Institute of Indigenous Medicine , give details:\n'
+				text: '\nC. If you have any brother or sisters following courses of study in a University, or any Campus, Institute of Athletic studies or Institute of Indigenous Medicine , give details:\n\n'
 			},
 			{
 				layout: 'lightHorizontalLines', // optional
@@ -163,22 +163,24 @@ const applicationDocDefinition = data => {
 					[
 						{ text: 'Name' },
 						{
-							text: 'Registration No of the Higher Education',
+							text: 'Reg No.',
 							width: 'auto'
 						},
 						{
-							text: 'Name of the Institution where the course of study is being followed ',
+							text: 'Name of the Institution',
 							width: 'auto'
 						},
 						{ text: 'Course', width: 'auto' },
 						{ text: 'Acadamic Year', width: 'auto' },
-						{ text: 'getBursary', width: 100 }
+						{ text: 'Bursary/Mahapola or not', width: 100 }
 					],
 
 					siblingsAtUniversity
 				)
 			},
-
+			{
+				text: '\n *Reg No. - Registration No of the Higher Education \n * Name of the Institution - Name of the Institution where the course of study is being followed \n * Bursary/Mahapola or not -Whether in receipt of a Mahapola Scholar Scholarship or a Bursary or not.'
+			},
 			{
 				text: '\n3. Income from Estates,Fields,Lands etc.:\n\n',
 				bold: 'true'
@@ -187,7 +189,7 @@ const applicationDocDefinition = data => {
 				layout: 'lightHorizontalLines', // optional
 				table: table(
 					[
-						{ text: 'Name of Owner' },
+						{ text: 'Owner' },
 						{ text: 'Relationship', width: 'auto' },
 						{ text: 'Location ', width: 'auto' },
 						{ text: 'Nature of Cultivation', width: 'auto' },
@@ -195,32 +197,37 @@ const applicationDocDefinition = data => {
 							text: 'Extent of Land & Details of Property',
 							width: 'auto'
 						},
-						{ text: 'Annual income in Rupees ', width: 100 }
+						{ text: 'Annual income', width: 'auto' }
 					],
 
 					incomeFromEstateFieldsLands
 				)
 			},
-
+			{
+				text: '\n *Owner - Name of Owner \n * Annual income - Annual income in Rupees '
+			},
 			{ text: '\n4. Income from the Houses:\n\n', bold: 'true' },
 			{
 				layout: 'lightHorizontalLines', // optional
 				table: table(
 					[
-						{ text: 'Name of Owner' },
+						{ text: 'Owner' },
 						{ text: 'Relationship', width: 'auto' },
 						{ text: 'Assessment No', width: 'auto' },
-						{ text: 'No. of house holders List', width: 'auto' },
+						{ text: 'House holders', width: 'auto' },
 						{ text: 'Address', width: 'auto' },
 						{ text: 'Annual income', width: 'auto' },
 						{
-							text: 'If given on rent/lease names and addresses of tenant/lease',
+							text: 'tenant/lease',
 							width: 100
 						}
 					],
 
 					incomeFromHouses
 				)
+			},
+			{
+				text: '\n *Owner - Name of Owner \n *tenant/lease-If given on rent/lease names and addresses of tenant/lease \n *House holders - No. of house holders List '
 			},
 			{
 				columns: [
@@ -232,15 +239,25 @@ const applicationDocDefinition = data => {
 						{ text: '\n 3.Name of the Local Authority :' }
 					],
 					[
-						{ text: `\n\n${data.GSDNo ? data.GSDNo : 'N/A'}` },
 						{
-							text: `\n${
-								data.DSDivision ? data.DSDivision : 'N/A'
+							text: `\n\n${
+								data.GSDNo
+									? data.GSDNo
+									: '..............................................................'
 							}`
 						},
 						{
 							text: `\n${
-								data.LocalAthority ? data.LocalAthority : 'N/A'
+								data.DSDivision
+									? data.DSDivision
+									: '..............................................................'
+							}`
+						},
+						{
+							text: `\n${
+								data.LocalAthority
+									? data.LocalAthority
+									: '..............................................................'
 							}`
 						}
 					]
@@ -290,7 +307,7 @@ const applicationDocDefinition = data => {
 						{
 							text: `\n${
 								employment.salary ? employment.salary : 'N/A'
-							}`
+							} ${employment.salary ? 'LKR' : ''}`
 						},
 						{
 							text: `\n${
@@ -338,7 +355,7 @@ const applicationDocDefinition = data => {
 								spouse.employment.salary
 									? spouse.employment.salary
 									: 'N/A'
-							}`
+							} ${spouse.employment.salary ? 'LKR' : ''}`
 						}
 						//])
 					]
@@ -380,6 +397,10 @@ const applicationDocDefinition = data => {
 								father.annualIncome.occupationOrPension
 									? father.annualIncome.occupationOrPension
 									: 'N/A'
+							} ${
+								father.annualIncome.occupationOrPension
+									? 'LKR'
+									: ''
 							}`
 						},
 						{
@@ -387,6 +408,10 @@ const applicationDocDefinition = data => {
 								father.annualIncome.houseAndProperty
 									? father.annualIncome.houseAndProperty
 									: 'N/A'
+							} ${
+								father.annualIncome.houseAndProperty
+									? 'LKR'
+									: ''
 							}`
 						},
 						{
@@ -394,14 +419,14 @@ const applicationDocDefinition = data => {
 								father.annualIncome.otherSources
 									? father.annualIncome.otherSources
 									: 'N/A'
-							}`
+							} ${father.annualIncome.otherSources ? 'LKR' : ''}`
 						},
 						{
 							text: `\n${
 								father.fatherTotalAnnualIncome
 									? father.fatherTotalAnnualIncome
 									: 'N/A'
-							}`
+							} ${father.fatherTotalAnnualIncome ? 'LKR' : ''}`
 						}
 						//])
 					]
@@ -440,6 +465,10 @@ const applicationDocDefinition = data => {
 								mother.annualIncome.occupationOrPension
 									? mother.annualIncome.occupationOrPension
 									: 'N/A'
+							} ${
+								mother.annualIncome.occupationOrPension
+									? 'LKR'
+									: ''
 							}`
 						},
 						{
@@ -447,6 +476,10 @@ const applicationDocDefinition = data => {
 								mother.annualIncome.houseAndProperty
 									? mother.annualIncome.houseAndProperty
 									: 'N/A'
+							} ${
+								mother.annualIncome.houseAndProperty
+									? 'LKR'
+									: ''
 							}`
 						},
 						{
@@ -454,14 +487,14 @@ const applicationDocDefinition = data => {
 								mother.annualIncome.otherSources
 									? mother.annualIncome.otherSources
 									: 'N/A'
-							}`
+							} ${mother.annualIncome.otherSources ? 'LKR' : ''}`
 						},
 						{
 							text: `\n${
 								mother.motherTotalAnnualIncome
 									? mother.motherTotalAnnualIncome
 									: 'N/A'
-							}`
+							} ${mother.motherTotalAnnualIncome ? 'LKR' : ''}`
 						}
 						//])
 					]
@@ -493,7 +526,7 @@ const applicationDocDefinition = data => {
 								guardian.annualIncome.salary
 									? guardian.annualIncome.salary
 									: 'N/A'
-							}`
+							} ${guardian.annualIncome.salary ? 'LKR' : ''}`
 						},
 						{
 							text: `\n\n${
@@ -501,6 +534,10 @@ const applicationDocDefinition = data => {
 									? guardian.annualIncome
 											.houseAndPropertyOrTemple
 									: 'N/A'
+							} ${
+								guardian.annualIncome.houseAndPropertyOrTemple
+									? 'LKR'
+									: ''
 							}`
 						},
 						{ text: `\n${guardian.age ? guardian.age : 'N/A'}` }
