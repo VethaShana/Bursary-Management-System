@@ -31,17 +31,27 @@ const studentSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-	street: {
-		type: String
-		//required: true
-	},
-	city: {
-		type: String
-		//required: true
-	},
-	district: {
-		type: String
-		//required: true
+	address: {
+		distance: { type: Number },
+		street: {
+			type: String
+			//required: true
+		},
+		city: {
+			type: String
+			//required: true
+		},
+		district: {
+			type: String
+			//required: true
+		},
+		GSDivision: {
+			type: String
+			// required: true
+		},
+		DSDivision: {
+			type: String
+		}
 	},
 	phone: {
 		type: String,
@@ -63,13 +73,7 @@ const studentSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-	GSDivision: {
-		type: String
-		// required: true
-	},
-	DSDivision: {
-		type: String
-	},
+	ALDistrict: { type: String },
 	//indexNo
 	ALIndexNo: {
 		type: String

@@ -11,14 +11,15 @@ import marriage from './layout/marriage.js'
 import footer from './layout/Footer.js'
 import footer2 from './layout/Footer2.js'
 import guard from './layout/guard.js'
+import { boolean } from 'yup'
 
 const applicationDocDefinition = data => {
 	const {
 		fullName,
 		title,
 		married,
-		siblingsAtUniversity = [],
-		siblingsUnder19 = [],
+		//siblingsAtUniversity = [],
+		//siblingsUnder19 = [],
 		incomeFromEstateFieldsLands = [],
 		incomeFromHouses = [],
 		employed,
@@ -38,16 +39,25 @@ const applicationDocDefinition = data => {
 				body: [
 					theads.map(({ text }) => text),
 					...data.map(x =>
-						Object.values(x).map(y => (y ? y : 'None'))
+						Object.values(x).map((y, idx) => {
+							if (typeof y === 'boolean') {
+								console.log(typeof y === 'boolean', y)
+								return y ? 'Yes' : 'No'
+							} else return y ? y : 'None'
+						})
 					)
 				]
 			}
-		}
-		return {
-			headerRows: 1,
-			// widths: theads.map(({width = 'auto'}) => width),
-			widths: theads.map(thead => thead.width),
-			body: [theads.map(({ text }) => text), theads.map(thead => 'None')]
+		} else {
+			return {
+				headerRows: 1,
+				// widths: theads.map(({width = 'auto'}) => width),
+				widths: theads.map(thead => 'auto'),
+				body: [
+					theads.map(({ text }) => text),
+					theads.map(thead => 'None')
+				]
+			}
 		}
 	}
 
@@ -104,25 +114,33 @@ const applicationDocDefinition = data => {
 					...stuD,
 					[
 						{ text: '\n\n' },
-						{ text: `\n${title}.${fullName}` },
+						{ text: `\n${title}${fullName}` },
 						{
-							text: `\n${data.street}, ${data.city}, ${data.district} `
+							text: `\n${data.address.street}, ${data.address.city}, ${data.address.district} `
 						},
 						{ text: '\n' },
 						{
 							text: `\n${
-								data.GSDivision ? data.GSDivision : 'None'
+								data.address.GSDivision
+									? data.address.GSDivision
+									: 'None'
 							}`
 						},
 						{
 							text: `\n${
-								data.DSDivision ? data.DSDivision : 'None'
+								data.address.DSDivision
+									? data.address.DSDivision
+									: 'None'
 							}`
 						},
-						{ text: `\n${data.district}` },
+						{ text: `\n${data.address.district}` },
 						{ text: `\n${data.phone}` },
-						{ text: `\n\n${data.alDistrict}` },
-						{ text: `\n${data.indexNo ? data.indexNo : 'None'}` },
+						{ text: `\n\n${data.ALDistrict}` },
+						{
+							text: `\n${
+								data.ALIndexNo ? data.ALIndexNo : 'None'
+							}`
+						},
 						{ text: `\n${data.zScore}` },
 						{ text: `\n\n${data.course}` },
 						{ text: `\n${data.nic}` }
@@ -146,15 +164,15 @@ const applicationDocDefinition = data => {
 				table: table(
 					[
 						{ text: 'Name' },
-						{ text: 'Date of Birth', width: 'auto' },
-						{ text: 'Age', width: 'auto' },
-						{ text: 'School/Institute', width: 100 }
+						{ text: 'Date of Birth' },
+						{ text: 'Age' },
+						{ text: 'School/Institute' }
 					],
-					siblingsUnder19
+					data.siblingsUnder19
 				)
 			},
 			{
-				text: `\nB. Distance from the student\'s permanent residence to the University of Jaffna(k.m) : ${data.Distance} km`,
+				text: `\nB. Distance from the student\'s permanent residence to the University of Jaffna(k.m) : ${data.address.distance} km`,
 				pageBreak: 'after'
 			},
 			{
@@ -175,10 +193,10 @@ const applicationDocDefinition = data => {
 						},
 						{ text: 'Course', width: 'auto' },
 						{ text: 'Acadamic Year', width: 'auto' },
-						{ text: 'Bursary/Mahapola or not', width: 100 }
+						{ text: 'Bursary/Mahapola or not', width: 'auto' }
 					],
 
-					siblingsAtUniversity
+					data.siblingsAtUniversity
 				)
 			},
 			{
@@ -222,7 +240,7 @@ const applicationDocDefinition = data => {
 						{ text: 'Annual income', width: 'auto' },
 						{
 							text: 'tenant/lease',
-							width: 100
+							width: 'auto'
 						}
 					],
 
