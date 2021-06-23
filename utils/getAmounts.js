@@ -2,9 +2,6 @@ import Student from '../models/student.js'
 export default data => {
 	const {
 		married,
-		spouse: {
-			employment: { salary }
-		},
 		siblingsUnder19 = [],
 		siblingsAtUniversity = [],
 		father,
@@ -19,7 +16,10 @@ export default data => {
 	let capIncome = 500000
 
 	// check marriage status
-	if (married) netIncome += parseInt(salary)
+	if (married)
+		netIncome += parseInt(
+			spouse.employment.salary ? spouse.employment.salary : 0
+		)
 
 	// check guardian
 	if (guardian && guardian.annualIncome) {

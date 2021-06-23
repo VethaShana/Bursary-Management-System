@@ -17,15 +17,14 @@ const applicationDocDefinition = data => {
 		fullName,
 		title,
 		married,
-		spouse,
 		siblingsAtUniversity = [],
 		siblingsUnder19 = [],
 		incomeFromEstateFieldsLands = [],
 		incomeFromHouses = [],
 		employed,
-		employment,
 		father,
 		mother,
+		isLivingWithGuardian,
 		guardian,
 		deadline
 	} = data
@@ -278,46 +277,40 @@ const applicationDocDefinition = data => {
 						{ text: `\n${employed ? 'Yes' : 'No'}` },
 						{
 							text: `\n\n${
-								employment.establishment
-									? employment.establishment
+								employed
+									? data.employment.establishment
 									: 'None'
 							} , Address : ${
-								employment.address.street
-									? employment.address.street
-									: ''
+								employed ? data.employment.address.street : ''
 							}-${
-								employment.address.city
-									? employment.address.city
-									: 'None'
+								employed ? data.employment.address.city : 'None'
 							}-${
-								employment.address.district
-									? employment.address.district
+								employed
+									? data.employment.address.district
 									: '\n\n'
 							}`
 						},
 						{
 							text: `\n${
-								employment.designation
-									? employment.designation
-									: 'None'
+								employed ? data.employment.designation : 'None'
 							}`
 						},
 						{
 							text: `\n${
-								employment.salaryScale
-									? employment.salaryScale
+								employed
+									? data.employment.salaryScale
 									: '..................................................................'
 							}`
 						},
 						{
 							text: `\n${
-								employment.salary ? employment.salary : 'None'
-							} ${employment.salary ? 'LKR' : ''}`
+								employed ? data.employment.salary : 'None'
+							} ${employed ? 'LKR' : ''}`
 						},
 						{
 							text: `\n${
-								employment.dateOfEmployment
-									? employment.dateOfEmployment
+								employed
+									? data.employment.dateOfEmployment
 									: 'None'
 							}`
 						}
@@ -335,32 +328,30 @@ const applicationDocDefinition = data => {
 						{ text: `\n${married ? 'Yes' : 'No'}` },
 						{
 							text: `\n${
-								spouse.dateOfMarriage
-									? spouse.dateOfMarriage
-									: 'None'
+								married ? data.spouse.dateOfMarriage : 'None'
 							}`
 						},
-						{ text: `\n${spouse.name ? spouse.name : 'None'}` },
+						{
+							text: `\n${married ? data.spouse.name : 'None'}`
+						},
 						{
 							text: `\n\n${
-								spouse.employment.establishment
-									? spouse.employment.establishment
+								married
+									? data.spouse.employment.establishment
 									: 'None'
 							}`
 						},
 						{
 							text: `\n${
-								spouse.employment.designation
-									? spouse.employment.designation
+								married
+									? data.spouse.employment.designation
 									: 'None'
 							}`
 						},
 						{
 							text: `\n\n${
-								spouse.employment.salary
-									? spouse.employment.salary
-									: 'None'
-							} ${spouse.employment.salary ? 'LKR' : ''}`
+								married ? data.spouse.employment.salary : 'None'
+							} ${married ? 'LKR' : ''}`
 						}
 						//])
 					]
@@ -519,33 +510,41 @@ const applicationDocDefinition = data => {
 					guard,
 					[
 						//...guardian.map(attr => [
-						{ text: `\n${guardian.name ? guardian.name : 'None'}` },
 						{
 							text: `\n${
-								guardian.address ? guardian.address : 'None'
+								isLivingWithGuardian ? guardian.name : 'None'
 							}`
 						},
-						{ text: `\n${guardian.post ? guardian.post : 'None'}` },
+						{
+							text: `\n${
+								isLivingWithGuardian ? guardian.address : 'None'
+							}`
+						},
+						{
+							text: `\n${
+								isLivingWithGuardian ? guardian.post : 'None'
+							}`
+						},
 						{
 							text: `\n\n\n\n${
-								guardian.annualIncome.salary
+								isLivingWithGuardian
 									? guardian.annualIncome.salary
 									: 'None'
-							} ${guardian.annualIncome.salary ? 'LKR' : ''}`
+							} ${isLivingWithGuardian ? 'LKR' : ''}`
 						},
 						{
 							text: `\n\n${
-								guardian.annualIncome.houseAndPropertyOrTemple
+								isLivingWithGuardian
 									? guardian.annualIncome
 											.houseAndPropertyOrTemple
 									: 'None'
-							} ${
-								guardian.annualIncome.houseAndPropertyOrTemple
-									? 'LKR'
-									: ''
-							}`
+							} ${isLivingWithGuardian ? 'LKR' : ''}`
 						},
-						{ text: `\n${guardian.age ? guardian.age : 'None'}` }
+						{
+							text: `\n${
+								isLivingWithGuardian ? guardian.age : 'None'
+							}`
+						}
 						//	])
 					]
 				]
