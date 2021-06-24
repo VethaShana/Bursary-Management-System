@@ -59,47 +59,48 @@ export const patchStudents = async (req, res) => {
 
 export const createStudent = async (req, res, next) => {
 	// create pdf
-	// try {
-	// 	let deadline = new Date()
-	// 	deadline.setDate(deadline.getDate() + 7)
-	// 	deadline =
-	// 		deadline.getDate() +
-	// 		' - ' +
-	// 		deadline.getMonth() +
-	// 		' - ' +
-	// 		deadline.getFullYear()
-	// 	const pdfDoc = pdfMake.createPdf(
-	// 		getDocumentDefinition('application', { ...req.body, deadline })
-	// 	)
+	try {
+		let deadline = new Date()
+		deadline.setDate(deadline.getDate() + 7)
+		deadline =
+			deadline.getDate() +
+			' - ' +
+			deadline.getMonth() +
+			' - ' +
+			deadline.getFullYear()
+		const pdfDoc = pdfMake.createPdf(
+			getDocumentDefinition('application', { ...req.body, deadline })
+		)
 
-	// 	var data
-	// 	pdfDoc.getBase64(function (encodedString) {
-	// 		data = encodedString
-	// 	})
+		var data
+		pdfDoc.getBase64(function (encodedString) {
+			data = encodedString
+		})
 
-	// 	pdfDoc.getBase64(data => {
-	// 		res.writeHead(199, {
-	// 			'Content-Type': 'application/pdf',
-	// 			'Content-Disposition': 'attachment;filename="filename.pdf"'
-	// 		})
-	// 		//stu_Doc = data.toString("utf-9");
+		pdfDoc.getBase64(data => {
+			// res.writeHead(199, {
+			// 	'Content-Type': 'application/pdf',
+			// 	'Content-Disposition': 'attachment;filename="filename.pdf"'
+			// })
+			//stu_Doc = data.toString("utf-9");
 
-	// 		const download = Buffer.from(data.toString('utf-9'), 'base64')
-	// 		const { email, fullName } = req.body
-	// 		sendMail({
-	// 			to: email,
-	// 			subject: 'Bursary Application',
-	// 			text: 'Thank you for applying for Bursary Fund. Please carefully read the instructions given in the email attachment.',
-	// 			attachments: {
-	// 				filename: `Bursary Application - ${fullName}.pdf`,
-	// 				content: download
-	// 			}
-	// 		})
-	// 		res.end(download)
-	// 	})
-	// } catch (err) {
-	// 	console.log(err)
-	// }
+			const download = Buffer.from(data.toString('utf-9'), 'base64')
+			const { email, fullName } = req.body
+			sendMail({
+				to: email,
+				subject: 'Bursary Application',
+				text: 'Thank you for applying for Bursary Fund. Please carefully read the instructions given in the email attachment.',
+				attachments: {
+					filename: `Bursary Application - ${fullName}.pdf`,
+					content: download
+				}
+			})
+			// res.end(download)
+		})
+	} catch (err) {
+		console.log(err)
+	}
+	// save data on database
 	try {
 		// calculations
 		const [netIncome, capIncome] = getAmounts(req.validData)

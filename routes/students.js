@@ -9,7 +9,7 @@ const router = express.Router()
 router.post(
 	'/',
 	auth(ROLES.STUDENT),
-	//validate({ schema: studentValidationSchema, path: 'body' }),
+	validate({ schema: studentValidationSchema, path: 'body' }),
 	StudentsController.createStudent
 )
 router.get(

@@ -394,20 +394,21 @@ const applicationDocDefinition = data => {
 						{ text: `\n${father.age ? father.age : 'None'}` },
 						{
 							text: `\n\n\n${
-								father.employment.occupation
+								father.living && father.employment.occupation
 									? father.employment.occupation
 									: 'None'
 							}`
 						},
 						{
 							text: `\n\n${
-								father.employment.address
+								father.living && father.employment.address
 									? father.employment.address
 									: 'None'
 							}`
 						},
 						{
 							text: `\n\n\n${
+								father.living &&
 								father.annualIncome.occupationOrPension
 									? father.annualIncome.occupationOrPension
 									: 'None'
@@ -462,14 +463,14 @@ const applicationDocDefinition = data => {
 						{ text: `\n${mother.age ? mother.age : 'None'}` },
 						{
 							text: `\n\n\n${
-								mother.employment.occupation
+								mother.living && mother.employment.occupation
 									? mother.employment.occupation
 									: 'None'
 							}`
 						},
 						{
 							text: `\n\n${
-								mother.employment.address
+								mother.living && mother.employment.address
 									? mother.employment.address
 									: 'None'
 							}`
