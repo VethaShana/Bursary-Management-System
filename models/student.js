@@ -54,17 +54,27 @@ const studentSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-	street: {
-		type: String
-		//required: true
-	},
-	city: {
-		type: String
-		//required: true
-	},
-	district: {
-		type: String
-		//required: true
+	address: {
+		distance: { type: Number },
+		street: {
+			type: String
+			//required: true
+		},
+		city: {
+			type: String
+			//required: true
+		},
+		district: {
+			type: String
+			//required: true
+		},
+		GSDivision: {
+			type: String
+			// required: true
+		},
+		DSDivision: {
+			type: String
+		}
 	},
 	phone: {
 		type: String,
@@ -103,6 +113,7 @@ const studentSchema = mongoose.Schema({
 		{
 			name: String,
 			dob: Date,
+			age: Number,
 			schoolOrInstitute: String
 		}
 	],
@@ -113,7 +124,7 @@ const studentSchema = mongoose.Schema({
 			institute: String,
 			course: String,
 			academicYear: String,
-			isBursaryOrMahapolaRecipient: String
+			isBursaryOrMahapolaRecipient: Boolean
 		}
 	],
 	incomeFromEstateFieldsLands: [
@@ -150,21 +161,30 @@ const studentSchema = mongoose.Schema({
 		},
 		designation: String,
 		salary: Number,
-		dateOfEmployment: Date,
-		salaryScale: Number
+		dateOfEmployment: Date
+		//salaryScale: Number
 	},
 
 	married: {
 		type: Boolean,
 		required: true
 	},
+
 	spouse: {
-		name: String,
-		dateOfMarriage: Date,
+		name: { type: String },
+		dateOfMarriage: { type: Date },
 		employment: {
-			establishment: String,
-			designation: String,
-			salary: Number
+			establishment: {
+				type: String
+			},
+			designation: {
+				type: String
+			},
+			salary: {
+				type: Number
+			}
+
+			//dateOfEmployment: { type: Date,  }
 		}
 	},
 

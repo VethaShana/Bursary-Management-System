@@ -11,21 +11,21 @@ import marriage from './layout/marriage.js'
 import footer from './layout/Footer.js'
 import footer2 from './layout/Footer2.js'
 import guard from './layout/guard.js'
+import { boolean } from 'yup'
 
 const applicationDocDefinition = data => {
 	const {
 		fullName,
 		title,
 		married,
-		spouse,
-		siblingsAtUniversity = [],
-		siblingsUnder19 = [],
+		//siblingsAtUniversity = [],
+		//siblingsUnder19 = [],
 		incomeFromEstateFieldsLands = [],
 		incomeFromHouses = [],
 		employed,
-		employment,
 		father,
 		mother,
+		isLivingWithGuardian,
 		guardian,
 		deadline
 	} = data
@@ -39,16 +39,25 @@ const applicationDocDefinition = data => {
 				body: [
 					theads.map(({ text }) => text),
 					...data.map(x =>
-						Object.values(x).map(y => (y ? y : 'None'))
+						Object.values(x).map((y, idx) => {
+							if (typeof y === 'boolean') {
+								console.log(typeof y === 'boolean', y)
+								return y ? 'Yes' : 'No'
+							} else return y ? y : 'None'
+						})
 					)
 				]
 			}
-		}
-		return {
-			headerRows: 1,
-			// widths: theads.map(({width = 'auto'}) => width),
-			widths: theads.map(thead => thead.width),
-			body: [theads.map(({ text }) => text), theads.map(thead => 'None')]
+		} else {
+			return {
+				headerRows: 1,
+				// widths: theads.map(({width = 'auto'}) => width),
+				widths: theads.map(thead => 'auto'),
+				body: [
+					theads.map(({ text }) => text),
+					theads.map(thead => 'None')
+				]
+			}
 		}
 	}
 
@@ -105,25 +114,33 @@ const applicationDocDefinition = data => {
 					...stuD,
 					[
 						{ text: '\n\n' },
-						{ text: `\n${title}.${fullName}` },
+						{ text: `\n${title}${fullName}` },
 						{
-							text: `\n${data.street}, ${data.city}, ${data.district} `
+							text: `\n${data.address.street}, ${data.address.city}, ${data.address.district} `
 						},
 						{ text: '\n' },
 						{
 							text: `\n${
-								data.GSDivision ? data.GSDivision : 'None'
+								data.address.GSDivision
+									? data.address.GSDivision
+									: 'None'
 							}`
 						},
 						{
 							text: `\n${
-								data.DSDivision ? data.DSDivision : 'None'
+								data.address.DSDivision
+									? data.address.DSDivision
+									: 'None'
 							}`
 						},
-						{ text: `\n${data.district}` },
+						{ text: `\n${data.address.district}` },
 						{ text: `\n${data.phone}` },
-						{ text: `\n\n${data.alDistrict}` },
-						{ text: `\n${data.indexNo ? data.indexNo : 'None'}` },
+						{ text: `\n\n${data.ALDistrict}` },
+						{
+							text: `\n${
+								data.ALIndexNo ? data.ALIndexNo : 'None'
+							}`
+						},
 						{ text: `\n${data.zScore}` },
 						{ text: `\n\n${data.course}` },
 						{ text: `\n${data.nic}` }
@@ -147,15 +164,15 @@ const applicationDocDefinition = data => {
 				table: table(
 					[
 						{ text: 'Name' },
-						{ text: 'Date of Birth', width: 'auto' },
-						{ text: 'Age', width: 'auto' },
-						{ text: 'School/Institute', width: 100 }
+						{ text: 'Date of Birth' },
+						{ text: 'Age' },
+						{ text: 'School/Institute' }
 					],
-					siblingsUnder19
+					data.siblingsUnder19
 				)
 			},
 			{
-				text: `\nB. Distance from the student\'s permanent residence to the University of Jaffna(k.m) : ${data.Distance} km`,
+				text: `\nB. Distance from the student\'s permanent residence to the University of Jaffna(k.m) : ${data.address.distance} km`,
 				pageBreak: 'after'
 			},
 			{
@@ -176,10 +193,10 @@ const applicationDocDefinition = data => {
 						},
 						{ text: 'Course', width: 'auto' },
 						{ text: 'Acadamic Year', width: 'auto' },
-						{ text: 'Bursary/Mahapola or not', width: 100 }
+						{ text: 'Bursary/Mahapola or not', width: 'auto' }
 					],
 
-					siblingsAtUniversity
+					data.siblingsAtUniversity
 				)
 			},
 			{
@@ -223,7 +240,7 @@ const applicationDocDefinition = data => {
 						{ text: 'Annual income', width: 'auto' },
 						{
 							text: 'tenant/lease',
-							width: 100
+							width: 'auto'
 						}
 					],
 
@@ -278,46 +295,40 @@ const applicationDocDefinition = data => {
 						{ text: `\n${employed ? 'Yes' : 'No'}` },
 						{
 							text: `\n\n${
-								employment.establishment
-									? employment.establishment
+								employed
+									? data.employment.establishment
 									: 'None'
 							} , Address : ${
-								employment.address.street
-									? employment.address.street
-									: ''
+								employed ? data.employment.address.street : ''
 							}-${
-								employment.address.city
-									? employment.address.city
-									: 'None'
+								employed ? data.employment.address.city : 'None'
 							}-${
-								employment.address.district
-									? employment.address.district
+								employed
+									? data.employment.address.district
 									: '\n\n'
 							}`
 						},
 						{
 							text: `\n${
-								employment.designation
-									? employment.designation
-									: 'None'
+								employed ? data.employment.designation : 'None'
 							}`
 						},
 						{
 							text: `\n${
-								employment.salaryScale
-									? employment.salaryScale
+								employed
+									? data.employment.salaryScale
 									: '..................................................................'
 							}`
 						},
 						{
 							text: `\n${
-								employment.salary ? employment.salary : 'None'
-							} ${employment.salary ? 'LKR' : ''}`
+								employed ? data.employment.salary : 'None'
+							} ${employed ? 'LKR' : ''}`
 						},
 						{
 							text: `\n${
-								employment.dateOfEmployment
-									? employment.dateOfEmployment
+								employed
+									? data.employment.dateOfEmployment
 									: 'None'
 							}`
 						}
@@ -335,32 +346,30 @@ const applicationDocDefinition = data => {
 						{ text: `\n${married ? 'Yes' : 'No'}` },
 						{
 							text: `\n${
-								spouse.dateOfMarriage
-									? spouse.dateOfMarriage
-									: 'None'
+								married ? data.spouse.dateOfMarriage : 'None'
 							}`
 						},
-						{ text: `\n${spouse.name ? spouse.name : 'None'}` },
+						{
+							text: `\n${married ? data.spouse.name : 'None'}`
+						},
 						{
 							text: `\n\n${
-								spouse.employment.establishment
-									? spouse.employment.establishment
+								married
+									? data.spouse.employment.establishment
 									: 'None'
 							}`
 						},
 						{
 							text: `\n${
-								spouse.employment.designation
-									? spouse.employment.designation
+								married
+									? data.spouse.employment.designation
 									: 'None'
 							}`
 						},
 						{
 							text: `\n\n${
-								spouse.employment.salary
-									? spouse.employment.salary
-									: 'None'
-							} ${spouse.employment.salary ? 'LKR' : ''}`
+								married ? data.spouse.employment.salary : 'None'
+							} ${married ? 'LKR' : ''}`
 						}
 						//])
 					]
@@ -519,33 +528,41 @@ const applicationDocDefinition = data => {
 					guard,
 					[
 						//...guardian.map(attr => [
-						{ text: `\n${guardian.name ? guardian.name : 'None'}` },
 						{
 							text: `\n${
-								guardian.address ? guardian.address : 'None'
+								isLivingWithGuardian ? guardian.name : 'None'
 							}`
 						},
-						{ text: `\n${guardian.post ? guardian.post : 'None'}` },
+						{
+							text: `\n${
+								isLivingWithGuardian ? guardian.address : 'None'
+							}`
+						},
+						{
+							text: `\n${
+								isLivingWithGuardian ? guardian.post : 'None'
+							}`
+						},
 						{
 							text: `\n\n\n\n${
-								guardian.annualIncome.salary
+								isLivingWithGuardian
 									? guardian.annualIncome.salary
 									: 'None'
-							} ${guardian.annualIncome.salary ? 'LKR' : ''}`
+							} ${isLivingWithGuardian ? 'LKR' : ''}`
 						},
 						{
 							text: `\n\n${
-								guardian.annualIncome.houseAndPropertyOrTemple
+								isLivingWithGuardian
 									? guardian.annualIncome
 											.houseAndPropertyOrTemple
 									: 'None'
-							} ${
-								guardian.annualIncome.houseAndPropertyOrTemple
-									? 'LKR'
-									: ''
-							}`
+							} ${isLivingWithGuardian ? 'LKR' : ''}`
 						},
-						{ text: `\n${guardian.age ? guardian.age : 'None'}` }
+						{
+							text: `\n${
+								isLivingWithGuardian ? guardian.age : 'None'
+							}`
+						}
 						//	])
 					]
 				]
