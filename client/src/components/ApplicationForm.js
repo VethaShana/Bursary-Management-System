@@ -606,11 +606,11 @@ function ApplicationForm({ setApplication, onClick }) {
 			<Instruction />
 
 			<Formik
-				// initialValues={
-				// 	JSON.parse(localStorage.getItem('application')) ||
-				// 	initialValues
-				// }
-				initialValues={initialValues}
+				initialValues={
+					JSON.parse(localStorage.getItem('application')) ||
+					initialValues
+				}
+				// initialValues={initialValues}
 				validationSchema={validationSchema}
 				onSubmit={(values, { setSubmitting }) => {
 					console.log(validationSchema.cast(values))
@@ -765,7 +765,7 @@ function ApplicationForm({ setApplication, onClick }) {
 												component={TextField}
 												type="text"
 												name="ALDistrict"
-												label="A/L Administrative District"
+												label="A / L Administrative District"
 												select
 												InputLabelProps={{
 													shrink: true

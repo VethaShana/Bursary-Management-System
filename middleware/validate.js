@@ -4,7 +4,6 @@ export default ({ schema, path = 'query' }) =>
 		try {
 			const validData = await schema.validate(req[path])
 			req.validData = validData
-			console.log('im here')
 			return next()
 		} catch (error) {
 			return res.status(400).json({ error })

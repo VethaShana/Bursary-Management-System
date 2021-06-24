@@ -27,6 +27,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded'
 import Dialog from '../Dialog'
+import { Link, useRouteMatch } from 'react-router-dom'
 import Fuse from 'fuse.js'
 
 import { connect, useDispatch } from 'react-redux'
@@ -361,6 +362,17 @@ ContextMenu.propTypes = {
 	// numSelected: PropTypes.number.isRequired,
 }
 
+const useRowStyles = makeStyles({
+	// root: {
+	// 	'& > *': {
+	// 		borderBottom: 'unset'
+	// 	}
+	// },
+	link: {
+		textDecoration: 'none'
+	}
+})
+
 const Row = props => {
 	const {
 		row,
@@ -371,6 +383,8 @@ const Row = props => {
 		approveDialogRef
 	} = props
 	const [open, setOpen] = React.useState(false)
+	const classes = useRowStyles()
+	const { path, url } = useRouteMatch()
 
 	return (
 		<TableRow
@@ -381,6 +395,7 @@ const Row = props => {
 			tabIndex={-1}
 			key={row._id} // unique key
 			selected={isItemSelected}
+			className={classes.root}
 		>
 			<TableCell padding="checkbox">
 				<Checkbox
@@ -402,15 +417,50 @@ const Row = props => {
 					{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
 				</IconButton>
 			</TableCell>
-			<TableCell component="th" id={labelId} scope="row" padding="none">
+			<TableCell
+				component={Link}
+				to={`${path}/${row._id}`}
+				id={labelId}
+				scope="row"
+				padding="none"
+				className={classes.link}
+			>
 				{row.regNo}
 			</TableCell>
-			<TableCell align="left">{row.nic}</TableCell>
+			<TableCell
+				align="left"
+				className={classes.link}
+				component={Link}
+				to={`${path}/${row._id}`}
+			>
+				{row.nic}
+			</TableCell>
 			<Tooltip title={row.fullName}>
-				<TableCell align="left">{row.nameWithInitials}</TableCell>
+				<TableCell
+					align="left"
+					className={classes.link}
+					component={Link}
+					to={`${path}/${row._id}`}
+				>
+					{row.nameWithInitials}
+				</TableCell>
 			</Tooltip>
-			<TableCell align="left">{row.course}</TableCell>
-			<TableCell align="right">{row.netIncome}</TableCell>
+			<TableCell
+				align="left"
+				className={classes.link}
+				component={Link}
+				to={`${path}/${row._id}`}
+			>
+				{row.course}
+			</TableCell>
+			<TableCell
+				align="right"
+				className={classes.link}
+				component={Link}
+				to={`${path}/${row._id}`}
+			>
+				{row.netIncome}
+			</TableCell>
 			{numSelected > 0 ? null : (
 				<TableCell align="right">
 					<ContextMenu
@@ -447,7 +497,7 @@ function Table(props) {
 	const [orderBy, setOrderBy] = React.useState('grossIncome')
 	const [selected, setSelected] = React.useState([])
 	const [page, setPage] = React.useState(0)
-	const [rowsPerPage, setRowsPerPage] = React.useState(5)
+	const [rowsPerPage, setRowsPerPage] = React.useState(10)
 	const [query, setQuery] = React.useState('')
 	const approveDialogRef = useRef(null)
 
@@ -574,7 +624,7 @@ function Table(props) {
 				</MuiTable>
 			</TableContainer>
 			<TablePagination
-				rowsPerPageOptions={[5, 10, 25]}
+				rowsPerPageOptions={[10, 30, 50]}
 				component="div"
 				count={rows.length}
 				rowsPerPage={rowsPerPage}
@@ -587,7 +637,16 @@ function Table(props) {
 	)
 }
 
-const mapStateToProps = state => ({
-	data: state.students.data.filter(x => x.isApproved === true)
-})
+const mapStateToProps = state =>
+	state.user.data.role === 'admin'
+		? {
+				data: state.students.data.filter(x => x.isApproved === true)
+		  }
+		: {
+				data: state.students.data.filter(
+					x =>
+						x.isApproved === true &&
+						x.faculty === state.user.data.faculty
+				)
+		  }
 export default connect(mapStateToProps)(Table)

@@ -5,7 +5,8 @@ import {
 	SUBMIT_APPLICATION,
 	SUBMIT_APPLICATION_SUCCESS,
 	SUBMIT_APPLICATION_FAILURE,
-	SET_APPLICATION_STATUS
+	SET_APPLICATION_STATUS,
+	SET_APPLICATION_LOADING
 } from './types'
 
 export const setApplication = data => {
@@ -17,16 +18,27 @@ export const setApplication = data => {
 
 export const getApplicationStatus = () => async (dispatch, getState) => {
 	const userId = getState().user.data._id
+	dispatch({
+		type: SET_APPLICATION_LOADING,
+		payload: true
+	})
 	return await axios
 		.get(`/students/${userId}`)
 		.then(({ data }) => {
-			setApplication(data)
+			dispatch({
+				type: SET_APPLICATION,
+				payload: data
+			})
 			dispatch({
 				type: SET_APPLICATION_STATUS,
 				payload: {
 					isSubmitted: true,
 					isApproved: data.isApproved
 				}
+			})
+			dispatch({
+				type: SET_APPLICATION_LOADING,
+				payload: false
 			})
 		})
 		.catch(error => {
@@ -37,23 +49,40 @@ export const getApplicationStatus = () => async (dispatch, getState) => {
 					isApproved: false
 				}
 			})
+			dispatch({
+				type: SET_APPLICATION_LOADING,
+				payload: false
+			})
 			console.log(error)
 		})
 }
 
 export const submitApplication = () => async (dispatch, getState) => {
 	dispatch({
-		type: SUBMIT_APPLICATION
+		type: SET_APPLICATION_LOADING,
+		payload: true
 	})
 	const data = getState().application.data
 	return await axios
 		.post('/students', data)
-		.then(() => {
+		.then(({ data }) => {
+			dispatch({
+				type: SET_APPLICATION,
+				payload: data
+			})
 			dispatch({
 				type: SUBMIT_APPLICATION_SUCCESS
 			})
+			dispatch({
+				type: SET_APPLICATION_LOADING,
+				payload: false
+			})
 		})
 		.catch(err => {
+			dispatch({
+				type: SET_APPLICATION_LOADING,
+				payload: false
+			})
 			dispatch({
 				type: SUBMIT_APPLICATION_FAILURE,
 				payload: {

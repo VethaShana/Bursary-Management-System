@@ -15,7 +15,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
-import { approveStudents } from '../../../../actions/students'
+import { deleteStudents } from '../../../../actions/students'
 import { connect, useSelector } from 'react-redux'
 
 const useStyles = makeStyles(theme => ({
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const ApproveStudent = forwardRef((props, ref) => {
-	const { approveStudents } = props
+	const { deleteStudents } = props
 	const [open, setOpen] = React.useState(false)
 	const [data, setData] = React.useState([])
 	const students = useSelector(state =>
@@ -103,7 +103,7 @@ const ApproveStudent = forwardRef((props, ref) => {
 				</Button>
 				<Button
 					onClick={() => {
-						approveStudents(data)
+						deleteStudents(data)
 						handleClose()
 					}}
 					color="secondary"
@@ -117,7 +117,7 @@ const ApproveStudent = forwardRef((props, ref) => {
 	)
 })
 
-const mapDispatchToProps = { approveStudents }
+const mapDispatchToProps = { deleteStudents }
 
 export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
 	ApproveStudent

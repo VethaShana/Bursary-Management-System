@@ -80,7 +80,7 @@ const validationSchema = yup.object({
 	description: yup
 		.string()
 		.min(3, 'Description must be atleast 3 characters')
-		.required('Description is required'),
+		.notRequired(),
 	noOfInstallments: yup
 		.number()
 		.min(1, 'Minimimum No. of Installments is one')
@@ -131,9 +131,7 @@ const Installment = forwardRef((props, ref) => {
 							Create Installment
 						</DialogTitle>
 						<DialogContent className={classes.dialogContent}>
-							{/* <DialogContentText>
-									Issue Installments for students.
-								</DialogContentText> */}
+							<DialogContentText></DialogContentText>
 							<Form>
 								<Grid container spacing={2}>
 									<Grid item xs={12} sm={12}>

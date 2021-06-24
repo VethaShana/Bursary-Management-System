@@ -27,14 +27,18 @@ const userSchema = mongoose.Schema({
 		trim: true
 	},
 
+	faculty: {
+		type: String,
+		trim: true
+	},
+
 	password: {
 		type: String,
 		required: true
 	},
 
 	isVerified: {
-		type: Boolean,
-		default: false
+		type: Boolean
 	},
 
 	isApproved: {
@@ -69,7 +73,17 @@ userSchema.methods.createToken = async function () {
 				email: this.email,
 				role: this.role
 			}
-		else
+		else if (this.role === 'dean') {
+			user = {
+				_id: this._id,
+				email: this.email,
+				faculty: this.faculty,
+				firstName: this.firstName,
+				lastName: this.lastName,
+				role: this.role,
+				isApproved: this.isApproved
+			}
+		} else
 			user = {
 				_id: this._id,
 				email: this.email,

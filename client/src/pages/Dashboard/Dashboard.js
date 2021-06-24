@@ -18,11 +18,15 @@ import { MainListItems, SecondaryListItems } from './components/listItems'
 import Copyright from '../../components/Copyright'
 import { useRouteMatch, Switch, Route, Redirect } from 'react-router-dom'
 import Students from './views/Students'
+import Student from './views/singles/Student'
 import Applications from './views/Applications'
+import Application from './views/singles/Application'
+import EditApplication from './views/edit/Application'
 import Installments from './views/Installments'
+import Installment from './views/singles/Installment'
 import Users from './views/Users'
 import Settings from './views/Settings'
-import { Paper, Grid } from '@material-ui/core'
+import { Paper, Grid, Avatar } from '@material-ui/core'
 import Card from './components/Card'
 import Chart from './components/Chart'
 import Title from './components/Title'
@@ -33,12 +37,15 @@ import Menu from './components/Menu'
 import { connect } from 'react-redux'
 import { getStudents } from '../../actions/students'
 import { getInstallments } from '../../actions/installments'
+import { getUsers } from '../../actions/users'
+import { getInitials } from '../../utils/helpers'
+import ProtectedContent from './components/ProtectedContent'
 
 const mapStateToProps = state => ({
 	user: state.user.data
 })
 
-const mapDispatchToProps = { getStudents, getInstallments }
+const mapDispatchToProps = { getStudents, getInstallments, getUsers }
 
 const drawerWidth = 240
 
@@ -115,10 +122,19 @@ const useStyles = makeStyles(theme => ({
 	},
 	fixedHeight: {
 		height: 240
+	},
+	avatar: {
+		width: theme.spacing(3.5),
+		height: theme.spacing(3.5),
+		color: theme.palette.getContrastText(theme.palette.secondary.main),
+		backgroundColor: theme.palette.secondary.main,
+		fontWeight: theme.typography.fontWeightMedium,
+		fontSize: theme.typography.fontSize
 	}
 }))
 
-function Dashboard({ user, getStudents, getInstallments }) {
+function Dashboard(props) {
+	const { user, getStudents, getInstallments, getUsers } = props
 	const classes = useStyles()
 	const menuRef = useRef(null)
 	const [open, setOpen] = React.useState(true)
@@ -134,6 +150,7 @@ function Dashboard({ user, getStudents, getInstallments }) {
 	useEffect(() => {
 		getStudents()
 		getInstallments()
+		getUsers()
 	}, [])
 
 	return (
@@ -176,7 +193,13 @@ function Dashboard({ user, getStudents, getInstallments }) {
 						color="inherit"
 						onClick={e => menuRef.current.handleClick(e)}
 					>
-						<AccountCircleIcon fontSize="default" />
+						<Avatar
+							className={classes.avatar}
+							alt={`${user.firstName} ${user.lastName} avatar`}
+							src={user.img}
+						>
+							{getInitials(`${user.firstName} ${user.lastName}`)}
+						</Avatar>
 					</IconButton>
 					<Menu ref={menuRef} />
 				</Toolbar>
@@ -200,10 +223,12 @@ function Dashboard({ user, getStudents, getInstallments }) {
 				<List dense>
 					<MainListItems />
 				</List>
-				<Divider />
-				<List dense>
-					<SecondaryListItems />
-				</List>
+				<ProtectedContent role="admin">
+					<Divider />
+					<List dense>
+						<SecondaryListItems />
+					</List>
+				</ProtectedContent>
 			</Drawer>
 			<main className={classes.content}>
 				<div className={classes.appBarSpacer} />
@@ -231,16 +256,35 @@ function Dashboard({ user, getStudents, getInstallments }) {
 								</Grid>
 								{/* Pending Applications */}
 								<Grid item xs={12}>
-									<Paper className={classes.paper}>
-										{/* some data */}
-									</Paper>
+									{/* <Paper className={classes.paper}>
+									</Paper> */}
 								</Grid>
 							</Grid>
 						</Route>
-						<Route path={`${path}/students`} component={Students} />
+						<Route
+							exact
+							path={`${path}/students`}
+							component={Students}
+						/>
+						<Route
+							path={`${path}/students/:id`}
+							component={Student}
+						/>
+						<Route
+							path={`${path}/applications/:id/edit`}
+							component={EditApplication}
+						/>
+						<Route
+							path={`${path}/applications/:id`}
+							component={Application}
+						/>
 						<Route
 							path={`${path}/applications`}
 							component={Applications}
+						/>
+						<Route
+							path={`${path}/installments/:id`}
+							component={Installment}
 						/>
 						<Route
 							path={`${path}/installments`}

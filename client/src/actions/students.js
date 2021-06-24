@@ -53,6 +53,23 @@ export const deleteStudent = id => async (dispatch, getState) => {
 		})
 }
 
+export const deleteStudents = ids => async (dispatch, getState) => {
+	await axios
+		.delete(`/students/${ids}`)
+		.then(res => {
+			dispatch({
+				type: REMOVE_STUDENT,
+				payload: ids
+			})
+		})
+		.catch(err => {
+			dispatch({
+				type: SET_STUDENTS_ERRORS,
+				payload: err.response.data.error
+			})
+		})
+}
+
 export const approveStudents = ids => async (dispatch, getState) => {
 	await axios
 		.patch('/students', { ids, data: { isApproved: true } })

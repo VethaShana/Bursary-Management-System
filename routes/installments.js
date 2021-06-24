@@ -5,7 +5,11 @@ import ROLES from '../utils/roles.js'
 
 const router = express.Router()
 
-router.get('/', auth(ROLES.ADMIN), InstallmentsController.getInstallments)
+router.get(
+	'/',
+	auth(ROLES.ADMIN, ROLES.DEAN),
+	InstallmentsController.getInstallments
+)
 router.post('/', auth(ROLES.ADMIN), InstallmentsController.createInstallments)
 
 export default router

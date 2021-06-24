@@ -51,34 +51,33 @@ export const registerStudent =
 			})
 	}
 
-export const registerUser =
-	(data, history, formikHelpers) => async (dispatch, getState) => {
-		dispatch({
-			type: REGISTER_USER
+export const registerUser = data => async (dispatch, getState) => {
+	dispatch({
+		type: REGISTER_USER
+	})
+	return await axios
+		.post('/auth/register?role=dean', data)
+		.then(({ data: { token } }) => {
+			localStorage.setItem('token', token)
+			const decoded = jwtDecode(token)
+			dispatch({
+				type: REGISTER_USER_SUCCESS,
+				payload: decoded.user
+			})
 		})
-		return await axios
-			.post('/auth/register?role=dean', data)
-			.then(({ data: { token } }) => {
-				localStorage.setItem('token', token)
-				const decoded = jwtDecode(token)
-				dispatch({
-					type: REGISTER_USER_SUCCESS,
-					payload: decoded.user
-				})
+		.catch(err => {
+			dispatch({
+				type: REGISTER_USER_FAILURE,
+				payload: {
+					status: err.response.status,
+					msg: err.response.data.error
+				}
 			})
-			.catch(err => {
-				dispatch({
-					type: REGISTER_USER_FAILURE,
-					payload: {
-						status: err.response.status,
-						msg: err.response.data.error
-					}
-				})
-				setTimeout(() => {
-					dispatch({ type: CLEAR_USER_ERROR })
-				}, 6000)
-			})
-	}
+			setTimeout(() => {
+				dispatch({ type: CLEAR_USER_ERROR })
+			}, 6000)
+		})
+}
 
 export const loginUser =
 	(data, history, formikHelpers) => async (dispatch, getState) => {

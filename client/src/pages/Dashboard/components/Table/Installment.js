@@ -26,6 +26,7 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded'
+import { Link, useRouteMatch } from 'react-router-dom'
 import Fuse from 'fuse.js'
 import { formatDistance, parseISO } from 'date-fns'
 import moment from 'moment'
@@ -247,9 +248,22 @@ ContextMenu.propTypes = {
 	_id: PropTypes.string.isRequired
 }
 
+const useRowStyles = makeStyles({
+	root: {
+		'& > *': {
+			borderBottom: 'unset'
+		}
+	},
+	link: {
+		textDecoration: 'none'
+	}
+})
+
 const Row = props => {
 	const { row, isItemSelected, labelId, handleClick, numSelected } = props
 	const [open, setOpen] = React.useState(false)
+	const classes = useRowStyles()
+	const { path, url } = useRouteMatch()
 
 	return (
 		<React.Fragment>
@@ -261,33 +275,74 @@ const Row = props => {
 				tabIndex={-1}
 				key={row._id} // unique key
 				selected={isItemSelected}
+				className={classes.root}
 			>
 				<TableCell>
-					<IconButton
-						aria-label="expand row"
-						size="small"
-						onClick={e => {
-							e.preventDefault()
-							setOpen(!open)
-						}}
-					>
-						{open ? (
-							<KeyboardArrowUpIcon />
-						) : (
-							<KeyboardArrowDownIcon />
-						)}
-					</IconButton>
+					{row.description && (
+						<IconButton
+							aria-label="expand row"
+							size="small"
+							onClick={e => {
+								e.preventDefault()
+								setOpen(!open)
+							}}
+						>
+							{open ? (
+								<KeyboardArrowUpIcon />
+							) : (
+								<KeyboardArrowDownIcon />
+							)}
+						</IconButton>
+					)}
 				</TableCell>
-				<TableCell align="left">
+				<TableCell
+					align="left"
+					component={Link}
+					to={`${path}/${row._id}`}
+					className={classes.link}
+				>
 					{moment(row.date).format('DD-MM-YYYY')}
 				</TableCell>
-				<TableCell align="left">{row.academicYear}</TableCell>
-				<TableCell align="left">{row.faculty}</TableCell>
-				<TableCell align="left">{row.course}</TableCell>
-				<TableCell align="left">
+				<TableCell
+					align="left"
+					component={Link}
+					to={`${path}/${row._id}`}
+					className={classes.link}
+				>
+					{row.academicYear}
+				</TableCell>
+				<TableCell
+					align="left"
+					component={Link}
+					to={`${path}/${row._id}`}
+					className={classes.link}
+				>
+					{row.faculty}
+				</TableCell>
+				<TableCell
+					align="left"
+					component={Link}
+					to={`${path}/${row._id}`}
+					className={classes.link}
+				>
+					{row.course}
+				</TableCell>
+				<TableCell
+					align="left"
+					component={Link}
+					to={`${path}/${row._id}`}
+					className={classes.link}
+				>
 					{moment(row.createdAt).fromNow()}
 				</TableCell>
-				<TableCell align="right">{row.noOfInstallments}</TableCell>
+				<TableCell
+					align="right"
+					component={Link}
+					to={`${path}/${row._id}`}
+					className={classes.link}
+				>
+					{row.noOfInstallments}
+				</TableCell>
 				{numSelected > 0 ? null : (
 					<TableCell align="right">
 						<ContextMenu _id={row._id} />
@@ -350,13 +405,12 @@ const useStyles = makeStyles(theme => ({
 
 function Table(props) {
 	const { data } = props
-	console.log(data)
 	const classes = useStyles()
 	const [order, setOrder] = React.useState('desc')
 	const [orderBy, setOrderBy] = React.useState('createdAt')
 	const [selected, setSelected] = React.useState([])
 	const [page, setPage] = React.useState(0)
-	const [rowsPerPage, setRowsPerPage] = React.useState(5)
+	const [rowsPerPage, setRowsPerPage] = React.useState(10)
 	const [query, setQuery] = React.useState('')
 
 	const fuse = new Fuse(data, {
@@ -468,7 +522,7 @@ function Table(props) {
 				</MuiTable>
 			</TableContainer>
 			<TablePagination
-				rowsPerPageOptions={[5, 10, 25]}
+				rowsPerPageOptions={[10, 30, 50]}
 				component="div"
 				count={rows.length}
 				rowsPerPage={rowsPerPage}
@@ -480,7 +534,12 @@ function Table(props) {
 	)
 }
 
-const mapStateToProps = state => ({
-	data: state.installments.data
-})
+const mapStateToProps = state =>
+	state.user.data.role === 'admin'
+		? { data: state.installments.data }
+		: {
+				data: state.installments.data.filter(
+					x => x.faculty === state.user.data.faculty
+				)
+		  }
 export default connect(mapStateToProps)(Table)

@@ -4,10 +4,12 @@ import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
+import MenuItem from '@material-ui/core/MenuItem'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
+import MuiLink from '@material-ui/core/Link'
 import { Link } from 'react-router-dom'
 import Copyright from '../../../components/Copyright'
 import { connect } from 'react-redux'
@@ -15,11 +17,16 @@ import { registerUser } from '../../../actions/user'
 import { Formik, Form, Field } from 'formik'
 import { TextField, Checkbox } from 'formik-material-ui'
 import { useHistory } from 'react-router-dom'
+import { courses } from '../../../utils/data'
+
 import * as yup from 'yup'
+
+const faculties = courses.map(x => x.faculty)
 
 const initialValues = {
 	firstName: '',
 	lastName: '',
+	faculty: '',
 	email: '',
 	password: ''
 }
@@ -35,6 +42,10 @@ const validationSchema = yup.object().shape({
 		.trim()
 		.min(3, 'Too short')
 		.required('Last name is required'),
+	faculty: yup
+		.string()
+		.oneOf(faculties, 'Invalid faculties')
+		.required('Faculty is required'),
 	email: yup.string().email('Invalid email').required('Email is required'),
 	password: yup.string().required('Password is required')
 })
@@ -42,10 +53,11 @@ const validationSchema = yup.object().shape({
 const onSubmit =
 	(action, history) =>
 	(values, { setSubmitting }) => {
-		action(values, history)
+		action(values)
 			.then(() => {
-				history.push('/dashboard/sign-up')
-				// setSubmitting(false)
+				console.log(history)
+				history.push('/dashboard')
+				setSubmitting(false)
 			})
 			.catch(() => setSubmitting(false))
 	}
@@ -100,7 +112,7 @@ function SignUp({ isLoading, registerUser, ...props }) {
 										autoComplete="fname"
 										id="firstName"
 										label="First Name"
-										autoFocus
+										// autoFocus
 									/>
 								</Grid>
 								<Grid item xs={12} sm={6}>
@@ -112,6 +124,30 @@ function SignUp({ isLoading, registerUser, ...props }) {
 										name="lastName"
 										autoComplete="lname"
 									/>
+								</Grid>
+								<Grid item xs={12}>
+									<Field
+										component={TextField}
+										type="text"
+										id="faculty"
+										name="faculty"
+										label="Faculty"
+										autoComplete="faculty"
+										select
+										InputLabelProps={{
+											shrink: true
+										}}
+									>
+										<MenuItem value="">N/A</MenuItem>
+										{faculties.sort().map(option => (
+											<MenuItem
+												key={option}
+												value={option}
+											>
+												{option}
+											</MenuItem>
+										))}
+									</Field>
 								</Grid>
 								<Grid item xs={12}>
 									<Field
@@ -147,12 +183,13 @@ function SignUp({ isLoading, registerUser, ...props }) {
 							</Button>
 							<Grid container justify="flex-end">
 								<Grid item>
-									<Link
+									<MuiLink
 										to="/dashboard/sign-in"
 										variant="body2"
+										component={Link}
 									>
 										Already have an account? Sign in
-									</Link>
+									</MuiLink>
 								</Grid>
 							</Grid>
 						</Form>

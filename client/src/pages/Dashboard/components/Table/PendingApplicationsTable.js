@@ -26,11 +26,13 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded'
+import { Link, useHistory, useRouteMatch } from 'react-router-dom'
 import Dialog from '../Dialog'
 import Fuse from 'fuse.js'
 
 import { connect, useDispatch } from 'react-redux'
 import { deleteStudent } from '../../../../actions/students'
+import { Chip } from '@material-ui/core'
 
 function descendingComparator(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
@@ -83,6 +85,12 @@ const headCells = [
 		numeric: false,
 		disablePadding: false,
 		label: 'Course of Study'
+	},
+	{
+		id: 'isValidCandidate',
+		numeric: false,
+		disablePadding: false,
+		label: 'Status'
 	},
 	{
 		id: 'grossIncome',
@@ -212,7 +220,13 @@ const useToolbarStyles = makeStyles(theme => ({
 
 const TableToolbar = props => {
 	const classes = useToolbarStyles()
-	const { selected, numSelected, setSelected, approveDialogRef } = props
+	const {
+		selected,
+		numSelected,
+		setSelected,
+		approveDialogRef,
+		deleteDialogRef
+	} = props
 
 	return (
 		<React.Fragment>
@@ -263,7 +277,7 @@ const TableToolbar = props => {
 									color="primary"
 									fontSize="small"
 									onClick={() => {
-										approveDialogRef.current.showDialog(
+										deleteDialogRef.current.showDialog(
 											...selected
 										)
 										setSelected([])
@@ -304,6 +318,8 @@ const ContextMenu = props => {
 	const classes = useContextMenuStyles()
 	const [anchorEl, setAnchorEl] = React.useState(null)
 	const dispatch = useDispatch()
+	const { path, url } = useRouteMatch()
+	const history = useHistory()
 
 	const handleDelete = () => {
 		dispatch(deleteStudent(_id)).then(() => setAnchorEl(null))
@@ -336,7 +352,10 @@ const ContextMenu = props => {
 				open={Boolean(anchorEl)}
 				onClose={handleClose}
 			>
-				<MenuItem dense onClick={handleClose}>
+				<MenuItem
+					dense
+					onClick={() => history.push(`${path}/${_id}/edit`)}
+				>
 					Edit
 				</MenuItem>
 				<MenuItem
@@ -361,6 +380,17 @@ ContextMenu.propTypes = {
 	// numSelected: PropTypes.number.isRequired,
 }
 
+const useRowStyles = makeStyles({
+	// root: {
+	// 	'& > *': {
+	// 		borderBottom: 'unset'
+	// 	}
+	// },
+	link: {
+		textDecoration: 'none'
+	}
+})
+
 const Row = props => {
 	const {
 		row,
@@ -368,9 +398,12 @@ const Row = props => {
 		labelId,
 		handleClick,
 		numSelected,
-		approveDialogRef
+		approveDialogRef,
+		deleteDialogRef
 	} = props
 	const [open, setOpen] = React.useState(false)
+	const classes = useRowStyles()
+	const { path, url } = useRouteMatch()
 
 	return (
 		<TableRow
@@ -381,6 +414,7 @@ const Row = props => {
 			tabIndex={-1}
 			key={row._id} // unique key
 			selected={isItemSelected}
+			className={classes.root}
 		>
 			<TableCell padding="checkbox">
 				<Checkbox
@@ -402,20 +436,68 @@ const Row = props => {
 					{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
 				</IconButton>
 			</TableCell>
-			<TableCell component="th" id={labelId} scope="row" padding="none">
+			<TableCell
+				id={labelId}
+				scope="row"
+				padding="none"
+				component={Link}
+				to={`${path}/${row._id}`}
+				className={classes.link}
+			>
 				{row.regNo}
 			</TableCell>
-			<TableCell align="left">{row.nic}</TableCell>
+			<TableCell
+				align="left"
+				component={Link}
+				to={`${path}/${row._id}`}
+				className={classes.link}
+			>
+				{row.nic}
+			</TableCell>
 			<Tooltip title={row.fullName}>
-				<TableCell align="left">{row.nameWithInitials}</TableCell>
+				<TableCell
+					align="left"
+					component={Link}
+					to={`${path}/${row._id}`}
+					className={classes.link}
+				>
+					{row.nameWithInitials}
+				</TableCell>
 			</Tooltip>
-			<TableCell align="left">{row.course}</TableCell>
-			<TableCell align="right">{row.netIncome}</TableCell>
+			<TableCell
+				align="left"
+				component={Link}
+				to={`${path}/${row._id}`}
+				className={classes.link}
+			>
+				{row.course}
+			</TableCell>
+			<TableCell
+				align="left"
+				component={Link}
+				to={`${path}/${row._id}`}
+				className={classes.link}
+			>
+				<Chip
+					size="small"
+					color={row.isValidCandidate ? 'secondary' : 'primary'}
+					label={row.isValidCandidate ? 'Valid' : 'Not valid'}
+				/>
+			</TableCell>
+			<TableCell
+				align="right"
+				component={Link}
+				to={`${path}/${row._id}`}
+				className={classes.link}
+			>
+				{row.netIncome}
+			</TableCell>
 			{numSelected > 0 ? null : (
 				<TableCell align="right">
 					<ContextMenu
 						_id={row._id}
 						approveDialogRef={approveDialogRef}
+						deleteDialogRef={deleteDialogRef}
 					/>
 				</TableCell>
 			)}
@@ -447,9 +529,10 @@ function Table(props) {
 	const [orderBy, setOrderBy] = React.useState('grossIncome')
 	const [selected, setSelected] = React.useState([])
 	const [page, setPage] = React.useState(0)
-	const [rowsPerPage, setRowsPerPage] = React.useState(5)
+	const [rowsPerPage, setRowsPerPage] = React.useState(10)
 	const [query, setQuery] = React.useState('')
 	const approveDialogRef = useRef(null)
+	const deleteDialogRef = useRef(null)
 
 	const fuse = new Fuse(data, {
 		threshold: 0.4,
@@ -524,6 +607,7 @@ function Table(props) {
 			<TableToolbar
 				numSelected={selected.length}
 				approveDialogRef={approveDialogRef}
+				deleteDialogRef={deleteDialogRef}
 				selected={selected}
 				setSelected={setSelected}
 			/>
@@ -562,6 +646,7 @@ function Table(props) {
 										handleClick={handleClick}
 										numSelected={selected.length}
 										approveDialogRef={approveDialogRef}
+										deleteDialogRef={deleteDialogRef}
 									/>
 								)
 							})}
@@ -574,7 +659,7 @@ function Table(props) {
 				</MuiTable>
 			</TableContainer>
 			<TablePagination
-				rowsPerPageOptions={[5, 10, 25]}
+				rowsPerPageOptions={[10, 30, 50]}
 				component="div"
 				count={rows.length}
 				rowsPerPage={rowsPerPage}
@@ -583,6 +668,7 @@ function Table(props) {
 				onChangeRowsPerPage={handleChangeRowsPerPage}
 			/>
 			<Dialog.ApproveStudent ref={approveDialogRef} />
+			<Dialog.DeleteStudent ref={deleteDialogRef} />
 		</React.Fragment>
 	)
 }

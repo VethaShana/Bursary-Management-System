@@ -23,8 +23,7 @@ const installmentSchema = mongoose.Schema(
 			required: true
 		},
 		description: {
-			type: String,
-			required: true
+			type: String
 		}
 	},
 	{ timestamps: true }

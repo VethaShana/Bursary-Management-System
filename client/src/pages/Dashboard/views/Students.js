@@ -6,6 +6,7 @@ import Table from '../components/Table'
 import Title from '../components/Title'
 import AddIcon from '@material-ui/icons/Add'
 import StudentChart from '../components/StudentChart'
+import ProtectedContent from '../components/ProtectedContent'
 
 const useStyles = makeStyles(theme => ({
 	paper: {
@@ -43,16 +44,24 @@ function Students() {
 					</Paper>
 				</Grid>
 
-				<Grid item container xs={12} display="flex" justify="flex-end">
-					<Button
-						variant="contained"
-						color="primary"
-						size="small"
-						startIcon={<AddIcon fontSize="small" />}
+				<ProtectedContent role="admin">
+					<Grid
+						item
+						container
+						xs={12}
+						display="flex"
+						justify="flex-end"
 					>
-						Add Student
-					</Button>
-				</Grid>
+						<Button
+							variant="contained"
+							color="primary"
+							size="small"
+							startIcon={<AddIcon fontSize="small" />}
+						>
+							Add Student
+						</Button>
+					</Grid>
+				</ProtectedContent>
 
 				{/* Enhanced Table */}
 				<Grid item xs={12}>

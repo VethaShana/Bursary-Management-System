@@ -24,7 +24,7 @@ export const login = async (req, res) => {
 }
 
 export const register = async (req, res) => {
-	const { email, password, firstName, lastName } = req.body
+	const { email, password, faculty, firstName, lastName } = req.body
 	const { query } = req
 	try {
 		let user = await User.findOne({ email })
@@ -38,6 +38,7 @@ export const register = async (req, res) => {
 				firstName,
 				lastName,
 				password,
+				faculty,
 				role
 			}).save()
 			const token = await user.createToken()

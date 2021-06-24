@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import LinearProgress from '@material-ui/core/LinearProgress'
 import Checkbox from '@material-ui/core/Checkbox'
 import Paper from '@material-ui/core/Paper'
 import { useTheme } from '@material-ui/core/styles'
@@ -28,7 +29,8 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-function ApplicationDialog({ open, onClose, submitApplication, isSubmitted }) {
+function ApplicationDialog(props) {
+	const { open, onClose, submitApplication, isSubmitted, isLoading } = props
 	const classes = useStyles()
 	const theme = useTheme()
 	const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
@@ -125,6 +127,7 @@ function ApplicationDialog({ open, onClose, submitApplication, isSubmitted }) {
 							)}
 						</FormControl>
 					</DialogContent>
+					{isLoading && <LinearProgress />}
 					<DialogActions className={classes.dialogActions}>
 						<Button onClick={onClose} color="primary">
 							Cancel
@@ -146,7 +149,8 @@ function ApplicationDialog({ open, onClose, submitApplication, isSubmitted }) {
 }
 
 const mapStateToProps = state => ({
-	isSubmitted: state.application.isSubmitted
+	isSubmitted: state.application.isSubmitted,
+	isLoading: state.application.isLoading
 })
 
 export default connect(mapStateToProps, { submitApplication })(

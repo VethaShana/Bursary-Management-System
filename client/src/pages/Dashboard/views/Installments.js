@@ -7,6 +7,7 @@ import StudentChart from '../components/StudentChart'
 import Instalment from '../components/Instalment'
 import Title from '../components/Title'
 import Toolbar from '../components/Toolbar'
+import ProtectedContent from '../components/ProtectedContent'
 
 const useStyles = makeStyles(theme => ({
 	paper: {
@@ -34,9 +35,11 @@ function Installments() {
 					/>
 				</Grid>
 
-				<Grid item xs={12}>
-					<Toolbar />
-				</Grid>
+				<ProtectedContent role="admin">
+					<Grid item xs={12}>
+						<Toolbar />
+					</Grid>
+				</ProtectedContent>
 
 				{/* Enhanced Table */}
 				<Grid item xs={12}>

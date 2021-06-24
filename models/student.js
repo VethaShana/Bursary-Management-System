@@ -2,6 +2,29 @@ import mongoose from 'mongoose'
 import { titles } from '../utils/data.js'
 //import studentValidationSchema from '../studentValidation.js'
 
+const Installment = mongoose.Schema(
+	{
+		installmentId: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'installment',
+			required: true
+		},
+		noOfInstallments: {
+			type: Number,
+			required: true
+		},
+		isApproved: {
+			type: Boolean,
+			default: false
+		},
+		approvedBy: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'user'
+		}
+	},
+	{ timestamps: true }
+)
+
 const studentSchema = mongoose.Schema({
 	userId: {
 		type: mongoose.Schema.Types.ObjectId,
@@ -70,7 +93,9 @@ const studentSchema = mongoose.Schema({
 	DSDivision: {
 		type: String
 	},
-	//indexNo
+	ALDistrict: {
+		type: String
+	},
 	ALIndexNo: {
 		type: String
 	},
@@ -112,9 +137,6 @@ const studentSchema = mongoose.Schema({
 			rent_lease: String
 		}
 	],
-	dsDivision: {
-		type: String
-	},
 	employed: {
 		type: Boolean,
 		required: true
@@ -202,19 +224,7 @@ const studentSchema = mongoose.Schema({
 		required: true,
 		default: false
 	},
-	installments: [
-		{
-			installmentId: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'installment',
-				required: true
-			},
-			noOfInstallments: {
-				type: Number,
-				required: true
-			}
-		}
-	],
+	installments: [Installment],
 	isApproved: {
 		type: Boolean,
 		default: false
