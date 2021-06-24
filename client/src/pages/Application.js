@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Container, makeStyles } from '@material-ui/core'
+import { Button, Container, makeStyles } from '@material-ui/core'
 import ApplicationDialog from '../components/ApplicationDialog'
 
 import { connect } from 'react-redux'
 import { setApplication, getApplicationStatus } from '../actions/application'
 import ApplicationStatus from '../components/ApplicationStatus'
+import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded'
+import { useHistory } from 'react-router-dom'
 
 import Copyright from '../components/Copyright'
 import Header from '../components/Header'
@@ -50,6 +52,7 @@ const useStyles = makeStyles(theme => ({
 
 function Application({ isSubmitted, getApplicationStatus }) {
 	const classes = useStyles()
+	const { goBack } = useHistory()
 
 	useEffect(() => {
 		getApplicationStatus()
@@ -67,6 +70,15 @@ function Application({ isSubmitted, getApplicationStatus }) {
 
 	return (
 		<Container className={classes.root}>
+			<Button
+				variant="text"
+				size="small"
+				className={classes.button}
+				startIcon={<KeyboardBackspaceRoundedIcon fontSize="small" />}
+				onClick={goBack}
+			>
+				Back
+			</Button>
 			<Header
 				title="Bursary Application"
 				subTitle="University of Jaffna"

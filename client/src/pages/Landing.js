@@ -118,7 +118,7 @@ const useStyles = makeStyles(theme => ({
 const helpMail = 'help@welfare.jfn.ac.lk'
 
 function Landing({ history }) {
-	const isAuthenticated = useSelector(state => state.user.isAuthenticated)
+	const user = useSelector(state => state.user)
 	const dispatch = useDispatch()
 	const classes = useStyles()
 	const [authView, setAuthView] = useState('register')
@@ -163,7 +163,8 @@ function Landing({ history }) {
 								</header>
 							</Box>
 							<Box className={classes.authContainer}>
-								{isAuthenticated ? (
+								{user.isAuthenticated &&
+								user.role === 'student' ? (
 									<React.Fragment>
 										<Box mb={2}>
 											<Typography variant="h6">
@@ -238,17 +239,20 @@ function Landing({ history }) {
 							className={classes.gridHalf}
 						>
 							<Grid container justify="flex-end" item>
-								{isAuthenticated && (
-									<Button
-										color="primary"
-										// endIcon={<ArrowRightAltOutlinedIcon />}
-										variant="contained"
-										size={'small'}
-										onClick={e => dispatch(logoutUser())}
-									>
-										Log Out
-									</Button>
-								)}
+								{user.isAuthenticated &&
+									user.role === 'student' && (
+										<Button
+											color="primary"
+											// endIcon={<ArrowRightAltOutlinedIcon />}
+											variant="contained"
+											size={'small'}
+											onClick={e =>
+												dispatch(logoutUser())
+											}
+										>
+											Log Out
+										</Button>
+									)}
 								<Button
 									color="primary"
 									endIcon={<ArrowRightAltOutlinedIcon />}

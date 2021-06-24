@@ -58,19 +58,15 @@ const studentSchema = mongoose.Schema({
 		distance: { type: Number },
 		street: {
 			type: String
-			//required: true
 		},
 		city: {
 			type: String
-			//required: true
 		},
 		district: {
 			type: String
-			//required: true
 		},
 		GSDivision: {
 			type: String
-			// required: true
 		},
 		DSDivision: {
 			type: String

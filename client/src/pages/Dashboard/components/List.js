@@ -297,7 +297,11 @@ function List(props) {
 											</Avatar>
 										</ListItemAvatar>
 										<ListItemText
-											primary={`Mr. ${user.firstName} ${user.lastName}`}
+											primary={`${
+												user.title ? 'Mr.' : ''
+											} ${user.firstName} ${
+												user.lastName
+											}`}
 											// secondary={user.faculty}
 											secondary={<Menu idx={1} />}
 										/>

@@ -53,7 +53,9 @@ const validationSchema = yup.object({
 })
 
 const onSubmit = (action, history) => (values, formikHelpers) => {
-	action(values, history, formikHelpers)
+	action(values, history, formikHelpers).then(() =>
+		history.push('/application')
+	)
 }
 
 function Login({ authView, onAuthViewChange, isLoading, ...props }) {

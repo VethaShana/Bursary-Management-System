@@ -55,7 +55,7 @@ const validationSchema = yup.object({
 		.required('Confirm your password')
 })
 const onSubmit = (action, history) => values => {
-	action(values, history)
+	action(values, history).then(() => history.push('/application'))
 }
 
 function Register({
