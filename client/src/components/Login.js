@@ -1,16 +1,15 @@
 import React from 'react'
-import {
-	Button,
-	Grid,
-	makeStyles,
-	TextField,
-	Typography,
-	Fade,
-	Link,
-	Slide,
-	Box,
-	LinearProgress
-} from '@material-ui/core'
+
+import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
+import Fade from '@material-ui/core/Fade'
+import Link from '@material-ui/core/Link'
+import Box from '@material-ui/core/Box'
+import LinearProgress from '@material-ui/core/LinearProgress'
+import { makeStyles } from '@material-ui/core'
+
 import { connect } from 'react-redux'
 import { useFormik } from 'formik'
 import { useHistory } from 'react-router-dom'

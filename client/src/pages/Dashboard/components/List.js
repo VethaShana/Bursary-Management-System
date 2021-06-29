@@ -34,6 +34,7 @@ const useMenuStyles = makeStyles(theme => ({
 		// backgroundColor: theme.palette.background.paper
 	}
 }))
+
 function Menu(props) {
 	const { idx } = props
 	const classes = useMenuStyles()
@@ -141,6 +142,7 @@ function List(props) {
 	const users = useSelector(state =>
 		state.users.data.filter(({ isApproved }) => isApproved === approved)
 	)
+	const faculties = users.map(({ faculty }) => faculty)
 	const classes = useStyles()
 	const dispatch = useDispatch()
 	return (
@@ -211,7 +213,8 @@ function List(props) {
 											</ListItemAvatar>
 											<ListItemText
 												primary={`Mr. ${user.firstName} ${user.lastName}`}
-												secondary={<Menu idx={1} />}
+												// secondary={<Menu idx={1} />}
+												secondary={user.faculty}
 											/>
 											<ListItemSecondaryAction>
 												{!approved && (
@@ -302,8 +305,8 @@ function List(props) {
 											} ${user.firstName} ${
 												user.lastName
 											}`}
-											// secondary={user.faculty}
-											secondary={<Menu idx={1} />}
+											secondary={user.faculty}
+											// secondary={<Menu idx={1} />}
 										/>
 										<ListItemSecondaryAction>
 											{/* <ContextMenu

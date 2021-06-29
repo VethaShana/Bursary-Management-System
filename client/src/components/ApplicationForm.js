@@ -15,7 +15,7 @@ import Fade from '@material-ui/core/Fade'
 import AddIcon from '@material-ui/icons/Add'
 import DeleteIcon from '@material-ui/icons/Delete'
 import * as yup from 'yup'
-import { Formik, Form, Field, FieldArray } from 'formik'
+import { Formik, Form, FastField, FieldArray } from 'formik'
 import Alert from '@material-ui/lab/Alert'
 import { TextField, Checkbox } from 'formik-material-ui'
 import { KeyboardDatePicker } from 'formik-material-ui-pickers'
@@ -506,12 +506,12 @@ const validationSchema = yup.object().shape({
 					.required('Name is required'),
 				dob: yup
 					.date()
-					// .min(
-					// 	new Date(
-					// 		new Date().setYear(new Date().getFullYear() - 19)
-					// 	),
-					// 	'Invalid date'
-					// )
+					.min(
+						new Date(
+							new Date().setYear(new Date().getFullYear() - 19)
+						),
+						'Invalid date'
+					)
 					.max(new Date(), 'Date of Birth cannot be in future')
 					.required('Date of Birth is required'),
 				age: yup
@@ -614,7 +614,7 @@ function ApplicationForm({ setApplication, onClick }) {
 				validationSchema={validationSchema}
 				onSubmit={(values, { setSubmitting }) => {
 					console.log(validationSchema.cast(values))
-					localStorage.setItem('application', JSON.stringify(values))
+					// localStorage.setItem('application', JSON.stringify(values))
 					setApplication(validationSchema.cast(values))
 					onClick()
 					setSubmitting(false)
@@ -645,7 +645,7 @@ function ApplicationForm({ setApplication, onClick }) {
 								<Grid container item md={9}>
 									<Grid container spacing={2}>
 										<Grid item xs={12} sm={4}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												label="Registration No."
@@ -655,7 +655,7 @@ function ApplicationForm({ setApplication, onClick }) {
 											/>
 										</Grid>
 										<Grid item xs={12} sm={4}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												label="NIC"
@@ -689,7 +689,7 @@ function ApplicationForm({ setApplication, onClick }) {
 								<Grid container item md={9}>
 									<Grid container spacing={2}>
 										<Grid item xs={12} sm={4}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												name="faculty"
@@ -712,10 +712,10 @@ function ApplicationForm({ setApplication, onClick }) {
 															{option}
 														</MenuItem>
 													))}
-											</Field>
+											</FastField>
 										</Grid>
 										<Grid item xs={12} sm={5}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												name="course"
@@ -749,10 +749,10 @@ function ApplicationForm({ setApplication, onClick }) {
 																{option}
 															</MenuItem>
 														))}
-											</Field>
+											</FastField>
 										</Grid>
 										<Grid item xs={12} sm={3}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												label="A / L Index No."
@@ -761,7 +761,7 @@ function ApplicationForm({ setApplication, onClick }) {
 											/>
 										</Grid>
 										<Grid item xs={12} sm={4}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												name="ALDistrict"
@@ -788,10 +788,10 @@ function ApplicationForm({ setApplication, onClick }) {
 															{option}
 														</MenuItem>
 													))}
-											</Field>
+											</FastField>
 										</Grid>
 										<Grid item xs={12} sm={3}>
-											<Field
+											<FastField
 												inputProps={{
 													step: '0.01'
 												}}
@@ -828,7 +828,7 @@ function ApplicationForm({ setApplication, onClick }) {
 								<Grid container item md={9}>
 									<Grid container spacing={2}>
 										<Grid item xs={12} sm={2}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												name="title"
@@ -846,10 +846,10 @@ function ApplicationForm({ setApplication, onClick }) {
 														{option}
 													</MenuItem>
 												))}
-											</Field>
+											</FastField>
 										</Grid>
 										<Grid item xs={12} sm={10}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												label="Name with Initials"
@@ -857,7 +857,7 @@ function ApplicationForm({ setApplication, onClick }) {
 											/>
 										</Grid>
 										<Grid item xs={12} sm={12}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												label="Full Name"
@@ -891,7 +891,7 @@ function ApplicationForm({ setApplication, onClick }) {
 								<Grid container item md={9}>
 									<Grid container spacing={2}>
 										<Grid item xs={12} sm={8}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												label="Street"
@@ -899,7 +899,7 @@ function ApplicationForm({ setApplication, onClick }) {
 											/>
 										</Grid>
 										<Grid item xs={12} sm={4}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												label="City"
@@ -907,7 +907,7 @@ function ApplicationForm({ setApplication, onClick }) {
 											/>
 										</Grid>
 										<Grid item xs={12} sm={4}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												name="address.district"
@@ -934,10 +934,10 @@ function ApplicationForm({ setApplication, onClick }) {
 															{option}
 														</MenuItem>
 													))}
-											</Field>
+											</FastField>
 										</Grid>
 										<Grid item xs={12} sm={4}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												name="address.DSDivision"
@@ -977,10 +977,10 @@ function ApplicationForm({ setApplication, onClick }) {
 																{option}
 															</MenuItem>
 														))}
-											</Field>
+											</FastField>
 										</Grid>
 										<Grid item xs={12} sm={4}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												name="address.GSDivision"
@@ -1030,10 +1030,10 @@ function ApplicationForm({ setApplication, onClick }) {
 																{option}
 															</MenuItem>
 														))}
-											</Field>
+											</FastField>
 										</Grid>
 										<Grid item xs={12} sm={3}>
-											<Field
+											<FastField
 												component={TextField}
 												type="number"
 												label="Distance to University"
@@ -1077,7 +1077,7 @@ function ApplicationForm({ setApplication, onClick }) {
 								<Grid container item md={9}>
 									<Grid container spacing={2}>
 										<Grid item xs={12} sm={8}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												label="Email"
@@ -1085,7 +1085,7 @@ function ApplicationForm({ setApplication, onClick }) {
 											/>
 										</Grid>
 										<Grid item xs={12} sm={4}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												label="Phone"
@@ -1121,7 +1121,7 @@ function ApplicationForm({ setApplication, onClick }) {
 										<Box mb={2}>
 											<FormControlLabel
 												control={
-													<Field
+													<FastField
 														component={Checkbox}
 														type="checkbox"
 														name="employed"
@@ -1142,7 +1142,7 @@ function ApplicationForm({ setApplication, onClick }) {
 										>
 											<Grid container spacing={2}>
 												<Grid item xs={12} sm={7}>
-													<Field
+													<FastField
 														component={TextField}
 														type="text"
 														label="Name of Establishment or Department"
@@ -1150,7 +1150,7 @@ function ApplicationForm({ setApplication, onClick }) {
 													/>
 												</Grid>
 												<Grid item xs={12} sm={5}>
-													<Field
+													<FastField
 														component={TextField}
 														type="text"
 														label="Designation"
@@ -1158,7 +1158,7 @@ function ApplicationForm({ setApplication, onClick }) {
 													/>
 												</Grid>
 												<Grid item xs={12} sm={5}>
-													<Field
+													<FastField
 														component={TextField}
 														type="number"
 														label="Salary"
@@ -1173,7 +1173,7 @@ function ApplicationForm({ setApplication, onClick }) {
 													/>
 												</Grid>
 												<Grid item xs={12} sm={7}>
-													<Field
+													<FastField
 														component={TextField}
 														type="text"
 														label="Street"
@@ -1181,7 +1181,7 @@ function ApplicationForm({ setApplication, onClick }) {
 													/>
 												</Grid>
 												<Grid item xs={12} sm={4}>
-													<Field
+													<FastField
 														component={TextField}
 														type="text"
 														label="City"
@@ -1189,7 +1189,7 @@ function ApplicationForm({ setApplication, onClick }) {
 													/>
 												</Grid>
 												<Grid item xs={12} sm={4}>
-													<Field
+													<FastField
 														component={TextField}
 														type="text"
 														name="employment.address.district"
@@ -1219,10 +1219,10 @@ function ApplicationForm({ setApplication, onClick }) {
 																	{option}
 																</MenuItem>
 															))}
-													</Field>
+													</FastField>
 												</Grid>
 												<Grid item xs={12} sm={4}>
-													<Field
+													<FastField
 														component={
 															KeyboardDatePicker
 														}
@@ -1340,7 +1340,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={12}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1354,7 +1354,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={4}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				KeyboardDatePicker
 																			}
@@ -1369,7 +1369,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={2}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1383,7 +1383,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={6}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1495,7 +1495,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={9}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1509,7 +1509,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={3}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1523,7 +1523,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={3}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1537,7 +1537,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={5}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1551,7 +1551,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={4}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1566,7 +1566,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																	>
 																		<FormControlLabel
 																			control={
-																				<Field
+																				<FastField
 																					component={
 																						Checkbox
 																					}
@@ -1715,7 +1715,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={12}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1729,7 +1729,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={6}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1743,7 +1743,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={6}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1757,7 +1757,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={4}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1771,7 +1771,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={4}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1785,7 +1785,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={4}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1907,7 +1907,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={12}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1921,7 +1921,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={6}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1935,7 +1935,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={6}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1949,7 +1949,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={8}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1963,7 +1963,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		xs={12}
 																		sm={4}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -1984,7 +1984,7 @@ function ApplicationForm({ setApplication, onClick }) {
 																		item
 																		xs={12}
 																	>
-																		<Field
+																		<FastField
 																			component={
 																				TextField
 																			}
@@ -2062,7 +2062,7 @@ function ApplicationForm({ setApplication, onClick }) {
 										<Box mb={2}>
 											<FormControlLabel
 												control={
-													<Field
+													<FastField
 														component={Checkbox}
 														type="checkbox"
 														name="married"
@@ -2074,7 +2074,11 @@ function ApplicationForm({ setApplication, onClick }) {
 											/>
 										</Box>
 									</Grid>
-									<Collapse in={values.married}>
+									<Collapse
+										in={values.married}
+										mountOnEnter
+										unmountOnExit
+									>
 										<Fade
 											{...(values.married
 												? { timeout: 700 }
@@ -2083,7 +2087,7 @@ function ApplicationForm({ setApplication, onClick }) {
 										>
 											<Grid container spacing={2}>
 												<Grid item xs={12}>
-													<Field
+													<FastField
 														component={TextField}
 														type="text"
 														label="Name of Spouse"
@@ -2091,7 +2095,7 @@ function ApplicationForm({ setApplication, onClick }) {
 													/>
 												</Grid>
 												<Grid item xs={12} sm={6}>
-													<Field
+													<FastField
 														component={
 															KeyboardDatePicker
 														}
@@ -2110,7 +2114,7 @@ function ApplicationForm({ setApplication, onClick }) {
 													</Typography>
 												</Grid>
 												<Grid item xs={12} sm={7}>
-													<Field
+													<FastField
 														component={TextField}
 														type="text"
 														label="Name of Establishment or Department"
@@ -2118,7 +2122,7 @@ function ApplicationForm({ setApplication, onClick }) {
 													/>
 												</Grid>
 												<Grid item xs={12} sm={5}>
-													<Field
+													<FastField
 														component={TextField}
 														type="text"
 														label="Designation"
@@ -2126,7 +2130,7 @@ function ApplicationForm({ setApplication, onClick }) {
 													/>
 												</Grid>
 												<Grid item xs={12} sm={6}>
-													<Field
+													<FastField
 														component={TextField}
 														type="number"
 														label="Salary"
@@ -2141,7 +2145,7 @@ function ApplicationForm({ setApplication, onClick }) {
 													/>
 												</Grid>
 												<Grid item xs={12} sm={6}>
-													<Field
+													<FastField
 														component={
 															KeyboardDatePicker
 														}
@@ -2209,7 +2213,7 @@ function ApplicationForm({ setApplication, onClick }) {
 											</Typography>
 										</Grid>
 										<Grid item xs={12}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												label="Full name"
@@ -2219,7 +2223,7 @@ function ApplicationForm({ setApplication, onClick }) {
 										<Grid item xs={12}>
 											<FormControlLabel
 												control={
-													<Field
+													<FastField
 														component={Checkbox}
 														type="checkbox"
 														name="father.living"
@@ -2231,7 +2235,11 @@ function ApplicationForm({ setApplication, onClick }) {
 											/>
 										</Grid>
 										<Grid item xs={12}>
-											<Collapse in={values.father.living}>
+											<Collapse
+												in={values.father.living}
+												mountOnEnter
+												unmountOnExit
+											>
 												<Fade
 													{...(values.father.living
 														? { timeout: 700 }
@@ -2244,7 +2252,7 @@ function ApplicationForm({ setApplication, onClick }) {
 															xs={12}
 															sm={4}
 														>
-															<Field
+															<FastField
 																component={
 																	TextField
 																}
@@ -2259,7 +2267,7 @@ function ApplicationForm({ setApplication, onClick }) {
 															xs={12}
 															sm={8}
 														>
-															<Field
+															<FastField
 																component={
 																	TextField
 																}
@@ -2274,7 +2282,7 @@ function ApplicationForm({ setApplication, onClick }) {
 															xs={12}
 															sm={6}
 														>
-															<Field
+															<FastField
 																component={
 																	TextField
 																}
@@ -2296,7 +2304,7 @@ function ApplicationForm({ setApplication, onClick }) {
 															xs={12}
 															sm={6}
 														>
-															<Field
+															<FastField
 																component={
 																	KeyboardDatePicker
 																}
@@ -2306,7 +2314,7 @@ function ApplicationForm({ setApplication, onClick }) {
 															/>
 														</Grid>
 														<Grid item xs={12}>
-															<Field
+															<FastField
 																component={
 																	TextField
 																}
@@ -2339,7 +2347,7 @@ function ApplicationForm({ setApplication, onClick }) {
 											</Typography>
 										</Grid>
 										<Grid item xs={12} md={4}>
-											<Field
+											<FastField
 												component={TextField}
 												type="number"
 												label="Income from occupation or pension"
@@ -2354,7 +2362,7 @@ function ApplicationForm({ setApplication, onClick }) {
 											/>
 										</Grid>
 										<Grid item xs={12} md={4}>
-											<Field
+											<FastField
 												component={TextField}
 												type="number"
 												label="Income from house and property"
@@ -2369,7 +2377,7 @@ function ApplicationForm({ setApplication, onClick }) {
 											/>
 										</Grid>
 										<Grid item xs={12} md={4}>
-											<Field
+											<FastField
 												component={TextField}
 												type="number"
 												label="Income from all other sources"
@@ -2403,7 +2411,7 @@ function ApplicationForm({ setApplication, onClick }) {
 											</Typography>
 										</Grid>
 										<Grid item xs={12}>
-											<Field
+											<FastField
 												component={TextField}
 												type="text"
 												label="Full name"
@@ -2413,7 +2421,7 @@ function ApplicationForm({ setApplication, onClick }) {
 										<Grid item xs={12}>
 											<FormControlLabel
 												control={
-													<Field
+													<FastField
 														component={Checkbox}
 														type="checkbox"
 														name="mother.living"
@@ -2425,7 +2433,11 @@ function ApplicationForm({ setApplication, onClick }) {
 											></FormControlLabel>
 										</Grid>
 										<Grid item xs={12}>
-											<Collapse in={values.mother.living}>
+											<Collapse
+												in={values.mother.living}
+												mountOnEnter
+												unmountOnExit
+											>
 												<Fade
 													{...(values.mother.living
 														? { timeout: 700 }
@@ -2438,7 +2450,7 @@ function ApplicationForm({ setApplication, onClick }) {
 															xs={12}
 															sm={4}
 														>
-															<Field
+															<FastField
 																component={
 																	TextField
 																}
@@ -2453,7 +2465,7 @@ function ApplicationForm({ setApplication, onClick }) {
 															xs={12}
 															sm={8}
 														>
-															<Field
+															<FastField
 																component={
 																	TextField
 																}
@@ -2468,7 +2480,7 @@ function ApplicationForm({ setApplication, onClick }) {
 															xs={12}
 															sm={7}
 														>
-															<Field
+															<FastField
 																component={
 																	TextField
 																}
@@ -2490,7 +2502,7 @@ function ApplicationForm({ setApplication, onClick }) {
 															xs={12}
 															sm={5}
 														>
-															<Field
+															<FastField
 																component={
 																	KeyboardDatePicker
 																}
@@ -2504,7 +2516,7 @@ function ApplicationForm({ setApplication, onClick }) {
 															xs={12}
 															md={12}
 														>
-															<Field
+															<FastField
 																component={
 																	TextField
 																}
@@ -2537,7 +2549,7 @@ function ApplicationForm({ setApplication, onClick }) {
 											</Typography>
 										</Grid>
 										<Grid item xs={12} md={4}>
-											<Field
+											<FastField
 												component={TextField}
 												type="number"
 												label="Income from occupation or pension"
@@ -2552,7 +2564,7 @@ function ApplicationForm({ setApplication, onClick }) {
 											/>
 										</Grid>
 										<Grid item xs={12} md={4}>
-											<Field
+											<FastField
 												component={TextField}
 												type="number"
 												label="Income from house and property"
@@ -2567,7 +2579,7 @@ function ApplicationForm({ setApplication, onClick }) {
 											/>
 										</Grid>
 										<Grid item xs={12} md={4}>
-											<Field
+											<FastField
 												component={TextField}
 												type="number"
 												label="Income from all other sources"
@@ -2613,7 +2625,7 @@ function ApplicationForm({ setApplication, onClick }) {
 											<Box mb={2}>
 												<FormControlLabel
 													control={
-														<Field
+														<FastField
 															component={Checkbox}
 															type="checkbox"
 															name="isLivingWithGuardian"
@@ -2643,7 +2655,7 @@ function ApplicationForm({ setApplication, onClick }) {
 															xs={12}
 															sm={10}
 														>
-															<Field
+															<FastField
 																component={
 																	TextField
 																}
@@ -2657,7 +2669,7 @@ function ApplicationForm({ setApplication, onClick }) {
 															xs={12}
 															sm={2}
 														>
-															<Field
+															<FastField
 																component={
 																	TextField
 																}
@@ -2671,7 +2683,7 @@ function ApplicationForm({ setApplication, onClick }) {
 															xs={12}
 															sm={8}
 														>
-															<Field
+															<FastField
 																component={
 																	TextField
 																}
@@ -2686,7 +2698,7 @@ function ApplicationForm({ setApplication, onClick }) {
 															xs={12}
 															sm={4}
 														>
-															<Field
+															<FastField
 																component={
 																	TextField
 																}
@@ -2726,7 +2738,7 @@ function ApplicationForm({ setApplication, onClick }) {
 															xs={12}
 															sm={5}
 														>
-															<Field
+															<FastField
 																component={
 																	TextField
 																}
@@ -2748,7 +2760,7 @@ function ApplicationForm({ setApplication, onClick }) {
 															xs={12}
 															sm={7}
 														>
-															<Field
+															<FastField
 																component={
 																	TextField
 																}

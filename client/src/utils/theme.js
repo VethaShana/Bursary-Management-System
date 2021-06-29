@@ -33,6 +33,8 @@ const theme = responsiveFontSizes(
 			MuiCssBaseline: {
 				'@global': {}
 			},
+			MuiDialogContent: {},
+			MuiDialogActions: {},
 			MuiButton: {
 				root: {
 					textTransform: 'none'

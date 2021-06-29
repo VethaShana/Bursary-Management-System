@@ -1,20 +1,19 @@
 import React, { useState } from 'react'
-import {
-	Container,
-	Grid,
-	makeStyles,
-	Typography,
-	Button,
-	Box,
-	Link as MuiLink,
-	IconButton,
-	List,
-	ListItem,
-	ListItemIcon,
-	ListItemText,
-	Divider
-} from '@material-ui/core'
-import ArrowRightAltOutlinedIcon from '@material-ui/icons/ArrowRightAltOutlined'
+import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
+import { makeStyles } from '@material-ui/core'
+import MuiLink from '@material-ui/core/Link'
+import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
+import Box from '@material-ui/core/Box'
+import IconButton from '@material-ui/core/IconButton'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
+import Divider from '@material-ui/core/Divider'
+import ArrowRightAltRoundedIcon from '@material-ui/icons/ArrowRightAltRounded'
 import DescriptionIcon from '@material-ui/icons/Description'
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile'
 import bgImg from '../assets/bg1.svg'
@@ -163,8 +162,7 @@ function Landing({ history }) {
 								</header>
 							</Box>
 							<Box className={classes.authContainer}>
-								{user.isAuthenticated &&
-								user.role === 'student' ? (
+								{user.isAuthenticated ? (
 									<React.Fragment>
 										<Box mb={2}>
 											<Typography variant="h6">
@@ -181,20 +179,21 @@ function Landing({ history }) {
 											component="nav"
 											aria-label="main mailbox folders"
 											dense
-											// style={{ maxWidth: '350px' }}
+											className={classes.list}
 										>
 											<ListItem
 												button
 												component={Link}
 												to="/application"
+												dense
 											>
 												<ListItemIcon>
 													<DescriptionIcon fontSize="small" />
 												</ListItemIcon>
-												<ListItemText
-													primary="Preliminary Application"
-													secondary=""
-												/>
+												<ListItemText primary="Preliminary Application" />
+												<ListItemSecondaryAction>
+													<ArrowRightAltRoundedIcon fontSize="small" />
+												</ListItemSecondaryAction>
 											</ListItem>
 											<Divider />
 											<ListItem
@@ -209,6 +208,9 @@ function Landing({ history }) {
 													primary="Extended Application"
 													secondary="For Honours students"
 												/>
+												<ListItemSecondaryAction>
+													<ArrowRightAltRoundedIcon fontSize="small" />
+												</ListItemSecondaryAction>
 											</ListItem>
 										</List>
 									</React.Fragment>
@@ -239,23 +241,19 @@ function Landing({ history }) {
 							className={classes.gridHalf}
 						>
 							<Grid container justify="flex-end" item>
-								{user.isAuthenticated &&
-									user.role === 'student' && (
-										<Button
-											color="primary"
-											// endIcon={<ArrowRightAltOutlinedIcon />}
-											variant="contained"
-											size={'small'}
-											onClick={e =>
-												dispatch(logoutUser())
-											}
-										>
-											Log Out
-										</Button>
-									)}
+								{user.isAuthenticated && (
+									<Button
+										color="primary"
+										variant="contained"
+										size={'small'}
+										onClick={e => dispatch(logoutUser())}
+									>
+										Log Out
+									</Button>
+								)}
 								<Button
 									color="primary"
-									endIcon={<ArrowRightAltOutlinedIcon />}
+									endIcon={<ArrowRightAltRoundedIcon />}
 									variant="text"
 									style={{ marginLeft: '10px' }}
 									size={'small'}

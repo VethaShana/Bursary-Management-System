@@ -40,7 +40,7 @@ const studentValidationSchema = yup.object().shape({
 
 	zScore: yup
 		.string()
-		.matches(/^[0-4](\.[0-9]{2})$/)
+		// .matches(/^[0-4](\.[0-9]{2})$/)
 		.min(0)
 		.max(4.0)
 		.required(),

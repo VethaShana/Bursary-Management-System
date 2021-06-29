@@ -83,7 +83,7 @@ export const createStudent = async (req, res, next) => {
 			// 	'Content-Disposition': 'attachment;filename="filename.pdf"'
 			// })
 			//stu_Doc = data.toString("utf-9");
-			const download = Buffer.from(data.toString('utf-9'), 'base64')
+			const download = Buffer.from(data.toString('utf-8'), 'base64')
 			const { email, fullName } = req.body
 			sendMail({
 				to: email,
