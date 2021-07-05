@@ -26,9 +26,11 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded'
+import Skeleton from '@material-ui/lab/Skeleton'
 import { Link, useHistory, useRouteMatch } from 'react-router-dom'
 import Dialog from '../Dialog'
 import Fuse from 'fuse.js'
+import TableSearch from '../TableSearch'
 
 import { connect, useDispatch } from 'react-redux'
 import { deleteStudent } from '../../../../actions/students'
@@ -64,7 +66,7 @@ const headCells = [
 	{
 		id: 'regNo',
 		numeric: false,
-		disablePadding: true,
+		disablePadding: false,
 		label: 'Registration No.'
 	},
 	{ id: 'nic', numeric: false, disablePadding: false, label: 'NIC' },
@@ -158,36 +160,6 @@ function TableHead(props) {
 	)
 }
 
-const useTableSearchStyles = makeStyles(theme => ({
-	root: {
-		marginBottom: theme.spacing(1)
-	}
-}))
-
-const TableSearch = props => {
-	const classes = useTableSearchStyles()
-	const { onQueryChange } = props
-	return (
-		<TextField
-			className={classes.root}
-			placeholder="Search"
-			onChange={onQueryChange}
-			size="small"
-			InputProps={{
-				startAdornment: (
-					<InputAdornment position="start">
-						<SearchRoundedIcon color="disabled" fontSize="small" />
-					</InputAdornment>
-				)
-			}}
-		/>
-	)
-}
-
-TableSearch.propTypes = {
-	onQueryChange: PropTypes.func.isRequired
-}
-
 TableHead.propTypes = {
 	classes: PropTypes.object.isRequired,
 	numSelected: PropTypes.number.isRequired,
@@ -225,11 +197,37 @@ const TableToolbar = props => {
 		numSelected,
 		setSelected,
 		approveDialogRef,
-		deleteDialogRef
+		deleteDialogRef,
+		onQueryChange
 	} = props
 
 	return (
 		<React.Fragment>
+			{/* <Toolbar disableGutters>
+				<Typography
+					variant="h6"
+					color="primary"
+					className={classes.title}
+					gutterBottom
+				>
+					Pending Applications
+					<Typography
+						variant="body2"
+						component="div"
+						color="textSecondary"
+						className={classes.title}
+						gutterBottom
+					>
+						Applications pending for Approval
+					</Typography>
+				</Typography>
+				<TableSearch onQueryChange={onQueryChange} />
+			</Toolbar> */}
+			<TableTopHeader
+				onQueryChange={onQueryChange}
+				title="Pending Application"
+				subtitle="Applications pending for approval"
+			/>
 			<Toolbar
 				className={clsx(classes.root, {
 					[classes.highlight]: numSelected > 0
@@ -380,6 +378,22 @@ ContextMenu.propTypes = {
 	// numSelected: PropTypes.number.isRequired,
 }
 
+const RowSkeleton = () => {
+	return (
+		<TableRow>
+			<TableCell padding="checkbox">
+				<Skeleton />
+			</TableCell>
+			<TableCell></TableCell>
+			{headCells.map((cell, idx) => (
+				<TableCell key={idx}>
+					<Skeleton />
+				</TableCell>
+			))}
+		</TableRow>
+	)
+}
+
 const useRowStyles = makeStyles({
 	// root: {
 	// 	'& > *': {
@@ -523,7 +537,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function Table(props) {
-	const { data } = props
+	const { data, isLoading } = props
 	const classes = useStyles()
 	const [order, setOrder] = React.useState('asc')
 	const [orderBy, setOrderBy] = React.useState('grossIncome')
@@ -603,13 +617,13 @@ function Table(props) {
 
 	return (
 		<React.Fragment>
-			<TableSearch onQueryChange={handleQueryChange} />
 			<TableToolbar
 				numSelected={selected.length}
 				approveDialogRef={approveDialogRef}
 				deleteDialogRef={deleteDialogRef}
 				selected={selected}
 				setSelected={setSelected}
+				onQueryChange={handleQueryChange}
 			/>
 			<TableContainer>
 				<MuiTable
@@ -629,27 +643,37 @@ function Table(props) {
 						numSelected={selected.length}
 					/>
 					<TableBody>
-						{stableSort(rows, getComparator(order, orderBy))
-							.slice(
-								page * rowsPerPage,
-								page * rowsPerPage + rowsPerPage
-							)
-							.map((row, index) => {
-								const isItemSelected = isSelected(row._id)
-								const labelId = `enhanced-table-checkbox-${index}`
+						{isLoading
+							? [...Array(rowsPerPage)].map((x, i) => (
+									<RowSkeleton key={i} />
+							  ))
+							: stableSort(rows, getComparator(order, orderBy))
+									.slice(
+										page * rowsPerPage,
+										page * rowsPerPage + rowsPerPage
+									)
+									.map((row, index) => {
+										const isItemSelected = isSelected(
+											row._id
+										)
+										const labelId = `enhanced-table-checkbox-${index}`
 
-								return (
-									<Row
-										row={row}
-										labelId={labelId}
-										isItemSelected={isItemSelected}
-										handleClick={handleClick}
-										numSelected={selected.length}
-										approveDialogRef={approveDialogRef}
-										deleteDialogRef={deleteDialogRef}
-									/>
-								)
-							})}
+										return (
+											<Row
+												row={row}
+												labelId={labelId}
+												isItemSelected={isItemSelected}
+												handleClick={handleClick}
+												numSelected={selected.length}
+												approveDialogRef={
+													approveDialogRef
+												}
+												deleteDialogRef={
+													deleteDialogRef
+												}
+											/>
+										)
+									})}
 						{/* {emptyRows > 0 && (
 							<TableRow style={{ height: (false ? 33 : 53) * emptyRows }}>
 								<TableCell colSpan={6} />
@@ -674,6 +698,48 @@ function Table(props) {
 }
 
 const mapStateToProps = state => ({
-	data: state.students.data.filter(x => x.isApproved === false)
+	data: state.students.data.filter(x => x.isApproved === false),
+	isLoading: state.students.isLoading
 })
+
+const useTableTopHeaderStyles = makeStyles(theme => ({
+	title: {
+		flex: '1 1 100%'
+	}
+}))
+
+const TableTopHeader = props => {
+	const { onQueryChange, title, subtitle = '' } = props
+	const classes = useTableTopHeaderStyles()
+
+	return (
+		<Toolbar disableGutters>
+			<Typography
+				variant="h6"
+				color="primary"
+				className={classes.title}
+				gutterBottom
+			>
+				{title}
+				<Typography
+					variant="body2"
+					component="div"
+					color="textSecondary"
+					className={classes.title}
+					gutterBottom
+				>
+					{subtitle}
+				</Typography>
+			</Typography>
+			<TableSearch onQueryChange={onQueryChange} />
+		</Toolbar>
+	)
+}
+
+TableTopHeader.propTypes = {
+	onQueryChange: PropTypes.func.isRequired,
+	title: PropTypes.string.isRequired,
+	subtitle: PropTypes.string
+}
+
 export default connect(mapStateToProps)(Table)
